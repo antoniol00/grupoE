@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,9 @@ public class Asignatura implements Serializable {
 	private Integer duracion;
 	private Integer cuatrimestre;
 	private String idiomas;
+	@Column(nullable = false)
 	private Titulacion titulacion_codigo;
+	private List<Clase> clases_asignadas;
 	private static final long serialVersionUID = 1L;
 
 	public Asignatura() {
@@ -126,12 +129,20 @@ public class Asignatura implements Serializable {
 		this.idiomas = idiomas;
 	}
 
-	public Integer getTitulacion_codigo() {
+	public Titulacion getTitulacion_codigo() {
 		return this.titulacion_codigo;
 	}
 
-	public void setTitulacion_codigo(Integer titulacion_codigo) {
+	public void setTitulacion_codigo(Titulacion titulacion_codigo) {
 		this.titulacion_codigo = titulacion_codigo;
+	}
+
+	public List<Clase> getClases_asignadas() {
+		return clases_asignadas;
+	}
+
+	public void setClases_asignadas(List<Clase> clases_asignadas) {
+		this.clases_asignadas = clases_asignadas;
 	}
 
 	@Override
