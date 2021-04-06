@@ -106,6 +106,13 @@ public class Alumno implements Serializable {
 	public void setCodigo_postal(Integer codigo_postal) {
 		this.codigo_postal = codigo_postal;
 	}
+	
+	public List<Expediente> getExpedientes() {
+		return expedientes;
+	}
+	public void setExpedientes(List<Expediente> expedientes) {
+		this.expedientes = expedientes;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
