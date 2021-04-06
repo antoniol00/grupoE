@@ -9,6 +9,7 @@
 		<class>es.uma.informatica.sii.entities.Asignatura</class>
 		<class>es.uma.informatica.sii.entities.Optativa</class>
 		<class>es.uma.informatica.sii.entities.Alumno</class>
+		<class>es.uma.informatica.sii.entities.Expediente</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/sii" />
