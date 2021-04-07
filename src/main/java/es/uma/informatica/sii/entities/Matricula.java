@@ -49,15 +49,18 @@ public class Matricula implements Serializable {
 	}
 
 	@Id
-	@Column(nullable=false)
+	@Column(length=10, nullable=false)
 	private String curso;
-	@Column(nullable=false)
+	@Column(length=9, nullable=false)
 	private Integer número_archivo;
 	@Column(nullable=false)
 	private Boolean activa;
+	@Column(length=6)
 	private String turno;
+	@Column(length=10)
 	private String tipo_estudio;
 	private Date fecha_matricula;
+	@Column(length=1)
 	private boolean nuevo_ingreso;
 	private String listado_asignaturas;   
 	@Id

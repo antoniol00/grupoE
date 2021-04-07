@@ -2,6 +2,8 @@ package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -15,11 +17,16 @@ public class Encuesta implements Serializable {
 
 	@Id
 	@Column(nullable=false)
-	private Date fecha_envio;   
+	private Date fecha_envio;  
+	
+	@ManyToOne
 	@Id
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Expediente expediente_número;
 
+	@ManyToMany (mappedBy="encuestas")
+	private List<Grupos_asig> asigYGrupo;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -2,6 +2,8 @@ package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -53,6 +55,7 @@ public class Grupos_asig implements Serializable {
 	@Id
 	@Column(nullable=false)
 	private String curso;
+	@Column(length=10)
 	private String oferta;   
 	@Id
 	@Column(nullable=false)
@@ -60,6 +63,10 @@ public class Grupos_asig implements Serializable {
 	@Id
 	@Column(nullable=false)
 	private Asignatura asignatura_preferencia;
+	
+	@ManyToOne
+	private List<Encuesta> encuestas;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asig() {
@@ -93,5 +100,14 @@ public class Grupos_asig implements Serializable {
 	public void setAsignatura_preferencia(Asignatura asignatura_preferencia) {
 		this.asignatura_preferencia = asignatura_preferencia;
 	}
+	
+	public List<Encuesta> getEncuesta() {
+		return this.encuestas;
+	}
+	
+	public void setEncuesta(List<Encuesta> encuestas) {
+		this.encuestas=encuestas;
+	}
+	
    
 }

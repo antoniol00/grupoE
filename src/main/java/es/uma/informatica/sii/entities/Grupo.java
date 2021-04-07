@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -17,20 +19,30 @@ public class Grupo implements Serializable {
 	@Id
 	@Column(nullable=false)
 	private String id;
-	@Column(nullable=false)
+	@Column(length=1, nullable=false)
 	private Integer curso;
-	@Column(nullable=false)
+	@Column(length=1, nullable=false)
 	private Boolean letra;
-	@Column(nullable=false)
+	@Column(length=6, nullable=false)
 	private String turno;
-	@Column(nullable=false)
+	@Column(length=2, nullable=false)
 	private Boolean inglés;
 	private Boolean visible;
+	@Column(length=3)
 	private Integer plazas;
 	private String asignar;
-	private String grupo_id;
-	@Column(nullable=false)
+	
+	@OneToMany(mappedBy="grupo_id")
+	private List<Grupo> grupos;
+	@ManyToOne
+	private Grupo grupo_id;
+	
+	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Titulacion titulación_código;
+	
+	@OneToMany(mappedBy="asign_grupo")
+	private List<Asigna_Grupos> asignagrupos;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -95,13 +107,19 @@ public class Grupo implements Serializable {
 	public void setAsignar(String asignar) {
 		this.asignar = asignar;
 	}   
-	public String getGrupo_id() {
-		return this.grupo_id;
+	
+	public List<Grupo> getGrupos() {
+		return grupos;
 	}
-
-	public void setGrupo_id(String grupo_id) {
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+	public Grupo getGrupo_id() {
+		return grupo_id;
+	}
+	public void setGrupo_id(Grupo grupo_id) {
 		this.grupo_id = grupo_id;
-	}   
+	}
 	public Titulacion getTitulación_código() {
 		return this.titulación_código;
 	}
