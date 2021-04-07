@@ -12,7 +12,7 @@ public class MatriculaPK  implements Serializable {
    
 	         
 	private String curso;         
-	private Double expediente_número;
+	private Expediente expediente_número;
 	private static final long serialVersionUID = 1L;
 
 	public MatriculaPK() {}
@@ -28,11 +28,11 @@ public class MatriculaPK  implements Serializable {
 	}
 	
 
-	public Double getExpediente_número() {
+	public Expediente getExpedienteNum() {
 		return this.expediente_número;
 	}
 
-	public void setExpediente_número(Double expediente_número) {
+	public void setExpedienteNum(Expediente expediente_número) {
 		this.expediente_número = expediente_número;
 	}
 	
@@ -50,7 +50,7 @@ public class MatriculaPK  implements Serializable {
 		MatriculaPK other = (MatriculaPK) o;
 		return true
 			&& (getCurso() == null ? other.getCurso() == null : getCurso().equals(other.getCurso()))
-			&& (getExpediente_número() == null ? other.getExpediente_número() == null : getExpediente_número().equals(other.getExpediente_número()));
+			&& (getExpedienteNum() == null ? other.getExpedienteNum() == null : getExpedienteNum().equals(other.getExpedienteNum()));
 	}
 	
 	/*	 
@@ -60,7 +60,7 @@ public class MatriculaPK  implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (getCurso() == null ? 0 : getCurso().hashCode());
-		result = prime * result + (getExpediente_número() == null ? 0 : getExpediente_número().hashCode());
+		result = prime * result + (getExpedienteNum() == null ? 0 : getExpedienteNum().hashCode());
 		return result;
 	}
    

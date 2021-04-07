@@ -62,7 +62,8 @@ public class Matricula implements Serializable {
 	private String listado_asignaturas;   
 	@Id
 	@Column(nullable=false)
-	private Double expediente_número;
+	private Expediente expediente_número;
+
 	private static final long serialVersionUID = 1L;
 
 	public Matricula() {
@@ -124,11 +125,12 @@ public class Matricula implements Serializable {
 	public void setListado_asignaturas(String listado_asignaturas) {
 		this.listado_asignaturas = listado_asignaturas;
 	}   
-	public Double getExpediente_número() {
+		
+	public Expediente getExpedienteNum() {
 		return this.expediente_número;
 	}
 
-	public void setExpediente_número(Double expediente_número) {
+	public void setExpedienteNum(Expediente expediente_número) {
 		this.expediente_número = expediente_número;
 	}
    

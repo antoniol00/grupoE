@@ -13,6 +13,7 @@
 		<class>es.uma.informatica.sii.entities.Encuesta</class>
 		<class>es.uma.informatica.sii.entities.Grupos_asig</class>
 		<class>es.uma.informatica.sii.entities.Matricula</class>
+		<class>es.uma.informatica.sii.entities.Grupo</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/sii" />
