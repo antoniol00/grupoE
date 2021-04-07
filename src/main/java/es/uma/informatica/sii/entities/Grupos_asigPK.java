@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.Integer;
 import java.lang.String;
 
 /**
@@ -13,7 +12,7 @@ public class Grupos_asigPK  implements Serializable {
 	         
 	private String curso;         
 	private String grupo_id;         
-	private Integer asignatura_preferencia;
+	private Asignatura asignatura_preferencia;
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asigPK() {}
@@ -38,11 +37,11 @@ public class Grupos_asigPK  implements Serializable {
 	}
 	
 
-	public Integer getAsignatura_preferencia() {
+	public Asignatura getAsignatura_preferencia() {
 		return this.asignatura_preferencia;
 	}
 
-	public void setAsignatura_preferencia(Integer asignatura_preferencia) {
+	public void setAsignatura_preferencia(Asignatura asignatura_preferencia) {
 		this.asignatura_preferencia = asignatura_preferencia;
 	}
 	

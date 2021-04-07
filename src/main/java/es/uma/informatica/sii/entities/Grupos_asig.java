@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.Integer;
 import java.lang.String;
 import javax.persistence.*;
 
@@ -60,7 +59,7 @@ public class Grupos_asig implements Serializable {
 	private String grupo_id;   
 	@Id
 	@Column(nullable=false)
-	private Integer asignatura_preferencia;
+	private Asignatura asignatura_preferencia;
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asig() {
@@ -87,11 +86,11 @@ public class Grupos_asig implements Serializable {
 	public void setGrupo_id(String grupo_id) {
 		this.grupo_id = grupo_id;
 	}   
-	public Integer getAsignatura_preferencia() {
+	public Asignatura getAsignatura_preferencia() {
 		return this.asignatura_preferencia;
 	}
 
-	public void setAsignatura_preferencia(Integer asignatura_preferencia) {
+	public void setAsignatura_preferencia(Asignatura asignatura_preferencia) {
 		this.asignatura_preferencia = asignatura_preferencia;
 	}
    
