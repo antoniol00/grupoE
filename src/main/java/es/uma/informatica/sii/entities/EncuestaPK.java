@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.Double;
 import java.sql.Date;
 
 /**
@@ -12,7 +11,7 @@ public class EncuestaPK  implements Serializable {
    
 	         
 	private Date fecha_envio;         
-	private Double expediente_numero;
+	private Expediente expediente_número;
 	private static final long serialVersionUID = 1L;
 
 	public EncuestaPK() {}
@@ -28,12 +27,12 @@ public class EncuestaPK  implements Serializable {
 	}
 	
 
-	public Double getExpediente_numero() {
-		return this.expediente_numero;
+	public Expediente getExpedienteNum() {
+		return this.expediente_número;
 	}
 
-	public void setExpediente_numero(Double expediente_numero) {
-		this.expediente_numero = expediente_numero;
+	public void setExpedienteNum(Expediente expediente_número) {
+		this.expediente_número = expediente_número;
 	}
 	
    
@@ -50,7 +49,7 @@ public class EncuestaPK  implements Serializable {
 		EncuestaPK other = (EncuestaPK) o;
 		return true
 			&& (getFecha_envio() == null ? other.getFecha_envio() == null : getFecha_envio().equals(other.getFecha_envio()))
-			&& (getExpediente_numero() == null ? other.getExpediente_numero() == null : getExpediente_numero().equals(other.getExpediente_numero()));
+			&& (getExpedienteNum() == null ? other.getExpedienteNum() == null : getExpedienteNum().equals(other.getExpedienteNum()));
 	}
 	
 	/*	 
@@ -60,7 +59,7 @@ public class EncuestaPK  implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (getFecha_envio() == null ? 0 : getFecha_envio().hashCode());
-		result = prime * result + (getExpediente_numero() == null ? 0 : getExpediente_numero().hashCode());
+		result = prime * result + (getExpedienteNum() == null ? 0 : getExpedienteNum().hashCode());
 		return result;
 	}
    
