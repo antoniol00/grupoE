@@ -11,14 +11,12 @@ public class Grupos_asigPK  implements Serializable {
    
 	         
 	private String curso;         
-	private String grupo_id;         
+	private Grupo grupo_id;         
 	private Asignatura asignatura_preferencia;
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asigPK() {}
-
 	
-
 	public String getCurso() {
 		return this.curso;
 	}
@@ -28,11 +26,11 @@ public class Grupos_asigPK  implements Serializable {
 	}
 	
 
-	public String getGrupo_id() {
+	public Grupo getGrupo_id() {
 		return this.grupo_id;
 	}
 
-	public void setGrupo_id(String grupo_id) {
+	public void setGrupo_id(Grupo grupo_id) {
 		this.grupo_id = grupo_id;
 	}
 	

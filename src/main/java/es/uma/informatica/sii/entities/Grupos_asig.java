@@ -56,7 +56,7 @@ public class Grupos_asig implements Serializable {
 	private String oferta;   
 	@Id
 	@Column(nullable=false)
-	private String grupo_id;   
+	private Grupo grupo_id;   
 	@Id
 	@Column(nullable=false)
 	private Asignatura asignatura_preferencia;
@@ -79,11 +79,11 @@ public class Grupos_asig implements Serializable {
 	public void setOferta(String oferta) {
 		this.oferta = oferta;
 	}   
-	public String getGrupo_id() {
+	public Grupo getGrupo_id() {
 		return this.grupo_id;
 	}
 
-	public void setGrupo_id(String grupo_id) {
+	public void setGrupo_id(Grupo grupo_id) {
 		this.grupo_id = grupo_id;
 	}   
 	public Asignatura getAsignatura_preferencia() {
