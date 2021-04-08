@@ -42,6 +42,9 @@ public class Grupo implements Serializable {
 	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
+	@OneToMany(mappedBy="grupos_asign")
+	private List<Grupos_asig> gruposAsig;
+	
 	@OneToMany(mappedBy="asign_grupo")
 	private List<Asigna_grupos> asignagrupos;
 	
@@ -134,12 +137,20 @@ public class Grupo implements Serializable {
 	public void setTitulacion(Titulacion titulacion) {
 		this.titulacion = titulacion;
 	}
-	public List<Asigna_Grupos> getAsignagrupos() {
+	public List<Asigna_grupos> getAsignagrupos() {
 		return asignagrupos;
 	}
-	public void setAsignagrupos(List<Asigna_Grupos> asignagrupos) {
+	public void setAsignagrupos(List<Asigna_grupos> asignagrupos) {
 		this.asignagrupos = asignagrupos;
 	}
+	
+	public List<Grupos_asig> getgruposAsig() {
+		return gruposAsig;
+	}
+	public void setgruposAsig(List<Grupos_asig> gruposAsig) {
+		this.gruposAsig = gruposAsig;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

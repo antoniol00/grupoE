@@ -12,7 +12,7 @@ public class MatriculaPK  implements Serializable {
    
 	         
 	private String curso;         
-	private Integer expediente;
+	private Expediente expediente;
 	private static final long serialVersionUID = 1L;
 
 	public MatriculaPK() {}
@@ -29,11 +29,11 @@ public class MatriculaPK  implements Serializable {
 	
 
 	public Expediente getExpedienteNum() {
-		return this.expediente_número;
+		return this.expediente;
 	}
 
-	public void setExpedienteNum(Expediente expediente_número) {
-		this.expediente_número = expediente_número;
+	public void setExpedienteNum(Expediente expediente) {
+		this.expediente = expediente;
 	}
 	
    

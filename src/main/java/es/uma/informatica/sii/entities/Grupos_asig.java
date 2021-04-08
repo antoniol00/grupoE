@@ -67,6 +67,9 @@ public class Grupos_asig implements Serializable {
 	@ManyToOne
 	private List<Encuesta> encuestas;
 	
+	@ManyToOne
+	private List<Matricula> matriculas;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asig() {
@@ -109,5 +112,12 @@ public class Grupos_asig implements Serializable {
 		this.encuestas=encuestas;
 	}
 	
+	public List<Matricula> getMatricula() {
+		return this.matriculas;
+	}
+	
+	public void setMatricula(List<Matricula> matriculas) {
+		this.matriculas=matriculas;
+	}
    
 }
