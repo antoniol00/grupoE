@@ -1,23 +1,19 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.Double;
-import java.lang.String;
 
 /**
  * ID class for entity: Matricula
  *
- */ 
-public class MatriculaPK  implements Serializable {   
-   
-	         
-	private String curso;         
+ */
+public class MatriculaPK implements Serializable {
+
+	private String curso;
 	private Expediente expediente;
 	private static final long serialVersionUID = 1L;
 
-	public MatriculaPK() {}
-
-	
+	public MatriculaPK() {
+	}
 
 	public String getCurso() {
 		return this.curso;
@@ -26,7 +22,6 @@ public class MatriculaPK  implements Serializable {
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
-	
 
 	public Expediente getExpedienteNum() {
 		return this.expediente;
@@ -35,11 +30,10 @@ public class MatriculaPK  implements Serializable {
 	public void setExpedienteNum(Expediente expediente) {
 		this.expediente = expediente;
 	}
-	
-   
+
 	/*
 	 * @see java.lang.Object#equals(Object)
-	 */	
+	 */
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true;
@@ -48,14 +42,14 @@ public class MatriculaPK  implements Serializable {
 			return false;
 		}
 		MatriculaPK other = (MatriculaPK) o;
-		return true
-			&& (getCurso() == null ? other.getCurso() == null : getCurso().equals(other.getCurso()))
-			&& (getExpedienteNum() == null ? other.getExpedienteNum() == null : getExpedienteNum().equals(other.getExpedienteNum()));
+		return true && (getCurso() == null ? other.getCurso() == null : getCurso().equals(other.getCurso()))
+				&& (getExpedienteNum() == null ? other.getExpedienteNum() == null
+						: getExpedienteNum().equals(other.getExpedienteNum()));
 	}
-	
-	/*	 
+
+	/*
 	 * @see java.lang.Object#hashCode()
-	 */	
+	 */
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -63,6 +57,5 @@ public class MatriculaPK  implements Serializable {
 		result = prime * result + (getExpedienteNum() == null ? 0 : getExpedienteNum().hashCode());
 		return result;
 	}
-   
-   
+
 }
