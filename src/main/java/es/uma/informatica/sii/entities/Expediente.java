@@ -73,6 +73,18 @@ public class Expediente implements Serializable {
 	public void setCreditos_fb(Integer creditos_fb) {
 		this.creditos_fb = creditos_fb;
 	}   
+	public Titulacion getTitulacion() {
+		return titulacion;
+	}
+	public void setTitulacion(Titulacion titulacion) {
+		this.titulacion = titulacion;
+	}
+	public Alumno getAlumno() {
+		return alumno;
+	}
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
 	public Integer getCreditos_ob() {
 		return this.creditos_ob;
 	}
@@ -142,6 +154,10 @@ public class Expediente implements Serializable {
 		} else if (!numero.equals(other.numero))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "Expediente [numero=" + numero + ", alumno=" + alumno + "]";
 	}
    
 }

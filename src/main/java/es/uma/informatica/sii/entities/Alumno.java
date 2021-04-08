@@ -142,5 +142,11 @@ public class Alumno implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Alumno [dni=" + dni + ", nombre_completo=" + nombre_completo + ", email_institucional="
+				+ email_institucional + "]";
+	}
+	
    
 }

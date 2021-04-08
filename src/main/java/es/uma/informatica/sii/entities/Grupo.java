@@ -19,10 +19,10 @@ public class Grupo implements Serializable {
 	@Id
 	@Column(nullable=false)
 	private String id;
-	@Column(length=1, nullable=false)
+	@Column(length=1, nullable=false, unique=true)
 	private Integer curso;
-	@Column(length=1, nullable=false)
-	private Boolean letra;
+	@Column(length=1, nullable=false, unique=true)
+	private String letra;
 	@Column(length=6, nullable=false)
 	private String turno;
 	@Column(length=2, nullable=false)
@@ -47,6 +47,9 @@ public class Grupo implements Serializable {
 	
 	@OneToMany(mappedBy="asign_grupo")
 	private List<Asigna_grupos> asignagrupos;
+	
+	@OneToMany(mappedBy="grupo_id")
+	private List<Clase> clases;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -75,11 +78,11 @@ public class Grupo implements Serializable {
 		this.turno = turno;
 	}   
 	
-	public Boolean getLetra() {
+	public String getLetra() {
 		return this.letra;
 	}
 
-	public void setLetra(Boolean letra) {
+	public void setLetra(String letra) {
 		this.letra = letra;
 	}
 	  
@@ -151,6 +154,18 @@ public class Grupo implements Serializable {
 		this.gruposAsig = gruposAsig;
 	}
 	
+	public List<Grupos_asig> getGruposAsig() {
+		return gruposAsig;
+	}
+	public void setGruposAsig(List<Grupos_asig> gruposAsig) {
+		this.gruposAsig = gruposAsig;
+	}
+	public List<Clase> getClases() {
+		return clases;
+	}
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -174,6 +189,11 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Grupo [id=" + id + ", curso=" + curso + ", letra=" + letra + "]";
+	}
+	
 	
    
 }

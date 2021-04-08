@@ -17,11 +17,11 @@ public class Encuesta implements Serializable {
 
 	@Id
 	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
 	private Date fecha_envio;  
 	
 	@ManyToOne
 	@Id
-	@JoinColumn(nullable=false)
 	private Expediente expediente;
 
 	@ManyToMany (mappedBy="encuestas")
@@ -75,6 +75,22 @@ public class Encuesta implements Serializable {
 
 	public void setExpedienteNum(Expediente expediente_número) {
 		this.expediente = expediente_número;
+	}
+	public Expediente getExpediente() {
+		return expediente;
+	}
+	public void setExpediente(Expediente expediente) {
+		this.expediente = expediente;
+	}
+	public List<Grupos_asig> getAsigYGrupo() {
+		return asigYGrupo;
+	}
+	public void setAsigYGrupo(List<Grupos_asig> asigYGrupo) {
+		this.asigYGrupo = asigYGrupo;
+	}
+	@Override
+	public String toString() {
+		return "Encuesta [fecha_envio=" + fecha_envio + ", expediente=" + expediente + "]";
 	}
    
 }

@@ -35,8 +35,8 @@ public class Asignatura implements Serializable {
 	private Integer cuatrimestre;
 	private String idiomas;
 
-	@Column(nullable = false)
 	@ManyToOne
+	@Column(nullable = false)
 	private Titulacion titulacion;
 
 	@OneToMany(mappedBy = "asignatura")
@@ -195,6 +195,11 @@ public class Asignatura implements Serializable {
 		} else if (!referencia.equals(other.referencia))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Asignatura [referencia=" + referencia + ", codigo=" + codigo + ", nombre=" + nombre + "]";
 	}
 
 }

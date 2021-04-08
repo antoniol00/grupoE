@@ -82,5 +82,10 @@ public class Centro implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Centro [nombre=" + nombre + "]";
+	}
 	
 }

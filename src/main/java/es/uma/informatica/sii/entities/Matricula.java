@@ -2,12 +2,16 @@ package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Matricula
@@ -52,7 +56,7 @@ public class Matricula implements Serializable {
 	@Id
 	@Column(length=10, nullable=false)
 	private String curso;
-	@Column(length=9, nullable=false)
+	@Column(length=9, nullable=false, unique=true)
 	private Integer numero_archivo;
 	@Column(nullable=false)
 	private Boolean activa;
@@ -60,82 +64,86 @@ public class Matricula implements Serializable {
 	private String turno;
 	@Column(length=10)
 	private String tipo_estudio;
+	@Temporal(TemporalType.DATE)
 	private Date fecha_matricula;
 	@Column(length=1)
 	private boolean nuevo_ingreso;
 	private String listado_asignaturas;   
 	@Id
-	@JoinColumn(nullable=false)
+	@ManyToOne
 	private Expediente expediente;
+	@OneToMany(mappedBy="matricula")
+	private List<Asigna_grupos> asigna_grupos;
 
 	private static final long serialVersionUID = 1L;
 
 	public Matricula() {
 		super();
 	}   
+	
 	public String getCurso() {
-		return this.curso;
+		return curso;
 	}
-
 	public void setCurso(String curso) {
 		this.curso = curso;
-	}   
-	public Integer getNúmero_archivo() {
-		return this.numero_archivo;
 	}
-
-	public void setNúmero_archivo(Integer número_archivo) {
-		this.numero_archivo = número_archivo;
-	}   
+	public Integer getNumero_archivo() {
+		return numero_archivo;
+	}
+	public void setNumero_archivo(Integer numero_archivo) {
+		this.numero_archivo = numero_archivo;
+	}
 	public Boolean getActiva() {
-		return this.activa;
+		return activa;
 	}
-
 	public void setActiva(Boolean activa) {
 		this.activa = activa;
-	}   
-	public String getTurno() {
-		return this.turno;
 	}
-
+	public String getTurno() {
+		return turno;
+	}
 	public void setTurno(String turno) {
 		this.turno = turno;
-	}   
-	public String getTipo_estudio() {
-		return this.tipo_estudio;
 	}
-
+	public String getTipo_estudio() {
+		return tipo_estudio;
+	}
 	public void setTipo_estudio(String tipo_estudio) {
 		this.tipo_estudio = tipo_estudio;
-	}   
-	public Date getFecha_matricula() {
-		return this.fecha_matricula;
 	}
-
+	public Date getFecha_matricula() {
+		return fecha_matricula;
+	}
 	public void setFecha_matricula(Date fecha_matricula) {
 		this.fecha_matricula = fecha_matricula;
-	}   
-	public boolean getNuevo_ingreso() {
-		return this.nuevo_ingreso;
 	}
-
+	public boolean isNuevo_ingreso() {
+		return nuevo_ingreso;
+	}
 	public void setNuevo_ingreso(boolean nuevo_ingreso) {
 		this.nuevo_ingreso = nuevo_ingreso;
-	}   
-	public String getListado_asignaturas() {
-		return this.listado_asignaturas;
 	}
-
+	public String getListado_asignaturas() {
+		return listado_asignaturas;
+	}
 	public void setListado_asignaturas(String listado_asignaturas) {
 		this.listado_asignaturas = listado_asignaturas;
-	}   
-		
-	public Expediente getExpedienteNum() {
-		return this.expediente;
 	}
-
-	public void setExpedienteNum(Expediente expediente_número) {
-		this.expediente = expediente_número;
+	public Expediente getExpediente() {
+		return expediente;
+	}
+	public void setExpediente(Expediente expediente) {
+		this.expediente = expediente;
+	}
+	public List<Asigna_grupos> getAsigna_grupos() {
+		return asigna_grupos;
+	}
+	public void setAsigna_grupos(List<Asigna_grupos> asigna_grupos) {
+		this.asigna_grupos = asigna_grupos;
+	}
+	@Override
+	public String toString() {
+		return "Matricula [curso=" + curso + ", expediente=" + expediente + "]";
 	}
    
 }

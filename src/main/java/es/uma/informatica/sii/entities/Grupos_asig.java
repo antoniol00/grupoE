@@ -20,7 +20,7 @@ public class Grupos_asig implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignatura_preferencia == null) ? 0 : asignatura_preferencia.hashCode());
+		result = prime * result + ((asignatura_referencia == null) ? 0 : asignatura_referencia.hashCode());
 		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
 		result = prime * result + ((grupo_id == null) ? 0 : grupo_id.hashCode());
 		return result;
@@ -34,10 +34,10 @@ public class Grupos_asig implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Grupos_asig other = (Grupos_asig) obj;
-		if (asignatura_preferencia == null) {
-			if (other.asignatura_preferencia != null)
+		if (asignatura_referencia == null) {
+			if (other.asignatura_referencia != null)
 				return false;
-		} else if (!asignatura_preferencia.equals(other.asignatura_preferencia))
+		} else if (!asignatura_referencia.equals(other.asignatura_referencia))
 			return false;
 		if (curso == null) {
 			if (other.curso != null)
@@ -58,66 +58,59 @@ public class Grupos_asig implements Serializable {
 	@Column(length=10)
 	private String oferta;   
 	@Id
+	@ManyToOne
 	@Column(nullable=false)
 	private Grupo grupo_id;   
 	@Id
-	@Column(nullable=false)
-	private Asignatura asignatura_preferencia;
-	
 	@ManyToOne
+	@Column(nullable=false)
+	private Asignatura asignatura_referencia;
+	
+	@ManyToMany
+	@JoinTable(name="encuesta_grupos",joinColumns=@JoinColumn(name="grupos_asig_fk"),
+	inverseJoinColumns=@JoinColumn(name="encuesta_fk"))
 	private List<Encuesta> encuestas;
 	
-	@ManyToOne
-	private List<Matricula> matriculas;
 	
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asig() {
 		super();
 	}   
+	
 	public String getCurso() {
-		return this.curso;
+		return curso;
 	}
-
 	public void setCurso(String curso) {
 		this.curso = curso;
-	}   
-	public String getOferta() {
-		return this.oferta;
 	}
-
+	public String getOferta() {
+		return oferta;
+	}
 	public void setOferta(String oferta) {
 		this.oferta = oferta;
-	}   
-	public Grupo getGrupo_id() {
-		return this.grupo_id;
 	}
-
+	public Grupo getGrupo_id() {
+		return grupo_id;
+	}
 	public void setGrupo_id(Grupo grupo_id) {
 		this.grupo_id = grupo_id;
-	}   
-	public Asignatura getAsignatura_preferencia() {
-		return this.asignatura_preferencia;
 	}
-
-	public void setAsignatura_preferencia(Asignatura asignatura_preferencia) {
-		this.asignatura_preferencia = asignatura_preferencia;
+	public Asignatura getAsignatura_referencia() {
+		return asignatura_referencia;
 	}
-	
-	public List<Encuesta> getEncuesta() {
-		return this.encuestas;
+	public void setAsignatura_referencia(Asignatura asignatura_referencia) {
+		this.asignatura_referencia = asignatura_referencia;
 	}
-	
-	public void setEncuesta(List<Encuesta> encuestas) {
-		this.encuestas=encuestas;
+	public List<Encuesta> getEncuestas() {
+		return encuestas;
 	}
-	
-	public List<Matricula> getMatricula() {
-		return this.matriculas;
+	public void setEncuestas(List<Encuesta> encuestas) {
+		this.encuestas = encuestas;
 	}
-	
-	public void setMatricula(List<Matricula> matriculas) {
-		this.matriculas=matriculas;
+	@Override
+	public String toString() {
+		return "Grupos_asig [curso=" + curso + ", grupo_id=" + grupo_id + "]";
 	}
    
 }

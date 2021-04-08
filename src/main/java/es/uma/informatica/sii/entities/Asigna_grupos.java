@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
 /**
@@ -11,39 +12,8 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
+@IdClass(Asigna_gruposPK.class)
 public class Asigna_grupos implements Serializable {
-
-	public static class Asigna_gruposPK implements Serializable {
-		private static final long serialVersionUID = 1L;
-
-		public Integer getAsignatura_referencia() {
-			return asignatura_referencia;
-		}
-
-		public void setAsignatura_referencia(Integer asignatura_referencia) {
-			this.asignatura_referencia = asignatura_referencia;
-		}
-
-		public String getMatricula_curso() {
-			return matricula_curso;
-		}
-
-		public void setMatricula_curso(String matricula_curso) {
-			this.matricula_curso = matricula_curso;
-		}
-
-		public Integer getMatricula_expediente_numero() {
-			return matricula_expediente_numero;
-		}
-
-		public void setMatricula_expediente_numero(Integer matricula_expediente_numero) {
-			this.matricula_expediente_numero = matricula_expediente_numero;
-		}
-
-		private Integer asignatura_referencia;
-		private String matricula_curso;
-		private Integer matricula_expediente_numero;
-	}
 
 	@Id
 	@ManyToOne
@@ -127,6 +97,12 @@ public class Asigna_grupos implements Serializable {
 		} else if (!matricula.equals(other.matricula))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Asigna_grupos [asignatura=" + asignatura + ", matricula=" + matricula + ", expediente=" + expediente
+				+ ", grupo_id=" + grupo_id + "]";
 	}
 
 }
