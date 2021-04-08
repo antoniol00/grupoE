@@ -26,7 +26,7 @@ public class Grupo implements Serializable {
 	@Column(length=6, nullable=false)
 	private String turno;
 	@Column(length=2, nullable=false)
-	private Boolean inglés;
+	private Boolean ingles;
 	private Boolean visible;
 	@Column(length=3)
 	private Integer plazas;
@@ -34,15 +34,16 @@ public class Grupo implements Serializable {
 	
 	@OneToMany(mappedBy="grupo_id")
 	private List<Grupo> grupos;
+	
 	@ManyToOne
 	private Grupo grupo_id;
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
-	private Titulacion titulación_código;
+	private Titulacion titulacion;
 	
 	@OneToMany(mappedBy="asign_grupo")
-	private List<Asigna_Grupos> asignagrupos;
+	private List<Asigna_grupos> asignagrupos;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -78,14 +79,7 @@ public class Grupo implements Serializable {
 	public void setLetra(Boolean letra) {
 		this.letra = letra;
 	}
-	
-	public Boolean getInglés() {
-		return this.inglés;
-	}
-
-	public void setInglés(Boolean inglés) {
-		this.inglés = inglés;
-	}   
+	  
 	public Boolean getVisible() {
 		return this.visible;
 	}
@@ -121,12 +115,31 @@ public class Grupo implements Serializable {
 		this.grupo_id = grupo_id;
 	}
 	public Titulacion getTitulación_código() {
-		return this.titulación_código;
+		return this.titulacion;
 	}
 
 	public void setTitulación_código(Titulacion titulación_código) {
-		this.titulación_código = titulación_código;
+		this.titulacion = titulación_código;
 	}   
+	
+	public Boolean getIngles() {
+		return ingles;
+	}
+	public void setIngles(Boolean ingles) {
+		this.ingles = ingles;
+	}
+	public Titulacion getTitulacion() {
+		return titulacion;
+	}
+	public void setTitulacion(Titulacion titulacion) {
+		this.titulacion = titulacion;
+	}
+	public List<Asigna_Grupos> getAsignagrupos() {
+		return asignagrupos;
+	}
+	public void setAsignagrupos(List<Asigna_Grupos> asignagrupos) {
+		this.asignagrupos = asignagrupos;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

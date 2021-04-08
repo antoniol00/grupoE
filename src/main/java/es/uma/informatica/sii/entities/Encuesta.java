@@ -22,7 +22,7 @@ public class Encuesta implements Serializable {
 	@ManyToOne
 	@Id
 	@JoinColumn(nullable=false)
-	private Expediente expediente_número;
+	private Expediente expediente;
 
 	@ManyToMany (mappedBy="encuestas")
 	private List<Grupos_asig> asigYGrupo;
@@ -31,7 +31,7 @@ public class Encuesta implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((expediente_número == null) ? 0 : expediente_número.hashCode());
+		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
 		result = prime * result + ((fecha_envio == null) ? 0 : fecha_envio.hashCode());
 		return result;
 	}
@@ -44,10 +44,10 @@ public class Encuesta implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Encuesta other = (Encuesta) obj;
-		if (expediente_número == null) {
-			if (other.expediente_número != null)
+		if (expediente == null) {
+			if (other.expediente != null)
 				return false;
-		} else if (!expediente_número.equals(other.expediente_número))
+		} else if (!expediente.equals(other.expediente))
 			return false;
 		if (fecha_envio == null) {
 			if (other.fecha_envio != null)
@@ -70,11 +70,11 @@ public class Encuesta implements Serializable {
 		this.fecha_envio = fecha_envio;
 	}   
 	public Expediente getExpedienteNum() {
-		return this.expediente_número;
+		return this.expediente;
 	}
 
 	public void setExpedienteNum(Expediente expediente_número) {
-		this.expediente_número = expediente_número;
+		this.expediente = expediente_número;
 	}
    
 }

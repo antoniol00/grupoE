@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Asignatura
@@ -32,9 +34,20 @@ public class Asignatura implements Serializable {
 	private Integer duracion;
 	private Integer cuatrimestre;
 	private String idiomas;
+
 	@Column(nullable = false)
-	private Titulacion titulacion_codigo;
+	@ManyToOne
+	private Titulacion titulacion;
+
+	@OneToMany(mappedBy = "asignatura")
 	private List<Clase> clases_asignadas;
+
+	@OneToMany(mappedBy = "asignatura")
+	private List<Asigna_grupos> asign_grupos;
+
+	@OneToMany(mappedBy = "asignatura")
+	private List<Grupos_asig> grupos;
+
 	private static final long serialVersionUID = 1L;
 
 	public Asignatura() {
@@ -42,7 +55,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Integer getReferencia() {
-		return this.referencia;
+		return referencia;
 	}
 
 	public void setReferencia(Integer referencia) {
@@ -50,7 +63,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Integer getCodigo() {
-		return this.codigo;
+		return codigo;
 	}
 
 	public void setCodigo(Integer codigo) {
@@ -58,7 +71,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Double getCreditos_teoricos() {
-		return this.creditos_teoricos;
+		return creditos_teoricos;
 	}
 
 	public void setCreditos_teoricos(Double creditos_teoricos) {
@@ -66,7 +79,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Double getCreditos_practicos() {
-		return this.creditos_practicos;
+		return creditos_practicos;
 	}
 
 	public void setCreditos_practicos(Double creditos_practicos) {
@@ -74,7 +87,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Boolean getOfertada() {
-		return this.ofertada;
+		return ofertada;
 	}
 
 	public void setOfertada(Boolean ofertada) {
@@ -82,7 +95,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -90,7 +103,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Integer getCurso() {
-		return this.curso;
+		return curso;
 	}
 
 	public void setCurso(Integer curso) {
@@ -98,7 +111,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public String getCaracter() {
-		return this.caracter;
+		return caracter;
 	}
 
 	public void setCaracter(String caracter) {
@@ -106,7 +119,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Integer getDuracion() {
-		return this.duracion;
+		return duracion;
 	}
 
 	public void setDuracion(Integer duracion) {
@@ -114,7 +127,7 @@ public class Asignatura implements Serializable {
 	}
 
 	public Integer getCuatrimestre() {
-		return this.cuatrimestre;
+		return cuatrimestre;
 	}
 
 	public void setCuatrimestre(Integer cuatrimestre) {
@@ -122,19 +135,19 @@ public class Asignatura implements Serializable {
 	}
 
 	public String getIdiomas() {
-		return this.idiomas;
+		return idiomas;
 	}
 
 	public void setIdiomas(String idiomas) {
 		this.idiomas = idiomas;
 	}
 
-	public Titulacion getTitulacion_codigo() {
-		return this.titulacion_codigo;
+	public Titulacion getTitulacion() {
+		return titulacion;
 	}
 
-	public void setTitulacion_codigo(Titulacion titulacion_codigo) {
-		this.titulacion_codigo = titulacion_codigo;
+	public void setTitulacion(Titulacion titulacion) {
+		this.titulacion = titulacion;
 	}
 
 	public List<Clase> getClases_asignadas() {
@@ -143,6 +156,22 @@ public class Asignatura implements Serializable {
 
 	public void setClases_asignadas(List<Clase> clases_asignadas) {
 		this.clases_asignadas = clases_asignadas;
+	}
+
+	public List<Asigna_grupos> getAsign_grupos() {
+		return asign_grupos;
+	}
+
+	public void setAsign_grupos(List<Asigna_grupos> asign_grupos) {
+		this.asign_grupos = asign_grupos;
+	}
+
+	public List<Grupos_asig> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupos_asig> grupos) {
+		this.grupos = grupos;
 	}
 
 	@Override
