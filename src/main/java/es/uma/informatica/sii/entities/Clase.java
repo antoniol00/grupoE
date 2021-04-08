@@ -1,8 +1,6 @@
 package es.uma.informatica.sii.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
@@ -48,6 +46,14 @@ public class Clase implements Serializable{
         Hora_fin = hora_fin;
     }
 
+    @ManyToOne
+    @Column(nullable=false)
+    private Asignatura asignatura;
+
+    @ManyToOne
+    @Id
+    @JoinColumn(nullable=false)
+    private Grupo grupo;
 
     @Override
     public int hashCode() {
