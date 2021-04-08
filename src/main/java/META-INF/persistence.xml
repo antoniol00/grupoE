@@ -27,7 +27,7 @@
 				value="com.mysql.jdbc.Driver" />
 				<property name="javax.persistence.schema-generation.database.action" value="create"/>
 			<property name="javax.persistence.schema-generation.scripts.action" value="create"/>
-			<property name="javax.persistence.schema-generation.scripts.create-target" value="nuevo-esquema.sql"/>
+			<property name="javax.persistence.schema-generation.scripts.create-target" value="schema.sql"/>
 		</properties>
 		
 	</persistence-unit>
