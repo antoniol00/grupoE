@@ -20,8 +20,8 @@ public class Centro implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToMany
-	@JoinTable(name="titul_centro",joinColumns=@JoinColumn(name="centro_fk"),
-	inverseJoinColumns=@JoinColumn(name="titulacion_fk"))
+	@JoinTable(name="titul_centro",joinColumns=@JoinColumn(name="centro_nombre"),
+	inverseJoinColumns=@JoinColumn(name="titulacion_codigo"))
 	private List<Titulacion> titulaciones;
 	
 	public Centro() {
