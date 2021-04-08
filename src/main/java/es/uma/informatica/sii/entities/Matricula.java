@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 
 /**
  * Entity implementation class for Entity: Matricula
@@ -52,7 +53,7 @@ public class Matricula implements Serializable {
 	@Column(length=10, nullable=false)
 	private String curso;
 	@Column(length=9, nullable=false)
-	private Integer número_archivo;
+	private Integer numero_archivo;
 	@Column(nullable=false)
 	private Boolean activa;
 	@Column(length=6)
@@ -64,7 +65,7 @@ public class Matricula implements Serializable {
 	private boolean nuevo_ingreso;
 	private String listado_asignaturas;   
 	@Id
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private Expediente expediente;
 
 	private static final long serialVersionUID = 1L;
@@ -80,11 +81,11 @@ public class Matricula implements Serializable {
 		this.curso = curso;
 	}   
 	public Integer getNúmero_archivo() {
-		return this.número_archivo;
+		return this.numero_archivo;
 	}
 
 	public void setNúmero_archivo(Integer número_archivo) {
-		this.número_archivo = número_archivo;
+		this.numero_archivo = número_archivo;
 	}   
 	public Boolean getActiva() {
 		return this.activa;
