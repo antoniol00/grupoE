@@ -42,10 +42,10 @@ public class Grupo implements Serializable {
 	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
-	@OneToMany(mappedBy="grupos_asign")
+	@OneToMany(mappedBy="grupo_id")
 	private List<Grupos_asig> gruposAsig;
 	
-	@OneToMany(mappedBy="asign_grupo")
+	@OneToMany(mappedBy="grupo_id")
 	private List<Asigna_grupos> asignagrupos;
 	
 	@OneToMany(mappedBy="grupo_id")

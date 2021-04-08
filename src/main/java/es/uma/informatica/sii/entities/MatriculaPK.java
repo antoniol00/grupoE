@@ -9,53 +9,57 @@ import java.io.Serializable;
 public class MatriculaPK implements Serializable {
 
 	private String curso;
-	private Expediente expediente;
+	private Integer expediente;
 	private static final long serialVersionUID = 1L;
 
 	public MatriculaPK() {
 	}
 
 	public String getCurso() {
-		return this.curso;
+		return curso;
 	}
 
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
 
-	public Expediente getExpedienteNum() {
-		return this.expediente;
+	public Integer getExpediente() {
+		return expediente;
 	}
 
-	public void setExpedienteNum(Expediente expediente) {
+	public void setExpediente(Integer expediente) {
 		this.expediente = expediente;
 	}
 
-	/*
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
-		if (!(o instanceof MatriculaPK)) {
-			return false;
-		}
-		MatriculaPK other = (MatriculaPK) o;
-		return true && (getCurso() == null ? other.getCurso() == null : getCurso().equals(other.getCurso()))
-				&& (getExpedienteNum() == null ? other.getExpedienteNum() == null
-						: getExpedienteNum().equals(other.getExpedienteNum()));
-	}
-
-	/*
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (getCurso() == null ? 0 : getCurso().hashCode());
-		result = prime * result + (getExpedienteNum() == null ? 0 : getExpedienteNum().hashCode());
+		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
+		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
 		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof MatriculaPK))
+			return false;
+		MatriculaPK other = (MatriculaPK) obj;
+		if (curso == null) {
+			if (other.curso != null)
+				return false;
+		} else if (!curso.equals(other.curso))
+			return false;
+		if (expediente == null) {
+			if (other.expediente != null)
+				return false;
+		} else if (!expediente.equals(other.expediente))
+			return false;
+		return true;
+	}
+
+	
 
 }

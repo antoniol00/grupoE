@@ -21,8 +21,6 @@ public class Asigna_grupos implements Serializable {
 	@Id
 	@ManyToOne
 	private Matricula matricula;
-	@Id
-	private Expediente expediente;
 	@ManyToOne
 	private Grupo grupo_id;
 
@@ -48,14 +46,6 @@ public class Asigna_grupos implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Expediente getExpediente() {
-		return expediente;
-	}
-
-	public void setExpediente(Expediente expediente) {
-		this.expediente = expediente;
-	}
-
 	public Grupo getGrupo_id() {
 		return grupo_id;
 	}
@@ -64,12 +54,12 @@ public class Asigna_grupos implements Serializable {
 		this.grupo_id = grupo_id;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
-		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		return result;
 	}
@@ -86,11 +76,6 @@ public class Asigna_grupos implements Serializable {
 				return false;
 		} else if (!asignatura.equals(other.asignatura))
 			return false;
-		if (expediente == null) {
-			if (other.expediente != null)
-				return false;
-		} else if (!expediente.equals(other.expediente))
-			return false;
 		if (matricula == null) {
 			if (other.matricula != null)
 				return false;
@@ -101,7 +86,7 @@ public class Asigna_grupos implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Asigna_grupos [asignatura=" + asignatura + ", matricula=" + matricula + ", expediente=" + expediente
+		return "Asigna_grupos [asignatura=" + asignatura + ", matricula=" + matricula
 				+ ", grupo_id=" + grupo_id + "]";
 	}
 

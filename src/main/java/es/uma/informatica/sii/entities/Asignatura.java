@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -36,7 +37,7 @@ public class Asignatura implements Serializable {
 	private String idiomas;
 
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	private Titulacion titulacion;
 
 	@OneToMany(mappedBy = "asignatura")
@@ -45,7 +46,7 @@ public class Asignatura implements Serializable {
 	@OneToMany(mappedBy = "asignatura")
 	private List<Asigna_grupos> asign_grupos;
 
-	@OneToMany(mappedBy = "asignatura")
+	@OneToMany(mappedBy = "asignatura_referencia")
 	private List<Grupos_asig> grupos;
 
 	private static final long serialVersionUID = 1L;
