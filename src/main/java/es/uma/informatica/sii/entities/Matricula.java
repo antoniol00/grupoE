@@ -1,12 +1,13 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.Boolean;
-import java.lang.Double;
-import java.lang.Integer;
-import java.lang.String;
 import java.sql.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 
 /**
  * Entity implementation class for Entity: Matricula
@@ -23,7 +24,7 @@ public class Matricula implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
-		result = prime * result + ((expediente_número == null) ? 0 : expediente_número.hashCode());
+		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
 		return result;
 	}
 	@Override
@@ -40,10 +41,10 @@ public class Matricula implements Serializable {
 				return false;
 		} else if (!curso.equals(other.curso))
 			return false;
-		if (expediente_número == null) {
-			if (other.expediente_número != null)
+		if (expediente == null) {
+			if (other.expediente != null)
 				return false;
-		} else if (!expediente_número.equals(other.expediente_número))
+		} else if (!expediente.equals(other.expediente))
 			return false;
 		return true;
 	}
@@ -52,7 +53,7 @@ public class Matricula implements Serializable {
 	@Column(length=10, nullable=false)
 	private String curso;
 	@Column(length=9, nullable=false)
-	private Integer número_archivo;
+	private Integer numero_archivo;
 	@Column(nullable=false)
 	private Boolean activa;
 	@Column(length=6)
@@ -64,8 +65,8 @@ public class Matricula implements Serializable {
 	private boolean nuevo_ingreso;
 	private String listado_asignaturas;   
 	@Id
-	@Column(nullable=false)
-	private Expediente expediente_número;
+	@JoinColumn(nullable=false)
+	private Expediente expediente;
 
 	private static final long serialVersionUID = 1L;
 
@@ -80,11 +81,11 @@ public class Matricula implements Serializable {
 		this.curso = curso;
 	}   
 	public Integer getNúmero_archivo() {
-		return this.número_archivo;
+		return this.numero_archivo;
 	}
 
 	public void setNúmero_archivo(Integer número_archivo) {
-		this.número_archivo = número_archivo;
+		this.numero_archivo = número_archivo;
 	}   
 	public Boolean getActiva() {
 		return this.activa;
@@ -130,11 +131,11 @@ public class Matricula implements Serializable {
 	}   
 		
 	public Expediente getExpedienteNum() {
-		return this.expediente_número;
+		return this.expediente;
 	}
 
 	public void setExpedienteNum(Expediente expediente_número) {
-		this.expediente_número = expediente_número;
+		this.expediente = expediente_número;
 	}
    
 }

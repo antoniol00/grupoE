@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Expediente
@@ -14,21 +16,28 @@ import javax.persistence.Id;
 @Entity
 
 public class Expediente implements Serializable {
-
-	   
+ 
 	@Id
-	private Double numero;
+	private Integer numero;
 	private Boolean activo;
 	private Double nota_media;
 	private Integer creditos_fb;
 	private Integer creditos_ob;
 	private Integer creditos_pe;
 	private Integer creditos_tf;
+	
+	@ManyToOne
 	@Column(nullable=false)
-	private Titulacion titulacion_codigo;
+	private Titulacion titulacion;
+	
+	@ManyToOne
 	@Column(nullable=false)
-	private Alumno alumno_dni;
+	private Alumno alumno;
+	
+	@OneToMany(mappedBy="expediente")
 	private List<Encuesta> encuestas;
+	
+	@OneToMany(mappedBy="expediente")
 	private List<Matricula> matriculas;
 	
 	private static final long serialVersionUID = 1L;
@@ -36,11 +45,11 @@ public class Expediente implements Serializable {
 	public Expediente() {
 		super();
 	}   
-	public Double getNumero() {
+	public Integer getNumero() {
 		return this.numero;
 	}
 
-	public void setNumero(Double numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}   
 	public Boolean getActivo() {
@@ -86,18 +95,18 @@ public class Expediente implements Serializable {
 		this.creditos_tf = creditos_tf;
 	}   
 	public Titulacion getTitulacion_codigo() {
-		return this.titulacion_codigo;
+		return this.titulacion;
 	}
 
 	public void setTitulacion_codigo(Titulacion titulacion_codigo) {
-		this.titulacion_codigo = titulacion_codigo;
+		this.titulacion = titulacion_codigo;
 	}   
 	public Alumno getAlumno_dni() {
-		return this.alumno_dni;
+		return this.alumno;
 	}
 
 	public void setAlumno_dni(Alumno alumno_dni) {
-		this.alumno_dni = alumno_dni;
+		this.alumno = alumno_dni;
 	}
 	
 	public List<Encuesta> getEncuestas() {

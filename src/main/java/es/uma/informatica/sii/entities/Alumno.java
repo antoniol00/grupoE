@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Alumno
@@ -16,19 +17,26 @@ import javax.persistence.Id;
 public class Alumno implements Serializable {
 
 	@Id
+	@Column(length=9)
 	private String dni;
 	@Column(nullable=false)
 	private String nombre_completo;
 	@Column(nullable=false)
 	private String email_institucional;
 	private String email_personal;
-	private Double telefono_fijo;
-	private Double telefono_movil;
+	@Column(length=9)
+	private Integer telefono_fijo;
+	@Column(length=9)
+	private Integer telefono_movil;
 	private String direccion_notificacion;
+	@Column(length=64)
 	private String localidad_notificacion;
+	@Column(length=32)
 	private String provincia_notificacion;
+	@Column(length=5)
 	private Integer codigo_postal;
 	
+	@OneToMany(mappedBy="alumno")
 	private List<Expediente> expedientes;
 	
 	private static final long serialVersionUID = 1L;
@@ -64,18 +72,18 @@ public class Alumno implements Serializable {
 	public void setEmail_personal(String email_personal) {
 		this.email_personal = email_personal;
 	}   
-	public Double getTelefono_fijo() {
+	public Integer getTelefono_fijo() {
 		return this.telefono_fijo;
 	}
 
-	public void setTelefono_fijo(Double telefono_fijo) {
+	public void setTelefono_fijo(Integer telefono_fijo) {
 		this.telefono_fijo = telefono_fijo;
 	}   
-	public Double getTelefono_movil() {
+	public Integer getTelefono_movil() {
 		return this.telefono_movil;
 	}
 
-	public void setTelefono_movil(Double telefono_movil) {
+	public void setTelefono_movil(Integer telefono_movil) {
 		this.telefono_movil = telefono_movil;
 	}   
 	public String getDireccion_notificacion() {

@@ -12,7 +12,7 @@ public class MatriculaPK  implements Serializable {
    
 	         
 	private String curso;         
-	private Expediente expediente_número;
+	private Integer expediente;
 	private static final long serialVersionUID = 1L;
 
 	public MatriculaPK() {}

@@ -6,17 +6,33 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 
 public class Titulacion implements Serializable{
+	
 	@Id
-	@Column(nullable = false)
 	private Integer codigo;
 	@Column(nullable = false)
 	private String nombre;
 	@Column(nullable = false)
 	private Integer creditos;
+	
+	@OneToMany(mappedBy="titulacion")
+	private List<Expediente> expedientes;
+	
+	@OneToMany(mappedBy="titulacion")
+	private List<Grupo> grupos;
+	
+	@OneToMany(mappedBy="titulacion")
+	private List<Asignatura> asignaturas;
+	
+	@ManyToMany(mappedBy="titulaciones")
+	private List<Centro> centros;
+	
+	private static final long serialVersionUID = 1L;
 	
 	public Titulacion() {
 		super();
@@ -46,6 +62,38 @@ public class Titulacion implements Serializable{
 		return this.creditos;
 	}
 	
+	public List<Expediente> getExpedientes() {
+		return expedientes;
+	}
+
+	public void setExpedientes(List<Expediente> expedientes) {
+		this.expedientes = expedientes;
+	}
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
+	public List<Asignatura> getAsignaturas() {
+		return asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignatura> asignaturas) {
+		this.asignaturas = asignaturas;
+	}
+
+	public List<Centro> getCentros() {
+		return centros;
+	}
+
+	public void setCentros(List<Centro> centros) {
+		this.centros = centros;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
