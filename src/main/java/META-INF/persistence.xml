@@ -16,6 +16,7 @@
 		<class>es.uma.informatica.sii.entities.Grupo</class>
 		<class>es.uma.informatica.sii.entities.Centro</class>
 		<class>es.uma.informatica.sii.entities.Titulacion</class>
+		<class>es.uma.informatica.sii.entities.Asigna_grupos</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/sii" />
