@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Grupo implements Serializable {
 
 	@Id
-	@Column(nullable=false)
+	@Column(nullable=false,length=10)
 	private String id;
 	@Column(length=1, nullable=false, unique=true)
 	private Integer curso;
@@ -42,7 +42,7 @@ public class Grupo implements Serializable {
 	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
-	@OneToMany(mappedBy="grupo_id")
+	@OneToMany(mappedBy="grupo")
 	private List<Grupos_asig> gruposAsig;
 	
 	@OneToMany(mappedBy="grupo_id")

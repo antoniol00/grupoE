@@ -16,12 +16,14 @@ import javax.persistence.*;
 public class Encuesta implements Serializable {
 
 	@Id
-	@Column(nullable=false)
+	@Column(nullable=false, name="FECHA_ENVIO")
 	@Temporal(TemporalType.DATE)
+	
 	private Date fecha_envio;  
 	
 	@ManyToOne
 	@Id
+	@JoinColumn(name="EXPEDIENTE")
 	private Expediente expediente;
 
 	@ManyToMany (mappedBy="encuestas")

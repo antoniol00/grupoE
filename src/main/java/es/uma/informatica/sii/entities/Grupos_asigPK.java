@@ -11,57 +11,43 @@ public class Grupos_asigPK  implements Serializable {
    
 	         
 	private String curso;         
-	private String grupo_id;         
-	private Integer asignatura_referencia;
+	private String grupo;         
+	private Integer asignatura;
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asigPK() {}
-
-	
 
 	public String getCurso() {
 		return curso;
 	}
 
-
-
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
 
-
-
-	public String getGrupo_id() {
-		return grupo_id;
+	public String getGrupo() {
+		return grupo;
 	}
 
-
-
-	public void setGrupo_id(String grupo_id) {
-		this.grupo_id = grupo_id;
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
-
-
-	public Integer getAsignatura_referencia() {
-		return asignatura_referencia;
+	public Integer getAsignatura() {
+		return asignatura;
 	}
 
-
-
-	public void setAsignatura_referencia(Integer asignatura_referencia) {
-		this.asignatura_referencia = asignatura_referencia;
+	public void setAsignatura(Integer asignatura) {
+		this.asignatura = asignatura;
 	}
-
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((asignatura_referencia == null) ? 0 : asignatura_referencia.hashCode());
+		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
 		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
-		result = prime * result + ((grupo_id == null) ? 0 : grupo_id.hashCode());
+		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
 		return result;
 	}
 
@@ -69,28 +55,31 @@ public class Grupos_asigPK  implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Grupos_asigPK))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Grupos_asigPK other = (Grupos_asigPK) obj;
-		if (asignatura_referencia == null) {
-			if (other.asignatura_referencia != null)
+		if (asignatura == null) {
+			if (other.asignatura != null)
 				return false;
-		} else if (!asignatura_referencia.equals(other.asignatura_referencia))
+		} else if (!asignatura.equals(other.asignatura))
 			return false;
 		if (curso == null) {
 			if (other.curso != null)
 				return false;
 		} else if (!curso.equals(other.curso))
 			return false;
-		if (grupo_id == null) {
-			if (other.grupo_id != null)
+		if (grupo == null) {
+			if (other.grupo != null)
 				return false;
-		} else if (!grupo_id.equals(other.grupo_id))
+		} else if (!grupo.equals(other.grupo))
 			return false;
 		return true;
 	}
+
 	
+
 	
-   
    
 }

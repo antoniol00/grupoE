@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 public class Asignatura implements Serializable {
 
 	@Id
+	@Column(length=5)
 	private Integer referencia;
 	@Column(nullable = false)
 	private Integer codigo;
@@ -49,7 +50,7 @@ public class Asignatura implements Serializable {
 	@OneToMany(mappedBy = "asignatura")
 	private List<Asigna_grupos> asign_grupos;
 
-	@OneToMany(mappedBy = "asignatura_referencia")
+	@OneToMany(mappedBy = "asignatura")
 	private List<Grupos_asig> grupos;
 
 	private static final long serialVersionUID = 1L;
