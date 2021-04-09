@@ -10,7 +10,7 @@ public class ClasePK implements Serializable {
 
 	private String dia;
 	private String hora_inicio;
-	private String grupo_id;
+	private String grupo;
 	private static final long serialVersionUID = 1L;
 
 	public ClasePK() {
@@ -32,12 +32,12 @@ public class ClasePK implements Serializable {
 		this.hora_inicio = hora_inicio;
 	}
 
-	public String getGrupo_id() {
-		return this.grupo_id;
+	public String getGrupo() {
+		return this.grupo;
 	}
 
-	public void setGrupo_id(String grupo_id) {
-		this.grupo_id = grupo_id;
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class ClasePK implements Serializable {
 		return true && (getDia() == null ? other.getDia() == null : getDia().equals(other.getDia()))
 				&& (getHora_inicio() == null ? other.getHora_inicio() == null
 						: getHora_inicio().equals(other.getHora_inicio()))
-				&& (getGrupo_id() == null ? other.getGrupo_id() == null : getGrupo_id().equals(other.getGrupo_id()));
+				&& (getGrupo() == null ? other.getGrupo() == null : getGrupo().equals(other.getGrupo()));
 	}
 
 	/*
@@ -65,7 +65,7 @@ public class ClasePK implements Serializable {
 		int result = 1;
 		result = prime * result + (getDia() == null ? 0 : getDia().hashCode());
 		result = prime * result + (getHora_inicio() == null ? 0 : getHora_inicio().hashCode());
-		result = prime * result + (getGrupo_id() == null ? 0 : getGrupo_id().hashCode());
+		result = prime * result + (getGrupo() == null ? 0 : getGrupo().hashCode());
 		return result;
 	}
 

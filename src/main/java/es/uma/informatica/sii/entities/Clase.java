@@ -29,7 +29,7 @@ public class Clase implements Serializable {
 	private String hora_fin;
 	@Id
 	@ManyToOne
-	private Grupo grupo_id;
+	private Grupo grupo;
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Asignatura asignatura;
@@ -62,12 +62,12 @@ public class Clase implements Serializable {
 		this.hora_fin = hora_fin;
 	}
 
-	public Grupo getGrupo_id() {
-		return this.grupo_id;
+	public Grupo getGrupo() {
+		return this.grupo;
 	}
 
-	public void setGrupo_id(Grupo grupo_id) {
-		this.grupo_id = grupo_id;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class Clase implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dia == null) ? 0 : dia.hashCode());
-		result = prime * result + ((grupo_id == null) ? 0 : grupo_id.hashCode());
+		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
 		result = prime * result + ((hora_inicio == null) ? 0 : hora_inicio.hashCode());
 		return result;
 	}
@@ -92,10 +92,10 @@ public class Clase implements Serializable {
 				return false;
 		} else if (!dia.equals(other.dia))
 			return false;
-		if (grupo_id == null) {
-			if (other.grupo_id != null)
+		if (grupo == null) {
+			if (other.grupo != null)
 				return false;
-		} else if (!grupo_id.equals(other.grupo_id))
+		} else if (!grupo.equals(other.grupo))
 			return false;
 		if (hora_inicio == null) {
 			if (other.hora_inicio != null)
@@ -107,7 +107,7 @@ public class Clase implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Clase [dia=" + dia + ", hora_inicio=" + hora_inicio + ", grupo_id=" + grupo_id + ", asignatura="
+		return "Clase [dia=" + dia + ", hora_inicio=" + hora_inicio + ", grupo=" + grupo + ", asignatura="
 				+ asignatura + "]";
 	}
 

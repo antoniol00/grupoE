@@ -22,7 +22,7 @@ public class Asigna_grupos implements Serializable {
 	@ManyToOne
 	private Matricula matricula;
 	@ManyToOne
-	private Grupo grupo_id;
+	private Grupo grupo;
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,12 +46,12 @@ public class Asigna_grupos implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Grupo getGrupo_id() {
-		return grupo_id;
+	public Grupo getGrupo() {
+		return grupo;
 	}
 
-	public void setGrupo_id(Grupo grupo_id) {
-		this.grupo_id = grupo_id;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 
@@ -87,7 +87,7 @@ public class Asigna_grupos implements Serializable {
 	@Override
 	public String toString() {
 		return "Asigna_grupos [asignatura=" + asignatura + ", matricula=" + matricula
-				+ ", grupo_id=" + grupo_id + "]";
+				+ ", grupo_id=" + grupo + "]";
 	}
 
 }

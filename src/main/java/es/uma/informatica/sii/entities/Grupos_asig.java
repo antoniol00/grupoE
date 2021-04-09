@@ -67,14 +67,14 @@ public class Grupos_asig implements Serializable {
 	private Asignatura asignatura;
 	
 	@ManyToMany
-	@JoinTable(name="encuesta_grupos",joinColumns= {
+	@JoinTable(name="ENCUESTA_GRUPOS",joinColumns= {
 			@JoinColumn(name="CURSO",referencedColumnName="curso"),
-			@JoinColumn(name="grupo",referencedColumnName="grupo_id"),
-			@JoinColumn(name="asignatura",referencedColumnName="asignatura_referencia")
+			@JoinColumn(name="GRUPO",referencedColumnName="grupo_id"),
+			@JoinColumn(name="ASIGNATURA",referencedColumnName="asignatura_referencia")
 	},
 	inverseJoinColumns= {
-			@JoinColumn(name="fecha_envio",referencedColumnName="fecha_envio"),
-			@JoinColumn(name="expediente",referencedColumnName="expediente")
+			@JoinColumn(name="FECHA_ENVIO",referencedColumnName="fecha_envio"),
+			@JoinColumn(name="EXPEDIENTE",referencedColumnName="expediente")
 	})
 	private List<Encuesta> encuestas;
 	

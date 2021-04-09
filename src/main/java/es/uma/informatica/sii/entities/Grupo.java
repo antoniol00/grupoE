@@ -32,11 +32,11 @@ public class Grupo implements Serializable {
 	private Integer plazas;
 	private String asignar;
 	
-	@OneToMany(mappedBy="grupo_id")
+	@OneToMany(mappedBy="grupo")
 	private List<Grupo> grupos;
 	
 	@ManyToOne
-	private Grupo grupo_id;
+	private Grupo grupo;
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
@@ -45,10 +45,10 @@ public class Grupo implements Serializable {
 	@OneToMany(mappedBy="grupo")
 	private List<Grupos_asig> gruposAsig;
 	
-	@OneToMany(mappedBy="grupo_id")
+	@OneToMany(mappedBy="grupo")
 	private List<Asigna_grupos> asignagrupos;
 	
-	@OneToMany(mappedBy="grupo_id")
+	@OneToMany(mappedBy="grupo")
 	private List<Clase> clases;
 	
 	private static final long serialVersionUID = 1L;
@@ -114,11 +114,11 @@ public class Grupo implements Serializable {
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
-	public Grupo getGrupo_id() {
-		return grupo_id;
+	public Grupo getGrupo() {
+		return grupo;
 	}
-	public void setGrupo_id(Grupo grupo_id) {
-		this.grupo_id = grupo_id;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 	public Titulacion getTitulación_código() {
 		return this.titulacion;
