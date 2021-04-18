@@ -39,6 +39,9 @@ public class Alumno implements Serializable {
 	@OneToMany(mappedBy="alumno")
 	private List<Expediente> expedientes;
 	
+	@OneToMany(mappedBy="alumno")
+	private List<Peticion> peticiones;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Alumno() {

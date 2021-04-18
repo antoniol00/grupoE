@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 
 /**
@@ -30,8 +31,9 @@ public class Clase implements Serializable {
 	@Id
 	@ManyToOne
 	private Grupo grupo;
+	@JoinColumns({ @JoinColumn(name = "ASIGNATURA_REFERENCIA", referencedColumnName = "REFERENCIA", nullable = false),
+			@JoinColumn(name = "TITULACION_CODIGO", referencedColumnName = "TITULACION_CODIGO", nullable = false) })
 	@ManyToOne
-	@JoinColumn(nullable = false)
 	private Asignatura asignatura;
 
 	public Clase() {
@@ -107,8 +109,8 @@ public class Clase implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Clase [dia=" + dia + ", hora_inicio=" + hora_inicio + ", grupo=" + grupo + ", asignatura="
-				+ asignatura + "]";
+		return "Clase [dia=" + dia + ", hora_inicio=" + hora_inicio + ", grupo=" + grupo + ", asignatura=" + asignatura
+				+ "]";
 	}
 
 }

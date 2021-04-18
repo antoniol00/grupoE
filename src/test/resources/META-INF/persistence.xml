@@ -17,6 +17,7 @@
 		<class>es.uma.informatica.sii.entities.Titulacion</class>
 		<class>es.uma.informatica.sii.entities.Asigna_grupos</class>
 		<class>es.uma.informatica.sii.entities.Clase</class>
+		<class>es.uma.informatica.sii.entities.Peticion</class>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property

@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-
+@IdClass(AsignaturaPK.class)
 public class Asignatura implements Serializable {
 
 	@Id
@@ -35,13 +35,11 @@ public class Asignatura implements Serializable {
 	@Column(nullable = false)
 	private String nombre;
 	private Integer curso;
-	private String caracter;
-	private Integer duracion;
 	private Integer cuatrimestre;
 	private String idiomas;
 
+	@Id
 	@ManyToOne
-	@JoinColumn(nullable = false)
 	private Titulacion titulacion;
 
 	@OneToMany(mappedBy = "asignatura")
@@ -113,22 +111,6 @@ public class Asignatura implements Serializable {
 
 	public void setCurso(Integer curso) {
 		this.curso = curso;
-	}
-
-	public String getCaracter() {
-		return caracter;
-	}
-
-	public void setCaracter(String caracter) {
-		this.caracter = caracter;
-	}
-
-	public Integer getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
 	}
 
 	public Integer getCuatrimestre() {

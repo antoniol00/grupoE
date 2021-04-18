@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Asigna_gruposPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer asignatura;
+	private AsignaturaPK asignatura;
 	private MatriculaPK matricula;
 	
 	public Asigna_gruposPK() {}
 
-	public Integer getAsignatura() {
+	public AsignaturaPK getAsignatura() {
 		return asignatura;
 	}
 
-	public void setAsignatura(Integer asignatura) {
+	public void setAsignatura(AsignaturaPK asignatura) {
 		this.asignatura = asignatura;
 	}
 
@@ -53,6 +53,6 @@ public class Asigna_gruposPK implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	
 }
