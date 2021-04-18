@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Properties;
@@ -21,9 +22,9 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.GestionPeticiones;
 
-public class ApplicationTests {
+public class TestApplication {
 
-	private static final Logger LOG = Logger.getLogger(ApplicationTests.class.getCanonicalName());
+	private static final Logger LOG = Logger.getLogger(TestApplication.class.getCanonicalName());
 
 	private static final String GLASSFISH_CONFIGI_FILE_PROPERTY = "org.glassfish.ejb.embedded.glassfish.configuration.file";
 	private static final String CONFIG_FILE = "target/test-classes/META-INF/domain.xml";
@@ -64,6 +65,12 @@ public class ApplicationTests {
 	@Test
 	public void test() {
 		assertTrue("es incorrecto", true);
+	}
+	
+	@Requisitos({ "RF1", "RF7" })
+	@Test
+	public void test2() {
+		assertEquals("es incorrecto", 0,0);
 	}
 
 	@AfterClass
