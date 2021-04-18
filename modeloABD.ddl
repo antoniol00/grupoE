@@ -3,119 +3,120 @@ CREATE TABLE alumno (
     nombre_completo         VARCHAR2(255) NOT NULL,
     email_institucional     VARCHAR2(255) NOT NULL,
     email_personal          VARCHAR2(255),
-    tel閒ono_fijo           NUMBER(9),
-    tel閒ono_m髒il          NUMBER(9),
-    direcci髇_notificaci髇  VARCHAR2(255),
-    localidad_notificaci髇  VARCHAR2(64),
-    provincia_notificaci髇  VARCHAR2(32),
-    c骴igo_postal           NUMBER(5)
+    tel茅fono_fijo           NUMBER(9),
+    tel茅fono_m贸vil          NUMBER(9),
+    direcci贸n_notificaci贸n  VARCHAR2(255),
+    localidad_notificaci贸n  VARCHAR2(64),
+    provincia_notificaci贸n  VARCHAR2(32),
+    c贸digo_postal           NUMBER(5)
 );
 
 ALTER TABLE alumno ADD CONSTRAINT alumno_pk PRIMARY KEY ( dni );
 
 CREATE TABLE asigna_grupos (
-    grupo_id                     VARCHAR2(10),
-    matricula_curso              VARCHAR2(6) NOT NULL,
-    matricula_expediente_n鷐ero  NUMBER(9) NOT NULL,
-    asignatura_referencia        NUMBER(5) NOT NULL
+    grupo_id                      VARCHAR2(10),
+    matricula_curso               VARCHAR2(6) NOT NULL,
+    matricula_expediente_n煤mero   NUMBER(9) NOT NULL,
+    asignatura_referencia         NUMBER(5) NOT NULL,
+    asignatura_titulacion_c贸digo  NUMBER(4) NOT NULL
 );
 
 ALTER TABLE asigna_grupos
     ADD CONSTRAINT asigna_grupos_pk PRIMARY KEY ( matricula_curso,
-                                                  matricula_expediente_n鷐ero,
-                                                  asignatura_referencia );
+                                                  matricula_expediente_n煤mero,
+                                                  asignatura_referencia,
+                                                  asignatura_titulacion_c贸digo );
 
 CREATE TABLE asignatura (
     referencia          NUMBER(5) NOT NULL,
-    c骴igo              NUMBER(3) NOT NULL,
-    cr閐itos_te髍icos   NUMBER(3, 1) NOT NULL,
-    cr閐itos_pr醕ticos  NUMBER(3, 1) NOT NULL,
+    c贸digo              NUMBER(3) NOT NULL,
+    cr茅ditos_te贸ricos   NUMBER(3, 1) NOT NULL,
+    cr茅ditos_pr谩cticos  NUMBER(3, 1) NOT NULL,
     ofertada            CHAR(1) NOT NULL,
     nombre              VARCHAR2(255) NOT NULL,
     curso               NUMBER(1),
-    car醕ter            VARCHAR2(32),
-    duraci髇            NUMBER(2),
     cuatrimestre        NUMBER(1),
     idiomas             VARCHAR2(32),
-    titulacion_c骴igo   NUMBER(4) NOT NULL
+    titulacion_c贸digo   NUMBER(4) NOT NULL
 );
 
-ALTER TABLE asignatura ADD CONSTRAINT asignatura_pk PRIMARY KEY ( referencia );
+ALTER TABLE asignatura ADD CONSTRAINT asignatura_pk PRIMARY KEY ( referencia,
+                                                                  titulacion_c贸digo );
 
 CREATE TABLE centro (
     nombre           VARCHAR2(64) NOT NULL,
-    direcci髇        VARCHAR2(255),
-    tlf_conserjer韆  NUMBER(9)
+    direcci贸n        VARCHAR2(255),
+    tlf_conserjer铆a  NUMBER(9)
 );
 
 ALTER TABLE centro ADD CONSTRAINT centro_pk PRIMARY KEY ( nombre );
 
-ALTER TABLE centro ADD CONSTRAINT centro_nombre_un UNIQUE ( nombre );
-
 CREATE TABLE clase (
-    d韆                    VARCHAR2(10) NOT NULL,
-    hora_inicio            VARCHAR2(5) NOT NULL,
-    hora_fin               VARCHAR2(5) NOT NULL,
-    asignatura_referencia  NUMBER(5) NOT NULL,
-    grupo_id               VARCHAR2(10) NOT NULL
+    d铆a                           VARCHAR2(10) NOT NULL,
+    hora_inicio                   VARCHAR2(5) NOT NULL,
+    hora_fin                      VARCHAR2(5) NOT NULL,
+    asignatura_referencia         NUMBER(5) NOT NULL,
+    grupo_id                      VARCHAR2(10) NOT NULL,
+    asignatura_titulacion_c贸digo  NUMBER(4) NOT NULL
 );
 
 ALTER TABLE clase
-    ADD CONSTRAINT clase_pk PRIMARY KEY ( d韆,
+    ADD CONSTRAINT clase_pk PRIMARY KEY ( d铆a,
                                           hora_inicio,
                                           grupo_id );
 
 CREATE TABLE encuesta (
-    fecha_env韔        DATE NOT NULL,
-    expediente_n鷐ero  NUMBER(9) NOT NULL
+    fecha_env铆o        DATE NOT NULL,
+    expediente_n煤mero  NUMBER(9) NOT NULL
 );
 
-
-ALTER TABLE encuesta ADD CONSTRAINT encuesta_pk PRIMARY KEY ( fecha_env韔,
-                                                              expediente_n鷐ero );
+ALTER TABLE encuesta ADD CONSTRAINT encuesta_pk PRIMARY KEY ( fecha_env铆o,
+                                                              expediente_n煤mero );
 
 CREATE TABLE encuesta_grupos (
-    encuesta_fecha_env韔    DATE NOT NULL,
-    encuesta_n鷐ero         NUMBER(9) NOT NULL,
+    encuesta_fecha_env铆o    DATE NOT NULL,
+    encuesta_n煤mero         NUMBER(9) NOT NULL,
     grupos_asig_curso       VARCHAR2(5) NOT NULL,
     grupos_asig_id          VARCHAR2(10) NOT NULL,
-    grupos_asig_referencia  NUMBER(5) NOT NULL
+    grupos_asig_referencia  NUMBER(5) NOT NULL,
+    grupos_asig_c贸digo1     NUMBER(4) NOT NULL
 );
 
 ALTER TABLE encuesta_grupos
-    ADD CONSTRAINT encuesta_grupos_pk PRIMARY KEY ( encuesta_fecha_env韔,
-                                                    encuesta_n鷐ero,
+    ADD CONSTRAINT encuesta_grupos_pk PRIMARY KEY ( encuesta_fecha_env铆o,
+                                                    encuesta_n煤mero,
                                                     grupos_asig_curso,
                                                     grupos_asig_id,
-                                                    grupos_asig_referencia );
+                                                    grupos_asig_referencia,
+                                                    grupos_asig_c贸digo1 );
 
 CREATE TABLE expediente (
-    n鷐ero             NUMBER(9) NOT NULL,
+    n煤mero             NUMBER(9) NOT NULL,
     activo             CHAR(1),
     nota_media         NUMBER(3, 2),
-    cr閐itos_fb        NUMBER(3),
-    cr閐itos_ob        NUMBER(3),
-    cr閐itos_op        NUMBER(3),
-    cr閐itos_pe        NUMBER(3),
-    cr閐itos_tf        NUMBER(3),
-    titulacion_c骴igo  NUMBER(4) NOT NULL,
+    cr茅ditos_fb        NUMBER(5, 2),
+    cr茅ditos_ob        NUMBER(5, 2),
+    cr茅ditos_op        NUMBER(5, 2),
+    cr茅ditos_pe        NUMBER(5, 2),
+    cr茅ditos_tf        NUMBER(5, 2),
+    titulacion_c贸digo  NUMBER(4) NOT NULL,
     alumno_dni         VARCHAR2(9) NOT NULL
 );
 
-ALTER TABLE expediente ADD CONSTRAINT expediente_pk PRIMARY KEY ( n鷐ero );
+ALTER TABLE expediente ADD CONSTRAINT expediente_pk PRIMARY KEY ( n煤mero );
 
 CREATE TABLE grupo (
     id                 VARCHAR2(10) NOT NULL,
     curso              NUMBER(1) NOT NULL,
     letra              VARCHAR2(1) NOT NULL,
     turno              VARCHAR2(6) NOT NULL,
-    ingl閟             CHAR(1) NOT NULL,
+    ingl茅s             CHAR(1) NOT NULL,
     visible            CHAR(1),
     plazas             NUMBER(3),
     asignar            VARCHAR2(5),
     grupo_id           VARCHAR2(10),
-    titulacion_c骴igo  NUMBER(4) NOT NULL
-);
+    titulacion_c贸digo  NUMBER(4) NOT NULL
+); 
 
 ALTER TABLE grupo ADD CONSTRAINT grupo_pk PRIMARY KEY ( id );
 
@@ -124,61 +125,76 @@ ALTER TABLE grupo ADD CONSTRAINT grupo_letra_un UNIQUE ( letra );
 ALTER TABLE grupo ADD CONSTRAINT grupo_curso_un UNIQUE ( curso );
 
 CREATE TABLE grupos_asig (
-    curso                  VARCHAR2(5) NOT NULL,
-    oferta                 VARCHAR2(10),
-    grupo_id               VARCHAR2(10) NOT NULL,
-    asignatura_referencia  NUMBER(5) NOT NULL
+    curso                         VARCHAR2(5) NOT NULL,
+    oferta                        VARCHAR2(10),
+    grupo_id                      VARCHAR2(10) NOT NULL,
+    asignatura_referencia         NUMBER(5) NOT NULL,
+    asignatura_titulacion_c贸digo  NUMBER(4) NOT NULL
 );
 
 ALTER TABLE grupos_asig
     ADD CONSTRAINT grupos_asig_pk PRIMARY KEY ( curso,
                                                 grupo_id,
-                                                asignatura_referencia );
+                                                asignatura_referencia,
+                                                asignatura_titulacion_c贸digo );
 
 CREATE TABLE matricula (
     curso                VARCHAR2(6) NOT NULL,
-    n鷐ero_archivo       NUMBER(9) NOT NULL,
+    n煤mero_archivo       NUMBER(9) NOT NULL,
     activa               CHAR(1) NOT NULL,
     turno                VARCHAR2(6),
     tipo_estudio         VARCHAR2(10),
-    fecha_matr韈ula      DATE,
+    fecha_matr铆cula      DATE,
     nuevo_ingreso        CHAR(1),
     listado_asignaturas  VARCHAR2(255),
-    expediente_n鷐ero    NUMBER(9) NOT NULL
+    expediente_n煤mero    NUMBER(9) NOT NULL
 );
 
 ALTER TABLE matricula ADD CONSTRAINT matricula_pk PRIMARY KEY ( curso,
-                                                                expediente_n鷐ero );
+                                                                expediente_n煤mero );
 
-ALTER TABLE matricula ADD CONSTRAINT matricula_n鷐ero_archivo_un UNIQUE ( n鷐ero_archivo );
+ALTER TABLE matricula ADD CONSTRAINT matricula_n煤mero_archivo_un UNIQUE ( n煤mero_archivo );
 
 CREATE TABLE optativa (
     referencia  NUMBER(5) NOT NULL,
     plazas      NUMBER(3),
-    menci髇     VARCHAR2(20)
+    menci贸n     VARCHAR2(20),
+    c贸digo1     NUMBER(4) NOT NULL
 );
 
-ALTER TABLE optativa ADD CONSTRAINT optativa_pk PRIMARY KEY ( referencia );
+ALTER TABLE optativa ADD CONSTRAINT optativa_pk PRIMARY KEY ( referencia,
+                                                              c贸digo1 );
+
+CREATE TABLE peticion (
+    id           NUMBER(9) NOT NULL,
+    tipo         VARCHAR2(255),
+    descripci贸n  VARCHAR2(255),
+    alumno_dni   VARCHAR2(9) NOT NULL
+);
+
+ALTER TABLE peticion ADD CONSTRAINT peticion_pk PRIMARY KEY ( id );
 
 CREATE TABLE titul_centro (
     centro_nombre      VARCHAR2(64) NOT NULL,
-    titulacion_c骴igo  NUMBER(4) NOT NULL
+    titulacion_c贸digo  NUMBER(4) NOT NULL
 );
 
 ALTER TABLE titul_centro ADD CONSTRAINT titul_centro_pk PRIMARY KEY ( centro_nombre,
-                                                                      titulacion_c骴igo );
+                                                                      titulacion_c贸digo );
 
 CREATE TABLE titulacion (
-    c骴igo    NUMBER(4) NOT NULL,
+    c贸digo    NUMBER(4) NOT NULL,
     nombre    VARCHAR2(64) NOT NULL,
-    cr閐itos  NUMBER(3) NOT NULL
+    cr茅ditos  NUMBER(3) NOT NULL
 );
 
-ALTER TABLE titulacion ADD CONSTRAINT titulacion_pk PRIMARY KEY ( c骴igo );
+ALTER TABLE titulacion ADD CONSTRAINT titulacion_pk PRIMARY KEY ( c贸digo );
 
 ALTER TABLE asigna_grupos
-    ADD CONSTRAINT asigna_grupos_asignatura_fk FOREIGN KEY ( asignatura_referencia )
-        REFERENCES asignatura ( referencia );
+    ADD CONSTRAINT asigna_grupos_asignatura_fk FOREIGN KEY ( asignatura_referencia,
+                                                             asignatura_titulacion_c贸digo )
+        REFERENCES asignatura ( referencia,
+                                titulacion_c贸digo );
 
 ALTER TABLE asigna_grupos
     ADD CONSTRAINT asigna_grupos_grupo_fk FOREIGN KEY ( grupo_id )
@@ -186,76 +202,88 @@ ALTER TABLE asigna_grupos
 
 ALTER TABLE asigna_grupos
     ADD CONSTRAINT asigna_grupos_matricula_fk FOREIGN KEY ( matricula_curso,
-                                                            matricula_expediente_n鷐ero )
+                                                            matricula_expediente_n煤mero )
         REFERENCES matricula ( curso,
-                               expediente_n鷐ero );
+                               expediente_n煤mero );
 
 ALTER TABLE asignatura
-    ADD CONSTRAINT asignatura_titulacion_fk FOREIGN KEY ( titulacion_c骴igo )
-        REFERENCES titulacion ( c骴igo );
+    ADD CONSTRAINT asignatura_titulacion_fk FOREIGN KEY ( titulacion_c贸digo )
+        REFERENCES titulacion ( c贸digo );
 
 ALTER TABLE clase
-    ADD CONSTRAINT clase_asignatura_fk FOREIGN KEY ( asignatura_referencia )
-        REFERENCES asignatura ( referencia );
+    ADD CONSTRAINT clase_asignatura_fk FOREIGN KEY ( asignatura_referencia,
+                                                     asignatura_titulacion_c贸digo )
+        REFERENCES asignatura ( referencia,
+                                titulacion_c贸digo );
 
 ALTER TABLE clase
     ADD CONSTRAINT clase_grupo_fk FOREIGN KEY ( grupo_id )
         REFERENCES grupo ( id );
 
 ALTER TABLE encuesta
-    ADD CONSTRAINT encuesta_expediente_fk FOREIGN KEY ( expediente_n鷐ero )
-        REFERENCES expediente ( n鷐ero );
+    ADD CONSTRAINT encuesta_expediente_fk FOREIGN KEY ( expediente_n煤mero )
+        REFERENCES expediente ( n煤mero );
 
 ALTER TABLE encuesta_grupos
-    ADD CONSTRAINT encuesta_grupos_encuesta_fk FOREIGN KEY ( encuesta_fecha_env韔,
-                                                             encuesta_n鷐ero )
-        REFERENCES encuesta ( fecha_env韔,
-                              expediente_n鷐ero );
+    ADD CONSTRAINT encuesta_grupos_encuesta_fk FOREIGN KEY ( encuesta_fecha_env铆o,
+                                                             encuesta_n煤mero )
+        REFERENCES encuesta ( fecha_env铆o,
+                              expediente_n煤mero );
 
 ALTER TABLE encuesta_grupos
     ADD CONSTRAINT encuesta_grupos_grupos_asig_fk FOREIGN KEY ( grupos_asig_curso,
                                                                 grupos_asig_id,
-                                                                grupos_asig_referencia )
+                                                                grupos_asig_referencia,
+                                                                grupos_asig_c贸digo1 )
         REFERENCES grupos_asig ( curso,
                                  grupo_id,
-                                 asignatura_referencia );
+                                 asignatura_referencia,
+                                 asignatura_titulacion_c贸digo );
 
 ALTER TABLE expediente
     ADD CONSTRAINT expediente_alumno_fk FOREIGN KEY ( alumno_dni )
         REFERENCES alumno ( dni );
 
 ALTER TABLE expediente
-    ADD CONSTRAINT expediente_titulacion_fk FOREIGN KEY ( titulacion_c骴igo )
-        REFERENCES titulacion ( c骴igo );
+    ADD CONSTRAINT expediente_titulacion_fk FOREIGN KEY ( titulacion_c贸digo )
+        REFERENCES titulacion ( c贸digo );
 
 ALTER TABLE grupo
     ADD CONSTRAINT grupo_grupo_fk FOREIGN KEY ( grupo_id )
         REFERENCES grupo ( id );
 
 ALTER TABLE grupo
-    ADD CONSTRAINT grupo_titulacion_fk FOREIGN KEY ( titulacion_c骴igo )
-        REFERENCES titulacion ( c骴igo );
+    ADD CONSTRAINT grupo_titulacion_fk FOREIGN KEY ( titulacion_c贸digo )
+        REFERENCES titulacion ( c贸digo );
 
 ALTER TABLE grupos_asig
-    ADD CONSTRAINT grupos_asig_asignatura_fk FOREIGN KEY ( asignatura_referencia )
-        REFERENCES asignatura ( referencia );
+    ADD CONSTRAINT grupos_asig_asignatura_fk FOREIGN KEY ( asignatura_referencia,
+                                                           asignatura_titulacion_c贸digo )
+        REFERENCES asignatura ( referencia,
+                                titulacion_c贸digo );
 
 ALTER TABLE grupos_asig
     ADD CONSTRAINT grupos_asig_grupo_fk FOREIGN KEY ( grupo_id )
         REFERENCES grupo ( id );
 
 ALTER TABLE matricula
-    ADD CONSTRAINT matricula_expediente_fk FOREIGN KEY ( expediente_n鷐ero )
-        REFERENCES expediente ( n鷐ero );
+    ADD CONSTRAINT matricula_expediente_fk FOREIGN KEY ( expediente_n煤mero )
+        REFERENCES expediente ( n煤mero );
 
 ALTER TABLE optativa
-    ADD CONSTRAINT optativa_asignatura_fk FOREIGN KEY ( referencia )
-        REFERENCES asignatura ( referencia );
+    ADD CONSTRAINT optativa_asignatura_fk FOREIGN KEY ( referencia,
+                                                        c贸digo1 )
+        REFERENCES asignatura ( referencia,
+                                titulacion_c贸digo );
+
+ALTER TABLE peticion
+    ADD CONSTRAINT peticion_alumno_fk FOREIGN KEY ( alumno_dni )
+        REFERENCES alumno ( dni );
 
 ALTER TABLE titul_centro
     ADD CONSTRAINT titul_centro_centro_fk FOREIGN KEY ( centro_nombre )
         REFERENCES centro ( nombre );
 
 ALTER TABLE titul_centro
-    ADD CONSTRAINT titul_centro_titulacion_fk FOREIGN KEY ( titulacion_c骴igo )
-        REFERENCES titulacion ( c骴igo );
+    ADD CONSTRAINT titul_centro_titulacion_fk FOREIGN KEY ( titulacion_c贸digo )
+        REFERENCES titulacion ( c贸digo );
