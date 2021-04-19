@@ -6,7 +6,6 @@ import javax.ejb.Local;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Asignatura;
-import es.uma.informatica.sii.entities.Grupos_asig;
 
 @Local
 public interface GestionAsignaturas {
@@ -42,9 +41,10 @@ public interface GestionAsignaturas {
 	public void borrarAsignatura(String codigo, String titulacion) throws SecretariaException;
 
 	/**
-	 * Permite definir grupos rellenando la tabla Grupos_asig para la asignatura y grupo dado
+	 * Permite definir grupos rellenando la tabla Grupos_asig para la asignatura y
+	 * grupo dado
 	 * 
 	 */
 	public void definirGrupos(String codigo, String titulacion, String id, String curso) throws SecretariaException;
-		
+
 }
