@@ -186,7 +186,10 @@ public class Asignatura implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Asignatura [referencia=" + referencia + ", codigo=" + codigo + ", nombre=" + nombre + "]";
+		return "Asignatura [referencia=" + referencia + ", codigo=" + codigo + ", creditos_teoricos="
+				+ creditos_teoricos + ", creditos_practicos=" + creditos_practicos + ", ofertada=" + ofertada
+				+ ", nombre=" + nombre + ", curso=" + curso + ", cuatrimestre=" + cuatrimestre + ", idiomas=" + idiomas
+				+ ", titulacion=" + titulacion + "]";
 	}
 
 }
