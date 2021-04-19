@@ -15,10 +15,9 @@ public class MatriculasImpl implements GestionMatriculas {
 
 	@PersistenceContext(name = "grupoE")
 	private EntityManager em;
-	
-	
+
 	@Override
-	public void importaMatriculas() throws SecretariaException {
+	public void importaMatriculas(String file) throws SecretariaException {
 		// TODO Auto-generated method stub
 
 	}

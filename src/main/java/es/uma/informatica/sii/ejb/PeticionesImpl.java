@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Peticion;
 
 @Stateless
 public class PeticionesImpl implements GestionPeticiones {
@@ -15,9 +16,21 @@ public class PeticionesImpl implements GestionPeticiones {
 
 	@PersistenceContext(name = "grupoE")
 	private EntityManager em;
-	
+
 	@Override
-	public void creaIncidencia(String i) throws SecretariaException {
+	public void creaIncidencia(Peticion p) throws SecretariaException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void editaIncidencia(Integer id, Peticion p) throws SecretariaException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void borraIncidencia(Integer id) throws SecretariaException {
 		// TODO Auto-generated method stub
 
 	}

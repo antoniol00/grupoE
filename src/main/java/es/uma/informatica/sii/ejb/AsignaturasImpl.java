@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Asignatura;
+import es.uma.informatica.sii.entities.Grupos_asig;
 
 @Stateless
 public class AsignaturasImpl implements GestionAsignaturas {
@@ -15,15 +17,15 @@ public class AsignaturasImpl implements GestionAsignaturas {
 
 	@PersistenceContext(name = "grupoE")
 	private EntityManager em;
-	
+
 	@Override
-	public void importaAsignaturas() throws SecretariaException {
+	public void importaAsignaturas(String file) throws SecretariaException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void modificarAsignatura(String codigo, String titulacion) throws SecretariaException {
+	public void modificarAsignatura(String codigo, String titulacion, Asignatura asig) throws SecretariaException {
 		// TODO Auto-generated method stub
 
 	}
@@ -35,7 +37,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	}
 
 	@Override
-	public void definirGrupos(String codigo, String titulacion) throws SecretariaException {
+	public void definirGrupos(Grupos_asig ga) throws SecretariaException {
 		// TODO Auto-generated method stub
 
 	}

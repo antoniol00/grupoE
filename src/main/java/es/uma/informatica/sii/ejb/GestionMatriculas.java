@@ -9,10 +9,10 @@ public interface GestionMatriculas {
 	
 	/**
 	 * Las matriculas deben importarse a la base de datos a partir de un archivo
-	 * excel preconfigurado. Se debe poder completar tanto la informacion de la
-	 * matricula en la tabla MATRICULA
+	 * excel preconfigurado. Se debe poder completar la informacion de las
+	 * matriculas en la tabla MATRICULA
 	 */
-	public void importaMatriculas() throws SecretariaException;
+	public void importaMatriculas(String file) throws SecretariaException;
 	
 	/**
 	 * Permite listar las matriculas dado un filtro pasado como parametro
