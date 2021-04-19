@@ -28,6 +28,8 @@
  ┃	┗ 📂resources.META-INF
  ┃          ┣ 📜domain.xml -> configuracion GlassFish
  ┃          ┗ 📜persistence.xml -> definición contexto pruebas
+ ┣ 📂DATOS -> ficheros de datos para importar
+ ┣ 📜REQUISITOS_FUNCIONALES_v1.1.pdf
  ┣ 📜LICENSE
  ┣ 📜README.md
  ┣ 📜esquema.dll -> esquema generado por las entidades JPA
