@@ -1,8 +1,11 @@
 package es.uma.informatica.sii.ejb;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Peticion;
@@ -42,6 +45,22 @@ public class PeticionesImpl implements GestionPeticiones {
 		}
 		em.remove(pe);
 
+	}
+
+	// NO NECESITAN TEST
+	@Override
+	public Peticion obtenerPeticion(Integer id) throws SecretariaException {
+		Peticion p = em.find(Peticion.class, id);
+		if (p == null) {
+			throw new SecretariaException("La peticion no existe");
+		}
+		return p;
+	}
+
+	@Override
+	public List<Peticion> listaPeticiones() throws SecretariaException {
+		TypedQuery<Peticion> query = em.createQuery("select p from Peticion a", Peticion.class);
+		return query.getResultList();
 	}
 
 }

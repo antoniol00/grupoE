@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.ejb;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -46,5 +47,20 @@ public interface GestionAsignaturas {
 	 * 
 	 */
 	public void definirGrupos(String codigo, String titulacion, String id, String curso) throws SecretariaException;
+
+	// NO NECESITAN TEST
+	/**
+	 * Devuelve la asignatura dada su clave compuesta
+	 * 
+	 * @param codigo
+	 * @param titulacion
+	 * @throws SecretariaException
+	 */
+	public Asignatura obtenerAsignatura(String codigo, String titulacion) throws SecretariaException;
+
+	/**
+	 * Devuelve todas las asignaturas
+	 */
+	public List<Asignatura> listarAsignaturas() throws SecretariaException;
 
 }

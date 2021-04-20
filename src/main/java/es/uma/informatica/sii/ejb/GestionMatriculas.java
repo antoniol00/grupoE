@@ -26,4 +26,13 @@ public interface GestionMatriculas {
 	 * por la ID, "DES" para ordenar descendente por la ID, "EXP" ordenado por el numero de referencia del expediente
 	 */
 	public List<Matricula> listaMatriculas(String filter) throws SecretariaException;
+	
+	//NO NECESITA TEST
+	/**
+	 * Devuelve la matricula especificada
+	 * @param curso
+	 * @param expediente
+	 * @throws SecretariaException
+	 */
+	public Matricula obtenerMatricula(String curso, Integer expediente) throws SecretariaException;
 }

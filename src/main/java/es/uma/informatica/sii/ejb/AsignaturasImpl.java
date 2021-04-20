@@ -5,10 +5,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -264,6 +266,26 @@ public class AsignaturasImpl implements GestionAsignaturas {
 
 		em.persist(ga);
 
+	}
+
+	// NO NECESITAN TEST
+
+	@Override
+	public Asignatura obtenerAsignatura(String codigo, String titulacion) throws SecretariaException {
+		AsignaturaPK apk = new AsignaturaPK();
+		apk.setReferencia(Integer.parseInt(codigo));
+		apk.setTitulacion(Integer.parseInt(titulacion));
+		Asignatura as = em.find(Asignatura.class, apk);
+		if (as == null) {
+			throw new SecretariaException("La asignatura no existe");
+		}
+		return as;
+	}
+
+	@Override
+	public List<Asignatura> listarAsignaturas() throws SecretariaException {
+		TypedQuery<Asignatura> query = em.createQuery("select a from Asignatura a", Asignatura.class);
+		return query.getResultList();
 	}
 
 }

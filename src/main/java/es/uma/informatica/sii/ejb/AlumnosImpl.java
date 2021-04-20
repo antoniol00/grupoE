@@ -3,10 +3,12 @@ package es.uma.informatica.sii.ejb;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -106,7 +108,7 @@ public class AlumnosImpl implements GestionAlumnos {
 				ex.setCreditos_ob(Double.parseDouble(creditos_ob));
 				ex.setCreditos_pe(Double.parseDouble(creditos_pe));
 				ex.setCreditos_tf(Double.parseDouble(creditos_tf));
-				Titulacion t = em.find(Titulacion.class, numero.substring(0, 3));
+				Titulacion t = em.find(Titulacion.class, Integer.parseInt(numero.substring(0, 4)));
 				if (t == null) {
 					throw new SecretariaException("Se ha intentado asignar un codigo de titulacion que no existe");
 				}
@@ -134,6 +136,22 @@ public class AlumnosImpl implements GestionAlumnos {
 			throw new SecretariaException("Se ha intentado modificar un alumno que no existe");
 		}
 		em.merge(al);
+	}
+
+	// NO NECESITAN TEST
+	@Override
+	public Alumno obtenerAlumno(String dni) throws SecretariaException {
+		Alumno al = em.find(Alumno.class, dni);
+		if (al == null) {
+			throw new SecretariaException("El alumno no existe");
+		}
+		return al;
+	}
+
+	@Override
+	public List<Alumno> obtenerListaAlumnos() throws SecretariaException {
+		TypedQuery<Alumno> query = em.createQuery("select a from Alumno a", Alumno.class);
+		return query.getResultList();
 	}
 
 }

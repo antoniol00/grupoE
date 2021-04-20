@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.ejb;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
@@ -21,4 +23,21 @@ public interface GestionPeticiones {
 	 * Permite borrar incidencia
 	 */
 	public void borraIncidencia(Integer id) throws SecretariaException;
+	
+	//NO NECESITA TEST
+	
+	/**
+	 * Obtiene la peticion especificada
+	 * @param id
+	 * @return
+	 * @throws SecretariaException
+	 */
+	public Peticion obtenerPeticion(Integer id) throws SecretariaException;
+	
+	/**
+	 * Lista todas las peticiones de la base de datos
+	 * @return
+	 * @throws SecretariaException
+	 */
+	public List<Peticion> listaPeticiones() throws SecretariaException;
 }
