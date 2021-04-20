@@ -3,6 +3,8 @@ package es.uma.informatica.sii.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -21,6 +23,8 @@ import es.uma.informatica.sii.ejb.GestionAsignacion;
 import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.GestionPeticiones;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Alumno;
 
 public class TestApplication {
 
@@ -52,7 +56,7 @@ public class TestApplication {
 	}
 
 	@Before
-	public void setup() throws NamingException {
+	public void setup() throws NamingException, IOException {
 		gestionAlumnos = (GestionAlumnos) ctx.lookup(ALUMNOS_EJB);
 		gestionAsignacion = (GestionAsignacion) ctx.lookup(ASIGNACION_EJB);
 		gestionAsignaturas = (GestionAsignaturas) ctx.lookup(ASIGNATURAS_EJB);
@@ -63,14 +67,18 @@ public class TestApplication {
 
 	@Requisitos({ "RF1", "RF7" })
 	@Test
-	public void test() {
-		assertTrue("es incorrecto", true);
+	public void test() throws SecretariaException, IOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
+		List<Alumno> l = gestionAlumnos.obtenerListaAlumnos();
+		System.out.println(l);
+		assertTrue("", true);
+
 	}
-	
+
 	@Requisitos({ "RF1", "RF7" })
 	@Test
 	public void test2() {
-		assertEquals("es incorrecto", 0,0);
+		assertEquals("es incorrecto", 0, 0);
 	}
 
 	@AfterClass
