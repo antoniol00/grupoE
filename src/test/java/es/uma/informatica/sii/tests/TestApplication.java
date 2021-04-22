@@ -107,8 +107,10 @@ public class TestApplication {
 	@Requisitos({ "RF3.1" })
 	@Test
 	public void importarMatriculas() throws SecretariaException, IOException, ParseException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
 		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
-		assertTrue("Error al importar alumnos",gestionAlumnos.obtenerListaAlumnos().size() != 0);
+		String filter="ASC";
+		assertTrue("Error al importar matriculas",gestionMatriculas.listaMatriculas(filter).size() != 0);
 	}
 	
 	@Requisitos({ "RF3.2" })
