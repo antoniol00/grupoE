@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.GestionPeticiones;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Alumno;
+import es.uma.informatica.sii.entities.Asignatura;
 
 public class TestApplication {
 
@@ -76,13 +78,26 @@ public class TestApplication {
 	@Requisitos({ "RF1.2" })
 	@Test
 	public void modificarAsignaturas() throws SecretariaException, IOException, ParseException {
-		
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+		Asignatura asig = gestionAsignaturas.listarAsignaturas().get(0);
+		asig.setCurso(8);
+		int codigo = asig.getCodigo();
+		int titu = asig.getTitulacion().getCodigo();
+		gestionAsignaturas.modificarAsignatura(codigo, titu, asig);
+		assertEquals("Error al modificar la asignatura", asig.getCurso(),
+				gestionAsignaturas.obtenerAsignatura(codigo,titu).getCurso());
 	}
 	
 	@Requisitos({ "RF1.3" })
 	@Test
 	public void borrarAsignaturas() throws SecretariaException, IOException, ParseException {
-		
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+		Asignatura asig = gestionAsignaturas.listarAsignaturas().get(5);
+		int codigo = asig.getCodigo();
+		int titu = asig.getTitulacion().getCodigo();
+		gestionAsignaturas.borrarAsignatura(codigo, titu);
+		assertFalse("Error al borrar la asignatura",
+				gestionAsignaturas.listarAsignaturas().contains(asig));
 	}
 	
 	@Requisitos({ "RF1.4" })
@@ -125,18 +140,32 @@ public class TestApplication {
 	
 	}
 	
-	@Requisitos({ "RF4.1" })
+	@Requisitos({ "RF4.2" })
 	@Test
 	public void modificaGrupo2Cuatri() throws SecretariaException, IOException, ParseException {
+	
+	}
+	//aviso de colisiones no esta implementado
+
+	@Requisitos({ "RF5.2", "RF5.3" })
+	@Test
+	public void asignacionGrupos() throws SecretariaException, IOException, ParseException {
 	
 	}
 	
 	
 	//excepciones
 	
-	@Requisitos({ "RF1.1" })
-	@Test(expected = SecretariaException.class )
-	public void when(){
+	@Requisitos({ "RFEx1" })
+	@Test(expected = SecretariaException.class)
+	public void whenSecretariaException(){
+		String test = null;
+		test.length();
+	}
+	
+	@Requisitos({ "RFEx2" })
+	@Test(expected = IOException.class)
+	public void whenIOException(){
 		String test = null;
 		test.length();
 	}

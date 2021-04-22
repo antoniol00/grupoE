@@ -33,13 +33,13 @@ public interface GestionAsignaturas {
 	 * @param codigo,titulacion: id de la asignatura a cambiar
 	 * @param asig:              información a actualizar
 	 */
-	public void modificarAsignatura(String codigo, String titulacion, Asignatura asig) throws SecretariaException;
+	public void modificarAsignatura(int codigo, int titulacion, Asignatura asig) throws SecretariaException;
 
 	/**
 	 * Borra una asignatura. Realmente no se borra de la base de datos, simplemente
 	 * se marca como no ofertada (campo ofertada a 'N')
 	 */
-	public void borrarAsignatura(String codigo, String titulacion) throws SecretariaException;
+	public void borrarAsignatura(int codigo, int titulacion) throws SecretariaException;
 
 	/**
 	 * Permite definir grupos rellenando la tabla Grupos_asig para la asignatura y
@@ -56,7 +56,7 @@ public interface GestionAsignaturas {
 	 * @param titulacion
 	 * @throws SecretariaException
 	 */
-	public Asignatura obtenerAsignatura(String codigo, String titulacion) throws SecretariaException;
+	public Asignatura obtenerAsignatura(int codigo, int titulacion) throws SecretariaException;
 
 	/**
 	 * Devuelve todas las asignaturas

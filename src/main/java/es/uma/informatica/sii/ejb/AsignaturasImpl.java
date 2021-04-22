@@ -228,10 +228,10 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	}
 
 	@Override
-	public void modificarAsignatura(String codigo, String titulacion, Asignatura asig) throws SecretariaException {
+	public void modificarAsignatura(int codigo, int titulacion, Asignatura asig) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setCodigo(Integer.parseInt(codigo));
-		apk.setTitulacion(Integer.parseInt(titulacion));
+		apk.setCodigo(codigo);
+		apk.setTitulacion(titulacion);
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
 			throw new SecretariaException("Se ha intentado modificar una asignatura que no existe");
@@ -241,15 +241,15 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	}
 
 	@Override
-	public void borrarAsignatura(String codigo, String titulacion) throws SecretariaException {
+	public void borrarAsignatura(int codigo, int titulacion) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setCodigo(Integer.parseInt(codigo));
-		apk.setTitulacion(Integer.parseInt(titulacion));
+		apk.setCodigo(codigo);
+		apk.setTitulacion(titulacion);
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
 			throw new SecretariaException("Se ha intentado borrar una asignatura que no existe");
 		}
-		em.remove(apk);
+		em.remove(as);
 	}
 
 	@Override
@@ -277,10 +277,10 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	// NO NECESITAN TEST
 
 	@Override
-	public Asignatura obtenerAsignatura(String codigo, String titulacion) throws SecretariaException {
+	public Asignatura obtenerAsignatura(int codigo, int titulacion) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setCodigo(Integer.parseInt(codigo));
-		apk.setTitulacion(Integer.parseInt(titulacion));
+		apk.setCodigo(codigo);
+		apk.setTitulacion(titulacion);
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
 			throw new SecretariaException("La asignatura no existe");
