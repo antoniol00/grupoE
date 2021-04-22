@@ -65,14 +65,80 @@ public class TestApplication {
 		gestionPeticiones = (GestionPeticiones) ctx.lookup(PETICIONES_EJB);
 		BaseDatos.inicializaBaseDatos("grupoETest");
 	}
-
+	
+	@Requisitos({ "RF1.1" })
+	@Test
+	public void importarAsignaturas() throws SecretariaException, IOException, ParseException {
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+		assertTrue("Error al importar asignaturas", gestionAsignaturas.listarAsignaturas().size() != 0);
+	}
+	
+	@Requisitos({ "RF1.2" })
+	@Test
+	public void modificarAsignaturas() throws SecretariaException, IOException, ParseException {
+		
+	}
+	
+	@Requisitos({ "RF1.3" })
+	@Test
+	public void borrarAsignaturas() throws SecretariaException, IOException, ParseException {
+		
+	}
+	
+	@Requisitos({ "RF1.4" })
+	@Test
+	public void defineGrupoAsignaturas() throws SecretariaException, IOException, ParseException {
+		
+	}
+	
 	@Requisitos({ "RF2.1" })
 	@Test
 	public void importarAlumnos() throws SecretariaException, IOException, ParseException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		assertTrue("Error",gestionAlumnos.obtenerListaAlumnos().size()==1508);
+		assertTrue("Error al importar alumnos",gestionAlumnos.obtenerListaAlumnos().size() != 0);
 	}
-
+	
+	@Requisitos({ "RF2.2" })
+	@Test
+	public void modificarAlumnos() throws SecretariaException, IOException, ParseException {
+		
+	}
+	
+	@Requisitos({ "RF3.1" })
+	@Test
+	public void importarMatriculas() throws SecretariaException, IOException, ParseException {
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
+		assertTrue("Error al importar alumnos",gestionAlumnos.obtenerListaAlumnos().size() != 0);
+	}
+	
+	@Requisitos({ "RF3.2" })
+	@Test
+	public void listarMatriculas() throws SecretariaException, IOException, ParseException {
+		
+	}
+	
+	@Requisitos({ "RF4.1" })
+	@Test
+	public void generarIncidencia() throws SecretariaException, IOException, ParseException {
+	
+	}
+	
+	@Requisitos({ "RF4.1" })
+	@Test
+	public void modificaGrupo2Cuatri() throws SecretariaException, IOException, ParseException {
+	
+	}
+	
+	
+	//excepciones
+	
+	@Requisitos({ "RF1.1" })
+	@Test(expected = SecretariaException.class )
+	public void when(){
+		String test = null;
+		test.length();
+	}
+	
 	//de prueba
 	@Requisitos({ "RF1", "RF7" })
 	@Test
