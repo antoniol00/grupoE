@@ -69,7 +69,7 @@ public class BaseDatos {
 		gs1.setLetra("A");
 		gs1.setVisible(true);
 		gs1.setIngles(false);
-		gs1.setTurno("manana");
+		gs1.setTurno("M");
 		gs1.setTitulacion(em.find(Titulacion.class, 1056));
 		em.persist(gs1);
 		
@@ -79,7 +79,7 @@ public class BaseDatos {
 		gs2.setLetra("B");
 		gs2.setVisible(true);
 		gs2.setIngles(false);
-		gs2.setTurno("manana");
+		gs2.setTurno("M");
 		gs2.setTitulacion(em.find(Titulacion.class, 1056));
 		em.persist(gs2);
 	
