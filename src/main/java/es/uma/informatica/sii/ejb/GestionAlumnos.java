@@ -1,11 +1,11 @@
 package es.uma.informatica.sii.ejb;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Alumno;
 
 @Local
@@ -19,11 +19,12 @@ public interface GestionAlumnos {
 	 * 
 	 * @param file: ruta del archivo donde importar
 	 * 
-	 * @throws IOException         si hay un error en el acceso a alumnos.csv
-	 * @throws SecretariaException si no encuentra en la bbdd alguna referencia a
-	 *                             otra entidad
+	 * @throws SecretariaIOException si no encuentra en la bbdd alguna referencia a
+	 *                               otra entidad o el archivo no existe
+	 * @throws SecretariaException   si falla en la importacion en algun dato
+	 * 
 	 */
-	public void importaAlumnos(String file) throws SecretariaException, IOException;
+	public void importaAlumnos(String file) throws SecretariaIOException, SecretariaException;
 
 	/**
 	 * Modifica el alumno pasado como parametro e identificado por su DNI
@@ -36,17 +37,17 @@ public interface GestionAlumnos {
 	 */
 	public void modificaAlumno(String dni_alumno, Alumno al) throws SecretariaException;
 
-	// NO NECESITAN TEST
+	//METODOS AUXILIARES
 	/**
 	 * Devuelve el alumno con id dni
 	 * 
-	 * @param dni
-	 * @throws SecretariaException
+	 * @param dni: dni del alumno del que se desea obtener instancia
+	 * @throws SecretariaException: si el alumno no existe
 	 */
 	public Alumno obtenerAlumno(String dni) throws SecretariaException;
 
 	/**
 	 * Devuelve todos los alumnos
 	 */
-	public List<Alumno> obtenerListaAlumnos() throws SecretariaException;
+	public List<Alumno> obtenerListaAlumnos();
 }

@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.tests;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 import javax.naming.NamingException;
 
@@ -14,6 +13,7 @@ import es.uma.informatica.sii.ejb.GestionAsignacion;
 import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 
 public class PruebaAsignacion {
 
@@ -35,13 +35,13 @@ public class PruebaAsignacion {
 		gestionMatriculas = (GestionMatriculas) SuiteTest.ctx.lookup(MATRICULAS_EJB);
 		BaseDatos.inicializaBaseDatos("grupoETest");
 	}
-	
-	
-	//aviso de colisiones no esta implementado
 
+	// aviso de colisiones no esta implementado
+
+	// comprueba que la tabla asignacion se ha rellenado correctamente
 	@Requisitos({ "RF5.2", "RF5.3" })
 	@Test
-	public void asignacionGrupos() throws SecretariaException, IOException, ParseException {
-	
-	}	
+	public void testAsignacionGrupos() throws SecretariaException, SecretariaIOException {
+
+	}
 }

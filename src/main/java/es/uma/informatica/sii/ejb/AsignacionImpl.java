@@ -15,7 +15,6 @@ import es.uma.informatica.sii.entities.Clase;
 import es.uma.informatica.sii.entities.ClasePK;
 import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Matricula;
-import es.uma.informatica.sii.entities.Titulacion;
 
 @Stateless
 public class AsignacionImpl implements GestionAsignacion {
@@ -32,23 +31,22 @@ public class AsignacionImpl implements GestionAsignacion {
 				Matricula.class);
 		List<Matricula> l = query_matricula.getResultList();
 		TypedQuery<Grupo> query_grupo = em.createQuery(
-				"select g from Grupo g where (g.curso=1 and g.visible=true and g.titulacion.codigo=1056)",
-				Grupo.class);
+				"select g from Grupo g where (g.curso=1 and g.visible=true and g.titulacion.codigo=1056)", Grupo.class);
 		List<Grupo> g = query_grupo.getResultList();
 		int index = 0;
-		for(Matricula m : l) {
-			for(int x = 101; x < 111; x++) {
+		for (Matricula m : l) {
+			for (int x = 101; x < 111; x++) {
 				AsignaturaPK apk = new AsignaturaPK();
 				apk.setCodigo(x);
 				apk.setTitulacion(1056);
 				Asignatura as = em.find(Asignatura.class, apk);
-				Grupo grupo = g.get(index%g.size());
+				Grupo grupo = g.get(index % g.size());
 				Asigna_grupos ag1 = new Asigna_grupos();
 				ag1.setAsignatura(as);
 				ag1.setGrupo(grupo);
 				ag1.setMatricula(m);
 				em.persist(ag1);
-			}	
+			}
 			index++;
 		}
 	}
@@ -100,9 +98,9 @@ public class AsignacionImpl implements GestionAsignacion {
 		em.remove(cpk);
 	}
 
-	// NO NECESITAN TEST
+	//METODOS AUXILIARES
 	@Override
-	public List<Asigna_grupos> listaAsignacionProvisional() throws SecretariaException {
+	public List<Asigna_grupos> listaAsignacionProvisional() {
 		TypedQuery<Asigna_grupos> query = em.createQuery("select a from Asigna_grupos a", Asigna_grupos.class);
 		return query.getResultList();
 	}
@@ -130,13 +128,13 @@ public class AsignacionImpl implements GestionAsignacion {
 	}
 
 	@Override
-	public List<Grupo> listaGrupos() throws SecretariaException {
+	public List<Grupo> listaGrupos() {
 		TypedQuery<Grupo> query = em.createQuery("select g from Grupo g", Grupo.class);
 		return query.getResultList();
 	}
 
 	@Override
-	public List<Clase> listaClases() throws SecretariaException {
+	public List<Clase> listaClases() {
 		TypedQuery<Clase> query = em.createQuery("select c from Clase c", Clase.class);
 		return query.getResultList();
 	}

@@ -19,6 +19,7 @@ import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Titulacion;
 
 public class BaseDatos {
+	@SuppressWarnings({ "resource", "deprecation" })
 	public static void inicializaBaseDatos(String nombreUnidadPersistencia) throws IOException {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(nombreUnidadPersistencia);
 		EntityManager em = emf.createEntityManager();
@@ -62,7 +63,7 @@ public class BaseDatos {
 				em.persist(t);
 			}
 		}
-		
+
 		Grupo gs1 = new Grupo();
 		gs1.setId("gs1");
 		gs1.setCurso(1);
@@ -72,7 +73,7 @@ public class BaseDatos {
 		gs1.setTurno("M");
 		gs1.setTitulacion(em.find(Titulacion.class, 1056));
 		em.persist(gs1);
-		
+
 		Grupo gs2 = new Grupo();
 		gs2.setId("gs2");
 		gs2.setCurso(1);
@@ -82,7 +83,6 @@ public class BaseDatos {
 		gs2.setTurno("M");
 		gs2.setTitulacion(em.find(Titulacion.class, 1056));
 		em.persist(gs2);
-	
 
 		em.getTransaction().commit();
 

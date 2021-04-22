@@ -9,35 +9,44 @@ import es.uma.informatica.sii.entities.Peticion;
 
 @Local
 public interface GestionPeticiones {
+
 	/**
 	 * Permite crear e introducir en el sistema una incidencia
+	 * 
+	 * @param p: objeto peticion
+	 * @throws SecretariaException: si el objeto ya existe
 	 */
 	public void creaIncidencia(Peticion p) throws SecretariaException;
-	
+
 	/**
 	 * Permite editar incidencia
+	 * 
+	 * @param p:  objeto peticion con nueva informacion (obtenido antes con find)
+	 * @param id: id de la peticion a modificar
+	 * @throws SecretariaException: si la peticion no existe
 	 */
 	public void editaIncidencia(Integer id, Peticion p) throws SecretariaException;
-	
+
 	/**
 	 * Permite borrar incidencia
+	 * 
+	 * @param id: id de la peticion a borrar
+	 * @throws SecretariaException: si la peticion no existe
 	 */
 	public void borraIncidencia(Integer id) throws SecretariaException;
-	
-	//NO NECESITA TEST
-	
+
+	//METODOS AUXILIARES
+
 	/**
 	 * Obtiene la peticion especificada
-	 * @param id
-	 * @return
-	 * @throws SecretariaException
+	 * 
+	 * @param id: id de la peticion a consultar
+	 * @throws SecretariaException: si no existe la peticion
 	 */
 	public Peticion obtenerPeticion(Integer id) throws SecretariaException;
-	
+
 	/**
 	 * Lista todas las peticiones de la base de datos
-	 * @return
-	 * @throws SecretariaException
 	 */
-	public List<Peticion> listaPeticiones() throws SecretariaException;
+	public List<Peticion> listaPeticiones();
 }

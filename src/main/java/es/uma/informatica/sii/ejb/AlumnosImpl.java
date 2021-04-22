@@ -15,6 +15,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Expediente;
 import es.uma.informatica.sii.entities.Titulacion;
@@ -41,94 +42,99 @@ public class AlumnosImpl implements GestionAlumnos {
 	 * 
 	 */
 	@Override
-	public void importaAlumnos(String file) throws SecretariaException, IOException {
-		// string de cabeceras para archivo alumnos.csv
-		String[] HEADERS = { "DOCUMENTO", "NOMBRE", "APELLIDO1", "APELLIDO2", "EXPEDIENTE", "ARCHIVO", "EMAIL_INST",
-				"EMAIL_PER", "FIJO", "MOVIL", "DIR", "LOCAL", "PRO", "CP", "FECHA", "TURNO", "GRUPOS", "NOTA",
-				"CREDITOS", "CREDITOS_FB", "CREDITOS_OB", "CREDITOS_OP", "CREDITOS_CF", "CREDITOS_PE", "CREDITOS_TF" };
+	public void importaAlumnos(String file) throws SecretariaIOException, SecretariaException {
+		try {
+			// string de cabeceras para archivo alumnos.csv
+			String[] HEADERS = { "DOCUMENTO", "NOMBRE", "APELLIDO1", "APELLIDO2", "EXPEDIENTE", "ARCHIVO", "EMAIL_INST",
+					"EMAIL_PER", "FIJO", "MOVIL", "DIR", "LOCAL", "PRO", "CP", "FECHA", "TURNO", "GRUPOS", "NOTA",
+					"CREDITOS", "CREDITOS_FB", "CREDITOS_OB", "CREDITOS_OP", "CREDITOS_CF", "CREDITOS_PE",
+					"CREDITOS_TF" };
 
-		// RELLENAMOS TABLA ALUMNOS
-		Reader in = new FileReader("./DATOS/alumnos.csv");
-		Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
-		int x = 0;
-		for (CSVRecord record : records) {
-			// eliminamos las primeras 3 lineas de basura + header
-			if (x > 3) {
-				String dni = record.get("DOCUMENTO");
-				String nombre_completo = record.get("NOMBRE") + " " + record.get("APELLIDO1") + " "
-						+ record.get("APELLIDO2");
-				String email_inst = record.get("EMAIL_INST");
-				String email_per = record.get("EMAIL_PER");
-				String fijo = record.get("FIJO");
-				String movil = record.get("MOVIL");
-				String dir_not = record.get("DIR");
-				String loc_not = record.get("LOCAL");
-				String pro_not = record.get("PRO");
-				String cp = record.get("CP");
+			// RELLENAMOS TABLA ALUMNOS
+			Reader in = new FileReader("./DATOS/alumnos.csv");
+			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
+			int x = 0;
+			for (CSVRecord record : records) {
+				// eliminamos las primeras 3 lineas de basura + header
+				if (x > 3) {
+					String dni = record.get("DOCUMENTO");
+					String nombre_completo = record.get("NOMBRE") + " " + record.get("APELLIDO1") + " "
+							+ record.get("APELLIDO2");
+					String email_inst = record.get("EMAIL_INST");
+					String email_per = record.get("EMAIL_PER");
+					String fijo = record.get("FIJO");
+					String movil = record.get("MOVIL");
+					String dir_not = record.get("DIR");
+					String loc_not = record.get("LOCAL");
+					String pro_not = record.get("PRO");
+					String cp = record.get("CP");
 
-				Alumno al = new Alumno();
-				al.setDni(dni);
-				al.setNombre_completo(nombre_completo);
-				al.setEmail_institucional(email_inst);
-				al.setEmail_personal(email_per);
-				al.setTelefono_fijo(Integer.parseInt(fijo.replaceAll(" ", "")));
-				al.setTelefono_movil(Integer.parseInt(movil.replaceAll(" ", "")));
-				al.setDireccion_notificacion(dir_not);
-				al.setLocalidad_notificacion(loc_not);
-				al.setProvincia_notificacion(pro_not);
-				al.setCodigo_postal(Integer.parseInt(cp));
-				al.setExpedientes(new ArrayList<>());
+					Alumno al = new Alumno();
+					al.setDni(dni);
+					al.setNombre_completo(nombre_completo);
+					al.setEmail_institucional(email_inst);
+					al.setEmail_personal(email_per);
+					al.setTelefono_fijo(Integer.parseInt(fijo.replaceAll(" ", "")));
+					al.setTelefono_movil(Integer.parseInt(movil.replaceAll(" ", "")));
+					al.setDireccion_notificacion(dir_not);
+					al.setLocalidad_notificacion(loc_not);
+					al.setProvincia_notificacion(pro_not);
+					al.setCodigo_postal(Integer.parseInt(cp));
+					al.setExpedientes(new ArrayList<>());
 
-				// introducimos en la base de datos cada alumno
-				em.persist(al);
+					// introducimos en la base de datos cada alumno
+					em.persist(al);
 
-			} else {
-				x++;
-			}
-		}
-
-		// RELLENAMOS TABLA EXPEDIENTE
-		Reader in2 = new FileReader("./DATOS/alumnos.csv");
-		Iterable<CSVRecord> records2 = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in2);
-		int y = 0;
-		for (CSVRecord record : records2) {
-			// eliminamos las primeras 3 lineas de basura + header
-			if (y > 3) {
-				String numero = record.get("EXPEDIENTE");
-				String nota = record.get("NOTA");
-				String creditos_fb = record.get("CREDITOS_FB");
-				String creditos_ob = record.get("CREDITOS_OB");
-				String creditos_pe = record.get("CREDITOS_PE");
-				String creditos_tf = record.get("CREDITOS_TF");
-				String dni = record.get("DOCUMENTO");
-
-				Expediente ex = new Expediente();
-				ex.setNumero(Integer.parseInt(numero));
-				ex.setActivo(true);
-				ex.setNota_media(Double.parseDouble(nota));
-				ex.setCreditos_fb(Double.parseDouble(creditos_fb));
-				ex.setCreditos_ob(Double.parseDouble(creditos_ob));
-				ex.setCreditos_pe(Double.parseDouble(creditos_pe));
-				ex.setCreditos_tf(Double.parseDouble(creditos_tf));
-				Titulacion t = em.find(Titulacion.class, Integer.parseInt(numero.substring(0, 4)));
-				if (t == null) {
-					throw new SecretariaException("Se ha intentado asignar un codigo de titulacion que no existe");
+				} else {
+					x++;
 				}
-				ex.setTitulacion(t);
-				Alumno al = em.find(Alumno.class, dni);
-				if (al == null) {
-					throw new SecretariaException("Se ha intentado asignar un alumno que no existe");
-				}
-				ex.setAlumno(al);
-
-				// introducimos en la base de datos cada expediente
-				em.persist(ex);
-
-			} else {
-				y++;
 			}
-		}
 
+			// RELLENAMOS TABLA EXPEDIENTE
+			Reader in2 = new FileReader("./DATOS/alumnos.csv");
+			Iterable<CSVRecord> records2 = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in2);
+			int y = 0;
+			for (CSVRecord record : records2) {
+				// eliminamos las primeras 3 lineas de basura + header
+				if (y > 3) {
+					String numero = record.get("EXPEDIENTE");
+					String nota = record.get("NOTA");
+					String creditos_fb = record.get("CREDITOS_FB");
+					String creditos_ob = record.get("CREDITOS_OB");
+					String creditos_pe = record.get("CREDITOS_PE");
+					String creditos_tf = record.get("CREDITOS_TF");
+					String dni = record.get("DOCUMENTO");
+
+					Expediente ex = new Expediente();
+					ex.setNumero(Integer.parseInt(numero));
+					ex.setActivo(true);
+					ex.setNota_media(Double.parseDouble(nota));
+					ex.setCreditos_fb(Double.parseDouble(creditos_fb));
+					ex.setCreditos_ob(Double.parseDouble(creditos_ob));
+					ex.setCreditos_pe(Double.parseDouble(creditos_pe));
+					ex.setCreditos_tf(Double.parseDouble(creditos_tf));
+					Titulacion t = em.find(Titulacion.class, Integer.parseInt(numero.substring(0, 4)));
+					if (t == null) {
+						throw new SecretariaException("Se ha intentado asignar un codigo de titulacion que no existe");
+					}
+					ex.setTitulacion(t);
+					Alumno al = em.find(Alumno.class, dni);
+					if (al == null) {
+						throw new SecretariaException("Se ha intentado asignar un alumno que no existe");
+					}
+					ex.setAlumno(al);
+
+					// introducimos en la base de datos cada expediente
+					em.persist(ex);
+
+				} else {
+					y++;
+				}
+			}
+
+		} catch (IOException e) {
+			throw new SecretariaIOException("Error IO de archivo");
+		}
 	}
 
 	@Override
@@ -139,8 +145,8 @@ public class AlumnosImpl implements GestionAlumnos {
 		}
 		em.merge(al);
 	}
-
-	// NO NECESITAN TEST
+	
+	//METODOS AUXILIARES
 	@Override
 	public Alumno obtenerAlumno(String dni) throws SecretariaException {
 		Alumno al = em.find(Alumno.class, dni);
@@ -151,7 +157,7 @@ public class AlumnosImpl implements GestionAlumnos {
 	}
 
 	@Override
-	public List<Alumno> obtenerListaAlumnos() throws SecretariaException {
+	public List<Alumno> obtenerListaAlumnos() {
 		TypedQuery<Alumno> query = em.createQuery("select a from Alumno a", Alumno.class);
 		return query.getResultList();
 	}

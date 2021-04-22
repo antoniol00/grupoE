@@ -47,7 +47,7 @@ public class PeticionesImpl implements GestionPeticiones {
 
 	}
 
-	// NO NECESITAN TEST
+	//METODOS AUXILIARES
 	@Override
 	public Peticion obtenerPeticion(Integer id) throws SecretariaException {
 		Peticion p = em.find(Peticion.class, id);
@@ -58,7 +58,7 @@ public class PeticionesImpl implements GestionPeticiones {
 	}
 
 	@Override
-	public List<Peticion> listaPeticiones() throws SecretariaException {
+	public List<Peticion> listaPeticiones() {
 		TypedQuery<Peticion> query = em.createQuery("select p from Peticion a", Peticion.class);
 		return query.getResultList();
 	}

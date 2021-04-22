@@ -14,6 +14,7 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.informatica.sii.ejb.GestionAlumnos;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 
 public class PruebaMatriculas {
 
@@ -32,7 +33,7 @@ public class PruebaMatriculas {
 
 	@Requisitos({ "RF3.1" })
 	@Test
-	public void importarMatriculas() throws SecretariaException, IOException, ParseException {
+	public void importarMatriculas() throws SecretariaIOException, SecretariaException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
 		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
 		String filter = "ASC";
