@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -17,8 +19,8 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(AsignaturaPK.class)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Asignatura implements Serializable {
 
 	@Column(length = 5)

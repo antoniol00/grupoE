@@ -28,11 +28,11 @@ public class AsignacionImpl implements GestionAsignacion {
 		// ALUMNOS DE NUEVO INGRESO
 		// GIS
 		TypedQuery<Matricula> query_matricula = em.createQuery(
-				"select m from Matricula m where m.nuevo_ingreso = true and m.expediente LIKE '1056%'",
+				"select m from Matricula m where (m.nuevo_ingreso = true and m.expediente.numero LIKE '%1056%')",
 				Matricula.class);
 		List<Matricula> l = query_matricula.getResultList();
 		TypedQuery<Grupo> query_grupo = em.createQuery(
-				"select g from Grupo g where g.curso=1 and g.visible=true and g.titulacion=1056",
+				"select g from Grupo g where (g.curso=1 and g.visible=true and g.titulacion.codigo=1056)",
 				Grupo.class);
 		List<Grupo> g = query_grupo.getResultList();
 		int index = 0;
@@ -47,6 +47,7 @@ public class AsignacionImpl implements GestionAsignacion {
 				ag1.setAsignatura(as);
 				ag1.setGrupo(grupo);
 				ag1.setMatricula(m);
+				em.persist(ag1);
 			}	
 			index++;
 		}

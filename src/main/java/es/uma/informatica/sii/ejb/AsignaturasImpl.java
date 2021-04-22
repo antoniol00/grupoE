@@ -92,8 +92,8 @@ public class AsignaturasImpl implements GestionAsignaturas {
 								"Se ha intentado crear una asignatura para una titulacion que no existe");
 					}
 					as.setTitulacion(t);
-
 					em.persist(as);
+
 				}
 			}
 		}
@@ -149,7 +149,6 @@ public class AsignaturasImpl implements GestionAsignaturas {
 							"Se ha intentado crear una asignatura para una titulacion que no existe");
 				}
 				as.setTitulacion(t);
-
 				em.persist(as);
 			}
 		}
@@ -194,7 +193,18 @@ public class AsignaturasImpl implements GestionAsignaturas {
 					String referencia = values.get(0);
 					String mencion = values.get(2);
 					String plazas = values.get(1);
-
+					
+					TypedQuery<Asignatura> query = em.createQuery(
+							"select a from Asignatura a where a.titulacion.codigo=:titulacion and a.referencia=:referencia",
+							Asignatura.class);
+					query.setParameter("titulacion", Integer.parseInt(titulacion.substring(0, 4)));
+					query.setParameter("referencia", Integer.parseInt(referencia.substring(0, 5)));
+					Asignatura a = query.getResultList().get(0);
+					AsignaturaPK apk = new AsignaturaPK();
+					apk.setCodigo(a.getCodigo());
+					apk.setTitulacion(a.getTitulacion().getCodigo());
+					Asignatura as = em.find(Asignatura.class, apk);
+					
 					Optativa o = new Optativa();
 					if (plazas.equals("999.0")) {
 						o.setPlazas(999);
@@ -202,16 +212,12 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						o.setPlazas(35);
 					}
 					o.setMencion(mencion);
-					o.setReferencia(Integer.parseInt(referencia.substring(0, 5)));
-
-					Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion.substring(0, 4)));
-					if (t == null) {
-						throw new SecretariaException(
-								"Se ha intentado crear una asignatura para una titulacion que no existe");
-					}
-
-					o.setTitulacion(t);
-
+					o.setCodigo(as.getCodigo());
+					o.setCreditos_practicos(as.getCreditos_practicos());
+					o.setCreditos_teoricos(as.getCreditos_teoricos());
+					o.setOfertada(as.getOfertada());
+					o.setNombre(as.getNombre());
+					o.setTitulacion(as.getTitulacion());
 					em.persist(o);
 				}
 			}

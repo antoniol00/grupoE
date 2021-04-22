@@ -11,7 +11,6 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Optativa extends Asignatura implements Serializable {
 
 	private Integer plazas;
@@ -35,5 +34,6 @@ public class Optativa extends Asignatura implements Serializable {
 	public void setMencion(String mencion) {
 		this.mencion = mencion;
 	}
+	
    
 }
