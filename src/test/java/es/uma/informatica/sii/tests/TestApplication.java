@@ -66,27 +66,33 @@ public class TestApplication {
 		BaseDatos.inicializaBaseDatos("grupoETest");
 	}
 
-	@Requisitos({ "RF1", "RF7" })
+	@Requisitos({ "RF2.1" })
 	@Test
-	public void test() throws SecretariaException, IOException, ParseException {
+	public void importarAlumnos() throws SecretariaException, IOException, ParseException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
-		gestionAsignacion.asignaGruposAlumnos();
-		System.out.println(gestionAsignacion.listaAsignacionProvisional());
-
+		assertTrue("Error",gestionAlumnos.obtenerListaAlumnos().size()==1508);
 	}
 
+	//de prueba
 	@Requisitos({ "RF1", "RF7" })
 	@Test
 	public void test2() {
 		assertEquals("es incorrecto", 0, 0);
 	}
-
+	
+	//de prueba
+	@Requisitos({ "RF1", "RF7" })
+	@Test
+	public void add_SingleNumber_ReturnsSameNumber(){
+	
+		int actual = 0;
+		assertEquals(0, actual);
+	}	
+	
 	@AfterClass
 	public static void tearDownClass() {
 		if (ejbContainer != null) {
 			ejbContainer.close();
 		}
 	}
-
 }
