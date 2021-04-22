@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Titulacion;
 
 public class BaseDatos {
@@ -61,6 +62,27 @@ public class BaseDatos {
 				em.persist(t);
 			}
 		}
+		
+		Grupo gs1 = new Grupo();
+		gs1.setId("gs1");
+		gs1.setCurso(1);
+		gs1.setLetra("A");
+		gs1.setVisible(true);
+		gs1.setIngles(false);
+		gs1.setTurno("manana");
+		gs1.setTitulacion(em.find(Titulacion.class, 1056));
+		em.persist(gs1);
+		
+		Grupo gs2 = new Grupo();
+		gs2.setId("gs2");
+		gs2.setCurso(1);
+		gs2.setLetra("B");
+		gs2.setVisible(true);
+		gs2.setIngles(false);
+		gs2.setTurno("manana");
+		gs2.setTitulacion(em.find(Titulacion.class, 1056));
+		em.persist(gs2);
+	
 
 		em.getTransaction().commit();
 

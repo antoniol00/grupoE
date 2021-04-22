@@ -19,9 +19,9 @@ public class Grupo implements Serializable {
 	@Id
 	@Column(nullable=false,length=10)
 	private String id;
-	@Column(length=1, nullable=false, unique=true)
+	@Column(length=1, nullable=false)
 	private Integer curso;
-	@Column(length=1, nullable=false, unique=true)
+	@Column(length=1, nullable=false)
 	private String letra;
 	@Column(length=6, nullable=false)
 	private String turno;

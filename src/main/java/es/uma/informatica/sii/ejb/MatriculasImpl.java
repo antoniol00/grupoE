@@ -16,6 +16,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Expediente;
 import es.uma.informatica.sii.entities.Matricula;
 import es.uma.informatica.sii.entities.MatriculaPK;
@@ -57,16 +58,17 @@ public class MatriculasImpl implements GestionMatriculas {
 					m.setTipo_estudio("GRADO");
 				}
 				if (record.get("CREDITOS").equals("0")
-						&& grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-")) {
+						&& (grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-")
+								|| grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-,111-"))) {
 					m.setNuevo_ingreso(true);
 				} else {
 					m.setNuevo_ingreso(false);
 				}
-				m.setFecha_matricula(new SimpleDateFormat("dd/MM/yyyy HH/mm").parse(fecha_matricula));
+				m.setFecha_matricula(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(fecha_matricula));
 				m.setListado_asignaturas(grupos);
 				Expediente exp = em.find(Expediente.class, Integer.parseInt(expediente));
 				if (exp == null) {
-					throw new SecretariaException("Se ha intentado crear una matricula con un expediente inexistente");
+					throw new SecretariaException("Se ha intentado crear una matricula con un expediente inexistente: " +Integer.parseInt(expediente));
 				}
 				m.setExpediente(exp);
 

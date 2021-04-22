@@ -9,9 +9,13 @@ import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Asigna_grupos;
+import es.uma.informatica.sii.entities.Asignatura;
+import es.uma.informatica.sii.entities.AsignaturaPK;
 import es.uma.informatica.sii.entities.Clase;
 import es.uma.informatica.sii.entities.ClasePK;
 import es.uma.informatica.sii.entities.Grupo;
+import es.uma.informatica.sii.entities.Matricula;
+import es.uma.informatica.sii.entities.Titulacion;
 
 @Stateless
 public class AsignacionImpl implements GestionAsignacion {
@@ -21,8 +25,31 @@ public class AsignacionImpl implements GestionAsignacion {
 
 	@Override
 	public void asignaGruposAlumnos() throws SecretariaException {
-		// TODO
-
+		// ALUMNOS DE NUEVO INGRESO
+		// GIS
+		TypedQuery<Matricula> query_matricula = em.createQuery(
+				"select m from Matricula m where m.nuevo_ingreso = true and m.expediente LIKE '1056%'",
+				Matricula.class);
+		List<Matricula> l = query_matricula.getResultList();
+		TypedQuery<Grupo> query_grupo = em.createQuery(
+				"select g from Grupo g where g.curso=1 and g.visible=true and g.titulacion=1056",
+				Grupo.class);
+		List<Grupo> g = query_grupo.getResultList();
+		int index = 0;
+		for(Matricula m : l) {
+			for(int x = 101; x < 111; x++) {
+				AsignaturaPK apk = new AsignaturaPK();
+				apk.setCodigo(x);
+				apk.setTitulacion(1056);
+				Asignatura as = em.find(Asignatura.class, apk);
+				Grupo grupo = g.get(index%g.size());
+				Asigna_grupos ag1 = new Asigna_grupos();
+				ag1.setAsignatura(as);
+				ag1.setGrupo(grupo);
+				ag1.setMatricula(m);
+			}	
+			index++;
+		}
 	}
 
 	@Override

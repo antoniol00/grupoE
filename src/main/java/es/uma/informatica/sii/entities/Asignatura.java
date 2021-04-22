@@ -17,14 +17,14 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(AsignaturaPK.class)
 public class Asignatura implements Serializable {
 
-	@Id
-	@Column(length=5)
+	@Column(length = 5)
 	private Integer referencia;
 	@Column(nullable = false)
+	@Id
 	private Integer codigo;
 	@Column(nullable = false)
 	private Double creditos_teoricos;

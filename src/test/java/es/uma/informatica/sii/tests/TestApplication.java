@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -67,11 +68,11 @@ public class TestApplication {
 
 	@Requisitos({ "RF1", "RF7" })
 	@Test
-	public void test() throws SecretariaException, IOException {
+	public void test() throws SecretariaException, IOException, ParseException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		List<Alumno> l = gestionAlumnos.obtenerListaAlumnos();
-		System.out.println(l);
-		assertTrue("", true);
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
+		gestionAsignacion.asignaGruposAlumnos();
+		System.out.println(gestionAsignacion.listaAsignacionProvisional());
 
 	}
 

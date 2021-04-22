@@ -3,6 +3,7 @@ package es.uma.informatica.sii.ejb;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -76,6 +77,7 @@ public class AlumnosImpl implements GestionAlumnos {
 				al.setLocalidad_notificacion(loc_not);
 				al.setProvincia_notificacion(pro_not);
 				al.setCodigo_postal(Integer.parseInt(cp));
+				al.setExpedientes(new ArrayList<>());
 
 				// introducimos en la base de datos cada alumno
 				em.persist(al);
@@ -120,7 +122,7 @@ public class AlumnosImpl implements GestionAlumnos {
 				ex.setAlumno(al);
 
 				// introducimos en la base de datos cada expediente
-				em.persist(al);
+				em.persist(ex);
 
 			} else {
 				y++;

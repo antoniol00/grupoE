@@ -31,7 +31,7 @@ public class Clase implements Serializable {
 	@Id
 	@ManyToOne
 	private Grupo grupo;
-	@JoinColumns({ @JoinColumn(name = "ASIGNATURA_REFERENCIA", referencedColumnName = "REFERENCIA", nullable = false),
+	@JoinColumns({ @JoinColumn(name = "ASIGNATURA_CODIGO", referencedColumnName = "CODIGO", nullable = false),
 			@JoinColumn(name = "TITULACION_CODIGO", referencedColumnName = "TITULACION_CODIGO", nullable = false) })
 	@ManyToOne
 	private Asignatura asignatura;

@@ -1,10 +1,16 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * Entity implementation class for Entity: Grupos_asig
@@ -15,7 +21,6 @@ import javax.persistence.*;
 @IdClass(Grupos_asigPK.class)
 public class Grupos_asig implements Serializable {
 
-	   
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -25,6 +30,7 @@ public class Grupos_asig implements Serializable {
 		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,70 +59,75 @@ public class Grupos_asig implements Serializable {
 	}
 
 	@Id
-	@Column(length=5)
+	@Column(length = 5)
 	private String curso;
-	@Column(length=10)
-	private String oferta;   
+	@Column(length = 10)
+	private String oferta;
 	@Id
 	@ManyToOne
-	private Grupo grupo;   
+	private Grupo grupo;
 	@Id
 	@ManyToOne
 	private Asignatura asignatura;
-	
+
 	@ManyToMany
-	@JoinTable(name="ENCUESTA_GRUPOS",joinColumns= {
-			@JoinColumn(name="CURSO",referencedColumnName="curso"),
-			@JoinColumn(name="GRUPO",referencedColumnName="grupo_id"),
-			@JoinColumn(name="ASIGNATURA",referencedColumnName="referencia"),
-			@JoinColumn(name="TITULACION",referencedColumnName="titulacion_codigo")
-	},
-	inverseJoinColumns= {
-			@JoinColumn(name="FECHA_ENVIO",referencedColumnName="fecha_envio"),
-			@JoinColumn(name="EXPEDIENTE",referencedColumnName="expediente")
-	})
+	@JoinTable(name = "ENCUESTA_GRUPOS", joinColumns = { @JoinColumn(name = "CURSO", referencedColumnName = "curso"),
+			@JoinColumn(name = "GRUPO", referencedColumnName = "grupo_id"),
+			@JoinColumn(name = "ASIGNATURA", referencedColumnName = "codigo"),
+			@JoinColumn(name = "TITULACION", referencedColumnName = "titulacion_codigo") }, inverseJoinColumns = {
+					@JoinColumn(name = "FECHA_ENVIO", referencedColumnName = "fecha_envio"),
+					@JoinColumn(name = "EXPEDIENTE", referencedColumnName = "expediente") })
 	private List<Encuesta> encuestas;
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Grupos_asig() {
 		super();
-	}   
-	
+	}
+
 	public String getCurso() {
 		return curso;
 	}
+
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
+
 	public String getOferta() {
 		return oferta;
 	}
+
 	public void setOferta(String oferta) {
 		this.oferta = oferta;
 	}
+
 	public Grupo getGrupo_id() {
 		return grupo;
 	}
+
 	public void setGrupo_id(Grupo grupo_id) {
 		this.grupo = grupo_id;
 	}
-	public Asignatura getAsignatura_referencia() {
+
+	public Asignatura getAsignatura_codigo() {
 		return asignatura;
 	}
-	public void setAsignatura_referencia(Asignatura asignatura) {
+
+	public void setAsignatura_codigo(Asignatura asignatura) {
 		this.asignatura = asignatura;
 	}
+
 	public List<Encuesta> getEncuestas() {
 		return encuestas;
 	}
+
 	public void setEncuestas(List<Encuesta> encuestas) {
 		this.encuestas = encuestas;
 	}
+
 	@Override
 	public String toString() {
 		return "Grupos_asig [curso=" + curso + ", grupo_id=" + grupo + "]";
 	}
-   
+
 }

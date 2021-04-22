@@ -224,7 +224,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	@Override
 	public void modificarAsignatura(String codigo, String titulacion, Asignatura asig) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setReferencia(Integer.parseInt(codigo));
+		apk.setCodigo(Integer.parseInt(codigo));
 		apk.setTitulacion(Integer.parseInt(titulacion));
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
@@ -237,7 +237,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	@Override
 	public void borrarAsignatura(String codigo, String titulacion) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setReferencia(Integer.parseInt(codigo));
+		apk.setCodigo(Integer.parseInt(codigo));
 		apk.setTitulacion(Integer.parseInt(titulacion));
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
@@ -249,7 +249,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	@Override
 	public void definirGrupos(String codigo, String titulacion, String id, String curso) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setReferencia(Integer.parseInt(codigo));
+		apk.setCodigo(Integer.parseInt(codigo));
 		apk.setTitulacion(Integer.parseInt(titulacion));
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {
@@ -260,7 +260,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 			throw new SecretariaException("Se ha intentado vincular un grupo que no existe");
 		}
 		Grupos_asig ga = new Grupos_asig();
-		ga.setAsignatura_referencia(as);
+		ga.setAsignatura_codigo(as);
 		ga.setCurso(curso);
 		ga.setGrupo_id(g);
 
@@ -273,7 +273,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 	@Override
 	public Asignatura obtenerAsignatura(String codigo, String titulacion) throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
-		apk.setReferencia(Integer.parseInt(codigo));
+		apk.setCodigo(Integer.parseInt(codigo));
 		apk.setTitulacion(Integer.parseInt(titulacion));
 		Asignatura as = em.find(Asignatura.class, apk);
 		if (as == null) {

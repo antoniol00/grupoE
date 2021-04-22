@@ -9,18 +9,18 @@ import java.io.Serializable;
 public class AsignaturaPK  implements Serializable {   
    
 	         
-	private Integer referencia;         
+	private Integer codigo;         
 	private Integer titulacion;
 	private static final long serialVersionUID = 1L;
 
 	public AsignaturaPK() {}
 
-	public Integer getReferencia() {
-		return referencia;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setReferencia(Integer referencia) {
-		this.referencia = referencia;
+	public void setCodigo(Integer referencia) {
+		this.codigo = referencia;
 	}
 
 	public Integer getTitulacion() {
@@ -35,7 +35,7 @@ public class AsignaturaPK  implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((referencia == null) ? 0 : referencia.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((titulacion == null) ? 0 : titulacion.hashCode());
 		return result;
 	}
@@ -47,10 +47,10 @@ public class AsignaturaPK  implements Serializable {
 		if (!(obj instanceof AsignaturaPK))
 			return false;
 		AsignaturaPK other = (AsignaturaPK) obj;
-		if (referencia == null) {
-			if (other.referencia != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!referencia.equals(other.referencia))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		if (titulacion == null) {
 			if (other.titulacion != null)
