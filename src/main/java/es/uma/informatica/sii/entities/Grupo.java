@@ -120,12 +120,12 @@ public class Grupo implements Serializable {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
-	public Titulacion getTitulación_código() {
+	public Titulacion getTitulacion_codigo() {
 		return this.titulacion;
 	}
 
-	public void setTitulación_código(Titulacion titulación_código) {
-		this.titulacion = titulación_código;
+	public void setTitulacion_codigo(Titulacion titulacion_codigo) {
+		this.titulacion = titulacion_codigo;
 	}   
 	
 	public Boolean getIngles() {
