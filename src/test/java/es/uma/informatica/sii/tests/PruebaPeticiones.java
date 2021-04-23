@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -12,6 +14,8 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.informatica.sii.ejb.GestionAlumnos;
 import es.uma.informatica.sii.ejb.GestionPeticiones;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Alumno;
+import es.uma.informatica.sii.entities.Peticion;
 
 public class PruebaPeticiones {
 
@@ -31,12 +35,16 @@ public class PruebaPeticiones {
 	@Requisitos({ "RF4.1" })
 	@Test
 	public void generarIncidencia() throws SecretariaException, IOException, ParseException {
-
+		Peticion p = new Peticion();
+		gestionPeticiones.creaIncidencia(p);
+		Integer id = p.getId();
+		assertTrue("Error al generar el incidente", gestionPeticiones.obtenerPeticion(id) == p);
+		
 	}
 
 	@Requisitos({ "RF4.2" })
 	@Test
 	public void modificaGrupo2Cuatri() throws SecretariaException, IOException, ParseException {
-
+		
 	}
 }

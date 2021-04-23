@@ -137,7 +137,7 @@ public class PruebaAsignaturas {
 	@Requisitos({ "RF1.4" })
 	@Test
 	public void defineGrupoAsignaturas() throws SecretariaException {
-
+		
 	}
 
 }

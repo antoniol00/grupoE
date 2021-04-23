@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -43,7 +44,8 @@ public class PruebaMatriculas {
 	@Requisitos({ "RF3.2" })
 	@Test
 	public void listarMatriculas() throws SecretariaException, IOException, ParseException {
-
+		gestionMatriculas.listaMatriculas(MATRICULAS_EJB);
+		assertTrue("Error al mostrar las matrículas", MATRICULAS_EJB.length() != 0);
 	}
 
 }

@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 
 import javax.naming.NamingException;
@@ -14,6 +16,7 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.entities.Grupo;
 
 public class PruebaAsignacion {
 
@@ -41,7 +44,14 @@ public class PruebaAsignacion {
 	// comprueba que la tabla asignacion se ha rellenado correctamente
 	@Requisitos({ "RF5.2", "RF5.3" })
 	@Test
-	public void testAsignacionGrupos() throws SecretariaException, SecretariaIOException {
-
+	public void testAsignarGrupo() throws SecretariaException, SecretariaIOException {
+		gestionAsignacion.asignaGruposAlumnos();
+		Grupo g = gestionAsignacion.listaGrupos().get(0);
+		gestionAsignacion.creaGrupo(g);
+		assertTrue("Error al asignar grupo", g!= null);
+		
+		
+		
+		
 	}
 }
