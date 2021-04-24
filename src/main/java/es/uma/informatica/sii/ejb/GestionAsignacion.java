@@ -21,6 +21,20 @@ public interface GestionAsignacion {
 	public void asignaGruposAlumnos() throws SecretariaException;
 
 	/**
+	 * Modifica la asignacion de una matricula a una asignatura, cambiando el grupo
+	 * asignado para esta
+	 * 
+	 * @param codigo,   titulacion: pk de asignatura
+	 * @param curso,    expediente: pk de matricula
+	 * @param id_grupo: id de grupo que se desea asignar manualmente
+	 * 
+	 * @throws SecretariaException: si la asignatura, la matricula o el grupo no
+	 *                              existen en la bbdd
+	 */
+	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, int id_grupo)
+			throws SecretariaException;
+
+	/**
 	 * Crea un grupo
 	 * 
 	 * @param g: grupo que se desea crear
@@ -52,7 +66,7 @@ public interface GestionAsignacion {
 	 */
 	public void borraClase(String dia, String hora_inicio, String id_grupo) throws SecretariaException;
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	/**
 	 * Devuelve lista provisional con asignacion: MATRICULA-ASIGNATURA-GRUPO
 	 */
@@ -82,9 +96,10 @@ public interface GestionAsignacion {
 	 * lista todas las clases creadas en la bbdd
 	 */
 	public List<Clase> listaClases();
-	
+
 	/**
-	 * Devuelve true si el alumno tiene colisiones de horario en sus asginaturas y false en caso contrario.
+	 * Devuelve true si el alumno tiene colisiones de horario en sus asginaturas y
+	 * false en caso contrario.
 	 * 
 	 * @param matricula: matricula del alumno
 	 * @throws SecretariaException si la clase no existe

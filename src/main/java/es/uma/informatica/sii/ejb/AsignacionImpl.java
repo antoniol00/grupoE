@@ -10,14 +10,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
-import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Asigna_grupos;
+import es.uma.informatica.sii.entities.Asigna_gruposPK;
 import es.uma.informatica.sii.entities.Asignatura;
 import es.uma.informatica.sii.entities.AsignaturaPK;
 import es.uma.informatica.sii.entities.Clase;
 import es.uma.informatica.sii.entities.ClasePK;
 import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Matricula;
+import es.uma.informatica.sii.entities.MatriculaPK;
 
 @Stateless
 public class AsignacionImpl implements GestionAsignacion {
@@ -52,6 +53,57 @@ public class AsignacionImpl implements GestionAsignacion {
 			}
 			index++;
 		}
+	}
+
+	public boolean ColisionesHorario(int matricula) throws SecretariaException {
+		boolean colision = false;
+		List<Asigna_grupos> lista = listaAsignacionProvisional();
+		Asigna_grupos comparador = new Asigna_grupos();
+		HashSet<Grupo> cursos = new HashSet<>();
+		for (int i = 0; i < lista.size(); i++) {
+			comparador = lista.get(i);
+			if (comparador.getMatricula().getNumero_archivo() == matricula) {
+				cursos.add(comparador.getGrupo());
+			}
+		}
+		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
+		for (int i = 0; i < grupos.size(); i++) {
+			for (int k = i; k < grupos.size(); k++) {
+				if (grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
+					colision = true;
+				}
+			}
+		}
+		return colision;
+	}
+
+	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, int id_grupo)
+			throws SecretariaException {
+		AsignaturaPK apk = new AsignaturaPK();
+		apk.setCodigo(codigo);
+		apk.setTitulacion(titulacion);
+		Asignatura as = em.find(Asignatura.class, apk);
+
+		MatriculaPK mpk = new MatriculaPK();
+		mpk.setCurso(curso);
+		mpk.setExpediente(expediente);
+		Matricula m = em.find(Matricula.class, mpk);
+
+		Grupo gr = em.find(Grupo.class, id_grupo);
+		if (as == null || m == null || gr == null) {
+			throw new SecretariaException("Se ha intentado modificar un grupo a un alumno de manera incorrecta");
+		}
+		Asigna_gruposPK agpk = new Asigna_gruposPK();
+		agpk.setAsignatura(apk);
+		agpk.setMatricula(mpk);
+		Asigna_grupos ag = em.find(Asigna_grupos.class, agpk);
+		if (ag == null) {
+			throw new SecretariaException(
+					"Error de modificacion de grupo. El alumno no tiene ninguna asignacion para la asignatura especificada");
+		}
+		ag.setGrupo(gr);
+		em.merge(ag);
+
 	}
 
 	@Override
@@ -101,7 +153,7 @@ public class AsignacionImpl implements GestionAsignacion {
 		em.remove(cpk);
 	}
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	@Override
 	public List<Asigna_grupos> listaAsignacionProvisional() {
 		TypedQuery<Asigna_grupos> query = em.createQuery("select a from Asigna_grupos a", Asigna_grupos.class);
@@ -141,28 +193,5 @@ public class AsignacionImpl implements GestionAsignacion {
 		TypedQuery<Clase> query = em.createQuery("select c from Clase c", Clase.class);
 		return query.getResultList();
 	}
-	
-	
-	public boolean ColisionesHorario(int matricula) throws SecretariaException{
-		boolean colision = false;
-		List<Asigna_grupos> lista = listaAsignacionProvisional();
-		Asigna_grupos comparador = new Asigna_grupos();
-		HashSet<Grupo> cursos = new HashSet();
-		for(int i=0;i<lista.size();i++) {
-			comparador=lista.get(i);
-			if(comparador.getMatricula().getNumero_archivo()==matricula) {
-				cursos.add(comparador.getGrupo());
-			}
-		}
-		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
-		for(int i=0;i<grupos.size();i++) {
-			for(int k=i; k<grupos.size();k++) {
-				if(grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
-					colision = true;
-				}
-			}
-		}
-		return colision;
-	}
-	
+
 }
