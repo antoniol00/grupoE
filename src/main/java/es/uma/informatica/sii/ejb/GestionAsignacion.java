@@ -82,4 +82,12 @@ public interface GestionAsignacion {
 	 * lista todas las clases creadas en la bbdd
 	 */
 	public List<Clase> listaClases();
+	
+	/**
+	 * Devuelve true si el alumno tiene colisiones de horario en sus asginaturas y false en caso contrario.
+	 * 
+	 * @param matricula: matricula del alumno
+	 * @throws SecretariaException si la clase no existe
+	 */
+	public boolean ColisionesHorario(int matricula) throws SecretariaException;
 }

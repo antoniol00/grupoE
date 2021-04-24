@@ -12,7 +12,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.uma.informatica.sii.anotaciones.Requisitos;
+import es.uma.informatica.sii.ejb.GestionAsignacion;
 import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
@@ -21,12 +21,15 @@ import es.uma.informatica.sii.entities.Asignatura;
 public class PruebaAsignaturas {
 
 	private static final String ASIGNATURAS_EJB = "java:global/classes/AsignaturasImpl";
+	private static final String ASIGNACION_EJB = "java:global/classes/AsignacionImpl";
 
 	private GestionAsignaturas gestionAsignaturas;
+	private GestionAsignacion gestionAsignacion;
 
 	@Before
 	public void setup() throws NamingException, IOException {
 		gestionAsignaturas = (GestionAsignaturas) SuiteTest.ctx.lookup(ASIGNATURAS_EJB);
+		gestionAsignacion = (GestionAsignacion) SuiteTest.ctx.lookup(ASIGNACION_EJB);
 		BaseDatos.inicializaBaseDatos("grupoETest");
 	}
 
@@ -133,10 +136,13 @@ public class PruebaAsignaturas {
 		gestionAsignaturas.desactivarAsignatura(codigo, titu);
 		gestionAsignaturas.desactivarAsignatura(codigo, titu);
 	}
-
+	// Definimos un grupo para una asignatura.
 	@Requisitos({ "RF1.4" })
 	@Test
 	public void defineGrupoAsignaturas() throws SecretariaException {
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+		Asignatura as = gestionAsignaturas.listarAsignaturas().get(0);
+		gestionAsignaturas.definirGrupos(as.getCodigo(), as.getTitulacion().getCodigo(), gestionAsignacion.listaGrupos().get(0).getId() , "20/21");
 		
 	}
 

@@ -16,6 +16,7 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Grupo;
 
 public class PruebaAsignacion {
@@ -40,7 +41,14 @@ public class PruebaAsignacion {
 	}
 
 	// aviso de colisiones no esta implementado
-
+	@Requisitos({ "RF5.1" })
+	@Test
+	public void testAvisoColisiones() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
+		Alumno a = gestionAlumnos.obtenerListaAlumnos().get(0);
+		gestionAsignacion.ColisionesHorario(a.getExpedientes().get(0).getMatriculas().get(0).getNumero_archivo());
+		
+	}
 	// comprueba que la tabla asignacion se ha rellenado correctamente
 	@Requisitos({ "RF5.2", "RF5.3" })
 	@Test

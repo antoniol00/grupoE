@@ -1,5 +1,7 @@
 package es.uma.informatica.sii.ejb;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Asigna_grupos;
 import es.uma.informatica.sii.entities.Asignatura;
 import es.uma.informatica.sii.entities.AsignaturaPK;
@@ -138,5 +141,28 @@ public class AsignacionImpl implements GestionAsignacion {
 		TypedQuery<Clase> query = em.createQuery("select c from Clase c", Clase.class);
 		return query.getResultList();
 	}
-
+	
+	
+	public boolean ColisionesHorario(int matricula) throws SecretariaException{
+		boolean colision = false;
+		List<Asigna_grupos> lista = listaAsignacionProvisional();
+		Asigna_grupos comparador = new Asigna_grupos();
+		HashSet<Grupo> cursos = new HashSet();
+		for(int i=0;i<lista.size();i++) {
+			comparador=lista.get(i);
+			if(comparador.getMatricula().getNumero_archivo()==matricula) {
+				cursos.add(comparador.getGrupo());
+			}
+		}
+		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
+		for(int i=0;i<grupos.size();i++) {
+			for(int k=i; k<grupos.size();k++) {
+				if(grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
+					colision = true;
+				}
+			}
+		}
+		return colision;
+	}
+	
 }

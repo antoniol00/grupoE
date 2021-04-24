@@ -45,7 +45,7 @@ public class PruebaMatriculas {
 	@Test
 	public void listarMatriculas() throws SecretariaException, IOException, ParseException {
 		gestionMatriculas.listaMatriculas(MATRICULAS_EJB);
-		assertTrue("Error al mostrar las matrículas", MATRICULAS_EJB.length() != 0);
+		assertTrue("Error al mostrar las matrÃ­culas", MATRICULAS_EJB.length() != 0);
 	}
 
 }

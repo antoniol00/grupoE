@@ -39,12 +39,16 @@ public class PruebaPeticiones {
 		gestionPeticiones.creaIncidencia(p);
 		Integer id = p.getId();
 		assertTrue("Error al generar el incidente", gestionPeticiones.obtenerPeticion(id) == p);
-		
 	}
 
 	@Requisitos({ "RF4.2" })
 	@Test
 	public void modificaGrupo2Cuatri() throws SecretariaException, IOException, ParseException {
-		
+		Peticion p = new Peticion();
+		Alumno a = new Alumno();
+		a.getExpedientes().get(0);
+		gestionPeticiones.creaIncidencia(p);
+		Integer id = p.getId();
+		assertTrue("Error al generar el incidente", gestionPeticiones.obtenerPeticion(id) == p);
 	}
 }
