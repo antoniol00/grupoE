@@ -1,26 +1,30 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Peticion
  *
  */
 @Entity
-
+@IdClass(PeticionPK.class)
 public class Peticion implements Serializable {
 
 	@Id
-	@GeneratedValue
-	private Integer id;
+	@Temporal(TemporalType.DATE)
+	private Date date;
+	private String tipo;
+	@Id
 	@ManyToOne
 	private Alumno alumno;
-	private String tipo;
 	private String descripcion;
 	private static final long serialVersionUID = 1L;
 
@@ -28,32 +32,32 @@ public class Peticion implements Serializable {
 		super();
 	}
 
-	public Integer getId() {
-		return id;
+	public Date getDate() {
+		return this.date;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Alumno getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
+	public Alumno getAlumno() {
+		return this.alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
@@ -64,7 +68,8 @@ public class Peticion implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((alumno == null) ? 0 : alumno.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		return result;
 	}
 
@@ -72,20 +77,28 @@ public class Peticion implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Peticion))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Peticion other = (Peticion) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (alumno == null) {
+			if (other.alumno != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!alumno.equals(other.alumno))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Peticion [alumno=" + alumno + ", descripcion=" + descripcion + "]";
+		return "Peticion [date=" + date + ", tipo=" + tipo + ", alumno=" + alumno + ", descripcion=" + descripcion
+				+ "]";
 	}
 
 }

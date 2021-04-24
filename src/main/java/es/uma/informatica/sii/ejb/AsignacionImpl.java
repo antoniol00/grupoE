@@ -29,46 +29,57 @@ public class AsignacionImpl implements GestionAsignacion {
 	@Override
 	public void asignaGruposAlumnos() throws SecretariaException {
 		// ALUMNOS DE NUEVO INGRESO
-		// GIS
-		TypedQuery<Matricula> query_matricula = em.createQuery(
-				"select m from Matricula m where (m.nuevo_ingreso = true and m.expediente.numero LIKE '%1056%')",
-				Matricula.class);
-		List<Matricula> l = query_matricula.getResultList();
-		TypedQuery<Grupo> query_grupo = em.createQuery(
-				"select g from Grupo g where (g.curso=1 and g.visible=true and g.titulacion.codigo=1056)", Grupo.class);
-		List<Grupo> g = query_grupo.getResultList();
-		int index = 0;
-		for (Matricula m : l) {
-			for (int x = 101; x < 111; x++) {
-				AsignaturaPK apk = new AsignaturaPK();
-				apk.setCodigo(x);
-				apk.setTitulacion(1056);
-				Asignatura as = em.find(Asignatura.class, apk);
-				Grupo grupo = g.get(index % g.size());
-				Asigna_grupos ag1 = new Asigna_grupos();
-				ag1.setAsignatura(as);
-				ag1.setGrupo(grupo);
-				ag1.setMatricula(m);
-				em.persist(ag1);
+		int[] index = { 1041, 1042, 1043, 1056, 1073 };
+		for (int x : index) {
+			TypedQuery<Matricula> query_matricula = em.createQuery(
+					"select m from Matricula m where (m.nuevo_ingreso = true and m.expediente.numero LIKE '" + x
+							+ "%')",
+					Matricula.class);
+			List<Matricula> l = query_matricula.getResultList();
+			TypedQuery<Grupo> query_grupo = em.createQuery(
+					"select g from Grupo g where (g.curso=1 and g.visible=true and g.titulacion.codigo = " + x + ")",
+					Grupo.class);
+			List<Grupo> g = query_grupo.getResultList();
+			int idx = 0;
+			int max_value = (x == 1073 ? 111 : 110);
+			for (Matricula m : l) {
+				for (int y = 101; y <= max_value; y++) {
+					AsignaturaPK apk = new AsignaturaPK();
+					apk.setCodigo(y);
+					apk.setTitulacion(x);
+					Asignatura as = em.find(Asignatura.class, apk);
+					Grupo grupo = g.get(idx % g.size());
+					Asigna_grupos ag1 = new Asigna_grupos();
+					ag1.setAsignatura(as);
+					ag1.setGrupo(grupo);
+					ag1.setMatricula(m);
+					em.persist(ag1);
+				}
+				idx++;
 			}
-			index++;
 		}
 	}
 
 	public boolean ColisionesHorario(int matricula) throws SecretariaException {
 		boolean colision = false;
 		List<Asigna_grupos> lista = listaAsignacionProvisional();
+		
 		Asigna_grupos comparador = new Asigna_grupos();
 		HashSet<Grupo> cursos = new HashSet<>();
+		
 		for (int i = 0; i < lista.size(); i++) {
 			comparador = lista.get(i);
 			if (comparador.getMatricula().getNumero_archivo() == matricula) {
 				cursos.add(comparador.getGrupo());
 			}
 		}
+		if(cursos.isEmpty()) {
+			throw new SecretariaException("matricula no tiene asignado ningun grupo");
+		}
+		
 		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
 		for (int i = 0; i < grupos.size(); i++) {
-			for (int k = i; k < grupos.size(); k++) {
+			for (int k = i+1; k < grupos.size(); k++) {
 				if (grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
 					colision = true;
 				}
@@ -77,7 +88,7 @@ public class AsignacionImpl implements GestionAsignacion {
 		return colision;
 	}
 
-	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, int id_grupo)
+	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, String id_grupo)
 			throws SecretariaException {
 		AsignaturaPK apk = new AsignaturaPK();
 		apk.setCodigo(codigo);
@@ -192,6 +203,34 @@ public class AsignacionImpl implements GestionAsignacion {
 	public List<Clase> listaClases() {
 		TypedQuery<Clase> query = em.createQuery("select c from Clase c", Clase.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public Asigna_grupos obtieneAsignacion(int codigo, int titulacion, String curso, int expediente)
+			throws SecretariaException {
+		AsignaturaPK apk = new AsignaturaPK();
+		apk.setCodigo(codigo);
+		apk.setTitulacion(titulacion);
+		Asignatura as = em.find(Asignatura.class, apk);
+
+		MatriculaPK mpk = new MatriculaPK();
+		mpk.setCurso(curso);
+		mpk.setExpediente(expediente);
+		Matricula m = em.find(Matricula.class, mpk);
+
+		if (as == null || m == null) {
+			throw new SecretariaException("Asignatura o matricula no encontrada");
+		}
+
+		Asigna_gruposPK agpk = new Asigna_gruposPK();
+		agpk.setAsignatura(apk);
+		agpk.setMatricula(mpk);
+		Asigna_grupos ag = em.find(Asigna_grupos.class, agpk);
+
+		if (ag == null) {
+			throw new SecretariaException("Asignacion no realizada");
+		}
+		return ag;
 	}
 
 }

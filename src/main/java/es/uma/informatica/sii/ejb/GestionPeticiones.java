@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -21,29 +22,30 @@ public interface GestionPeticiones {
 	/**
 	 * Permite editar incidencia
 	 * 
-	 * @param p:  objeto peticion con nueva informacion (obtenido antes con find)
-	 * @param id: id de la peticion a modificar
+	 * @param p:        objeto peticion con nueva informacion (obtenido antes con
+	 *                  find)
+	 * @param date,dni: pk peticion
 	 * @throws SecretariaException: si la peticion no existe
 	 */
-	public void editaIncidencia(Integer id, Peticion p) throws SecretariaException;
+	public void editaIncidencia(Date d, String dni, Peticion p) throws SecretariaException;
 
 	/**
 	 * Permite borrar incidencia
 	 * 
-	 * @param id: id de la peticion a borrar
+	 * @param date,dni: pk peticion
 	 * @throws SecretariaException: si la peticion no existe
 	 */
-	public void borraIncidencia(Integer id) throws SecretariaException;
+	public void borraIncidencia(Date d, String dni) throws SecretariaException;
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 
 	/**
 	 * Obtiene la peticion especificada
 	 * 
-	 * @param id: id de la peticion a consultar
+	 * @param date,dni: pk peticion
 	 * @throws SecretariaException: si no existe la peticion
 	 */
-	public Peticion obtenerPeticion(Integer id) throws SecretariaException;
+	public Peticion obtenerPeticion(Date d, String dni) throws SecretariaException;
 
 	/**
 	 * Lista todas las peticiones de la base de datos

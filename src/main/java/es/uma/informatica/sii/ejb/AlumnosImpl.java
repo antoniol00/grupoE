@@ -90,6 +90,20 @@ public class AlumnosImpl implements GestionAlumnos {
 				}
 			}
 
+		} catch (IOException e) {
+			throw new SecretariaIOException("Error IO de archivo");
+		}
+	}
+
+	@Override
+	public void importaExpedientes(String file) throws SecretariaIOException, SecretariaException {
+		try {
+			// string de cabeceras para archivo alumnos.csv
+			String[] HEADERS = { "DOCUMENTO", "NOMBRE", "APELLIDO1", "APELLIDO2", "EXPEDIENTE", "ARCHIVO", "EMAIL_INST",
+					"EMAIL_PER", "FIJO", "MOVIL", "DIR", "LOCAL", "PRO", "CP", "FECHA", "TURNO", "GRUPOS", "NOTA",
+					"CREDITOS", "CREDITOS_FB", "CREDITOS_OB", "CREDITOS_OP", "CREDITOS_CF", "CREDITOS_PE",
+					"CREDITOS_TF" };
+
 			// RELLENAMOS TABLA EXPEDIENTE
 			Reader in2 = new FileReader("./DATOS/alumnos.csv");
 			Iterable<CSVRecord> records2 = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in2);
@@ -137,16 +151,7 @@ public class AlumnosImpl implements GestionAlumnos {
 		}
 	}
 
-	@Override
-	public void modificaAlumno(String dni_alumno, Alumno al) throws SecretariaException {
-		Alumno alumno_entity = em.find(Alumno.class, dni_alumno);
-		if (alumno_entity == null) {
-			throw new SecretariaException("Se ha intentado modificar un alumno que no existe");
-		}
-		em.merge(al);
-	}
-	
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	@Override
 	public Alumno obtenerAlumno(String dni) throws SecretariaException {
 		Alumno al = em.find(Alumno.class, dni);
@@ -159,6 +164,21 @@ public class AlumnosImpl implements GestionAlumnos {
 	@Override
 	public List<Alumno> obtenerListaAlumnos() {
 		TypedQuery<Alumno> query = em.createQuery("select a from Alumno a", Alumno.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public Expediente obtenerExpediente(int num) throws SecretariaException {
+		Expediente ex = em.find(Expediente.class, num);
+		if (ex == null) {
+			throw new SecretariaException("El expediente no existe");
+		}
+		return ex;
+	}
+
+	@Override
+	public List<Expediente> obtenerListaExpedientes() {
+		TypedQuery<Expediente> query = em.createQuery("select a from Expediente a", Expediente.class);
 		return query.getResultList();
 	}
 

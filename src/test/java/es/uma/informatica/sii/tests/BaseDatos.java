@@ -64,25 +64,31 @@ public class BaseDatos {
 			}
 		}
 
-		Grupo gs1 = new Grupo();
-		gs1.setId("gs1");
-		gs1.setCurso(1);
-		gs1.setLetra("A");
-		gs1.setVisible(true);
-		gs1.setIngles(false);
-		gs1.setTurno("M");
-		gs1.setTitulacion(em.find(Titulacion.class, 1056));
-		em.persist(gs1);
+		int[] index = { 1041, 1042, 1043, 1056, 1073 };
+		int x = 0;
+		for (int i : index) {
+			Grupo gs1 = new Grupo();
+			gs1.setId("g" + x);
+			x++;
+			gs1.setCurso(1);
+			gs1.setLetra("A");
+			gs1.setVisible(true);
+			gs1.setIngles(false);
+			gs1.setTurno("M");
+			gs1.setTitulacion(em.find(Titulacion.class, i));
+			em.persist(gs1);
 
-		Grupo gs2 = new Grupo();
-		gs2.setId("gs2");
-		gs2.setCurso(1);
-		gs2.setLetra("B");
-		gs2.setVisible(true);
-		gs2.setIngles(false);
-		gs2.setTurno("M");
-		gs2.setTitulacion(em.find(Titulacion.class, 1056));
-		em.persist(gs2);
+			Grupo gs2 = new Grupo();
+			gs2.setId("g" + x);
+			x++;
+			gs2.setCurso(1);
+			gs2.setLetra("B");
+			gs2.setVisible(true);
+			gs2.setIngles(false);
+			gs2.setTurno("M");
+			gs2.setTitulacion(em.find(Titulacion.class, i));
+			em.persist(gs2);
+		}
 
 		em.getTransaction().commit();
 

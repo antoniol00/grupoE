@@ -5,18 +5,20 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 import javax.naming.NamingException;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.informatica.sii.ejb.GestionAsignacion;
 import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Asignatura;
+import es.uma.informatica.sii.entities.Grupo;
+import es.uma.informatica.sii.entities.Grupos_asig;
 
 public class PruebaAsignaturas {
 
@@ -27,17 +29,17 @@ public class PruebaAsignaturas {
 	private GestionAsignacion gestionAsignacion;
 
 	@Before
-	public void setup() throws NamingException, IOException {
+	public void setup() throws NamingException, IOException, SecretariaIOException, SecretariaException {
 		gestionAsignaturas = (GestionAsignaturas) SuiteTest.ctx.lookup(ASIGNATURAS_EJB);
 		gestionAsignacion = (GestionAsignacion) SuiteTest.ctx.lookup(ASIGNACION_EJB);
 		BaseDatos.inicializaBaseDatos("grupoETest");
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 	}
 
 	// Importar asignaturas debe devolver una lista no vacia
 	@Requisitos({ "RF1.1" })
 	@Test
 	public void testImportarAsignaturasListaNoVacia() throws SecretariaIOException, SecretariaException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 		assertTrue("Error al importar asignaturas", gestionAsignaturas.listarAsignaturas().size() != 0);
 	}
 
@@ -45,15 +47,13 @@ public class PruebaAsignaturas {
 	@Requisitos({ "RF1.1" })
 	@Test
 	public void testImportarAsignaturasTamanoCorrecto() throws SecretariaIOException, SecretariaException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 		assertEquals("Error al importar asignaturas", gestionAsignaturas.listarAsignaturas().size(), 364);
 	}
 
 	// Al modificar una asignatura se modifican los cambios especificados en la bbdd
-	@Requisitos({ "RF1.1", "RF1.2" })
+	@Requisitos({ "RF1.2" })
 	@Test
 	public void testModificarAsignaturas() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 		Asignatura asig = gestionAsignaturas.listarAsignaturas().get(0);
 		asig.setCurso(8);
 		int codigo = asig.getCodigo();
@@ -64,38 +64,34 @@ public class PruebaAsignaturas {
 	}
 
 	// Al modificar una asignatura que no existe, lanza excepcion
-	@Requisitos({ "RF1.1", "RF1.2" })
+	@Requisitos({ "RF1.2" })
 	@Test(expected = SecretariaException.class)
 	public void testModificarAlumnoInexsistente() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
-		gestionAsignaturas.modificarAsignatura(0, 0, gestionAsignaturas.listarAsignaturas().get(0));
+		gestionAsignaturas.modificarAsignatura(-1, -1, gestionAsignaturas.listarAsignaturas().get(0));
 
 	}
 
 	// Borrar todas las asignaturas queda con una lista vacia
-	@Requisitos({ "RF1.1", "RF1.3" })
+	@Requisitos({ "RF1.3" })
 	@Test
-	public void borrarAsignaturas() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+	public void borrarTodasAsignaturas() throws SecretariaException, SecretariaIOException {
 		for (Asignatura as : gestionAsignaturas.listarAsignaturas())
 			gestionAsignaturas.borrarAsignatura(as.getCodigo(), as.getTitulacion().getCodigo());
 		assertTrue("Error al borrar la asignatura", gestionAsignaturas.listarAsignaturas().size() == 0);
 	}
 
-	// Al borrar un alumno que no existe, lanza excepcion
-	@Requisitos({ "RF1.1", "RF1.3" })
+	// Al borrar una asignatura que no existe, lanza excepcion
+	@Requisitos({ "RF1.3" })
 	@Test(expected = SecretariaException.class)
 	public void testBorrarAsignaturaInexsistente() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
-		gestionAsignaturas.modificarAsignatura(0, 0, gestionAsignaturas.listarAsignaturas().get(0));
+		gestionAsignaturas.modificarAsignatura(-1, -1, gestionAsignaturas.listarAsignaturas().get(0));
 
 	}
 
 	// Al desactivar una asignatura, su campo ofertada debe ser false
-	@Requisitos({ "RF1.1", "RF1.3" })
+	@Requisitos({ "RF1.3" })
 	@Test
 	public void testDesactivarAsignaturas() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 		Asignatura as = gestionAsignaturas.listarAsignaturas().get(0);
 		int x = 1;
 		while (!as.getOfertada()) {
@@ -112,18 +108,16 @@ public class PruebaAsignaturas {
 	}
 
 	// Al desactivar una asignatura que no existe, lanza excepcion
-	@Requisitos({ "RF1.1", "RF1.3" })
+	@Requisitos({ "RF1.3" })
 	@Test(expected = SecretariaException.class)
 	public void testDesactivarAsignaturaInexsistente() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
-		gestionAsignaturas.desactivarAsignatura(0, 0);
+		gestionAsignaturas.desactivarAsignatura(-1, -1);
 	}
 
 	// Al desactivar una asignatura ya desactivada, lanza excepcion
-	@Requisitos({ "RF1.1", "RF1.3" })
+	@Requisitos({ "RF1.3" })
 	@Test(expected = SecretariaException.class)
 	public void testDesactivarAsignaturaYaDesactivada() throws SecretariaException, SecretariaIOException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
 		Asignatura as = gestionAsignaturas.listarAsignaturas().get(0);
 		int x = 1;
 		while (!as.getOfertada()) {
@@ -136,14 +130,26 @@ public class PruebaAsignaturas {
 		gestionAsignaturas.desactivarAsignatura(codigo, titu);
 		gestionAsignaturas.desactivarAsignatura(codigo, titu);
 	}
+
 	// Definimos un grupo para una asignatura.
 	@Requisitos({ "RF1.4" })
 	@Test
-	public void defineGrupoAsignaturas() throws SecretariaException {
-		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx");
+	public void defineGrupoAsignaturas() throws SecretariaException, SecretariaIOException {
 		Asignatura as = gestionAsignaturas.listarAsignaturas().get(0);
-		gestionAsignaturas.definirGrupos(as.getCodigo(), as.getTitulacion().getCodigo(), gestionAsignacion.listaGrupos().get(0).getId() , "20/21");
-		
+		Grupo g = gestionAsignacion.listaGrupos().get(1);
+		assertTrue("Lista no vacia de gruposXAsig", gestionAsignaturas.listarGrupoXAsignaturas().isEmpty());
+
+		gestionAsignaturas.definirGrupos(as.getCodigo(), as.getTitulacion().getCodigo(), g.getId(), "22/23");
+
+		assertFalse("Lista vacia de gruposXAsig", gestionAsignaturas.listarGrupoXAsignaturas().isEmpty());
+
+		Grupos_asig ga = new Grupos_asig();
+		ga.setAsignatura_codigo(as);
+		ga.setCurso("22/23");
+		ga.setGrupo_id(g);
+
+		assertTrue("Lista no contiene grupo creado", gestionAsignaturas.listarGrupoXAsignaturas().contains(ga));
+
 	}
 
 }

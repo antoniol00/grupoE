@@ -316,4 +316,10 @@ public class AsignaturasImpl implements GestionAsignaturas {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Grupos_asig> listarGrupoXAsignaturas() {
+		TypedQuery<Grupos_asig> query = em.createQuery("select a from Grupos_asig a", Grupos_asig.class);
+		return query.getResultList();
+	}
+
 }

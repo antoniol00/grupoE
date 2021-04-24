@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -16,8 +17,7 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
-import es.uma.informatica.sii.entities.Alumno;
-import es.uma.informatica.sii.entities.Grupo;
+import es.uma.informatica.sii.entities.Matricula;
 
 public class PruebaAsignacion {
 
@@ -40,26 +40,48 @@ public class PruebaAsignacion {
 		BaseDatos.inicializaBaseDatos("grupoETest");
 	}
 
-	// aviso de colisiones no esta implementado
 	@Requisitos({ "RF5.1" })
 	@Test
-	public void testAvisoColisiones() throws SecretariaException, SecretariaIOException {
-		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		Alumno a = gestionAlumnos.obtenerListaAlumnos().get(0);
-		gestionAsignacion.ColisionesHorario(a.getExpedientes().get(0).getMatriculas().get(0).getNumero_archivo());
-		
+	public void testAvisoColisionesCorrecto() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv"); // importo alumnos
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv"); // importo expedientes
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv"); // importo matriculas
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
+
+		int x = 0;
+		Matricula m = gestionMatriculas.listaMatriculas("ASC").get(x);
+		while (!m.isNuevo_ingreso()) {
+			x++;
+			m = gestionMatriculas.listaMatriculas("ASC").get(x);
+		}
+		assertFalse(gestionAsignacion.ColisionesHorario(m.getNumero_archivo()));
+
 	}
+
+	@Requisitos({ "RF5.1" })
+	@Test(expected = SecretariaException.class)
+	public void testAvisoColisionesMatriculaIncorrecta() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv"); // importo alumnos
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv"); // importo expedientes
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv"); // importo matriculas
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
+
+		gestionAsignacion.ColisionesHorario(-1);
+
+	}
+
 	// comprueba que la tabla asignacion se ha rellenado correctamente
 	@Requisitos({ "RF5.2", "RF5.3" })
 	@Test
 	public void testAsignarGrupo() throws SecretariaException, SecretariaIOException {
-		gestionAsignacion.asignaGruposAlumnos();
-		Grupo g = gestionAsignacion.listaGrupos().get(0);
-		gestionAsignacion.creaGrupo(g);
-		assertTrue("Error al asignar grupo", g!= null);
-		
-		
-		
-		
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv"); // importo alumnos
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv"); // importo expedientes
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv"); // importo matriculas
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
+
+		assertTrue("Tabla no creada", gestionAsignacion.listaAsignacionProvisional().size() != 0);
 	}
 }

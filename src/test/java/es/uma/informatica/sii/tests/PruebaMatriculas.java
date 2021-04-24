@@ -1,10 +1,11 @@
 package es.uma.informatica.sii.tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -16,6 +17,7 @@ import es.uma.informatica.sii.ejb.GestionAlumnos;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.entities.Matricula;
 
 public class PruebaMatriculas {
 
@@ -26,26 +28,52 @@ public class PruebaMatriculas {
 	private GestionMatriculas gestionMatriculas;
 
 	@Before
-	public void setup() throws NamingException, IOException {
+	public void setup() throws NamingException, IOException, SecretariaIOException, SecretariaException {
 		gestionAlumnos = (GestionAlumnos) SuiteTest.ctx.lookup(ALUMNOS_EJB);
 		gestionMatriculas = (GestionMatriculas) SuiteTest.ctx.lookup(MATRICULAS_EJB);
 		BaseDatos.inicializaBaseDatos("grupoETest");
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv");
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
 	}
 
 	@Requisitos({ "RF3.1" })
 	@Test
-	public void importarMatriculas() throws SecretariaIOException, SecretariaException {
-		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv");
+	public void testImportarMatriculas() throws SecretariaIOException, SecretariaException {
 		String filter = "ASC";
 		assertTrue("Error al importar matriculas", gestionMatriculas.listaMatriculas(filter).size() != 0);
+		assertTrue("Error al importar matriculas", gestionMatriculas.listaMatriculas(filter).size() == 1508);
 	}
 
 	@Requisitos({ "RF3.2" })
 	@Test
-	public void listarMatriculas() throws SecretariaException, IOException, ParseException {
-		gestionMatriculas.listaMatriculas(MATRICULAS_EJB);
-		assertTrue("Error al mostrar las matrículas", MATRICULAS_EJB.length() != 0);
+	public void tesListarMatriculasFiltrosDiferentes() throws SecretariaException, SecretariaIOException {
+		String[] filters = { "DATE", "ASC", "DES", "EXP" };
+		List<List<Matricula>> aam = new ArrayList<>();
+		for (String f : filters) {
+			aam.add(gestionMatriculas.listaMatriculas(f));
+		}
+		boolean iguales = false;
+		for (int x = 0; x < aam.size() - 1; x++) {
+			if (aam.get(x).equals(aam.get(x + 1))) {
+				iguales = true;
+			}
+		}
+		assertFalse("diferentes filtros crean mismas listas", iguales);
 	}
 
+	@Requisitos({ "RF3.2" })
+	@Test
+	public void tesListarMatriculasNoCreaListasVacias() throws SecretariaException, SecretariaIOException {
+		String[] filters = { "DATE", "ASC", "DES", "EXP" };
+		for (String f : filters) {
+			assertFalse("lista vacia al ordenar", gestionMatriculas.listaMatriculas(f).isEmpty());
+		}
+	}
+
+	@Requisitos({ "RF3.2" })
+	@Test(expected = SecretariaException.class)
+	public void tesListarMatriculasConFiltroNoValido() throws SecretariaException, SecretariaIOException {
+		gestionMatriculas.listaMatriculas("x");
+	}
 }

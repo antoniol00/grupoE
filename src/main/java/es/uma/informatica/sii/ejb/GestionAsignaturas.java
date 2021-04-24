@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Asignatura;
+import es.uma.informatica.sii.entities.Grupos_asig;
 
 @Local
 public interface GestionAsignaturas {
@@ -43,7 +44,7 @@ public interface GestionAsignaturas {
 	 * Borra una asignatura
 	 */
 	public void borrarAsignatura(int codigo, int titulacion) throws SecretariaException;
-	
+
 	/**
 	 * Marca una asignatura como no ofertada
 	 * 
@@ -56,14 +57,14 @@ public interface GestionAsignaturas {
 	 * grupo dado
 	 * 
 	 * @param codigo, titulacion: id de la asignatura
-	 * @param id:     id del grupo
-	 * @param curso   : curso de la asignatura
+	 * @param id      : id del grupo
+	 * @param curso   : curso
 	 * @throws SecretariaException: si no existe la asignatura o grupo que se desea
 	 *                              asignar
 	 */
-	public void definirGrupos(int codigo, int titulacion, String id, String curso) throws SecretariaException;
+	public void definirGrupos(int codigo, int titulacion, String id_grupo, String curso) throws SecretariaException;
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	/**
 	 * Devuelve la asignatura dada su clave compuesta
 	 * 
@@ -76,5 +77,10 @@ public interface GestionAsignaturas {
 	 * Devuelve todas las asignaturas
 	 */
 	public List<Asignatura> listarAsignaturas();
+	
+	/**
+	 * Devuelve todos los grupos por asignatura
+	 */
+	public List<Grupos_asig> listarGrupoXAsignaturas();
 
 }

@@ -7,15 +7,16 @@ import javax.ejb.Local;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Alumno;
+import es.uma.informatica.sii.entities.Expediente;
 
 @Local
 public interface GestionAlumnos {
 
 	/**
 	 * Los alumnos deben importarse a la base de datos a partir de un archivo excel
-	 * preconfigurado. Se debe poder completar tanto la informacion del alumno en la
-	 * tabla ALUMNOS como la de la tabla EXPEDIENTE. El acceso y procesamiento de
-	 * estos datos se realiza mediante el fichero alumnos.csv proporcionado
+	 * preconfigurado. Se debe poder completar la informacion del alumno en la tabla
+	 * ALUMNOS. El acceso y procesamiento de estos datos se realiza mediante el
+	 * fichero alumnos.csv proporcionado
 	 * 
 	 * @param file: ruta del archivo donde importar
 	 * 
@@ -27,17 +28,21 @@ public interface GestionAlumnos {
 	public void importaAlumnos(String file) throws SecretariaIOException, SecretariaException;
 
 	/**
-	 * Modifica el alumno pasado como parametro e identificado por su DNI
+	 * Los alumnos deben importarse a la base de datos a partir de un archivo excel
+	 * preconfigurado. Se debe poder completar la informacion del alumno en la tabla
+	 * EXPEDIENTE. El acceso y procesamiento de estos datos se realiza mediante el
+	 * fichero alumnos.csv proporcionado
 	 * 
-	 * @param dni_alumno: alumno que se desea modificar
-	 * @param al:         informacion actualizada del alumno
+	 * @param file: ruta del archivo donde importar
 	 * 
-	 * @throws SecretariaException si no encuentra en la bbdd alguna referencia al
-	 *                             alumno a modificar
+	 * @throws SecretariaIOException si no encuentra en la bbdd alguna referencia a
+	 *                               otra entidad o el archivo no existe
+	 * @throws SecretariaException   si falla en la importacion en algun dato
+	 * 
 	 */
-	public void modificaAlumno(String dni_alumno, Alumno al) throws SecretariaException;
+	public void importaExpedientes(String file) throws SecretariaIOException, SecretariaException;
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	/**
 	 * Devuelve el alumno con id dni
 	 * 
@@ -50,4 +55,17 @@ public interface GestionAlumnos {
 	 * Devuelve todos los alumnos
 	 */
 	public List<Alumno> obtenerListaAlumnos();
+
+	/**
+	 * Devuelve el expediente con id num
+	 * 
+	 * @param num: numero del expediente a buscar
+	 * @throws SecretariaException: si el expediente no existe
+	 */
+	public Expediente obtenerExpediente(int num) throws SecretariaException;
+
+	/**
+	 * Devuelve todos los exepdientes
+	 */
+	public List<Expediente> obtenerListaExpedientes();
 }

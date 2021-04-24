@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Peticion;
+import es.uma.informatica.sii.entities.PeticionPK;
 
 @Stateless
 public class PeticionesImpl implements GestionPeticiones {
@@ -18,48 +20,58 @@ public class PeticionesImpl implements GestionPeticiones {
 
 	@Override
 	public void creaIncidencia(Peticion p) throws SecretariaException {
-		Peticion pe = em.find(Peticion.class, p.getId());
-		if (pe == null) {
-			em.persist(p);
-		} else {
-			throw new SecretariaException("Se ha intentado crear una peitcion que ya existia en la base de datos");
+		PeticionPK ppk = new PeticionPK();
+		ppk.setAlumno(p.getAlumno().getDni());
+		ppk.setDate(p.getDate());
+		Peticion pe = em.find(Peticion.class, ppk);
+		if (pe != null) {
+			throw new SecretariaException("Se ha intentado crear una incidencia que ya existia");
 		}
-
+		em.persist(p);
 	}
 
 	@Override
-	public void editaIncidencia(Integer id, Peticion p) throws SecretariaException {
-		Peticion pe = em.find(Peticion.class, id);
+	public void editaIncidencia(Date date, String dni, Peticion p) throws SecretariaException {
+		PeticionPK ppk = new PeticionPK();
+		ppk.setAlumno(dni);
+		ppk.setDate(date);
+		Peticion pe = em.find(Peticion.class, ppk);
 		if (pe == null) {
-			throw new SecretariaException("Se ha intentado editar una incidencia que no se haya en la base de datos");
+			throw new SecretariaException("Se ha intentado editar una incidencia que no esta en la base de datos");
 		}
 		em.merge(p);
 
 	}
 
 	@Override
-	public void borraIncidencia(Integer id) throws SecretariaException {
-		Peticion pe = em.find(Peticion.class, id);
+	public void borraIncidencia(Date date, String dni) throws SecretariaException {
+		PeticionPK ppk = new PeticionPK();
+		ppk.setAlumno(dni);
+		ppk.setDate(date);
+		Peticion pe = em.find(Peticion.class, ppk);
 		if (pe == null) {
-			throw new SecretariaException("Se ha intentado borrar una incidencia que no se haya en la base de datos");
+			throw new SecretariaException("Se ha intentado borrar una incidencia que no esta en la base de datos");
 		}
 		em.remove(pe);
 
 	}
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	@Override
-	public Peticion obtenerPeticion(Integer id) throws SecretariaException {
-		Peticion p = em.find(Peticion.class, id);
-		if (p == null) {
-			throw new SecretariaException("La peticion no existe");
+	public Peticion obtenerPeticion(Date date, String dni) throws SecretariaException {
+		PeticionPK ppk = new PeticionPK();
+		ppk.setAlumno(dni);
+		ppk.setDate(date);
+		Peticion pe = em.find(Peticion.class, ppk);
+		if (pe == null) {
+			throw new SecretariaException("Se ha intentado borrar una incidencia que no esta en la base de datos");
 		}
-		return p;
+		return pe;
 	}
 
 	@Override
 	public List<Peticion> listaPeticiones() {
-		TypedQuery<Peticion> query = em.createQuery("select p from Peticion a", Peticion.class);
+		TypedQuery<Peticion> query = em.createQuery("select p from Peticion p", Peticion.class);
 		return query.getResultList();
 	}
 

@@ -31,7 +31,7 @@ public interface GestionAsignacion {
 	 * @throws SecretariaException: si la asignatura, la matricula o el grupo no
 	 *                              existen en la bbdd
 	 */
-	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, int id_grupo)
+	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, String id_grupo)
 			throws SecretariaException;
 
 	/**
@@ -73,6 +73,11 @@ public interface GestionAsignacion {
 	public List<Asigna_grupos> listaAsignacionProvisional();
 
 	/**
+	 * Devuelve la asignacion pasada como parametro
+	 */
+	public Asigna_grupos obtieneAsignacion(int codigo, int titulacion, String curso, int expediente) throws SecretariaException;
+
+	/**
 	 * Devuelve el grupo pasado como parametro
 	 * 
 	 * @param id: id grupo
@@ -98,11 +103,10 @@ public interface GestionAsignacion {
 	public List<Clase> listaClases();
 
 	/**
-	 * Devuelve true si el alumno tiene colisiones de horario en sus asginaturas y
+	 * Devuelve true si el alumno tiene colisiones de horario en sus asignaturas y
 	 * false en caso contrario.
 	 * 
 	 * @param matricula: matricula del alumno
-	 * @throws SecretariaException si la clase no existe
 	 */
 	public boolean ColisionesHorario(int matricula) throws SecretariaException;
 }
