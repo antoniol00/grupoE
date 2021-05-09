@@ -1,7 +1,11 @@
 package es.uma.informatica.sii.ejb;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,7 +13,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Asigna_grupos;
 import es.uma.informatica.sii.entities.Asigna_gruposPK;
 import es.uma.informatica.sii.entities.Asignatura;
@@ -19,6 +29,7 @@ import es.uma.informatica.sii.entities.ClasePK;
 import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Matricula;
 import es.uma.informatica.sii.entities.MatriculaPK;
+import es.uma.informatica.sii.entities.Titulacion;
 
 @Stateless
 public class AsignacionImpl implements GestionAsignacion {
@@ -63,23 +74,23 @@ public class AsignacionImpl implements GestionAsignacion {
 	public boolean ColisionesHorario(int matricula) throws SecretariaException {
 		boolean colision = false;
 		List<Asigna_grupos> lista = listaAsignacionProvisional();
-		
+
 		Asigna_grupos comparador = new Asigna_grupos();
 		HashSet<Grupo> cursos = new HashSet<>();
-		
+
 		for (int i = 0; i < lista.size(); i++) {
 			comparador = lista.get(i);
 			if (comparador.getMatricula().getNumero_archivo() == matricula) {
 				cursos.add(comparador.getGrupo());
 			}
 		}
-		if(cursos.isEmpty()) {
+		if (cursos.isEmpty()) {
 			throw new SecretariaException("matricula no tiene asignado ningun grupo");
 		}
-		
+
 		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
 		for (int i = 0; i < grupos.size(); i++) {
-			for (int k = i+1; k < grupos.size(); k++) {
+			for (int k = i + 1; k < grupos.size(); k++) {
 				if (grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
 					colision = true;
 				}
@@ -162,6 +173,63 @@ public class AsignacionImpl implements GestionAsignacion {
 			throw new SecretariaException("Se ha intentado borrar una clase que no existe");
 		}
 		em.remove(cpk);
+	}
+
+	@SuppressWarnings({ "resource", "deprecation" })
+	@Override
+	public void importaGrupos(String file) throws SecretariaException, SecretariaIOException {
+		try {
+			FileInputStream filex = new FileInputStream(new File("./DATOS/grupos.xlsx"));
+			XSSFWorkbook workbook = new XSSFWorkbook(filex);
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			Iterator<Row> rowIterator = sheet.iterator();
+			rowIterator.next();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
+				Iterator<Cell> cellIterator = row.cellIterator();
+				ArrayList<String> values = new ArrayList<>();
+				while (cellIterator.hasNext()) {
+					Cell cell = cellIterator.next();
+					switch (cell.getCellType()) {
+					case Cell.CELL_TYPE_NUMERIC:
+						values.add(Double.toString(cell.getNumericCellValue()));
+						break;
+					case Cell.CELL_TYPE_STRING:
+						values.add(cell.getStringCellValue());
+						break;
+					default:
+						values.add("");
+					}
+				}
+				if (!values.get(0).equals("")) {
+					String id = values.get(0);
+					String curso = values.get(1);
+					String letra = values.get(2);
+					String turno = values.get(3);
+					String ingles = values.get(4);
+					String visible = values.get(5);
+					String titulacion = values.get(9);
+
+					Grupo g = new Grupo();
+					g.setId(id);
+					g.setCurso(Integer.parseInt(curso));
+					g.setLetra(letra);
+					g.setTurno(turno);
+					g.setIngles(ingles.equals("S") ? true : false);
+					g.setVisible(visible.equals("S") ? true : false);
+					Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion));
+					if (t == null) {
+						throw new SecretariaException("Titulacion no existente " + titulacion);
+					}
+					g.setTitulacion(t);
+
+					// inserto cada grupo
+					em.persist(g);
+				}
+			}
+		} catch (IOException e) {
+			throw new SecretariaIOException("Error en el archivo");
+		}
 	}
 
 	// METODOS AUXILIARES

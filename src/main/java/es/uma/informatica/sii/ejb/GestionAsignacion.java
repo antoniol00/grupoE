@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Asigna_grupos;
 import es.uma.informatica.sii.entities.Clase;
 import es.uma.informatica.sii.entities.Grupo;
@@ -66,6 +67,14 @@ public interface GestionAsignacion {
 	 */
 	public void borraClase(String dia, String hora_inicio, String id_grupo) throws SecretariaException;
 
+	/**
+	 * Importa grupos del archivo excel pasado como parametro
+	 * @param file : archivo de importacion
+	 * @throws SecretariaException: error en la importacion
+	 * @throws SecretariaIOException: error en el archivo indicado
+	 */
+	public void importaGrupos(String file) throws SecretariaException, SecretariaIOException;
+
 	// METODOS AUXILIARES
 	/**
 	 * Devuelve lista provisional con asignacion: MATRICULA-ASIGNATURA-GRUPO
@@ -75,7 +84,8 @@ public interface GestionAsignacion {
 	/**
 	 * Devuelve la asignacion pasada como parametro
 	 */
-	public Asigna_grupos obtieneAsignacion(int codigo, int titulacion, String curso, int expediente) throws SecretariaException;
+	public Asigna_grupos obtieneAsignacion(int codigo, int titulacion, String curso, int expediente)
+			throws SecretariaException;
 
 	/**
 	 * Devuelve el grupo pasado como parametro
