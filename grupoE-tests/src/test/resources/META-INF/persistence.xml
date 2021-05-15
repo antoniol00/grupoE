@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="grupoEPI"
+		transaction-type="RESOURCE_LOCAL">
+		<class>es.uma.informatica.sii.entities.Asignatura</class>
+		<class>es.uma.informatica.sii.entities.Optativa</class>
+		<class>es.uma.informatica.sii.entities.Alumno</class>
+		<class>es.uma.informatica.sii.entities.Expediente</class>
+		<class>es.uma.informatica.sii.entities.Encuesta</class>
+		<class>es.uma.informatica.sii.entities.Grupos_asig</class>
+		<class>es.uma.informatica.sii.entities.Matricula</class>
+		<class>es.uma.informatica.sii.entities.Grupo</class>
+		<class>es.uma.informatica.sii.entities.Centro</class>
+		<class>es.uma.informatica.sii.entities.Titulacion</class>
+		<class>es.uma.informatica.sii.entities.Asigna_grupos</class>
+		<class>es.uma.informatica.sii.entities.Clase</class>
+		<class>es.uma.informatica.sii.entities.Peticion</class>
+		<shared-cache-mode>NONE</shared-cache-mode>
+		<properties>
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/sii" />
+			<property name="javax.persistence.jdbc.user" value="siiuser" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.password"
+				value="siipassword" />
+			<property name="javax.persistence.sql-load-script-source"
+				value="db-inicial.sql" />
+		</properties>
+
+	</persistence-unit>
+</persistence>

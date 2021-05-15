@@ -1,0 +1,49 @@
+{
+  "id": "70450815-1b43-4d45-9800-30336d6bb6eb",
+  "version": "2.0",
+  "name": "grupoE",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "1d3257b8-0e43-440d-8301-38e8c2577ba0",
+    "name": "PruebaSencilla",
+    "commands": [{
+      "id": "586aabf9-1309-4c17-84f1-4e28370f13ee",
+      "comment": "",
+      "command": "open",
+      "target": "/grupoE-war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "32eece72-7407-471e-bc97-29468ea9bb34",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x625",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3d598d7b-d245-4b06-96b2-62a12d70b255",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=texto",
+      "targets": [
+        ["id=texto", "id"],
+        ["css=#texto", "css:finder"],
+        ["xpath=//span[@id='texto']", "xpath:attributes"],
+        ["xpath=//h1[@id='cabecera']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hello')]", "xpath:innerText"]
+      ],
+      "value": "Hello"
+    }]
+  }],
+  "suites": [{
+    "id": "77c770df-6033-43c2-984d-85f8cb717242",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["1d3257b8-0e43-440d-8301-38e8c2577ba0"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

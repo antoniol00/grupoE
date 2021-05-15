@@ -13,5 +13,6 @@
 		<module>grupoE-ejb</module>
 		<module>grupoE-war</module>
 		<module>grupoE-ear</module>
+		<module>grupoE-tests</module>
 	</modules>
 </project>
