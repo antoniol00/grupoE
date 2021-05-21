@@ -4,13 +4,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core" lang="es">
 
 <h:head>
-	<title>Hola mundo</title>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+		crossorigin="anonymous" />
+
+	<title>Secretaria</title>
 </h:head>
 
+
 <h:body>
-<h1 id="cabecera"><h:outputText id="texto" value="#{helloWorld.hello}"/></h1>
+	<header class="header-area header-sticky">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h:form>
+					<nav class="main-nav"> <a href="#" class="logo">Universidad
+						de M&aacute;laga</a>
+					<ul class="nav">
+						<li class="scroll-to-section"><a href="#" class="active">Inicio</a></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Asignación de grupos" action="asignacion" /></li>
+						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
+								de datos</a>
+							<ul>
+								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
+							</ul></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Peticiones" action="peticiones" /></li>
+					</ul>
+					</nav>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	</header>
+
+	<div class="welcome-area" id="welcome">
+		<div class="header-text">
+			<div class="container">
+				<div class="row">
+					<div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<h1>
+							Gesti&oacute;n de grupos para <strong>secretar&iacute;a</strong>
+						</h1>
+						<p>Proyecto para la asignatura Sistemas de informaci&oacute;n
+							para Internet</p>
+						<p>
+							Para m&aacute;s informaci&oacute;n, <a
+								href="https://github.com/antoniol00/grupoE">pinche
+								aqu&iacute;</a>
+						</p>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+						data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+						<img src="resources/images/informatica_logo.png"
+							class="rounded img-fluid d-block mx-auto"
+							alt="Logo ETSI Informatica" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
+	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 </h:body>
 </html>

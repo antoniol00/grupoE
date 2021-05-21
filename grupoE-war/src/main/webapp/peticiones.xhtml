@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" lang="es">
+
+<h:head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+		crossorigin="anonymous" />
+	<title>Peticiones</title>
+</h:head>
+
+
+<h:body>
+	<header class="header-area header-sticky">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h:form>
+					<nav class="main-nav"> <h:commandLink
+						value="Universidad
+						de Málaga" class="logo"
+						action="#{index.getIndex}" />
+					<ul class="nav">
+						<li class="scroll-to-section"><h:commandLink value="Inicio"
+								action="#{index.getIndex}" /></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Asignación de grupos" action="#{index.getAsignacion}" /></li>
+						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
+								de datos</a>
+							<ul>
+								<li><h:commandLink value="Alumnos"
+										action="#{index.getAlumnos}" /></li>
+								<li><h:commandLink value="Asignaturas"
+										action="#{index.getAsignaturas}" /></li>
+								<li><h:commandLink value="Matriculas"
+										action="#{index.getMatriculas}" /></li>
+							</ul></li>
+						<li class="scroll-to-section"><h:commandLink class="active"
+								value="Peticiones" action="#{index.getPeticiones}" /></li>
+					</ul>
+					</nav>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	</header>
+
+	<div class="welcome-area" id="text">
+		<h2 class="titulo">
+			Listado de peticiones
+			<h:outputText value="#{peticionesBean.fileName}" />
+		</h2>
+		<div class="text">
+			<button type="button" class="btn btn-success btn-lg"
+				data-toggle="modal" data-target="#creationModal">+</button>
+
+			<div class="modal fade" id="creationModal" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Creaci&oacute;n
+								de petici&oacute;n</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<h:form id="user-form">
+							<div class="modal-body formulario">
+
+								<h:outputLabel for="dni">DNI</h:outputLabel>
+								<h:inputText class="form-control" id="dni"
+									value="#{peticionesBean.asignarDNI}" />
+								<small id="dniHelp" class="form-text text-muted">DNI de
+									alumno matriculado</small> <br /> <br />
+
+								<h:outputLabel for="tipo" value="Tipo "></h:outputLabel>
+								<h:selectOneMenu id="tipo" class="custom-select"
+									value="#{peticionesBean.peticion.tipo}">
+									<f:selectItem itemValue="Cambio de grupo"
+										itemLabel="Cambio de grupo" />
+									<f:selectItem itemValue="Cambio idioma"
+										itemLabel="Cambio idioma" />
+									<f:selectItem itemValue="Cambio 2º semestre"
+										itemLabel="Cambio 2º semestre" />
+								</h:selectOneMenu>
+								<br /> <br />
+
+								<h:outputLabel for="desc">Descripci&oacute;n</h:outputLabel>
+								<h:inputTextarea id="desc" class="form-control"
+									value="#{peticionesBean.peticion.descripcion}" cols="32"
+									rows="3">
+								</h:inputTextarea>
+							</div>
+							<div class="modal-footer">
+								<h:messages class="mensajesError" />
+								<h:commandButton id="enviar" value="Añadir petición"
+									class="btn btn-primary"
+									action="#{peticionesBean.crearPeticion}" />
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+
+			<h:dataTable value="#{peticionesBean.peticiones}" var="p"
+				styleClass="formatoTabla" headerClass="formatoHeader"
+				rowClasses="formatoFilaImpar,formatoFilaPar">
+				<h:column>
+					<f:facet name="header">Alumno</f:facet>
+					<h:outputText id="alumno" value="#{p.alumno}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Fecha</f:facet>
+					<h:outputText id="fecha" value="#{p.date}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tipo</f:facet>
+					<h:outputText id="tipo" value="#{p.tipo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Descripci&oacute;n</f:facet>
+					<h:outputText id="descripcion" value="#{p.descripcion}"></h:outputText>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
+	<h:form enctype="multipart/form-data">
+		<h:inputFile id="file-id" value="#{peticionesBean.part}"
+			requiredMessage="Please upload a file" alt="upload file"></h:inputFile>
+		<h:commandButton value="Upload" action="#{peticionesBean.upload}" />
+	</h:form>
+
+
+
+
+	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
+	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
+</h:body>
+</html>

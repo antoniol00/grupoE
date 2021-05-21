@@ -51,7 +51,7 @@ public class AlumnosImpl implements GestionAlumnos {
 					"CREDITOS_TF" };
 
 			// RELLENAMOS TABLA ALUMNOS
-			Reader in = new FileReader("./DATOS/alumnos.csv");
+			Reader in = new FileReader(file);
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
 			int x = 0;
 			for (CSVRecord record : records) {
@@ -91,7 +91,7 @@ public class AlumnosImpl implements GestionAlumnos {
 			}
 
 		} catch (IOException e) {
-			throw new SecretariaIOException("Error IO de archivo");
+			throw new SecretariaIOException("Error IO de archivo " + file);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class AlumnosImpl implements GestionAlumnos {
 					"CREDITOS_TF" };
 
 			// RELLENAMOS TABLA EXPEDIENTE
-			Reader in2 = new FileReader("./DATOS/alumnos.csv");
+			Reader in2 = new FileReader(file);
 			Iterable<CSVRecord> records2 = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in2);
 			int y = 0;
 			for (CSVRecord record : records2) {
@@ -180,6 +180,11 @@ public class AlumnosImpl implements GestionAlumnos {
 	public List<Expediente> obtenerListaExpedientes() {
 		TypedQuery<Expediente> query = em.createQuery("select a from Expediente a", Expediente.class);
 		return query.getResultList();
+	}
+	
+	@Override
+	public void creaAlumno(Alumno a) {
+		em.persist(a);
 	}
 
 }

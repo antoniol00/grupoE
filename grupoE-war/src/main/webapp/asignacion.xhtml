@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" lang="es">
+
+<h:head>
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+		crossorigin="anonymous" />
+
+	<title>Asignacion</title>
+</h:head>
+
+
+<h:body>
+	<header class="header-area header-sticky">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h:form>
+					<nav class="main-nav"> <h:commandLink
+						value="Universidad
+						de Málaga" class="logo"
+						action="#{index.getIndex}" />
+					<ul class="nav">
+						<li class="scroll-to-section"><h:commandLink value="Inicio"
+								action="#{index.getIndex}" /></li>
+						<li class="scroll-to-section"><h:commandLink class="active"
+								value="Asignación de grupos" action="#{index.getAsignacion}" /></li>
+						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
+								de datos</a>
+							<ul>
+								<li><h:commandLink value="Alumnos"
+										action="#{index.getAlumnos}" /></li>
+								<li><h:commandLink value="Asignaturas"
+										action="#{index.getAsignaturas}" /></li>
+								<li><h:commandLink value="Matriculas"
+										action="#{index.getMatriculas}" /></li>
+							</ul></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Peticiones" action="#{index.getPeticiones}" /></li>
+					</ul>
+					</nav>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	</header>
+
+	<div class="welcome-area" id="welcome">
+		
+	</div>
+
+	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
+	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+</h:body>
+</html>

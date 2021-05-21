@@ -16,4 +16,12 @@
 	<welcome-file-list>
 		<welcome-file>faces/index.xhtml</welcome-file>
 	</welcome-file-list>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.html</location>
+	</error-page>
+	<error-page>
+		<exception-type>es.uma.informatica.sii.ejb.exceptions.SecretariaException</exception-type>
+		<location>/exception.html</location>
+	</error-page>
 </web-app>

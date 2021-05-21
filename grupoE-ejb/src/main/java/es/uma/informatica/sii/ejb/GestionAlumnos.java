@@ -68,4 +68,6 @@ public interface GestionAlumnos {
 	 * Devuelve todos los exepdientes
 	 */
 	public List<Expediente> obtenerListaExpedientes();
+	
+	public void creaAlumno(Alumno a);
 }
