@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.backing;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +20,7 @@ import es.uma.informatica.sii.entities.Peticion;
 
 @Named
 @RequestScoped
-public class PeticionesBean implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class PeticionesBean {
 	@EJB
 	private GestionPeticiones pet = new PeticionesImpl();
 
@@ -47,7 +41,6 @@ public class PeticionesBean implements Serializable {
 	}
 
 	public String crearPeticion() throws SecretariaException, SecretariaIOException, IOException {
-		//al.importaAlumnos("/opt/jboss/wildfly/standalone/tmp/grupoE-ear-0.0.1-SNAPSHOT.ear.grupoE-war-0.0.1-SNAPSHOT.war/alumnos.csv");
 		p.setDate(new Date());
 		p.setAlumno(al.obtenerAlumno(DNI));
 		pet.creaIncidencia(p);
@@ -83,12 +76,13 @@ public class PeticionesBean implements Serializable {
 		return p;
 	}
 
-	public String upload() throws IOException {
+	public String upload() throws IOException, SecretariaIOException, SecretariaException {
 
 		fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 		part.write(fileName);
+		al.importaAlumnos(System.getProperty("jboss.server.temp.dir")
+				+ "/grupoE-ear-0.0.1-SNAPSHOT.ear.grupoE-war-0.0.1-SNAPSHOT.war/" + fileName);
 		return null;
-
 	}
 
 }

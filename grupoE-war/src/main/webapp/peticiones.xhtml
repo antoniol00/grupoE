@@ -26,25 +26,21 @@
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
 						value="Universidad
-						de Málaga" class="logo"
-						action="#{index.getIndex}" />
+						de Málaga" class="logo" action="index" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="#{index.getIndex}" /></li>
+								action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Asignación de grupos" action="#{index.getAsignacion}" /></li>
+								value="Asignación de grupos" action="asignacion" /></li>
 						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
 								de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos"
-										action="#{index.getAlumnos}" /></li>
-								<li><h:commandLink value="Asignaturas"
-										action="#{index.getAsignaturas}" /></li>
-								<li><h:commandLink value="Matriculas"
-										action="#{index.getMatriculas}" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
 							</ul></li>
 						<li class="scroll-to-section"><h:commandLink class="active"
-								value="Peticiones" action="#{index.getPeticiones}" /></li>
+								value="Peticiones" action="peticiones" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -102,7 +98,7 @@
 								</h:inputTextarea>
 							</div>
 							<div class="modal-footer">
-								<h:messages class="mensajesError" />
+								<h:messages class="mensajesError"/>
 								<h:commandButton id="enviar" value="Añadir petición"
 									class="btn btn-primary"
 									action="#{peticionesBean.crearPeticion}" />
@@ -116,8 +112,8 @@
 				styleClass="formatoTabla" headerClass="formatoHeader"
 				rowClasses="formatoFilaImpar,formatoFilaPar">
 				<h:column>
-					<f:facet name="header">Alumno</f:facet>
-					<h:outputText id="alumno" value="#{p.alumno}"></h:outputText>
+					<f:facet name="header">DNI</f:facet>
+					<h:outputText id="alumno" value="#{p.alumno.dni}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Fecha</f:facet>

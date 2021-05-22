@@ -716,6 +716,7 @@ Tabla
 .formatoTabla td, .formatoTabla th {
 	border: 1px solid white;
 	padding: 8px;
+	text-align:center;
 }
 
 .mensajesError {
