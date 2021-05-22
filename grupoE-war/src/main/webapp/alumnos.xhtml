@@ -50,8 +50,42 @@
 		</div>
 	</div>
 	</header>
-
-	<div class="welcome-area" id="welcome"></div>
+	<div>
+	<div class="welcome-area" id="text">
+		<h2 class="titulo">
+			Listado de alumnos
+			<h:outputText value="#{alumnosBean.fileName}" />
+		</h2>
+		<div>
+			<h:dataTable value="#{alumnosBean.alumnos}" var="alum"
+					styleClass="formatoTabla" headerClass="formatoHeader"
+					rowClasses="formatoFilaImpar,formatoFilaPar">
+					<h:column>
+						<f:facet name="header">DNI</f:facet>
+						<h:outputText id="dni" value="#{alum.dni}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nombre</f:facet>
+						<h:outputText id="nombre" value="#{alum.nombre}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email inst.</f:facet>
+						<h:outputText id="email1" value="#{alum.email_inst}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Telefono Movil</f:facet>
+						<h:outputText id="telef_mov" value="#{alum.telef_mov}"></h:outputText>
+					</h:column>
+				</h:dataTable>
+			</div>
+		</div>
+	</div>
+	
+	<h:form enctype="multipart/form-data">
+		<h:inputFile id="file-id" value="#{peticionesBean.part}"
+			requiredMessage="Please upload a file" alt="upload file"></h:inputFile>
+		<h:commandButton value="Upload" action="#{peticionesBean.upload}" />
+	</h:form>
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
