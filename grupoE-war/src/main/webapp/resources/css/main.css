@@ -676,6 +676,15 @@ h5 {
 	text-align: left;
 	color: black;
 }
+
+.uploadFile {
+	background-color: gray;
+	margin-left: 53em;
+	width: 31em; /* or whatever width you want. */
+	max-width: 35em; /* or whatever width you want. */
+	display: inline-block;
+	text-align: center;
+}
 /*
 ---------------------------------------------
 Tabla
@@ -695,12 +704,16 @@ Tabla
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: center;
-	background-color: #4DE834;
+	background-color: #066085;
 	color: white;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	font-size: 18px;
 }
 
 .formatoFilaPar {
-	background-color: #7FF092;
+	background-color: #AEC6CF;
 	color: black;
 }
 
@@ -714,9 +727,14 @@ Tabla
 }
 
 .formatoTabla td, .formatoTabla th {
-	border: 1px solid white;
+	border: hidden;
 	padding: 8px;
-	text-align:center;
+	text-align: center;
+}
+
+.scrolltabla {
+	overflow: scroll;
+	height: 85%;
 }
 
 .mensajesError {

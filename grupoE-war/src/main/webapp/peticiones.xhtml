@@ -50,10 +50,7 @@
 	</header>
 
 	<div class="welcome-area" id="text">
-		<h2 class="titulo">
-			Listado de peticiones
-			<h:outputText value="#{peticionesBean.fileName}" />
-		</h2>
+		<h2 class="titulo">Listado de peticiones</h2>
 		<div class="text">
 			<button type="button" class="btn btn-success btn-lg"
 				data-toggle="modal" data-target="#creationModal">+</button>
@@ -98,7 +95,7 @@
 								</h:inputTextarea>
 							</div>
 							<div class="modal-footer">
-								<h:messages class="mensajesError"/>
+								<h:messages class="mensajesError" />
 								<h:commandButton id="enviar" value="Añadir petición"
 									class="btn btn-primary"
 									action="#{peticionesBean.crearPeticion}" />
@@ -107,37 +104,37 @@
 					</div>
 				</div>
 			</div>
-
-			<h:dataTable value="#{peticionesBean.peticiones}" var="p"
-				styleClass="formatoTabla" headerClass="formatoHeader"
-				rowClasses="formatoFilaImpar,formatoFilaPar">
-				<h:column>
-					<f:facet name="header">DNI</f:facet>
-					<h:outputText id="alumno" value="#{p.alumno.dni}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Fecha</f:facet>
-					<h:outputText id="fecha" value="#{p.date}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Tipo</f:facet>
-					<h:outputText id="tipo" value="#{p.tipo}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Descripci&oacute;n</f:facet>
-					<h:outputText id="descripcion" value="#{p.descripcion}"></h:outputText>
-				</h:column>
-			</h:dataTable>
+			<div class="scrolltabla">
+				<h:dataTable value="#{peticionesBean.peticiones}" var="p"
+					styleClass="formatoTabla" headerClass="formatoHeader"
+					rowClasses="formatoFilaImpar,formatoFilaPar">
+					<h:column>
+						<f:facet name="header">DNI</f:facet>
+						<h:outputText id="alumno" value="#{p.alumno.dni}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Fecha</f:facet>
+						<h:outputText id="fecha" value="#{p.date}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Tipo</f:facet>
+						<h:outputText id="tipo" value="#{p.tipo}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Descripci&oacute;n</f:facet>
+						<h:outputText id="descripcion" value="#{p.descripcion}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Eliminar</f:facet>
+						<h:form>
+							<h:commandButton id="eliminar" value="X" class="btn btn-danger"
+								action="#{peticionesBean.eliminarPeticion(p)}" />
+						</h:form>
+					</h:column>
+				</h:dataTable>
+			</div>
 		</div>
 	</div>
-	<h:form enctype="multipart/form-data">
-		<h:inputFile id="file-id" value="#{peticionesBean.part}"
-			requiredMessage="Please upload a file" alt="upload file"></h:inputFile>
-		<h:commandButton value="Upload" action="#{peticionesBean.upload}" />
-	</h:form>
-
-
-
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>

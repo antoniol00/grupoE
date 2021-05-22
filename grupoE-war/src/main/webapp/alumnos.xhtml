@@ -30,7 +30,7 @@
 						de Málaga" class="logo" action="index" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="#{index.getIndex}" /></li>
+								action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
 								value="Asignación de grupos" action="asignacion" /></li>
 						<li class="submenu"><a href="javascript:;" class="active">Gesti&oacute;n
@@ -51,13 +51,21 @@
 	</div>
 	</header>
 	<div>
-	<div class="welcome-area" id="text">
-		<h2 class="titulo">
-			Listado de alumnos
-			<h:outputText value="#{alumnosBean.fileName}" />
-		</h2>
-		<div>
-			<h:dataTable value="#{alumnosBean.alumnos}" var="alum"
+		<div class="welcome-area" id="text">
+			<div class="uploadFile">
+				<h:form enctype="multipart/form-data">
+					<h:inputFile id="file-id" value="#{alumnosBean.part}"
+						requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
+					<h:commandButton value="Upload" action="#{alumnosBean.upload}"
+						class="btn btn-primary" id="upload" />
+				</h:form>
+			</div>
+			<div class="titulo">
+				<h2>Listado de alumnos</h2>
+			</div>
+
+			<div class="scrolltabla">
+				<h:dataTable value="#{alumnosBean.alumnos}" var="alum"
 					styleClass="formatoTabla" headerClass="formatoHeader"
 					rowClasses="formatoFilaImpar,formatoFilaPar">
 					<h:column>
@@ -66,28 +74,55 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Nombre</f:facet>
-						<h:outputText id="nombre" value="#{alum.nombre}"></h:outputText>
+						<h:outputText id="nombre" value="#{alum.nombre_completo}"></h:outputText>
 					</h:column>
 					<h:column>
 						<f:facet name="header">Email inst.</f:facet>
-						<h:outputText id="email1" value="#{alum.email_inst}"></h:outputText>
+						<h:outputText id="email1" value="#{alum.email_institucional}"></h:outputText>
 					</h:column>
 					<h:column>
 						<f:facet name="header">Telefono Movil</f:facet>
-						<h:outputText id="telef_mov" value="#{alum.telef_mov}"></h:outputText>
+						<h:outputText id="telef_mov" value="#{alum.telefono_movil}"></h:outputText>
 					</h:column>
 				</h:dataTable>
 			</div>
 		</div>
 	</div>
-	
-	<h:form enctype="multipart/form-data">
-		<h:inputFile id="file-id" value="#{peticionesBean.part}"
-			requiredMessage="Please upload a file" alt="upload file"></h:inputFile>
-		<h:commandButton value="Upload" action="#{peticionesBean.upload}" />
-	</h:form>
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+	<script>
+		function findOffset(element) {
+			var top = 0, left = 0;
+
+			do {
+				top += element.offsetTop || 0;
+				left += element.offsetLeft || 0;
+				element = element.offsetParent;
+			} while (element);
+
+			return {
+				top : top,
+				left : left
+			};
+		}
+
+		window.onload = function() {
+			var stickyHeader = document.getElementById('sticky');
+			var headerOffset = findOffset(stickyHeader);
+
+			window.onscroll = function() {
+				// body.scrollTop is deprecated and no longer available on Firefox
+				var bodyScrollTop = document.documentElement.scrollTop
+						|| document.body.scrollTop;
+
+				if (bodyScrollTop > headerOffset.top) {
+					stickyHeader.classList.add('fixed');
+				} else {
+					stickyHeader.classList.remove('fixed');
+				}
+			};
+		};
+	</script>
 </h:body>
 </html>
