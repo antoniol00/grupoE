@@ -25,8 +25,12 @@ public class PeticionesBean {
 
 	private Peticion p;
 	private String DNI;
+	private String containerID;
+	private String prevID;
+	private int id;
 
 	public PeticionesBean() {
+		id = 0;
 		p = new Peticion();
 	}
 
@@ -48,6 +52,14 @@ public class PeticionesBean {
 		return null;
 	}
 
+	public String editarPeticion(Peticion peticion) throws SecretariaException {
+		p.setDate(peticion.getDate());
+		p.setAlumno(peticion.getAlumno());
+		pet.editaIncidencia(peticion.getDate(), peticion.getAlumno().getDni(), p);
+		p = new Peticion();
+		return null;
+	}
+
 	public String getAsignarDNI() {
 		return DNI;
 	}
@@ -58,6 +70,15 @@ public class PeticionesBean {
 
 	public Peticion getPeticion() {
 		return p;
+	}
+
+	public String getContainerID() {
+		id++;
+		return "#containerID" + id;
+	}
+
+	public String getPrevID() {
+		return "containerID" + id;
 	}
 
 }

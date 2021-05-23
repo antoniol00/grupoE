@@ -57,6 +57,11 @@
 				<h:commandButton value="Upload" action="#{alumnosBean.upload}"
 					class="btn btn-primary" id="upload" />
 			</h:form>
+			<h:form>
+				<h:commandButton id="borrarTodo" value="Vaciar datos"
+					class="btn btn-danger" action="#{alumnosBean.vaciarDatos}"
+					onclick="return compruebaVaciado()" />
+			</h:form>
 		</div>
 		<div class="titulo">
 			<h2>Listado de alumnos</h2>
@@ -84,9 +89,9 @@
 				</h:column>
 				<h:column>
 					<button type="button" class="btn btn-info" data-toggle="modal"
-						data-target="#creationModal">+</button>
+						data-target="#{alumnosBean.containerID}">+</button>
 
-					<div class="modal fade" id="creationModal" tabindex="-1"
+					<div class="modal fade" id="#{alumnosBean.prevID}" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
@@ -94,14 +99,54 @@
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">
 										Información del alumno
-										<h:outputText id="idAlumno" value="#{alum.dni}"></h:outputText>
+										<h:outputText id="idAlumno" value="#{alum.dni}" />
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body"></div>
+								<div class="modal-body datosAlumnos">
+									<label><strong>DNI </strong> <h:outputText
+											id="dniCompleto" value="#{alum.dni}" /> </label> <br /> <label><strong>Nombre
+											completo </strong> <h:outputText id="nombreCompleto"
+											value="#{alum.nombre_completo}" /> </label><br /> <label><strong>Email
+											institucional </strong> <h:outputText id="email_institucionalCompleto"
+											value="#{alum.email_institucional}" /> </label><br /> <label><strong>Email
+											personal </strong> <h:outputText id="email_personalCompleto"
+											value="#{alum.email_personal}" /> </label> <br /> <label><strong>Telefono
+											fijo </strong> <h:outputText id="telefono_fijoCompleto"
+											value="#{alum.telefono_fijo}" /> </label><br /> <label><strong>Telefono
+											movil </strong> <h:outputText id="telefono_movilCompleto"
+											value="#{alum.telefono_movil}" /> </label><br /> <label><strong>Direccion
+									</strong> <h:outputText id="direccion_notificacionCompleto"
+											value="#{alum.direccion_notificacion}" /> </label> <br /> <label><strong>Provincia
+									</strong> <h:outputText id="provincia_notificacionCompleto"
+											value="#{alum.provincia_notificacion}" /> </label><br /> <label><strong>Localidad
+									</strong> <h:outputText id="localidad_notificacionCompleto"
+											value="#{alum.localidad_notificacion}" /> </label><br /> <label><strong>CP
+									</strong> <h:outputText id="codigo_postalCompleto"
+											value="#{alum.codigo_postal}" /> </label><br />
+
+									<h:dataTable value="#{alum.expedientes}" var="exp"
+										styleClass="formatoTabla" headerClass="formatoHeader"
+										rowClasses="formatoFilaImpar,formatoFilaPar">
+										<h:column>
+											<f:facet name="header">Titulacion</f:facet>
+											<h:outputText id="titulacion"
+												value="#{exp.titulacion.nombre}"></h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Numero expediente</f:facet>
+											<h:outputText id="numero_expediente" value="#{exp.numero}"></h:outputText>
+										</h:column>
+										<h:column>
+											<f:facet name="header">Nota media</f:facet>
+											<h:outputText id="nota_media" value="#{exp.nota_media}"></h:outputText>
+										</h:column>
+									</h:dataTable>
+
+								</div>
 							</div>
 						</div>
 					</div>

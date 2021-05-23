@@ -181,10 +181,11 @@ public class AlumnosImpl implements GestionAlumnos {
 		TypedQuery<Expediente> query = em.createQuery("select a from Expediente a", Expediente.class);
 		return query.getResultList();
 	}
-	
+
 	@Override
-	public void creaAlumno(Alumno a) {
-		em.persist(a);
+	public void borraAlumno(Alumno a) {
+
+		em.remove(em.contains(a) ? a : em.merge(a));
 	}
 
 }

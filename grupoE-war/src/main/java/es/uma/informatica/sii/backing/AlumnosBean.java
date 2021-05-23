@@ -26,9 +26,13 @@ public class AlumnosBean {
 
 	private Part part;
 	private String fileName;
+	private String containerID;
+	private String prevID;
+	private int id;
 
 	public AlumnosBean() {
 		alum = new Alumno();
+		id = 0;
 	}
 
 	public List<Alumno> getAlumnos() {
@@ -55,6 +59,15 @@ public class AlumnosBean {
 		return alum;
 	}
 
+	public String getContainerID() {
+		id++;
+		return "#containerID" + id;
+	}
+
+	public String getPrevID() {
+		return "containerID" + id;
+	}
+
 	public String upload() throws IOException, SecretariaIOException, SecretariaException {
 
 		fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -63,9 +76,17 @@ public class AlumnosBean {
 				+ "/grupoE-ear-0.0.1-SNAPSHOT.ear.grupoE-war-0.0.1-SNAPSHOT.war/" + fileName;
 		al.importaAlumnos(ruta);
 		al.importaExpedientes(ruta);
+
 		File file = new File(ruta);
 		file.delete();
 
+		return null;
+	}
+
+	public String vaciarDatos() {
+		for (Alumno a : al.obtenerListaAlumnos()) {
+			al.borraAlumno(a);
+		}
 		return null;
 	}
 }

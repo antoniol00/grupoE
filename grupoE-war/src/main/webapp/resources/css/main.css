@@ -560,8 +560,20 @@ h3 {
 	color: black;
 }
 
+.datosAlumnos {
+	text-align: left;
+	color: black;
+	font-size: 18px;
+}
+
+.datosAlumnos .formatoTabla {
+	border-collapse: collapse;
+	width: auto;
+	margin: 4% 7%;
+}
+
 .uploadFile {
-	background-color: turquoise;
+	background-color: gray;
 	margin-left: 53em;
 	width: 31em; /* or whatever width you want. */
 	max-width: 35em; /* or whatever width you want. */
@@ -571,6 +583,11 @@ h3 {
 
 .text-center strong {
 	font-size: 100px;
+}
+
+#editarElem {
+	background-image: url(resources/images/gear.png);
+	background-repeat: no-repeat;
 }
 /*
 ---------------------------------------------
@@ -620,7 +637,7 @@ Tabla
 }
 
 .scrolltabla {
-	overflow: scroll;
+	overflow-y: auto;
 	height: 85%;
 }
 

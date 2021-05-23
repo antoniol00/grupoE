@@ -126,12 +126,63 @@
 						<h:outputText id="descripcion" value="#{p.descripcion}"></h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Eliminar</f:facet>
 						<h:form>
 							<h:commandButton id="eliminar" value="X" class="btn btn-danger"
 								action="#{peticionesBean.eliminarPeticion(p)}"
 								onclick="return compruebaBorrado()" />
 						</h:form>
+					</h:column>
+					<h:column>
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#{peticionesBean.containerID}">
+							<h:graphicImage value="#{resource['images:gear.png']}" />
+						</button>
+
+						<div class="modal fade" id="#{peticionesBean.prevID}"
+							tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">
+											Edci&oacute;n de petici&oacute;n para
+											<h:outputText value="#{p.alumno.dni}" />
+										</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<h:form id="user-form">
+										<div class="modal-body formulario">
+											<h:outputLabel for="tipo" value="Tipo "></h:outputLabel>
+											<h:selectOneMenu id="tipo" class="custom-select"
+												value="#{peticionesBean.peticion.tipo}">
+												<f:selectItem itemValue="Cambio de grupo"
+													itemLabel="Cambio de grupo" />
+												<f:selectItem itemValue="Cambio idioma"
+													itemLabel="Cambio idioma" />
+												<f:selectItem itemValue="Cambio 2º semestre"
+													itemLabel="Cambio 2º semestre" />
+											</h:selectOneMenu>
+											<br /> <br />
+
+											<h:outputLabel for="desc">Descripci&oacute;n</h:outputLabel>
+											<h:inputTextarea id="desc" class="form-control"
+												value="#{peticionesBean.peticion.descripcion}" cols="32"
+												rows="3">
+											</h:inputTextarea>
+											<div class="modal-footer">
+												<h:messages class="mensajesError" />
+												<h:commandButton id="enviar" value="Editar petición"
+													class="btn btn-primary"
+													action="#{peticionesBean.editarPeticion(p)}" />
+											</div>
+										</div>
+									</h:form>
+								</div>
+							</div>
+						</div>
 					</h:column>
 				</h:dataTable>
 			</div>
