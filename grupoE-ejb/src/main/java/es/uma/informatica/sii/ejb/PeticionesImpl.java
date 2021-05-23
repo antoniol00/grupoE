@@ -27,7 +27,7 @@ public class PeticionesImpl implements GestionPeticiones {
 		if (pe != null) {
 			throw new SecretariaException("Se ha intentado crear una incidencia que ya existia");
 		}
-		em.persist(p);
+		em.merge(p);
 	}
 
 	@Override

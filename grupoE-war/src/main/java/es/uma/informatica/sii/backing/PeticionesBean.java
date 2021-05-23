@@ -39,6 +39,7 @@ public class PeticionesBean {
 		p.setAlumno(al.obtenerAlumno(DNI));
 		pet.creaIncidencia(p);
 		p = new Peticion();
+		DNI = "";
 		return null;
 	}
 

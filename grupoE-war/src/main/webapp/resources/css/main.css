@@ -561,7 +561,7 @@ h3 {
 }
 
 .uploadFile {
-	background-color: gray;
+	background-color: turquoise;
 	margin-left: 53em;
 	width: 31em; /* or whatever width you want. */
 	max-width: 35em; /* or whatever width you want. */
@@ -582,7 +582,7 @@ Tabla
 	margin-right: 4em;
 	margin-top: 1em;
 	border-collapse: collapse;
-	width: 96%;
+	width: 93%;
 	padding-top: 10px;
 	border-radius: 6px;
 }

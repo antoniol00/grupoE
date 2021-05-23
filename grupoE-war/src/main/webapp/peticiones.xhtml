@@ -14,6 +14,7 @@
 		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
 		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
 		crossorigin="anonymous" />
+	<script src="resources/js/functions.js" />
 	<title>Peticiones</title>
 </h:head>
 
@@ -128,7 +129,8 @@
 						<f:facet name="header">Eliminar</f:facet>
 						<h:form>
 							<h:commandButton id="eliminar" value="X" class="btn btn-danger"
-								action="#{peticionesBean.eliminarPeticion(p)}" />
+								action="#{peticionesBean.eliminarPeticion(p)}"
+								onclick="return compruebaBorrado()" />
 						</h:form>
 					</h:column>
 				</h:dataTable>

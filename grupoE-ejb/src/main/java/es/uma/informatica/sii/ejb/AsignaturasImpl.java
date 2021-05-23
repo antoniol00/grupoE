@@ -289,9 +289,9 @@ public class AsignaturasImpl implements GestionAsignaturas {
 			throw new SecretariaException("Se ha intentado vincular un grupo que no existe");
 		}
 		Grupos_asig ga = new Grupos_asig();
-		ga.setAsignatura_codigo(as);
+		ga.setAsignatura(as);
 		ga.setCurso(curso);
-		ga.setGrupo_id(g);
+		ga.setGrupo(g);
 
 		em.persist(ga);
 

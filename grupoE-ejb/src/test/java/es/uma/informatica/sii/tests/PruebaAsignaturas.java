@@ -144,9 +144,9 @@ public class PruebaAsignaturas {
 		assertFalse("Lista vacia de gruposXAsig", gestionAsignaturas.listarGrupoXAsignaturas().isEmpty());
 
 		Grupos_asig ga = new Grupos_asig();
-		ga.setAsignatura_codigo(as);
+		ga.setAsignatura(as);
 		ga.setCurso("22/23");
-		ga.setGrupo_id(g);
+		ga.setGrupo(g);
 
 		assertTrue("Lista no contiene grupo creado", gestionAsignaturas.listarGrupoXAsignaturas().contains(ga));
 
