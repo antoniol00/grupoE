@@ -13,6 +13,7 @@ public class MatriculaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public MatriculaPK() {
+		super();
 	}
 
 	public String getCurso() {
@@ -60,6 +61,9 @@ public class MatriculaPK implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "MatriculaPK [curso=" + curso + ", expediente=" + expediente + "]";
+	}
 
 }

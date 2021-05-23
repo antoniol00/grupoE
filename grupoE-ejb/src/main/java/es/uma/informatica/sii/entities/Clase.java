@@ -72,6 +72,14 @@ public class Clase implements Serializable {
 		this.grupo = grupo;
 	}
 
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -1,21 +1,21 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.lang.String;
 
 /**
  * ID class for entity: Grupos_asig
  *
- */ 
-public class Grupos_asigPK  implements Serializable {   
-   
-	         
-	private String curso;         
-	private String grupo;         
+ */
+public class Grupos_asigPK implements Serializable {
+
+	private String curso;
+	private String grupo;
 	private AsignaturaPK asignatura;
 	private static final long serialVersionUID = 1L;
 
-	public Grupos_asigPK() {}
+	public Grupos_asigPK() {
+		super();
+	}
 
 	public String getCurso() {
 		return curso;
@@ -78,8 +78,9 @@ public class Grupos_asigPK  implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Grupos_asigPK [curso=" + curso + ", grupo=" + grupo + ", asignatura=" + asignatura + "]";
+	}
 
-	
-   
 }

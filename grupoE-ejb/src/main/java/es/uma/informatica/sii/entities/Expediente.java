@@ -49,7 +49,7 @@ public class Expediente implements Serializable {
 	}
 
 	public Integer getNumero() {
-		return this.numero;
+		return numero;
 	}
 
 	public void setNumero(Integer numero) {
@@ -57,7 +57,7 @@ public class Expediente implements Serializable {
 	}
 
 	public Boolean getActivo() {
-		return this.activo;
+		return activo;
 	}
 
 	public void setActivo(Boolean activo) {
@@ -65,7 +65,7 @@ public class Expediente implements Serializable {
 	}
 
 	public Double getNota_media() {
-		return this.nota_media;
+		return nota_media;
 	}
 
 	public void setNota_media(Double nota_media) {
@@ -73,11 +73,35 @@ public class Expediente implements Serializable {
 	}
 
 	public Double getCreditos_fb() {
-		return this.creditos_fb;
+		return creditos_fb;
 	}
 
 	public void setCreditos_fb(Double creditos_fb) {
 		this.creditos_fb = creditos_fb;
+	}
+
+	public Double getCreditos_ob() {
+		return creditos_ob;
+	}
+
+	public void setCreditos_ob(Double creditos_ob) {
+		this.creditos_ob = creditos_ob;
+	}
+
+	public Double getCreditos_pe() {
+		return creditos_pe;
+	}
+
+	public void setCreditos_pe(Double creditos_pe) {
+		this.creditos_pe = creditos_pe;
+	}
+
+	public Double getCreditos_tf() {
+		return creditos_tf;
+	}
+
+	public void setCreditos_tf(Double creditos_tf) {
+		this.creditos_tf = creditos_tf;
 	}
 
 	public Titulacion getTitulacion() {
@@ -94,46 +118,6 @@ public class Expediente implements Serializable {
 
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
-	}
-
-	public Double getCreditos_ob() {
-		return this.creditos_ob;
-	}
-
-	public void setCreditos_ob(Double creditos_ob) {
-		this.creditos_ob = creditos_ob;
-	}
-
-	public Double getCreditos_pe() {
-		return this.creditos_pe;
-	}
-
-	public void setCreditos_pe(Double creditos_pe) {
-		this.creditos_pe = creditos_pe;
-	}
-
-	public Double getCreditos_tf() {
-		return this.creditos_tf;
-	}
-
-	public void setCreditos_tf(Double creditos_tf) {
-		this.creditos_tf = creditos_tf;
-	}
-
-	public Titulacion getTitulacion_codigo() {
-		return this.titulacion;
-	}
-
-	public void setTitulacion_codigo(Titulacion titulacion_codigo) {
-		this.titulacion = titulacion_codigo;
-	}
-
-	public Alumno getAlumno_dni() {
-		return this.alumno;
-	}
-
-	public void setAlumno_dni(Alumno alumno_dni) {
-		this.alumno = alumno_dni;
 	}
 
 	public List<Encuesta> getEncuestas() {

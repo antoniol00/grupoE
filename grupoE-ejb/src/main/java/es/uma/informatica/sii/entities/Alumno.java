@@ -51,6 +51,12 @@ public class Alumno implements Serializable {
 		return this.dni;
 	}
 
+	public List<Peticion> getPeticiones() {
+		return peticiones;
+	}
+	public void setPeticiones(List<Peticion> peticiones) {
+		this.peticiones = peticiones;
+	}
 	public void setDni(String dni) {
 		this.dni = dni;
 	}   

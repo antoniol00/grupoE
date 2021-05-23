@@ -14,6 +14,7 @@ public class ClasePK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public ClasePK() {
+		super();
 	}
 
 	public String getDia() {
@@ -40,33 +41,44 @@ public class ClasePK implements Serializable {
 		this.grupo = grupo;
 	}
 
-	/*
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
-		if (!(o instanceof ClasePK)) {
-			return false;
-		}
-		ClasePK other = (ClasePK) o;
-		return true && (getDia() == null ? other.getDia() == null : getDia().equals(other.getDia()))
-				&& (getHora_inicio() == null ? other.getHora_inicio() == null
-						: getHora_inicio().equals(other.getHora_inicio()))
-				&& (getGrupo() == null ? other.getGrupo() == null : getGrupo().equals(other.getGrupo()));
-	}
-
-	/*
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (getDia() == null ? 0 : getDia().hashCode());
-		result = prime * result + (getHora_inicio() == null ? 0 : getHora_inicio().hashCode());
-		result = prime * result + (getGrupo() == null ? 0 : getGrupo().hashCode());
+		result = prime * result + ((dia == null) ? 0 : dia.hashCode());
+		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
+		result = prime * result + ((hora_inicio == null) ? 0 : hora_inicio.hashCode());
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof ClasePK))
+			return false;
+		ClasePK other = (ClasePK) obj;
+		if (dia == null) {
+			if (other.dia != null)
+				return false;
+		} else if (!dia.equals(other.dia))
+			return false;
+		if (grupo == null) {
+			if (other.grupo != null)
+				return false;
+		} else if (!grupo.equals(other.grupo))
+			return false;
+		if (hora_inicio == null) {
+			if (other.hora_inicio != null)
+				return false;
+		} else if (!hora_inicio.equals(other.hora_inicio))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ClasePK [dia=" + dia + ", hora_inicio=" + hora_inicio + ", grupo=" + grupo + "]";
 	}
 
 }

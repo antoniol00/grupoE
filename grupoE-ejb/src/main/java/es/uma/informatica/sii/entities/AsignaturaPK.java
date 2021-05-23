@@ -5,15 +5,16 @@ import java.io.Serializable;
 /**
  * ID class for entity: Asignatura
  *
- */ 
-public class AsignaturaPK  implements Serializable {   
-   
-	         
-	private Integer codigo;         
+ */
+public class AsignaturaPK implements Serializable {
+
+	private Integer codigo;
 	private Integer titulacion;
 	private static final long serialVersionUID = 1L;
 
-	public AsignaturaPK() {}
+	public AsignaturaPK() {
+		super();
+	}
 
 	public Integer getCodigo() {
 		return codigo;
@@ -58,6 +59,11 @@ public class AsignaturaPK  implements Serializable {
 		} else if (!titulacion.equals(other.titulacion))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "AsignaturaPK [codigo=" + codigo + ", titulacion=" + titulacion + "]";
 	}
 
 }

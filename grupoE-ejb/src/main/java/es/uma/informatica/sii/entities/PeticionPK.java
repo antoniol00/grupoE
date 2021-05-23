@@ -14,6 +14,7 @@ public class PeticionPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public PeticionPK() {
+		super();
 	}
 
 	public Date getDate() {
@@ -32,30 +33,38 @@ public class PeticionPK implements Serializable {
 		this.alumno = alumno;
 	}
 
-	/*
-	 * @see java.lang.Object#equals(Object)
-	 */
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
-		if (!(o instanceof PeticionPK)) {
-			return false;
-		}
-		PeticionPK other = (PeticionPK) o;
-		return true && (getDate() == null ? other.getDate() == null : getDate().equals(other.getDate()))
-				&& (getAlumno() == null ? other.getAlumno() == null : getAlumno().equals(other.getAlumno()));
-	}
-
-	/*
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (getDate() == null ? 0 : getDate().hashCode());
-		result = prime * result + (getAlumno() == null ? 0 : getAlumno().hashCode());
+		result = prime * result + ((alumno == null) ? 0 : alumno.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof PeticionPK))
+			return false;
+		PeticionPK other = (PeticionPK) obj;
+		if (alumno == null) {
+			if (other.alumno != null)
+				return false;
+		} else if (!alumno.equals(other.alumno))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PeticionPK [date=" + date + ", alumno=" + alumno + "]";
 	}
 
 }

@@ -11,57 +11,57 @@ import javax.persistence.OneToMany;
 
 @Entity
 
-public class Titulacion implements Serializable{
-	
+public class Titulacion implements Serializable {
+
 	@Id
 	private Integer codigo;
 	@Column(nullable = false)
 	private String nombre;
 	@Column(nullable = false)
 	private Integer creditos;
-	
-	@OneToMany(mappedBy="titulacion")
+
+	@OneToMany(mappedBy = "titulacion")
 	private List<Expediente> expedientes;
-	
-	@OneToMany(mappedBy="titulacion")
+
+	@OneToMany(mappedBy = "titulacion")
 	private List<Grupo> grupos;
-	
-	@OneToMany(mappedBy="titulacion")
+
+	@OneToMany(mappedBy = "titulacion")
 	private List<Asignatura> asignaturas;
-	
-	@ManyToMany(mappedBy="titulaciones")
+
+	@ManyToMany(mappedBy = "titulaciones")
 	private List<Centro> centros;
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	public Titulacion() {
 		super();
 	}
-	
+
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	
+
 	public Integer getCodigo() {
 		return this.codigo;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getNombre() {
 		return this.nombre;
 	}
-	
+
 	public void setCreditos(Integer creditos) {
 		this.creditos = creditos;
 	}
-	
+
 	public Integer getCreditos() {
 		return this.creditos;
 	}
-	
+
 	public List<Expediente> getExpedientes() {
 		return expedientes;
 	}
@@ -101,7 +101,7 @@ public class Titulacion implements Serializable{
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

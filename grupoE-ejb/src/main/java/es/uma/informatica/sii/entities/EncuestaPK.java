@@ -6,15 +6,16 @@ import java.util.Date;
 /**
  * ID class for entity: Encuesta
  *
- */ 
-public class EncuestaPK  implements Serializable {   
-   
-	         
-	private Date fecha_envio;         
+ */
+public class EncuestaPK implements Serializable {
+
+	private Date fecha_envio;
 	private Integer expediente;
 	private static final long serialVersionUID = 1L;
 
-	public EncuestaPK() {}
+	public EncuestaPK() {
+		super();
+	}
 
 	public Date getFecha_envio() {
 		return fecha_envio;
@@ -61,8 +62,9 @@ public class EncuestaPK  implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "EncuestaPK [fecha_envio=" + fecha_envio + ", expediente=" + expediente + "]";
+	}
 
-   
-   
 }

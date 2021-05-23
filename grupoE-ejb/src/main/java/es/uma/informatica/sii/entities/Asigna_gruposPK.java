@@ -6,8 +6,10 @@ public class Asigna_gruposPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private AsignaturaPK asignatura;
 	private MatriculaPK matricula;
-	
-	public Asigna_gruposPK() {}
+
+	public Asigna_gruposPK() {
+		super();
+	}
 
 	public AsignaturaPK getAsignatura() {
 		return asignatura;
@@ -54,5 +56,9 @@ public class Asigna_gruposPK implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Asigna_gruposPK [asignatura=" + asignatura + ", matricula=" + matricula + "]";
+	}
+
 }

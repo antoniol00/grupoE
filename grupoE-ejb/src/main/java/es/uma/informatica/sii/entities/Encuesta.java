@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Encuesta
@@ -16,19 +24,49 @@ import javax.persistence.*;
 public class Encuesta implements Serializable {
 
 	@Id
-	@Column(nullable=false, name="FECHA_ENVIO")
+	@Column(nullable = false, name = "FECHA_ENVIO")
 	@Temporal(TemporalType.DATE)
-	
-	private Date fecha_envio;  
-	
+
+	private Date fecha_envio;
+
 	@ManyToOne
 	@Id
-	@JoinColumn(name="EXPEDIENTE")
+	@JoinColumn(name = "EXPEDIENTE")
 	private Expediente expediente;
 
-	@ManyToMany (mappedBy="encuestas")
+	@ManyToMany(mappedBy = "encuestas")
 	private List<Grupos_asig> asigYGrupo;
-	
+
+	private static final long serialVersionUID = 1L;
+
+	public Encuesta() {
+		super();
+	}
+
+	public Date getFecha_envio() {
+		return fecha_envio;
+	}
+
+	public void setFecha_envio(Date fecha_envio) {
+		this.fecha_envio = fecha_envio;
+	}
+
+	public Expediente getExpediente() {
+		return expediente;
+	}
+
+	public void setExpediente(Expediente expediente) {
+		this.expediente = expediente;
+	}
+
+	public List<Grupos_asig> getAsigYGrupo() {
+		return asigYGrupo;
+	}
+
+	public void setAsigYGrupo(List<Grupos_asig> asigYGrupo) {
+		this.asigYGrupo = asigYGrupo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -37,6 +75,7 @@ public class Encuesta implements Serializable {
 		result = prime * result + ((fecha_envio == null) ? 0 : fecha_envio.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,40 +98,9 @@ public class Encuesta implements Serializable {
 		return true;
 	}
 
-	private static final long serialVersionUID = 1L;
-
-	public Encuesta() {
-		super();
-	}   
-	public Date getFecha_envio() {
-		return this.fecha_envio;
-	}
-
-	public void setFecha_envio(Date fecha_envio) {
-		this.fecha_envio = fecha_envio;
-	}   
-	public Expediente getExpedienteNum() {
-		return this.expediente;
-	}
-
-	public void setExpedienteNum(Expediente expediente_número) {
-		this.expediente = expediente_número;
-	}
-	public Expediente getExpediente() {
-		return expediente;
-	}
-	public void setExpediente(Expediente expediente) {
-		this.expediente = expediente;
-	}
-	public List<Grupos_asig> getAsigYGrupo() {
-		return asigYGrupo;
-	}
-	public void setAsigYGrupo(List<Grupos_asig> asigYGrupo) {
-		this.asigYGrupo = asigYGrupo;
-	}
 	@Override
 	public String toString() {
 		return "Encuesta [fecha_envio=" + fecha_envio + ", expediente=" + expediente + "]";
 	}
-   
+
 }
