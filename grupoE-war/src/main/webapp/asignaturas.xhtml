@@ -51,11 +51,85 @@
 	</div>
 	</header>
 
-	<div class="welcome-area" id="welcome"></div>
+	<div class="welcome-area" id="text">
+		<div class="uploadFile">
+			<h:form enctype="multipart/form-data">
+				<h:inputFile id="file-id" value="#{asignaturasBean.part}"
+					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
+				<h:commandButton value="Upload" action="#{asignaturasBean.upload}"
+					class="btn btn-primary" id="upload" />
+			</h:form>
+		</div>
+		<div class="titulo">
+			<h2>Listado de alumnos</h2>
+		</div>
+
+		<div class="scrolltabla">
+			<h:dataTable value="#{asignaturasBean.asignaturas}" var="asig"
+				styleClass="formatoTabla" headerClass="formatoHeader"
+				rowClasses="formatoFilaImpar,formatoFilaPar">
+				<h:column>
+					<f:facet name="header">Referencia</f:facet>
+					<h:outputText id="referencia" value="#{asig.referencia}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">C&oacute;digo</f:facet>
+					<h:outputText id="codigo" value="#{asig.codigo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+					<h:outputText id="nombre" value="#{asig.nombre}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Curso</f:facet>
+					<h:outputText id="curso" value="#{asig.curso}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Cuatrimestre</f:facet>
+					<h:outputText id="Cuatrimestre" value="#{asig.cuatrimestre}"></h:outputText>
+				</h:column>
+				<h:column>
+					<button type="button" class="btn btn-info" data-toggle="modal"
+						data-target="#creationModal">+</button>
+
+					<div class="modal fade" id="creationModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">
+										Información de la asignatura
+										<h:outputText id="idAsinatura" value="#{asig.referencia}"></h:outputText>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body"></div>
+							</div>
+						</div>
+					</div>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 
 
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
 </h:body>
 </html>
