@@ -7,8 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core" lang="es">
 
 <h:head>
-	<meta name="viewport"
-		content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+	<meta charset="UTF-8" />
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
 	<link rel="stylesheet"
 		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
@@ -50,79 +49,80 @@
 		</div>
 	</div>
 	</header>
-	<div>
-		<div class="welcome-area" id="text">
-			<div class="uploadFile">
-				<h:form enctype="multipart/form-data">
-					<h:inputFile id="file-id" value="#{alumnosBean.part}"
-						requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
-					<h:commandButton value="Upload" action="#{alumnosBean.upload}"
-						class="btn btn-primary" id="upload" />
-				</h:form>
-			</div>
-			<div class="titulo">
-				<h2>Listado de alumnos</h2>
-			</div>
+	<div class="welcome-area" id="text">
+		<div class="uploadFile">
+			<h:form enctype="multipart/form-data">
+				<h:inputFile id="file-id" value="#{alumnosBean.part}"
+					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
+				<h:commandButton value="Upload" action="#{alumnosBean.upload}"
+					class="btn btn-primary" id="upload" />
+			</h:form>
+		</div>
+		<div class="titulo">
+			<h2>Listado de alumnos</h2>
+		</div>
 
-			<div class="scrolltabla">
-				<h:dataTable value="#{alumnosBean.alumnos}" var="alum"
-					styleClass="formatoTabla" headerClass="formatoHeader"
-					rowClasses="formatoFilaImpar,formatoFilaPar">
-					<h:column>
-						<f:facet name="header">DNI</f:facet>
-						<h:outputText id="dni" value="#{alum.dni}"></h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Nombre</f:facet>
-						<h:outputText id="nombre" value="#{alum.nombre_completo}"></h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Email inst.</f:facet>
-						<h:outputText id="email1" value="#{alum.email_institucional}"></h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Telefono Movil</f:facet>
-						<h:outputText id="telef_mov" value="#{alum.telefono_movil}"></h:outputText>
-					</h:column>
-				</h:dataTable>
-			</div>
+		<div class="scrolltabla">
+			<h:dataTable value="#{alumnosBean.alumnos}" var="alum"
+				styleClass="formatoTabla" headerClass="formatoHeader"
+				rowClasses="formatoFilaImpar,formatoFilaPar">
+				<h:column>
+					<f:facet name="header">DNI</f:facet>
+					<h:outputText id="dni" value="#{alum.dni}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+					<h:outputText id="nombre" value="#{alum.nombre_completo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email inst.</f:facet>
+					<h:outputText id="email1" value="#{alum.email_institucional}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefono Movil</f:facet>
+					<h:outputText id="telef_mov" value="#{alum.telefono_movil}"></h:outputText>
+				</h:column>
+				<h:column>
+					<button type="button" class="btn btn-info" data-toggle="modal"
+						data-target="#creationModal">+</button>
+
+					<div class="modal fade" id="creationModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">
+										Información del alumno
+										<h:outputText id="idAlumno" value="#{alum.dni}"></h:outputText>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body"></div>
+							</div>
+						</div>
+					</div>
+				</h:column>
+			</h:dataTable>
 		</div>
 	</div>
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
-	<script>
-		function findOffset(element) {
-			var top = 0, left = 0;
 
-			do {
-				top += element.offsetTop || 0;
-				left += element.offsetLeft || 0;
-				element = element.offsetParent;
-			} while (element);
-
-			return {
-				top : top,
-				left : left
-			};
-		}
-
-		window.onload = function() {
-			var stickyHeader = document.getElementById('sticky');
-			var headerOffset = findOffset(stickyHeader);
-
-			window.onscroll = function() {
-				// body.scrollTop is deprecated and no longer available on Firefox
-				var bodyScrollTop = document.documentElement.scrollTop
-						|| document.body.scrollTop;
-
-				if (bodyScrollTop > headerOffset.top) {
-					stickyHeader.classList.add('fixed');
-				} else {
-					stickyHeader.classList.remove('fixed');
-				}
-			};
-		};
-	</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
 </h:body>
 </html>
