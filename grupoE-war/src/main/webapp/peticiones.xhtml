@@ -129,7 +129,7 @@
 						<h:form>
 							<h:commandButton id="eliminar" value="X" class="btn btn-danger"
 								action="#{peticionesBean.eliminarPeticion(p)}"
-								onclick="return compruebaBorrado()" />
+								onclick="return compruebaBorradoPeticion()" />
 						</h:form>
 					</h:column>
 					<h:column>
@@ -157,7 +157,7 @@
 										<div class="modal-body formulario">
 											<h:outputLabel for="tipo" value="Tipo "></h:outputLabel>
 											<h:selectOneMenu id="tipo" class="custom-select"
-												value="#{peticionesBean.peticion.tipo}">
+												value="#{p.tipo}" immediate="true">
 												<f:selectItem itemValue="Cambio de grupo"
 													itemLabel="Cambio de grupo" />
 												<f:selectItem itemValue="Cambio idioma"
@@ -169,14 +169,14 @@
 
 											<h:outputLabel for="desc">Descripci&oacute;n</h:outputLabel>
 											<h:inputTextarea id="desc" class="form-control"
-												value="#{peticionesBean.peticion.descripcion}" cols="32"
-												rows="3">
+												value="#{p.descripcion}" immediate="true" cols="32" rows="3">
 											</h:inputTextarea>
 											<div class="modal-footer">
 												<h:messages class="mensajesError" />
 												<h:commandButton id="enviar" value="Editar petición"
 													class="btn btn-primary"
-													action="#{peticionesBean.editarPeticion(p)}" />
+													action="#{peticionesBean.editarPeticion(p)}"
+													immediate="true" />
 											</div>
 										</div>
 									</h:form>

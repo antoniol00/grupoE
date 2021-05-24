@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -38,7 +37,7 @@ public class Alumno implements Serializable {
 	@Column(length = 5)
 	private Integer codigo_postal;
 
-	@OneToMany(mappedBy = "alumno", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "alumno", cascade = CascadeType.REMOVE)
 	private List<Expediente> expedientes;
 
 	@OneToMany(mappedBy = "alumno", cascade = CascadeType.REMOVE)

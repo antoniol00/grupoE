@@ -224,7 +224,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						o.setOfertada(as.getOfertada());
 						o.setNombre(as.getNombre());
 						o.setTitulacion(as.getTitulacion());
-						em.persist(o);
+						em.merge(o);
 					}
 				}
 			}

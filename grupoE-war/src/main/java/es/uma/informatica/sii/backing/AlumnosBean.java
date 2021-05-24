@@ -18,6 +18,7 @@ import es.uma.informatica.sii.entities.Alumno;
 
 @Named
 @RequestScoped
+@SuppressWarnings("unused")
 public class AlumnosBean {
 	@EJB
 	private GestionAlumnos al = new AlumnosImpl();
@@ -29,6 +30,7 @@ public class AlumnosBean {
 	private String containerID;
 	private String prevID;
 	private int id;
+	private String mensaje;
 
 	public AlumnosBean() {
 		alum = new Alumno();
@@ -68,6 +70,14 @@ public class AlumnosBean {
 		return "containerID" + id;
 	}
 
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
 	public String upload() throws IOException, SecretariaIOException, SecretariaException {
 
 		fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -80,6 +90,8 @@ public class AlumnosBean {
 		File file = new File(ruta);
 		file.delete();
 
+		mensaje = "Imporación correcta";
+
 		return null;
 	}
 
@@ -87,6 +99,7 @@ public class AlumnosBean {
 		for (Alumno a : al.obtenerListaAlumnos()) {
 			al.borraAlumno(a);
 		}
+		mensaje = "Borrado correcto";
 		return null;
 	}
 }

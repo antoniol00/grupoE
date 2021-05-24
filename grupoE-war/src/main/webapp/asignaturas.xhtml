@@ -52,16 +52,23 @@
 	</header>
 
 	<div class="welcome-area" id="text">
-		<div class="uploadFile">
-			<h:form enctype="multipart/form-data">
+		<div>
+			<h:form class="uploadFile" enctype="multipart/form-data">
 				<h:inputFile id="file-id" value="#{asignaturasBean.part}"
 					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
-				<h:commandButton value="Upload" action="#{asignaturasBean.upload}"
-					class="btn btn-primary" id="upload" />
+				<h:commandButton value="Cargar datos"
+					action="#{asignaturasBean.upload}" class="btn btn-primary"
+					id="upload" />
+
+				<h:commandButton id="borrarTodo" value="Vaciar datos"
+					class="btn btn-danger" action="#{asignaturasBean.vaciarDatos}"
+					onclick="return compruebaVaciadoAsignaturas()" />
+				<h:outputText class="mensajeSubida"
+					value="#{asignaturasBean.mensaje}" />
 			</h:form>
 		</div>
 		<div class="titulo">
-			<h2>Listado de alumnos</h2>
+			<h2>Listado de asignaturas</h2>
 		</div>
 
 		<div class="scrolltabla">
@@ -81,37 +88,71 @@
 					<h:outputText id="nombre" value="#{asig.nombre}"></h:outputText>
 				</h:column>
 				<h:column>
-					<f:facet name="header">Curso</f:facet>
-					<h:outputText id="curso" value="#{asig.curso}"></h:outputText>
-				</h:column>
-				<h:column>
 					<f:facet name="header">Cuatrimestre</f:facet>
 					<h:outputText id="Cuatrimestre" value="#{asig.cuatrimestre}"></h:outputText>
 				</h:column>
 				<h:column>
-					<button type="button" class="btn btn-info" data-toggle="modal"
-						data-target="#creationModal">+</button>
+					<h:form>
+						<h:commandButton id="eliminar" value="X" class="btn btn-danger"
+							action="#{asignaturasBean.eliminarAsignatura(asig)}"
+							onclick="return compruebaBorradoPeticion()" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#{asignaturasBean.containerID}">
+						<h:graphicImage value="#{resource['images:gear.png']}" />
+					</button>
 
-					<div class="modal fade" id="creationModal" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalLabel"
+					<div class="modal fade" id="#{asignaturasBean.prevID}"
+						tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">
-										Información de la asignatura
-										<h:outputText id="idAsinatura" value="#{asig.referencia}"></h:outputText>
+										Edci&oacute;n de asignatura
+										<h:outputText value="#{asig.nombre}" />
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body"></div>
+								<h:form id="user-form">
+									<div class="modal-body formulario">
+
+										<h:outputLabel for="teoricos">Créditos teóricos</h:outputLabel>
+										<h:inputText class="form-control" id="teoricos"
+											value="#{asignaturasBean.asig.creditos_teoricos}" />
+										<small id="teoricosHelp" class="form-text text-muted">Créditos
+											de la parte teórica de la asignatura</small> <br /> <br />
+
+										<h:outputLabel for="practicos">Créditos prácticos</h:outputLabel>
+										<h:inputText class="form-control" id="practicos"
+											value="#{asignaturasBean.asig.creditos_practicos}" />
+										<small id="practicosHelp" class="form-text text-muted">Créditos
+											de la parte práctica de la asignatura</small> <br /> <br />
+
+										<h:outputLabel for="idiomas">Idiomas</h:outputLabel>
+										<h:inputText class="form-control" id="idiomas"
+											value="#{asignaturasBean.asig.idiomas}" />
+										<small id="idiomasHelp" class="form-text text-muted">Idiomas
+											y grupos en los que se imparte</small> <br /> <br />
+
+										<div class="modal-footer">
+											<h:messages class="mensajesError" />
+											<h:commandButton id="enviar" value="Editar asignatura"
+												class="btn btn-primary"
+												action="#{asignaturasBean.editarAsignatura(asig)}" />
+										</div>
+									</div>
+								</h:form>
 							</div>
 						</div>
 					</div>
 				</h:column>
+
 			</h:dataTable>
 		</div>
 	</div>

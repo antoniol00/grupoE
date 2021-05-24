@@ -3,12 +3,11 @@ package es.uma.informatica.sii.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -18,7 +17,6 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @IdClass(AsignaturaPK.class)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Asignatura implements Serializable {
 
 	@Column(length = 5)
@@ -42,13 +40,13 @@ public class Asignatura implements Serializable {
 	@ManyToOne
 	private Titulacion titulacion;
 
-	@OneToMany(mappedBy = "asignatura")
+	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE)
 	private List<Clase> clases_asignadas;
 
-	@OneToMany(mappedBy = "asignatura")
+	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE)
 	private List<Asigna_grupos> asign_grupos;
 
-	@OneToMany(mappedBy = "asignatura")
+	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE)
 	private List<Grupos_asig> grupos;
 
 	private static final long serialVersionUID = 1L;

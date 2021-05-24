@@ -14,6 +14,8 @@
 		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
 		crossorigin="anonymous" />
 
+	<script src="resources/js/functions.js" />
+
 	<title>Alumnos</title>
 </h:head>
 
@@ -50,17 +52,17 @@
 	</div>
 	</header>
 	<div class="welcome-area" id="text">
-		<div class="uploadFile">
-			<h:form enctype="multipart/form-data">
+		<div>
+			<h:form class="uploadFile" enctype="multipart/form-data">
 				<h:inputFile id="file-id" value="#{alumnosBean.part}"
 					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
-				<h:commandButton value="Upload" action="#{alumnosBean.upload}"
+				<h:commandButton value="Cargar datos" action="#{alumnosBean.upload}"
 					class="btn btn-primary" id="upload" />
-			</h:form>
-			<h:form>
+
 				<h:commandButton id="borrarTodo" value="Vaciar datos"
 					class="btn btn-danger" action="#{alumnosBean.vaciarDatos}"
-					onclick="return compruebaVaciado()" />
+					onclick="return compruebaVaciadoAlumnos()" />
+				<h:outputText class="mensajeSubida" value="#{alumnosBean.mensaje}" />
 			</h:form>
 		</div>
 		<div class="titulo">
@@ -126,25 +128,7 @@
 									</strong> <h:outputText id="localidad_notificacionCompleto"
 											value="#{alum.localidad_notificacion}" /> </label><br /> <label><strong>CP
 									</strong> <h:outputText id="codigo_postalCompleto"
-											value="#{alum.codigo_postal}" /> </label><br />
-
-									<h:dataTable value="#{alum.expedientes}" var="exp"
-										styleClass="formatoTabla" headerClass="formatoHeader"
-										rowClasses="formatoFilaImpar,formatoFilaPar">
-										<h:column>
-											<f:facet name="header">Titulacion</f:facet>
-											<h:outputText id="titulacion"
-												value="#{exp.titulacion.nombre}"></h:outputText>
-										</h:column>
-										<h:column>
-											<f:facet name="header">Numero expediente</f:facet>
-											<h:outputText id="numero_expediente" value="#{exp.numero}"></h:outputText>
-										</h:column>
-										<h:column>
-											<f:facet name="header">Nota media</f:facet>
-											<h:outputText id="nota_media" value="#{exp.nota_media}"></h:outputText>
-										</h:column>
-									</h:dataTable>
+											value="#{alum.codigo_postal}" /> </label>
 
 								</div>
 							</div>

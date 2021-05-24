@@ -16,6 +16,7 @@ import es.uma.informatica.sii.entities.Peticion;
 
 @Named
 @RequestScoped
+@SuppressWarnings("unused")
 public class PeticionesBean {
 	@EJB
 	private GestionPeticiones pet = new PeticionesImpl();
@@ -53,11 +54,8 @@ public class PeticionesBean {
 	}
 
 	public String editarPeticion(Peticion peticion) throws SecretariaException {
-		p.setDate(peticion.getDate());
-		p.setAlumno(peticion.getAlumno());
-		pet.editaIncidencia(peticion.getDate(), peticion.getAlumno().getDni(), p);
-		p = new Peticion();
-		return null;
+		throw new RuntimeException(peticion.toString());
+
 	}
 
 	public String getAsignarDNI() {

@@ -574,11 +574,13 @@ h3 {
 
 .uploadFile {
 	background-color: gray;
-	margin-left: 53em;
-	width: 31em; /* or whatever width you want. */
+	width: 30em; /* or whatever width you want. */
 	max-width: 35em; /* or whatever width you want. */
-	display: inline-block;
-	text-align: center;
+	text-align: left;
+	position:relative;
+	margin:0 0 0 65%;
+	padding: 5px 5px 5px 5px;
+	border:3px solid white;
 }
 
 .text-center strong {
@@ -588,6 +590,12 @@ h3 {
 #editarElem {
 	background-image: url(resources/images/gear.png);
 	background-repeat: no-repeat;
+}
+
+.mensajeSubida {
+	color: red;
+	font-size: 20px;
+	padding-left:20px;
 }
 /*
 ---------------------------------------------
@@ -601,7 +609,6 @@ Tabla
 	border-collapse: collapse;
 	width: 93%;
 	padding-top: 10px;
-	border-radius: 6px;
 }
 
 .formatoHeader {
