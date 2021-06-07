@@ -1,0 +1,2493 @@
+{
+  "id": "9e4185d5-05e1-4a06-93b4-d624f8462388",
+  "version": "2.0",
+  "name": "grupoE",
+  "url": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+  "tests": [{
+    "id": "aed2bbbd-1d91-4e9c-b95a-a29ddacdbb7b",
+    "name": "testDiseñoInicialPagina",
+    "commands": [{
+      "id": "4bda525b-4063-4903-8a60-33c8fb3cab5a",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e7ad3c4-1644-4823-8ac9-574df33e269e",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=titulo_principal",
+      "targets": [
+        ["id=titulo_principal", "id"],
+        ["css=#titulo_principal", "css:finder"],
+        ["xpath=//h2[@id='titulo_principal']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Listado de peticiones')]", "xpath:innerText"]
+      ],
+      "value": "Listado de peticiones"
+    }, {
+      "id": "3ac4042c-37c1-428f-be18-17218521fdc9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(1)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='text']/div/div[2]/table/thead/tr/th", "xpath:idRelative"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'DNI')]", "xpath:innerText"]
+      ],
+      "value": "DNI"
+    }, {
+      "id": "b6eee89d-6429-42b8-b5ca-abff7c4ffe2b",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(2)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='text']/div/div[2]/table/thead/tr/th[2]", "xpath:idRelative"],
+        ["xpath=//th[2]", "xpath:position"],
+        ["xpath=//th[contains(.,'Fecha')]", "xpath:innerText"]
+      ],
+      "value": "Fecha"
+    }, {
+      "id": "9babc7fb-f11c-4297-8c69-37f8d893616f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(3)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='text']/div/div[2]/table/thead/tr/th[3]", "xpath:idRelative"],
+        ["xpath=//th[3]", "xpath:position"],
+        ["xpath=//th[contains(.,'Tipo')]", "xpath:innerText"]
+      ],
+      "value": "Tipo"
+    }, {
+      "id": "ba5be3c5-8550-4fb0-9805-477ffd332921",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(4)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='text']/div/div[2]/table/thead/tr/th[4]", "xpath:idRelative"],
+        ["xpath=//th[4]", "xpath:position"],
+        ["xpath=//th[contains(.,'Descripción')]", "xpath:innerText"]
+      ],
+      "value": "Descripción"
+    }, {
+      "id": "c608f297-5b12-4e4d-8bd5-c5f0734e5706",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "514768d4-a1d3-4e54-ae6e-3244848a60b9",
+    "name": "testCreacionPeticionCorrecta",
+    "commands": [{
+      "id": "ae70774e-235b-4d3e-9745-8090dc8acf62",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "34cb5c3d-5187-4f81-ae07-64dd8442c54c",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce15f926-db26-41c3-9916-4a813da22f7b",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "c56186e0-cbb6-491c-86c9-db20cefb33c8",
+      "comment": "",
+      "command": "select",
+      "target": "id=user-form:tipo",
+      "targets": [],
+      "value": "label=Cambio idioma"
+    }, {
+      "id": "4a3a7dc3-97ac-4bee-9916-ab61fe93256b",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:desc",
+      "targets": [
+        ["id=user-form:desc", "id"],
+        ["name=user-form:desc", "name"],
+        ["css=#user-form\\3A desc", "css:finder"],
+        ["xpath=//textarea[@id='user-form:desc']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "nuevo idioma"
+    }, {
+      "id": "4adfcb69-3fb4-4148-950e-c51b412c8e30",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "01177a76-5d29-4c20-b832-7a459ed82067",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Peticiones",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "047f8801-5281-4ed3-8da7-7c6598d91fd7",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:alumno",
+      "targets": [
+        ["id=j_idt30:0:alumno", "id"],
+        ["css=#j_idt30\\3A 0\\3A alumno", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:alumno']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'00128979G')]", "xpath:innerText"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "89283d9c-f6ec-4cc4-bf0b-7e145d501bc8",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:tipo",
+      "targets": [
+        ["id=j_idt30:0:tipo", "id"],
+        ["css=#j_idt30\\3A 0\\3Atipo", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:tipo']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[3]/span", "xpath:idRelative"],
+        ["xpath=//td[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Cambio idioma')]", "xpath:innerText"]
+      ],
+      "value": "Cambio idioma"
+    }, {
+      "id": "6e514f28-575a-4508-b722-b4f3d8d0f4ff",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:descripcion",
+      "targets": [
+        ["id=j_idt30:0:descripcion", "id"],
+        ["css=#j_idt30\\3A 0\\3A descripcion", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:descripcion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'nuevo idioma')]", "xpath:innerText"]
+      ],
+      "value": "nuevo idioma"
+    }, {
+      "id": "e76cc6e3-49a3-4922-a79a-1d1fce3006f2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt30:0:j_idt40:eliminar",
+      "targets": [
+        ["id=j_idt30:0:j_idt40:eliminar", "id"],
+        ["name=j_idt30:0:j_idt40:eliminar", "name"],
+        ["css=#j_idt30\\3A 0\\3Aj_idt40\\3A eliminar", "css:finder"],
+        ["xpath=//input[@id='j_idt30:0:j_idt40:eliminar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt30:0:j_idt40']/input[2]", "xpath:idRelative"],
+        ["xpath=//td[5]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1d59d6c-3ef2-4f3f-acb8-e84cae5ab275",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=img",
+      "targets": [
+        ["css=img", "css:finder"],
+        ["xpath=//img[@alt='Editar']", "xpath:img"],
+        ["xpath=//button[@id='boton_edicion']/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e49b8790-36fa-49d0-85f8-a9aece3ffbed",
+    "name": "testCrearPeticionAlumnoNoExistente",
+    "commands": [{
+      "id": "17d49c80-454c-431d-8dee-873ec6dcac36",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c86231e1-f700-4a97-9483-be2d44b68906",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b28b3b34-4730-4fb4-a26a-c936abd83d3b",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "xxx"
+    }, {
+      "id": "7d155724-bb0d-4689-a6b6-b3876748a914",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "12d542f8-7148-4f3f-b2f6-73a88d0b26de",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Peticiones",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "aabe687c-da27-4d7e-9fe5-1c4300fc8960",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=mensaje_error",
+      "targets": [
+        ["id=mensaje_error", "id"],
+        ["css=#mensaje_error", "css:finder"],
+        ["xpath=//span[@id='mensaje_error']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'ERROR: peticion para alumno xxx no se ha podido crear')]", "xpath:innerText"]
+      ],
+      "value": "ERROR: peticion para alumno xxx no se ha podido crear"
+    }]
+  }, {
+    "id": "df071f52-e81c-4c08-b8fb-a8977bf8126b",
+    "name": "testModificarPeticionCorrectamente",
+    "commands": [{
+      "id": "cdfa67eb-df7d-4d8d-b9d9-3473ad222180",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d2ecd3ed-81bd-4ef1-a830-be1f6ed2fb4d",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2056581c-4a88-44e6-a92f-e75ef17224b7",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "73f3ec08-36a5-4773-9030-cce3afa525d6",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:desc",
+      "targets": [
+        ["id=user-form:desc", "id"],
+        ["name=user-form:desc", "name"],
+        ["css=#user-form\\3A desc", "css:finder"],
+        ["xpath=//textarea[@id='user-form:desc']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "grupo1"
+    }, {
+      "id": "eb016e4e-45d5-4d96-8608-e95d8bc7c3e9",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a0ea9fba-ee44-4322-a571-61970f0fa1ee",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=boton_edicion",
+      "targets": [
+        ["id=boton_edicion", "id"],
+        ["css=#boton_edicion", "css:finder"],
+        ["xpath=//button[@id='boton_edicion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[6]/button", "xpath:idRelative"],
+        ["xpath=//td[6]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5925912b-8bf8-4942-84eb-95795e480159",
+      "comment": "",
+      "command": "click",
+      "target": "id=boton_edicion",
+      "targets": [
+        ["id=boton_edicion", "id"],
+        ["css=#boton_edicion", "css:finder"],
+        ["xpath=//button[@id='boton_edicion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[6]/button", "xpath:idRelative"],
+        ["xpath=//td[6]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b41cc52f-f435-4a05-8aa6-35af66aa584d",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt30:0:user-form:tipo",
+      "targets": [],
+      "value": "label=Cambio 2º semestre"
+    }, {
+      "id": "4dfc2eaa-5243-4af3-a0ac-011343a38a0c",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt30:0:user-form:desc",
+      "targets": [
+        ["id=j_idt30:0:user-form:desc", "id"],
+        ["name=j_idt30:0:user-form:desc", "name"],
+        ["css=#j_idt30\\3A 0\\3Auser-form\\3A desc", "css:finder"],
+        ["xpath=//textarea[@id='j_idt30:0:user-form:desc']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt30:0:user-form']/div/textarea", "xpath:idRelative"],
+        ["xpath=//td[6]/div/div/div/form/div/textarea", "xpath:position"]
+      ],
+      "value": "grupo 2 semestre"
+    }, {
+      "id": "d222d7d1-e417-460c-8575-fd1bc6abd2e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt30:0:user-form:enviar",
+      "targets": [
+        ["id=j_idt30:0:user-form:enviar", "id"],
+        ["name=j_idt30:0:user-form:enviar", "name"],
+        ["css=#j_idt30\\3A 0\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt30:0:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt30:0:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8fd09996-610b-44a4-a7ef-abbf669e5244",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Peticiones",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "71994f39-4321-44e2-9f33-9ec677d762f8",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:alumno",
+      "targets": [
+        ["id=j_idt30:0:alumno", "id"],
+        ["css=#j_idt30\\3A 0\\3A alumno", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:alumno']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'00128979G')]", "xpath:innerText"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "553997a8-259c-4c63-aece-bbcfc7997993",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:tipo",
+      "targets": [
+        ["id=j_idt30:0:tipo", "id"],
+        ["css=#j_idt30\\3A 0\\3Atipo", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:tipo']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[3]/span", "xpath:idRelative"],
+        ["xpath=//td[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Cambio 2º semestre')]", "xpath:innerText"]
+      ],
+      "value": "Cambio 2º semestre"
+    }, {
+      "id": "50f93c0a-72d0-4522-81c8-e0e05d0698e8",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:descripcion",
+      "targets": [
+        ["id=j_idt30:0:descripcion", "id"],
+        ["css=#j_idt30\\3A 0\\3A descripcion", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:descripcion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'grupo 2 semestre')]", "xpath:innerText"]
+      ],
+      "value": "grupo 2 semestre"
+    }]
+  }, {
+    "id": "36450163-5dba-4d8d-95cc-467fae15f809",
+    "name": "testEliminarPeticion",
+    "commands": [{
+      "id": "027ff368-222d-478c-8f87-4b2861d1e66d",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c432935b-57d1-45a8-84c8-a48b2db1d640",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf999419-0fd6-42a9-a495-0f397b8a1ef7",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "ba90e898-76b7-4fb4-9e2a-26708234d5b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9fd1fcad-3c6e-4a9a-864b-a0edc6a5dde6",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "37831bc2-a6e1-440d-848b-e9cd681f5346",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt30:0:j_idt40:eliminar",
+      "targets": [
+        ["id=j_idt30:0:j_idt40:eliminar", "id"],
+        ["name=j_idt30:0:j_idt40:eliminar", "name"],
+        ["css=#j_idt30\\3A 0\\3Aj_idt40\\3A eliminar", "css:finder"],
+        ["xpath=//input[@id='j_idt30:0:j_idt40:eliminar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt30:0:j_idt40']/input[2]", "xpath:idRelative"],
+        ["xpath=//td[5]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b0b3c845-81ae-415c-96c2-21d208e19e63",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "Desea borrar esta peticion?",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d4483a5-1fcc-4f0e-892a-0f963531f5d7",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "89c8d9d6-220e-45a2-803f-935d3e2bd007",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Peticiones",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "ff97107d-0de5-4a21-8fec-0017a47323a3",
+    "name": "testCrearPeticionYaExistente",
+    "commands": [{
+      "id": "9bde6db5-a631-4f09-8d5e-2fb28ea2d05b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/peticiones.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9adbe920-a775-4a01-a6ad-553af306845a",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e9965cbd-bc48-41d4-bf5f-0a08ac47c05c",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "fb7a99d9-29c5-4b7d-bb86-69338a15961e",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2fed7919-3a4b-4478-98ac-7e2a6c7affa1",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:alumno",
+      "targets": [
+        ["id=j_idt30:0:alumno", "id"],
+        ["css=#j_idt30\\3A 0\\3A alumno", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:alumno']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'00128979G')]", "xpath:innerText"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "8ae5a147-2837-4157-8dd4-d24b9c9d2b8a",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt30:0:tipo",
+      "targets": [
+        ["id=j_idt30:0:tipo", "id"],
+        ["css=#j_idt30\\3A 0\\3Atipo", "css:finder"],
+        ["xpath=//span[@id='j_idt30:0:tipo']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/div[2]/table/tbody/tr/td[3]/span", "xpath:idRelative"],
+        ["xpath=//td[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Cambio de grupo')]", "xpath:innerText"]
+      ],
+      "value": "Cambio de grupo"
+    }, {
+      "id": "49c1f08a-1d81-4288-ac17-91d2bb359183",
+      "comment": "",
+      "command": "click",
+      "target": "id=creacion_peticion",
+      "targets": [
+        ["id=creacion_peticion", "id"],
+        ["css=#creacion_peticion", "css:finder"],
+        ["xpath=//button[@id='creacion_peticion']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eadba310-1df7-404a-b4f7-85d47eb48955",
+      "comment": "",
+      "command": "type",
+      "target": "id=user-form:dni",
+      "targets": [
+        ["id=user-form:dni", "id"],
+        ["name=user-form:dni", "name"],
+        ["css=#user-form\\3A dni", "css:finder"],
+        ["xpath=//input[@id='user-form:dni']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "ab7df013-dbb9-48b0-b043-f1f139c854a8",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-form:enviar",
+      "targets": [
+        ["id=user-form:enviar", "id"],
+        ["name=user-form:enviar", "name"],
+        ["css=#user-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='user-form']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef0bf6b0-f919-4d87-a059-fafe9fb0c4d1",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Peticiones",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f4929227-4608-446a-86a0-3c36cfb71c1d",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=mensaje_error",
+      "targets": [
+        ["id=mensaje_error", "id"],
+        ["css=#mensaje_error", "css:finder"],
+        ["xpath=//span[@id='mensaje_error']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'ERROR: peticion para alumno 00128979G no se ha podido crear')]", "xpath:innerText"]
+      ],
+      "value": "ERROR: peticion para alumno 00128979G no se ha podido crear"
+    }]
+  }, {
+    "id": "3927af65-a2fe-41ff-a1e5-944d66d4ed72",
+    "name": "testDiseñoInicialAlumnos",
+    "commands": [{
+      "id": "f276861d-cc1c-4b95-888f-fb2b522a527c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/alumnos.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bd98a25b-22cc-424d-8b28-62d84fc0c49b",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Alumnos",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eaf67ba0-cc4d-48ec-bb92-6082654c790a",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=titulo_listado",
+      "targets": [
+        ["id=titulo_listado", "id"],
+        ["css=#titulo_listado", "css:finder"],
+        ["xpath=//h2[@id='titulo_listado']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[2]/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Listado de alumnos')]", "xpath:innerText"]
+      ],
+      "value": "Listado de alumnos"
+    }, {
+      "id": "fdb03136-7ffa-45c9-9013-1e96f6fbc7d9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(1)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th", "xpath:idRelative"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'DNI')]", "xpath:innerText"]
+      ],
+      "value": "DNI"
+    }, {
+      "id": "6b4f6112-324a-4da7-a197-de99d8738925",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(2)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[2]", "xpath:idRelative"],
+        ["xpath=//th[2]", "xpath:position"],
+        ["xpath=//th[contains(.,'Nombre')]", "xpath:innerText"]
+      ],
+      "value": "Nombre"
+    }, {
+      "id": "3acb5d9d-1ff2-4137-b149-00648983bc7f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(3)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[3]", "xpath:idRelative"],
+        ["xpath=//th[3]", "xpath:position"],
+        ["xpath=//th[contains(.,'Email inst.')]", "xpath:innerText"]
+      ],
+      "value": "Email inst."
+    }, {
+      "id": "23cd4627-dcdd-4fac-b0ad-a9685ec4d96a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(4)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[4]", "xpath:idRelative"],
+        ["xpath=//th[4]", "xpath:position"],
+        ["xpath=//th[contains(.,'Telefono Movil')]", "xpath:innerText"]
+      ],
+      "value": "Telefono Movil"
+    }, {
+      "id": "155f1f63-7648-400f-b169-2105500d67b2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:file-id",
+      "targets": [
+        ["id=j_idt16:file-id", "id"],
+        ["name=j_idt16:file-id", "name"],
+        ["css=#j_idt16\\3A file-id", "css:finder"],
+        ["xpath=//input[@id='j_idt16:file-id']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[2]", "xpath:idRelative"],
+        ["xpath=//body/div/div/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "151d9019-5d70-42aa-a504-0039d3e12f9d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0602b4e6-5019-4f47-ba4c-d1071ceecdf2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:borrarTodo",
+      "targets": [
+        ["id=j_idt16:borrarTodo", "id"],
+        ["name=j_idt16:borrarTodo", "name"],
+        ["css=#j_idt16\\3A borrarTodo", "css:finder"],
+        ["xpath=//input[@id='j_idt16:borrarTodo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1b9b2610-5a04-40a9-881c-018bd049afa7",
+    "name": "testImportarAlumnosFicheroErroneo",
+    "commands": [{
+      "id": "c19c6cf1-bfc6-409c-b9f5-0718876009b7",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/alumnos.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "04c8c701-a80a-44f1-97aa-082af7a85ce7",
+      "comment": "",
+      "command": "type",
+      "target": "css=#j_idt16\\3A file-id",
+      "targets": [
+        ["id=j_idt16:file-id", "id"],
+        ["name=j_idt16:file-id", "name"],
+        ["css=#j_idt16\\3A file-id", "css:finder"],
+        ["xpath=//input[@id='j_idt16:file-id']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[2]", "xpath:idRelative"],
+        ["xpath=//body/div/div/form/input[2]", "xpath:position"]
+      ],
+      "value": "/home/alumno/git/grupoE/grupoE-ejb/DATOS/asignaturas.xlsx"
+    }, {
+      "id": "1d188a55-8da3-4237-85ae-9d0c70f5269b",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "07a3b562-6ef0-449c-934b-2029415c939b",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3fa45d5-19ed-4714-9dbc-7cb44fc3fb69",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "La subida de archivos debe hacerse desde alumnos.csv. Se cargaran los datos de ALUMNOS, EXPEDIENTES Y MATRICULAS. Confirmar?",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8e66b366-e5a8-474c-b8c9-fe0826be9cd7",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bb28acaf-06b1-4bc6-b10a-4c85be97003a",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Alumnos",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6d4ecd2e-a510-4aa7-9db6-8c3fe4fb1ea4",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt16:mensaje_subida",
+      "targets": [
+        ["id=j_idt16:mensaje_subida", "id"],
+        ["css=#j_idt16\\3Amensaje_subida", "css:finder"],
+        ["xpath=//span[@id='j_idt16:mensaje_subida']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Error de importación. Sin cambios')]", "xpath:innerText"]
+      ],
+      "value": "Error de importación. Sin cambios"
+    }]
+  }, {
+    "id": "e78a55ff-5a64-48e5-820a-f90f77ad875a",
+    "name": "testVaciarDatosAlumnos",
+    "commands": [{
+      "id": "aa4c2456-1c20-410d-9da3-6e76ffcd1552",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/alumnos.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "969bafd9-659b-4324-8571-3233679c3b6f",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bfd88538-1672-460d-afb6-8999e3cabb0d",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:borrarTodo",
+      "targets": [
+        ["id=j_idt16:borrarTodo", "id"],
+        ["name=j_idt16:borrarTodo", "name"],
+        ["css=#j_idt16\\3A borrarTodo", "css:finder"],
+        ["xpath=//input[@id='j_idt16:borrarTodo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "07dee654-7769-4615-bed3-b1e1514636f5",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "Desea vaciar datos de ALUMNOS? Recuerde que todas las peticiones y expedientes relacionadas tambien seran eliminadas",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ed22b83-1b24-4b2d-a8b0-5c215a1ad060",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "157acc76-bc8d-4fd6-8746-7a72e5d673e1",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Alumnos",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "37ef1193-8b01-4a3e-8929-03e5baa55437",
+    "name": "testImportarAlumnosCorrectamente",
+    "commands": [{
+      "id": "ef10fe5e-273e-4d47-ab1d-79518f6a2f33",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/alumnos.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b57edf12-5493-48c3-b347-e0c9f9dbf51b",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt16:file-id",
+      "targets": [
+        ["id=j_idt16:file-id", "id"],
+        ["name=j_idt16:file-id", "name"],
+        ["css=#j_idt16\\3A file-id", "css:finder"],
+        ["xpath=//input[@id='j_idt16:file-id']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[2]", "xpath:idRelative"],
+        ["xpath=//body/div/div/form/input[2]", "xpath:position"]
+      ],
+      "value": "/home/alumno/git/grupoE/grupoE-ejb/DATOS/alumnos.csv"
+    }, {
+      "id": "c4c53417-00a7-4250-9327-5eaafd5ca8a8",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e7c3fa7-67c4-4354-baa4-53dfa7cf0313",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c059ad7-abb3-433c-a10d-da6f59d24ada",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "La subida de archivos debe hacerse desde alumnos.csv. Se cargaran los datos de ALUMNOS, EXPEDIENTES Y MATRICULAS. Confirmar?",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "12eec648-7c86-44f7-ac36-45bce09d0212",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "563e4ba2-0dea-4f0b-9719-96689e42bcc1",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt18:0:dni",
+      "targets": [
+        ["id=j_idt18:0:dni", "id"],
+        ["css=#j_idt18\\3A 0\\3A dni", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:dni']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'00128979G')]", "xpath:innerText"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "0d433c70-fca9-4f16-b3a0-0a80cfb713f1",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Alumnos",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "562b68a4-907a-4536-86f8-60a1ac35b433",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt16:mensaje_subida",
+      "targets": [
+        ["id=j_idt16:mensaje_subida", "id"],
+        ["css=#j_idt16\\3Amensaje_subida", "css:finder"],
+        ["xpath=//span[@id='j_idt16:mensaje_subida']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Importación correcta')]", "xpath:innerText"]
+      ],
+      "value": "Importación correcta"
+    }, {
+      "id": "6fd613e1-f81d-4973-8a00-3cdcf3ed5e22",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:0:dni",
+      "targets": [
+        ["id=j_idt18:0:dni", "id"],
+        ["css=#j_idt18\\3A 0\\3A dni", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:dni']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'00128979G')]", "xpath:innerText"]
+      ],
+      "value": "00128979G"
+    }, {
+      "id": "5ddcc585-b056-4306-865d-034b9e7acbe9",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:0:nombre",
+      "targets": [
+        ["id=j_idt18:0:nombre", "id"],
+        ["css=#j_idt18\\3A 0\\3Anombre", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:nombre']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[2]/span", "xpath:idRelative"],
+        ["xpath=//td[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Andre Guillen Espinoza')]", "xpath:innerText"]
+      ],
+      "value": "Andre Guillen Espinoza"
+    }, {
+      "id": "c120240a-e475-440d-9f6d-8e1a996646aa",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:0:email1",
+      "targets": [
+        ["id=j_idt18:0:email1", "id"],
+        ["css=#j_idt18\\3A 0\\3A email1", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:email1']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[3]/span", "xpath:idRelative"],
+        ["xpath=//td[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'06105600113@uma.es')]", "xpath:innerText"]
+      ],
+      "value": "06105600113@uma.es"
+    }, {
+      "id": "1bc3f7ad-ca10-4a65-9a8a-fa832550355f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:0:telef_mov",
+      "targets": [
+        ["id=j_idt18:0:telef_mov", "id"],
+        ["css=#j_idt18\\3A 0\\3Atelef_mov", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:telef_mov']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'678405943')]", "xpath:innerText"]
+      ],
+      "value": "678405943"
+    }, {
+      "id": "dc94878a-1792-461e-b7eb-25ec23b59b80",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=mas_info",
+      "targets": [
+        ["id=mas_info", "id"],
+        ["css=.formatoFilaImpar:nth-child(1) #mas_info", "css:finder"],
+        ["xpath=//button[@id='mas_info']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[5]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "66c16e46-559f-4991-a5a8-75877254a61e",
+      "comment": "",
+      "command": "click",
+      "target": "id=mas_info",
+      "targets": [
+        ["id=mas_info", "id"],
+        ["css=.formatoFilaImpar:nth-child(1) #mas_info", "css:finder"],
+        ["xpath=//button[@id='mas_info']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[5]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e80bd5ca-3029-4911-978a-9bd8fe929122",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt18:0:dniCompleto",
+      "targets": [
+        ["id=j_idt18:0:dniCompleto", "id"],
+        ["css=#j_idt18\\3A 0\\3A dniCompleto", "css:finder"],
+        ["xpath=//span[@id='j_idt18:0:dniCompleto']", "xpath:attributes"],
+        ["xpath=//div[@id='containerID1']/div/div/div[2]/label/span", "xpath:idRelative"],
+        ["xpath=//label/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "228052c3-cf58-428b-a79c-b8057e672a7c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#containerID1 .close > span",
+      "targets": [
+        ["css=#containerID1 .close > span", "css:finder"],
+        ["xpath=//div[@id='containerID1']/div/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'×')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cddff85e-fb10-4107-b8f3-86412e0348d3",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=.scrolltabla",
+      "targets": [
+        ["css=.scrolltabla", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": "1158,459.015625"
+    }, {
+      "id": "bd122277-2793-432e-953f-4ffb10198bc6",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=.scrolltabla",
+      "targets": [
+        ["css=.scrolltabla", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": "1158,459.015625"
+    }, {
+      "id": "18126102-0061-477e-9361-e8a9f5c0d15d",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=.scrolltabla",
+      "targets": [
+        ["css=.scrolltabla", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": "1158,459.015625"
+    }, {
+      "id": "36823f80-95b7-46e8-9d8e-db1a904fb639",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:1507:dni",
+      "targets": [
+        ["id=j_idt18:1507:dni", "id"],
+        ["css=#j_idt18\\3A 1507\\3A dni", "css:finder"],
+        ["xpath=//span[@id='j_idt18:1507:dni']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[1508]/td/span", "xpath:idRelative"],
+        ["xpath=//tr[1508]/td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'99975279T')]", "xpath:innerText"]
+      ],
+      "value": "99975279T"
+    }]
+  }, {
+    "id": "a79d911f-48aa-4eb5-b809-dcfdd563fb0a",
+    "name": "testDiseñoInicialAsignaturas",
+    "commands": [{
+      "id": "0eea6b72-87f2-4e1a-8653-bbbb2d33fc73",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "51fa6a49-068c-4e5d-b1e9-c764ceffe4f2",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Asignaturas",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b58b341c-3d17-427b-be12-c7a5cbe52fe6",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=titulo_listado",
+      "targets": [
+        ["id=titulo_listado", "id"],
+        ["css=#titulo_listado", "css:finder"],
+        ["xpath=//h2[@id='titulo_listado']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[2]/h2", "xpath:idRelative"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Listado de asignaturas')]", "xpath:innerText"]
+      ],
+      "value": "Listado de asignaturas"
+    }, {
+      "id": "decb3888-52d3-4e3f-a8cf-5bbb16c6799c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt18:tipo",
+      "targets": [
+        ["id=j_idt18:tipo", "id"],
+        ["name=j_idt18:tipo", "name"],
+        ["css=#j_idt18\\3Atipo", "css:finder"],
+        ["xpath=//select[@id='j_idt18:tipo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt18']/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "533d8223-e465-4c7b-a87c-36aa44cf64ac",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt18:tipo",
+      "targets": [
+        ["id=j_idt18:tipo", "id"],
+        ["name=j_idt18:tipo", "name"],
+        ["css=#j_idt18\\3Atipo", "css:finder"],
+        ["xpath=//select[@id='j_idt18:tipo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt18']/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": " Ingeniería Informática (1041)\\n Ingeniería del Software (1042)\\n Ingeniería de Computadores (1043)\\n Ingeniería de la Salud (1056)\\n Doble Grado II+Matemáticas (1073)"
+    }, {
+      "id": "965945e7-1b34-4caf-adf4-ca45fcd52092",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:file-id",
+      "targets": [
+        ["id=j_idt16:file-id", "id"],
+        ["name=j_idt16:file-id", "name"],
+        ["css=#j_idt16\\3A file-id", "css:finder"],
+        ["xpath=//input[@id='j_idt16:file-id']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[2]", "xpath:idRelative"],
+        ["xpath=//body/div/div/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4fdcf6d-e32b-4eb4-b222-de3db5bbcbfa",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bbd3da28-36e1-4a2f-a7d3-b2090139735e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt16:borrarTodo",
+      "targets": [
+        ["id=j_idt16:borrarTodo", "id"],
+        ["name=j_idt16:borrarTodo", "name"],
+        ["css=#j_idt16\\3A borrarTodo", "css:finder"],
+        ["xpath=//input[@id='j_idt16:borrarTodo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92af9806-f319-47e8-b891-1de17ea00a25",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(1)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th", "xpath:idRelative"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'Referencia')]", "xpath:innerText"]
+      ],
+      "value": "Referencia"
+    }, {
+      "id": "ec46986d-29c6-47b8-8a04-22ffff2042a9",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(2)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[2]", "xpath:idRelative"],
+        ["xpath=//th[2]", "xpath:position"],
+        ["xpath=//th[contains(.,'Código')]", "xpath:innerText"]
+      ],
+      "value": "Código"
+    }, {
+      "id": "c42183ad-3692-4d55-aa99-fade031cab9e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(3)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[3]", "xpath:idRelative"],
+        ["xpath=//th[3]", "xpath:position"],
+        ["xpath=//th[contains(.,'Curso')]", "xpath:innerText"]
+      ],
+      "value": "Curso"
+    }, {
+      "id": "aaebe8ad-eeef-4af1-a72f-42337c4a5eef",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(4)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(4)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[4]", "xpath:idRelative"],
+        ["xpath=//th[4]", "xpath:position"],
+        ["xpath=//th[contains(.,'Nombre')]", "xpath:innerText"]
+      ],
+      "value": "Nombre"
+    }, {
+      "id": "0fe5698a-1265-42da-a6b2-ddc3bd34a542",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(5)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(5)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[5]", "xpath:idRelative"],
+        ["xpath=//th[5]", "xpath:position"],
+        ["xpath=//th[contains(.,'Cuatrimestre')]", "xpath:innerText"]
+      ],
+      "value": "Cuatrimestre"
+    }, {
+      "id": "896bb9e4-3ae5-4eb8-94c0-fd566f9df89f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(6)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(6)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[6]", "xpath:idRelative"],
+        ["xpath=//th[6]", "xpath:position"],
+        ["xpath=//th[contains(.,'C.T')]", "xpath:innerText"]
+      ],
+      "value": "C.T"
+    }, {
+      "id": "f7761257-c4a8-40f4-9480-a07747ef88cc",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(7)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(7)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[7]", "xpath:idRelative"],
+        ["xpath=//th[7]", "xpath:position"],
+        ["xpath=//th[contains(.,'C.P')]", "xpath:innerText"]
+      ],
+      "value": "C.P"
+    }, {
+      "id": "194b6755-e838-495b-9620-119820523441",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.formatoHeader:nth-child(8)",
+      "targets": [
+        ["css=.formatoHeader:nth-child(8)", "css:finder"],
+        ["xpath=//div[@id='text']/div[3]/table/thead/tr/th[8]", "xpath:idRelative"],
+        ["xpath=//th[8]", "xpath:position"],
+        ["xpath=//th[contains(.,'Grupos asignados')]", "xpath:innerText"]
+      ],
+      "value": "Grupos asignados"
+    }]
+  }, {
+    "id": "925cdcbd-da87-49b5-abab-a2dae9db8c3c",
+    "name": "testImportarAsignaturasFicheroErroneo",
+    "commands": [{
+      "id": "56fcd25b-ddf6-466a-b448-5b4cce496ee4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "26b7efec-107d-490d-a4fb-a03a22fc318c",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "88ab457c-688a-4c95-9236-ed779a26896f",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt16:mensaje_subida",
+      "targets": [
+        ["id=j_idt16:mensaje_subida", "id"],
+        ["css=#j_idt16\\3Amensaje_subida", "css:finder"],
+        ["xpath=//span[@id='j_idt16:mensaje_subida']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Error de importación. Sin cambios')]", "xpath:innerText"]
+      ],
+      "value": "Error de importación. Sin cambios"
+    }, {
+      "id": "a99d9886-a9d4-41fb-9673-3a8179fd2c60",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Asignaturas",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "b2e758cc-03ef-447f-9b8a-8b8ec3d8dbcb",
+    "name": "testImportarAsignaturasCorrectamente",
+    "commands": [{
+      "id": "e4e7602a-3917-44e6-8f81-76603a224fd7",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a08b71eb-13b2-478d-9d57-2ccb7584d752",
+      "comment": "",
+      "command": "type",
+      "target": "css=#j_idt16\\3A file-id",
+      "targets": [
+        ["id=j_idt16:file-id", "id"],
+        ["name=j_idt16:file-id", "name"],
+        ["css=#j_idt16\\3A file-id", "css:finder"],
+        ["xpath=//input[@id='j_idt16:file-id']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[2]", "xpath:idRelative"],
+        ["xpath=//body/div/div/form/input[2]", "xpath:position"]
+      ],
+      "value": "/home/alumno/git/grupoE/grupoE-ejb/DATOS/asignaturas.xlsx"
+    }, {
+      "id": "33deb551-0c30-46b6-a553-3599b1a35d15",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:upload",
+      "targets": [
+        ["id=j_idt16:upload", "id"],
+        ["name=j_idt16:upload", "name"],
+        ["css=#j_idt16\\3Aupload", "css:finder"],
+        ["xpath=//input[@id='j_idt16:upload']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3f4d0449-5b63-4df6-8ca2-918f7bfd3c3a",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt16:mensaje_subida",
+      "targets": [
+        ["id=j_idt16:mensaje_subida", "id"],
+        ["css=#j_idt16\\3Amensaje_subida", "css:finder"],
+        ["xpath=//span[@id='j_idt16:mensaje_subida']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Importación correcta')]", "xpath:innerText"]
+      ],
+      "value": "Importación correcta"
+    }, {
+      "id": "bb52e47d-2135-4887-a06c-b58603c49695",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'50658')]", "xpath:innerText"]
+      ],
+      "value": "50658"
+    }, {
+      "id": "73f83178-5c2e-4160-82e5-132d52f59daa",
+      "comment": "",
+      "command": "click",
+      "target": "id=editar_asignatura",
+      "targets": [
+        ["id=editar_asignatura", "id"],
+        ["css=.formatoFilaImpar:nth-child(1) #editar_asignatura", "css:finder"],
+        ["xpath=//button[@id='editar_asignatura']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[10]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b809527e-0c05-4cc8-ba6e-38c98891d3a8",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=titulo_edicion",
+      "targets": [
+        ["id=titulo_edicion", "id"],
+        ["css=#containerID1 #titulo_edicion", "css:finder"],
+        ["xpath=//h5[@id='titulo_edicion']", "xpath:attributes"],
+        ["xpath=//div[@id='containerID1']/div/div/div/h5", "xpath:idRelative"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "Edición de asignatura Cálculo para la Computación"
+    }, {
+      "id": "dfe8fe9d-8713-4439-9080-2199b75f5b84",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:nombre",
+      "targets": [
+        ["id=j_idt25:0:nombre", "id"],
+        ["css=#j_idt25\\3A 0\\3Anombre", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:nombre']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Cálculo para la Computación')]", "xpath:innerText"]
+      ],
+      "value": "Cálculo para la Computación"
+    }, {
+      "id": "52e57fbe-dd48-44c7-b904-b57b4c7b7c0d",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt25:0:j_idt43:eliminar",
+      "targets": [
+        ["id=j_idt25:0:j_idt43:eliminar", "id"],
+        ["name=j_idt25:0:j_idt43:eliminar", "name"],
+        ["css=#j_idt25\\3A 0\\3Aj_idt43\\3A eliminar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:0:j_idt43:eliminar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:0:j_idt43']/input[2]", "xpath:idRelative"],
+        ["xpath=//td[9]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f61b8538-1397-48b4-93a7-388523a541ca",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=editar_asignatura",
+      "targets": [
+        ["id=editar_asignatura", "id"],
+        ["css=.formatoFilaImpar:nth-child(1) #editar_asignatura", "css:finder"],
+        ["xpath=//button[@id='editar_asignatura']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[10]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eaf4d4fd-b680-4666-a8a6-dbe1c25dd085",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=j_idt25:81:referencia",
+      "targets": [
+        ["id=j_idt25:81:referencia", "id"],
+        ["css=#j_idt25\\3A 81\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:81:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[82]/td/span", "xpath:idRelative"],
+        ["xpath=//tr[82]/td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51045')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "9ef7f007-d467-482f-ae2b-8de9b1d2b7ee",
+    "name": "testFiltrosAsignaturasPorGrados",
+    "commands": [{
+      "id": "202ede9b-08eb-4636-b1a3-e9b39410675c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0c9fa367-6196-4495-9fdc-df391e2a9266",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'50658')]", "xpath:innerText"]
+      ],
+      "value": "50658"
+    }, {
+      "id": "503f737b-7597-4ca4-836e-d9862d086220",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Ingeniería del Software (1042)"
+    }, {
+      "id": "b88f33e5-4927-4e59-890c-b4ca3b07832e",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51138')]", "xpath:innerText"]
+      ],
+      "value": "51138"
+    }, {
+      "id": "11c489d6-9039-45dd-a828-6d4178f9fe02",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Ingeniería de Computadores (1043)"
+    }, {
+      "id": "7a17064d-d96c-407d-a06b-d7cde2117450",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51673')]", "xpath:innerText"]
+      ],
+      "value": "51673"
+    }, {
+      "id": "57551b13-20df-40a2-a3a6-6fc0e342664e",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Ingeniería de la Salud (1056)"
+    }, {
+      "id": "df970c64-2b66-42b7-8779-51ca926742f3",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'53008')]", "xpath:innerText"]
+      ],
+      "value": "53008"
+    }, {
+      "id": "64c4cc47-bcd3-451c-8492-5d5443e256c2",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Doble Grado II+Matemáticas (1073)"
+    }, {
+      "id": "b71c534f-2257-4a4c-b152-3e94c2432be9",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51487')]", "xpath:innerText"]
+      ],
+      "value": "51487"
+    }]
+  }, {
+    "id": "69c59743-a092-4763-8388-5e25c08dd7a1",
+    "name": "testModificarNingunDatoAsignatura",
+    "commands": [{
+      "id": "305a9cd4-5674-4242-b8ee-13cd82a14598",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eb618510-a9de-4b71-b2c0-cdcc0a231e0b",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:3:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[6]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[6]/span", "xpath:position"]
+      ],
+      "value": "6.0"
+    }, {
+      "id": "37aeaf97-8f6c-4be2-9431-b1abe19b48bb",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:3:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[7]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/span", "xpath:position"]
+      ],
+      "value": "0.0"
+    }, {
+      "id": "df89b72a-dcd1-42e0-94fc-48da8afd4304",
+      "comment": "",
+      "command": "click",
+      "target": "css=.formatoFilaPar:nth-child(4) #editar_asignatura",
+      "targets": [
+        ["css=.formatoFilaPar:nth-child(4) #editar_asignatura", "css:finder"],
+        ["xpath=(//button[@id='editar_asignatura'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[10]/button", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f070e65b-c81f-4fab-8ead-74284909c420",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#containerID4 #titulo_edicion",
+      "targets": [
+        ["css=#containerID4 #titulo_edicion", "css:finder"],
+        ["xpath=(//h5[@id='titulo_edicion'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='containerID4']/div/div/div/h5", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/div/h5", "xpath:position"]
+      ],
+      "value": "Edición de asignatura Fundamentos de la Programación"
+    }, {
+      "id": "5bfcbcd1-eb17-4ade-9201-2cbdd985c6a5",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:3:user-form:enviar",
+      "targets": [
+        ["id=j_idt25:3:user-form:enviar", "id"],
+        ["name=j_idt25:3:user-form:enviar", "name"],
+        ["css=#j_idt25\\3A 3\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:3:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:3:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/form/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4471c11d-2e07-4932-a075-ad9136c53148",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:3:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[6]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[6]/span", "xpath:position"]
+      ],
+      "value": "6.0"
+    }, {
+      "id": "66bc863c-5eb7-454f-b708-4ec2c8678f6b",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:3:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[7]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/span", "xpath:position"]
+      ],
+      "value": "0.0"
+    }]
+  }, {
+    "id": "a6809302-0b5a-480c-9a92-4f34f88793b1",
+    "name": "testModificarDatosAsignatura",
+    "commands": [{
+      "id": "9c831819-2190-4917-8d19-9b91c13fb4c4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "57e34e24-3302-479a-80ee-74c8656efb58",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:nombre",
+      "targets": [
+        ["id=j_idt25:3:nombre", "id"],
+        ["css=#j_idt25\\3A 3\\3Anombre", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:nombre']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[4]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Fundamentos de la Programación')]", "xpath:innerText"]
+      ],
+      "value": "Fundamentos de la Programación"
+    }, {
+      "id": "128936ba-7fec-4c13-82d4-669e6c96f83c",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:3:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[6]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[6]/span", "xpath:position"]
+      ],
+      "value": "6.0"
+    }, {
+      "id": "d81a83c8-558e-4f02-b1ce-04b233c0377c",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:3:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[7]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/span", "xpath:position"]
+      ],
+      "value": "0.0"
+    }, {
+      "id": "9cee4979-20d2-4963-b030-048b26b2ba9e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.formatoFilaPar:nth-child(4) #editar_asignatura",
+      "targets": [
+        ["css=.formatoFilaPar:nth-child(4) #editar_asignatura", "css:finder"],
+        ["xpath=(//button[@id='editar_asignatura'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[10]/button", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2d5855f4-aae6-4b21-8c61-d61d2a483a77",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#containerID4 #titulo_edicion",
+      "targets": [
+        ["css=#containerID4 #titulo_edicion", "css:finder"],
+        ["xpath=(//h5[@id='titulo_edicion'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='containerID4']/div/div/div/h5", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/div/h5", "xpath:position"]
+      ],
+      "value": "Edición de asignatura Fundamentos de la Programación"
+    }, {
+      "id": "1ce9cdca-f6c7-47bf-8ffb-77aec1fd10cf",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt25:3:user-form:teoricos",
+      "targets": [
+        ["id=j_idt25:3:user-form:teoricos", "id"],
+        ["name=j_idt25:3:user-form:teoricos", "name"],
+        ["css=#j_idt25\\3A 3\\3Auser-form\\3Ateoricos", "css:finder"],
+        ["xpath=//input[@id='j_idt25:3:user-form:teoricos']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:3:user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": "100"
+    }, {
+      "id": "88f87516-0bd5-4e06-98a3-0ba5725fe48c",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt25:3:user-form:practicos",
+      "targets": [
+        ["id=j_idt25:3:user-form:practicos", "id"],
+        ["name=j_idt25:3:user-form:practicos", "name"],
+        ["css=#j_idt25\\3A 3\\3Auser-form\\3Apracticos", "css:finder"],
+        ["xpath=//input[@id='j_idt25:3:user-form:practicos']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:3:user-form']/div/input[2]", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/form/div/input[2]", "xpath:position"]
+      ],
+      "value": "200"
+    }, {
+      "id": "c01fbcf2-3058-4c45-9711-a623542c65f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:3:user-form:enviar",
+      "targets": [
+        ["id=j_idt25:3:user-form:enviar", "id"],
+        ["name=j_idt25:3:user-form:enviar", "name"],
+        ["css=#j_idt25\\3A 3\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:3:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:3:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[10]/div/div/div/form/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "89163acd-16e5-4c71-a9e1-71a9f5dfed9e",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:3:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:3:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[6]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[6]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'100.0')]", "xpath:innerText"]
+      ],
+      "value": "100.0"
+    }, {
+      "id": "890cdf85-75e4-476d-a09a-4e2551a6bc81",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:3:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[6]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[6]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'100.0')]", "xpath:innerText"]
+      ],
+      "value": "100.0"
+    }, {
+      "id": "0be813f0-3ccf-4c5b-90e4-ba517b8c5d4f",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:3:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:3:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 3\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:3:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[4]/td[7]/span", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'200.0')]", "xpath:innerText"]
+      ],
+      "value": "200.0"
+    }, {
+      "id": "f7206782-5488-4305-8e84-98da92c25b42",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Ingeniería de la Salud (1056)"
+    }, {
+      "id": "c2c6b062-20ce-49b9-a648-43418efb95b3",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'53008')]", "xpath:innerText"]
+      ],
+      "value": "53008"
+    }, {
+      "id": "0c89ac47-bde2-4016-98b7-3d2edfba03ce",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:nombre",
+      "targets": [
+        ["id=j_idt25:0:nombre", "id"],
+        ["css=#j_idt25\\3A 0\\3Anombre", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:nombre']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Bioquímica Estructural')]", "xpath:innerText"]
+      ],
+      "value": "Bioquímica Estructural"
+    }, {
+      "id": "1e444ce9-f88d-440d-bcfb-c2df79eb7394",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:0:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 0\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[6]/span", "xpath:idRelative"],
+        ["xpath=//td[6]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'6.0')]", "xpath:innerText"]
+      ],
+      "value": "6.0"
+    }, {
+      "id": "f7cf657a-23bc-4286-a87c-ec578c06a4f4",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:0:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 0\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[7]/span", "xpath:idRelative"],
+        ["xpath=//td[7]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'0.0')]", "xpath:innerText"]
+      ],
+      "value": "0.0"
+    }, {
+      "id": "d7cd2b27-9e91-4b84-8828-dda119c11029",
+      "comment": "",
+      "command": "click",
+      "target": "id=editar_asignatura",
+      "targets": [
+        ["id=editar_asignatura", "id"],
+        ["css=.formatoFilaImpar:nth-child(1) #editar_asignatura", "css:finder"],
+        ["xpath=//button[@id='editar_asignatura']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[10]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e0acdbd2-73bb-48d8-b114-d7b9fd1b8e30",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt25:0:user-form:teoricos",
+      "targets": [
+        ["id=j_idt25:0:user-form:teoricos", "id"],
+        ["name=j_idt25:0:user-form:teoricos", "name"],
+        ["css=#j_idt25\\3A 0\\3Auser-form\\3Ateoricos", "css:finder"],
+        ["xpath=//input[@id='j_idt25:0:user-form:teoricos']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:0:user-form']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "25"
+    }, {
+      "id": "d7a404b4-c8b9-443d-86d6-9aa216f48a08",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt25:0:user-form:practicos",
+      "targets": [
+        ["id=j_idt25:0:user-form:practicos", "id"],
+        ["name=j_idt25:0:user-form:practicos", "name"],
+        ["css=#j_idt25\\3A 0\\3Auser-form\\3Apracticos", "css:finder"],
+        ["xpath=//input[@id='j_idt25:0:user-form:practicos']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:0:user-form']/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div/input[2]", "xpath:position"]
+      ],
+      "value": "3.65"
+    }, {
+      "id": "fcf55833-2bca-4f24-98fe-8da0f8f96bca",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:0:user-form:enviar",
+      "targets": [
+        ["id=j_idt25:0:user-form:enviar", "id"],
+        ["name=j_idt25:0:user-form:enviar", "name"],
+        ["css=#j_idt25\\3A 0\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:0:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:0:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "719bb8e7-5458-4b59-a539-3095f91d98b6",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:0:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 0\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[6]/span", "xpath:idRelative"],
+        ["xpath=//td[6]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'25.0')]", "xpath:innerText"]
+      ],
+      "value": "25.0"
+    }, {
+      "id": "4a70cd1d-2d96-491a-85d3-9d09eb2c0c29",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:nombre",
+      "targets": [
+        ["id=j_idt25:0:nombre", "id"],
+        ["css=#j_idt25\\3A 0\\3Anombre", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:nombre']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[4]/span", "xpath:idRelative"],
+        ["xpath=//td[4]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Bioquímica Estructural')]", "xpath:innerText"]
+      ],
+      "value": "Bioquímica Estructural"
+    }, {
+      "id": "ab6c0c64-58e9-4eab-9ab5-1d9676305259",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:creditos_teoricos",
+      "targets": [
+        ["id=j_idt25:0:creditos_teoricos", "id"],
+        ["css=#j_idt25\\3A 0\\3A creditos_teoricos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:creditos_teoricos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[6]/span", "xpath:idRelative"],
+        ["xpath=//td[6]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'25.0')]", "xpath:innerText"]
+      ],
+      "value": "25.0"
+    }, {
+      "id": "774f8af0-e3aa-4f33-b418-a7fa18b4d2aa",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:0:creditos_practicos",
+      "targets": [
+        ["id=j_idt25:0:creditos_practicos", "id"],
+        ["css=#j_idt25\\3A 0\\3A creditos_practicos", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:creditos_practicos']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td[7]/span", "xpath:idRelative"],
+        ["xpath=//td[7]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'3.65')]", "xpath:innerText"]
+      ],
+      "value": "3.65"
+    }]
+  }, {
+    "id": "bd32743b-2ef9-4d6f-b629-3a4f5e53b8a3",
+    "name": "testBorrarAsignatura",
+    "commands": [{
+      "id": "8a4159a7-2f5f-40e1-bbc6-669db1bcecac",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9ca973cd-efbf-4164-8a5d-427b49ad80b2",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:0:j_idt43:eliminar",
+      "targets": [
+        ["id=j_idt25:0:j_idt43:eliminar", "id"],
+        ["name=j_idt25:0:j_idt43:eliminar", "name"],
+        ["css=#j_idt25\\3A 0\\3Aj_idt43\\3A eliminar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:0:j_idt43:eliminar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:0:j_idt43']/input[2]", "xpath:idRelative"],
+        ["xpath=//td[9]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a36ce814-f81f-4395-96dc-b53442e98002",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:0:referencia",
+      "targets": [
+        ["id=j_idt25:0:referencia", "id"],
+        ["css=#j_idt25\\3A 0\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:0:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr/td/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'50659')]", "xpath:innerText"]
+      ],
+      "value": "50659"
+    }, {
+      "id": "c034838d-2da7-40b3-94cd-3bbed800d5f4",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=j_idt25:80:referencia",
+      "targets": [
+        ["id=j_idt25:80:referencia", "id"],
+        ["css=#j_idt25\\3A 80\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:80:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[81]/td/span", "xpath:idRelative"],
+        ["xpath=//tr[81]/td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51045')]", "xpath:innerText"]
+      ],
+      "value": "51045"
+    }, {
+      "id": "e7d7d694-2f22-4a0e-82c6-f0b4fb3fa80b",
+      "comment": "",
+      "command": "select",
+      "target": "id=j_idt18:tipo",
+      "targets": [],
+      "value": "label=Ingeniería de Computadores (1043)"
+    }, {
+      "id": "c54acee6-d41f-47d4-ade4-287d9d9c7a98",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:1:referencia",
+      "targets": [],
+      "value": "51674"
+    }, {
+      "id": "31d042be-cbdb-4bc5-8fca-03ed93e99483",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:1:j_idt43:eliminar",
+      "targets": [
+        ["id=j_idt25:1:j_idt43:eliminar", "id"],
+        ["name=j_idt25:1:j_idt43:eliminar", "name"],
+        ["css=#j_idt25\\3A 1\\3Aj_idt43\\3A eliminar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:1:j_idt43:eliminar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:1:j_idt43']/input[2]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[9]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71302015-df5c-4f8c-b832-bb86dc469a34",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:1:referencia",
+      "targets": [
+        ["id=j_idt25:1:referencia", "id"],
+        ["css=#j_idt25\\3A 1\\3Areferencia", "css:finder"],
+        ["xpath=//span[@id='j_idt25:1:referencia']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[2]/td/span", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/span", "xpath:position"],
+        ["xpath=//span[contains(.,'51675')]", "xpath:innerText"]
+      ],
+      "value": "51675"
+    }]
+  }, {
+    "id": "8d4eb66d-aa8a-4c30-bb77-12534238b2bb",
+    "name": "testVaciarDatosAsignaturas",
+    "commands": [{
+      "id": "c00f8b4d-0c70-4d47-813a-c8f316106f40",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "179c1420-b804-4e55-a441-8ad78c9f5685",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16:borrarTodo",
+      "targets": [
+        ["id=j_idt16:borrarTodo", "id"],
+        ["name=j_idt16:borrarTodo", "name"],
+        ["css=#j_idt16\\3A borrarTodo", "css:finder"],
+        ["xpath=//input[@id='j_idt16:borrarTodo']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/input[4]", "xpath:idRelative"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "441d4c3b-ceae-433e-8e31-f96401acfa68",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt16",
+      "targets": [
+        ["id=j_idt16", "id"],
+        ["name=j_idt16", "name"],
+        ["css=#j_idt16", "css:finder"],
+        ["xpath=//form[@id='j_idt16']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div/form", "xpath:idRelative"],
+        ["xpath=//body/div/div/form", "xpath:position"],
+        ["xpath=//form[contains(.,'Borrado correcto')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "01f24cb1-54da-42f9-91de-d8a5c8488d94",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt16:mensaje_subida",
+      "targets": [
+        ["id=j_idt16:mensaje_subida", "id"],
+        ["css=#j_idt16\\3Amensaje_subida", "css:finder"],
+        ["xpath=//span[@id='j_idt16:mensaje_subida']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt16']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Borrado correcto')]", "xpath:innerText"]
+      ],
+      "value": "Borrado correcto"
+    }]
+  }, {
+    "id": "69980b0b-74bb-4506-bb7e-86db9bfab25f",
+    "name": "testAsignarGruposAsignatura",
+    "commands": [{
+      "id": "29e7128b-c3a5-4ecb-a850-f76f049de737",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "59ee3822-2db5-41b3-a22c-1b69dbd5f901",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x626",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2f25f87-4bff-4fb0-ba82-c020e6a5c959",
+      "comment": "",
+      "command": "click",
+      "target": "css=.formatoFilaImpar:nth-child(3) #editar_asignatura",
+      "targets": [
+        ["css=.formatoFilaImpar:nth-child(3) #editar_asignatura", "css:finder"],
+        ["xpath=(//button[@id='editar_asignatura'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[3]/td[10]/button", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a60a289-45ab-4249-a050-144873d50c18",
+      "comment": "",
+      "command": "click",
+      "target": "css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label",
+      "targets": [
+        ["css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label", "css:finder"],
+        ["xpath=//table[@id='j_idt25:2:user-form:grupos_imparticion']/tbody/tr/td[2]/label", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/div/div/div/form/div/table/tbody/tr/td[2]/label", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f98df1f-93f1-493c-8614-97f1716fa773",
+      "comment": "",
+      "command": "click",
+      "target": "css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(4) > label",
+      "targets": [
+        ["css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(4) > label", "css:finder"],
+        ["xpath=//table[@id='j_idt25:2:user-form:grupos_imparticion']/tbody/tr/td[4]/label", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/div/div/div/form/div/table/tbody/tr/td[4]/label", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92f78f48-a78d-4ae8-9339-dbb0080d046f",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:2:user-form:enviar",
+      "targets": [
+        ["id=j_idt25:2:user-form:enviar", "id"],
+        ["name=j_idt25:2:user-form:enviar", "name"],
+        ["css=#j_idt25\\3A 2\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:2:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:2:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/div/div/div/form/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "06d6ccf9-7b35-4212-bae5-5d3e000ad4a7",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:2:grupos_asignados",
+      "targets": [
+        ["id=j_idt25:2:grupos_asignados", "id"],
+        ["css=#j_idt25\\3A 2\\3Agrupos_asignados", "css:finder"],
+        ["xpath=//span[@id='j_idt25:2:grupos_asignados']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[3]/td[8]/span", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[8]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'(1 B) (1 D)')]", "xpath:innerText"]
+      ],
+      "value": "(1 B) (1 D)"
+    }, {
+      "id": "3c7986da-8ecf-48f5-84ff-c8e89d571c06",
+      "comment": "",
+      "command": "click",
+      "target": "css=.formatoFilaImpar:nth-child(3) #editar_asignatura",
+      "targets": [
+        ["css=.formatoFilaImpar:nth-child(3) #editar_asignatura", "css:finder"],
+        ["xpath=(//button[@id='editar_asignatura'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[3]/td[10]/button", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eae292c6-ebfb-4235-b97a-665458c83bee",
+      "comment": "",
+      "command": "click",
+      "target": "css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label",
+      "targets": [
+        ["css=#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label", "css:finder"],
+        ["xpath=//table[@id='j_idt25:2:user-form:grupos_imparticion']/tbody/tr/td[2]/label", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/div/div/div/form/div/table/tbody/tr/td[2]/label", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d58bd4dc-03d9-4ab8-9c76-9cc55f8da39a",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt25:2:user-form:enviar",
+      "targets": [
+        ["id=j_idt25:2:user-form:enviar", "id"],
+        ["name=j_idt25:2:user-form:enviar", "name"],
+        ["css=#j_idt25\\3A 2\\3Auser-form\\3A enviar", "css:finder"],
+        ["xpath=//input[@id='j_idt25:2:user-form:enviar']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt25:2:user-form']/div/div/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[10]/div/div/div/form/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2a2e5993-b164-4621-9eef-02e5940c9aa9",
+      "comment": "",
+      "command": "waitForText",
+      "target": "id=j_idt25:2:grupos_asignados",
+      "targets": [
+        ["id=j_idt25:2:grupos_asignados", "id"],
+        ["css=#j_idt25\\3A 2\\3Agrupos_asignados", "css:finder"],
+        ["xpath=//span[@id='j_idt25:2:grupos_asignados']", "xpath:attributes"],
+        ["xpath=//div[@id='text']/div[3]/table/tbody/tr[3]/td[8]/span", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[8]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'(1 D)')]", "xpath:innerText"]
+      ],
+      "value": "(1 D)"
+    }]
+  }],
+  "suites": [{
+    "id": "b07f358d-8478-4caf-9f30-de6107ebcc40",
+    "name": "Peticiones",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["514768d4-a1d3-4e54-ae6e-3244848a60b9", "e49b8790-36fa-49d0-85f8-a9aece3ffbed", "aed2bbbd-1d91-4e9c-b95a-a29ddacdbb7b", "36450163-5dba-4d8d-95cc-467fae15f809", "df071f52-e81c-4c08-b8fb-a8977bf8126b", "ff97107d-0de5-4a21-8fec-0017a47323a3"]
+  }, {
+    "id": "48bf838e-bf27-4edd-8d15-f255502f5424",
+    "name": "Alumnos",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3927af65-a2fe-41ff-a1e5-944d66d4ed72", "1b9b2610-5a04-40a9-881c-018bd049afa7", "37ef1193-8b01-4a3e-8929-03e5baa55437", "e78a55ff-5a64-48e5-820a-f90f77ad875a"]
+  }, {
+    "id": "c0bd95df-abe4-4e9d-a74e-c75c5356951d",
+    "name": "Matricula",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }, {
+    "id": "9362d928-55ce-4848-99b6-7147408b4586",
+    "name": "Asignatura",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a79d911f-48aa-4eb5-b809-dcfdd563fb0a", "925cdcbd-da87-49b5-abab-a2dae9db8c3c", "b2e758cc-03ef-447f-9b8a-8b8ec3d8dbcb", "9ef7f007-d467-482f-ae2b-8de9b1d2b7ee", "69c59743-a092-4763-8388-5e25c08dd7a1", "a6809302-0b5a-480c-9a92-4f34f88793b1", "69980b0b-74bb-4506-bb7e-86db9bfab25f", "bd32743b-2ef9-4d6f-b629-3a4f5e53b8a3", "8d4eb66d-aa8a-4c30-bb77-12534238b2bb"]
+  }, {
+    "id": "30394d02-ffbb-4665-b2c9-2a6868056024",
+    "name": "Asignacion",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/grupoE-war/faces/peticiones.xhtml", "http://localhost:8080/grupoE-war/faces/index.xhtml", "http://localhost:8080/grupoE-war/faces/alumnos.xhtml", "http://localhost:8080/grupoE-war/faces/asignaturas.xhtml"],
+  "plugins": []
+}
