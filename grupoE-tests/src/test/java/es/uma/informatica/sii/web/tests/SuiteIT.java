@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ PeticionesIntegracion.class, AlumnosIntegracion.class, AsignaturasIntegracion.class })
+@SuiteClasses({ /*PeticionesIntegracion.class, AlumnosIntegracion.class, AsignaturasIntegracion.class*/ MatriculasIntegracion.class })
 public class SuiteIT {
 	@BeforeClass
 	public static void before() {
