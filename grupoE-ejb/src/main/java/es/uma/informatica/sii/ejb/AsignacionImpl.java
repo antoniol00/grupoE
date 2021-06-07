@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -72,31 +73,19 @@ public class AsignacionImpl implements GestionAsignacion {
 	}
 
 	public boolean ColisionesHorario(int matricula) throws SecretariaException {
-		boolean colision = false;
-		List<Asigna_grupos> lista = listaAsignacionProvisional();
+		List<Asigna_grupos> lista = listaAsignacionProvisional().stream()
+				.filter(a -> a.getMatricula().getNumero_archivo() == matricula).collect(Collectors.toList());
 
-		Asigna_grupos comparador = new Asigna_grupos();
-		HashSet<Grupo> cursos = new HashSet<>();
-
-		for (int i = 0; i < lista.size(); i++) {
-			comparador = lista.get(i);
-			if (comparador.getMatricula().getNumero_archivo() == matricula) {
-				cursos.add(comparador.getGrupo());
+		if (!lista.isEmpty()) {
+			HashSet<String> hss = new HashSet<String>();
+			for (Asigna_grupos ag : lista) {
+				hss.add(ag.getGrupo().getTurno());
 			}
-		}
-		if (cursos.isEmpty()) {
-			throw new SecretariaException("matricula no tiene asignado ningun grupo");
+			return hss.size() == 2;
+		} else {
+			throw new SecretariaException("No tiene grupos asignados");
 		}
 
-		List<Grupo> grupos = new ArrayList<Grupo>(cursos);
-		for (int i = 0; i < grupos.size(); i++) {
-			for (int k = i + 1; k < grupos.size(); k++) {
-				if (grupos.get(i).getTurno().equals(grupos.get(k).getTurno())) {
-					colision = true;
-				}
-			}
-		}
-		return colision;
 	}
 
 	public void modificaGrupo(int codigo, int titulacion, String curso, int expediente, String id_grupo)
@@ -175,11 +164,16 @@ public class AsignacionImpl implements GestionAsignacion {
 		em.remove(cpk);
 	}
 
+	@Override
+	public void borraAsignacion(Asigna_grupos ag) {
+		em.remove(em.merge(ag));
+	}
+
 	@SuppressWarnings({ "resource", "deprecation" })
 	@Override
 	public void importaGrupos(String file) throws SecretariaException, SecretariaIOException {
 		try {
-			FileInputStream filex = new FileInputStream(new File("./DATOS/grupos.xlsx"));
+			FileInputStream filex = new FileInputStream(new File(file));
 			XSSFWorkbook workbook = new XSSFWorkbook(filex);
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
@@ -208,16 +202,16 @@ public class AsignacionImpl implements GestionAsignacion {
 					String turno = values.get(3);
 					String ingles = values.get(4);
 					String visible = values.get(5);
-					String titulacion = values.get(9);
+					String titulacion = values.get(7);
 
 					Grupo g = new Grupo();
 					g.setId(id);
-					g.setCurso(Integer.parseInt(curso));
+					g.setCurso(Integer.parseInt(curso.substring(0, 1)));
 					g.setLetra(letra);
 					g.setTurno(turno);
 					g.setIngles(ingles.equals("S") ? true : false);
 					g.setVisible(visible.equals("S") ? true : false);
-					Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion));
+					Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion.substring(0, 4)));
 					if (t == null) {
 						throw new SecretariaException("Titulacion no existente " + titulacion);
 					}
@@ -235,7 +229,8 @@ public class AsignacionImpl implements GestionAsignacion {
 	// METODOS AUXILIARES
 	@Override
 	public List<Asigna_grupos> listaAsignacionProvisional() {
-		TypedQuery<Asigna_grupos> query = em.createQuery("select a from Asigna_grupos a", Asigna_grupos.class);
+		TypedQuery<Asigna_grupos> query = em.createQuery(
+				"select a from Asigna_grupos a order by a.matricula.expediente.numero", Asigna_grupos.class);
 		return query.getResultList();
 	}
 

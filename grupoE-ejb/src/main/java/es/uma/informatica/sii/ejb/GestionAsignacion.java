@@ -69,8 +69,9 @@ public interface GestionAsignacion {
 
 	/**
 	 * Importa grupos del archivo excel pasado como parametro
+	 * 
 	 * @param file : archivo de importacion
-	 * @throws SecretariaException: error en la importacion
+	 * @throws SecretariaException:   error en la importacion
 	 * @throws SecretariaIOException: error en el archivo indicado
 	 */
 	public void importaGrupos(String file) throws SecretariaException, SecretariaIOException;
@@ -119,4 +120,7 @@ public interface GestionAsignacion {
 	 * @param matricula: matricula del alumno
 	 */
 	public boolean ColisionesHorario(int matricula) throws SecretariaException;
+
+	public void borraAsignacion(Asigna_grupos ag);
+
 }

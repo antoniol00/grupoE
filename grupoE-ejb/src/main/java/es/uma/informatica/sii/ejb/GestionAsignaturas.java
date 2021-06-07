@@ -63,6 +63,7 @@ public interface GestionAsignaturas {
 	 *                              asignar
 	 */
 	public void definirGrupos(int codigo, int titulacion, String id_grupo, String curso) throws SecretariaException;
+	public void borrarDefinirGrupos(Grupos_asig ga) throws SecretariaException;
 
 	// METODOS AUXILIARES
 	/**

@@ -36,7 +36,7 @@ public class MatriculasImpl implements GestionMatriculas {
 
 		// RELLENAMOS TABLA MATRICULA
 		try {
-			Reader in = new FileReader("./DATOS/alumnos.csv");
+			Reader in = new FileReader(file);
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
 			int x = 0;
 			for (CSVRecord record : records) {

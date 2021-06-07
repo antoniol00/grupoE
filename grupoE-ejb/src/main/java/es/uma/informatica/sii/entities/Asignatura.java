@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -46,7 +47,7 @@ public class Asignatura implements Serializable {
 	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE)
 	private List<Asigna_grupos> asign_grupos;
 
-	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "asignatura", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Grupos_asig> grupos;
 
 	private static final long serialVersionUID = 1L;

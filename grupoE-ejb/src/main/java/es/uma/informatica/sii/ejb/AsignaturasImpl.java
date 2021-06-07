@@ -322,4 +322,9 @@ public class AsignaturasImpl implements GestionAsignaturas {
 		return query.getResultList();
 	}
 
+	@Override
+	public void borrarDefinirGrupos(Grupos_asig ga) throws SecretariaException {
+		em.remove(em.merge(ga));
+	}
+
 }
