@@ -55,15 +55,15 @@
 
 	<div class="welcome-area" id="text">
 		<div class="titulo">
-			<h2>Listado de matrículas (importadas desde Alumnos)</h2>
+			<h2 id = "titulo_matricula">Listado de matrículas (importadas desde Alumnos)</h2>
 			<h:form>
-				<h:outputText value="Orden de visualización: " />
+				<h:outputText id = "orden_visualizacion" value="Orden de visualización: " />
 				<h:selectOneMenu id="tipo" class="custom-select"
-					value="#{asignaturasBean.filtro}"
-					valueChangeListener="#{asignaturasBean.refresh}"
+					value="#{matriculasBean.filtro}"
+					valueChangeListener="#{matriculasBean.refresh}"
 					onchange="submit()">
-					<f:selectItem itemLabel="Por fecha" itemValue="DATE" />
 					<f:selectItem itemLabel="Por expediente" itemValue="EXP" />
+					<f:selectItem itemLabel="Por fecha" itemValue="DATE" />
 					<f:selectItem itemLabel="Por número de archivo (mayor a menor)"
 						itemValue="DES" />
 					<f:selectItem itemLabel="Por número de archivo (menor a mayor)"
@@ -95,7 +95,7 @@
 				</h:column>
 				<h:column>
 
-					<button type="button" class="btn btn-info" data-toggle="modal"
+					<button id="mas_info" type="button" class="btn btn-info" data-toggle="modal"
 						data-target="#{matriculasBean.containerID}">+</button>
 
 					<div class="modal fade" id="#{matriculasBean.prevID}" tabindex="-1"
@@ -104,7 +104,7 @@
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">
+									<h5 class="modal-title" id="titulo_mas_info">
 										Información de la matrícula del alumno
 										<h:outputText id="info_alumno"
 											value="#{matr.expediente.alumno.dni}" />
@@ -112,7 +112,7 @@
 										<h:outputText id="info_curso" value="#{matr.curso}" />
 
 									</h5>
-									<button type="button" class="close" data-dismiss="modal"
+									<button id = "boton_close" type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -142,7 +142,7 @@
 		</div>
 	</div>
 
-	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
+	<footer id="footer"> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -1,9 +1,10 @@
 package es.uma.informatica.sii.backing;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import es.uma.informatica.sii.ejb.GestionMatriculas;
@@ -12,9 +13,14 @@ import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.entities.Matricula;
 
 @Named
-@RequestScoped
+@ViewScoped
 @SuppressWarnings("unused")
-public class MatriculasBean {
+public class MatriculasBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	private GestionMatriculas mat = new MatriculasImpl();
 
@@ -25,10 +31,12 @@ public class MatriculasBean {
 
 	public MatriculasBean() {
 		id = 0;
-		filtro = "EXP";
 	}
 
 	public List<Matricula> getMatriculas() throws SecretariaException {
+		if (filtro==null) {
+			setFiltro("EXP");
+		}
 		return mat.listaMatriculas(filtro);
 	}
 
