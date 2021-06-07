@@ -25,13 +25,12 @@ public class PeticionesBean {
 	private GestionAlumnos al = new AlumnosImpl();
 
 	private Peticion p;
-	private String DNI;
-	private String containerID;
-	private String prevID;
+	private String DNI, containerID, prevID, mensaje;
 	private int id;
 
 	public PeticionesBean() {
 		id = 0;
+		mensaje = "";
 		p = new Peticion();
 	}
 
@@ -39,10 +38,14 @@ public class PeticionesBean {
 		return pet.listaPeticiones();
 	}
 
-	public String crearPeticion() throws SecretariaException {
+	public String crearPeticion() {
 		p.setDate(new Date());
-		p.setAlumno(al.obtenerAlumno(DNI));
-		pet.creaIncidencia(p);
+		try {
+			p.setAlumno(al.obtenerAlumno(DNI));
+			pet.creaIncidencia(p);
+		} catch (SecretariaException e) {
+			mensaje = "ERROR: peticion para alumno " + DNI + " no se ha podido crear";
+		}
 		p = new Peticion();
 		DNI = "";
 		return null;
@@ -54,8 +57,11 @@ public class PeticionesBean {
 	}
 
 	public String editarPeticion(Peticion peticion) throws SecretariaException {
-		throw new RuntimeException(peticion.toString());
-
+		p.setDate(peticion.getDate());
+		p.setAlumno(peticion.getAlumno());
+		pet.editaIncidencia(peticion.getDate(), peticion.getAlumno().getDni(), p);
+		p = new Peticion();
+		return null;
 	}
 
 	public String getAsignarDNI() {
@@ -79,4 +85,7 @@ public class PeticionesBean {
 		return "containerID" + id;
 	}
 
+	public String getMensaje() {
+		return mensaje;
+	}
 }

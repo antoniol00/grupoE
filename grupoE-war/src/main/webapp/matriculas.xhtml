@@ -14,7 +14,7 @@
 		href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
 		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
 		crossorigin="anonymous" />
-		
+
 	<title>Matriculas</title>
 </h:head>
 
@@ -26,23 +26,25 @@
 			<div class="col-12">
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
-						value="Universidad
-						de Málaga" class="logo" action="index" />
+						value="Universidad de Malaga" action="index" class="logo"
+						id="logo_universidad" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="index" /></li>
+								id="Inicio" action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Asignación de grupos" action="asignacion" /></li>
-						<li class="submenu"><a href="javascript:;" class="active">Gesti&oacute;n
-								de datos</a>
+								value="Asignación de grupos" action="asignacion"
+								id="Asignacion_grupos" /></li>
+						<li class="submenu"><a>Gestión de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
-								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
-								<li><h:commandLink value="Matriculas" class="active"
-										action="matriculas" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos"
+										id="Alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas"
+										id="Asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas"
+										id="Matriculas" class="active" /></li>
 							</ul></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Peticiones" action="peticiones" /></li>
+								value="Peticiones" action="peticiones" id="Peticiones" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -52,21 +54,23 @@
 	</header>
 
 	<div class="welcome-area" id="text">
-		<div>
-			<h:form class="uploadFile" enctype="multipart/form-data">
-				<h:inputFile id="file-id" value="#{matriculasBean.part}"
-					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
-				<h:commandButton value="Cargar datos" action="#{matriculasBean.upload}"
-					class="btn btn-primary" id="upload" />
-
-				<h:commandButton id="borrarTodo" value="Vaciar datos"
-					class="btn btn-danger" action="#{matriculasBean.vaciarDatos}"
-					onclick="return compruebaVaciadoMatriculas()" />
-				<h:outputText class="mensajeSubida" value="#{matriculasBean.mensaje}" />
-			</h:form>
-		</div>
 		<div class="titulo">
-			<h2>Listado de matriculas</h2>
+			<h2>Listado de matrículas (importadas desde Alumnos)</h2>
+			<h:form>
+				<h:outputText value="Orden de visualización: " />
+				<h:selectOneMenu id="tipo" class="custom-select"
+					value="#{asignaturasBean.filtro}"
+					valueChangeListener="#{asignaturasBean.refresh}"
+					onchange="submit()">
+					<f:selectItem itemLabel="Por fecha" itemValue="DATE" />
+					<f:selectItem itemLabel="Por expediente" itemValue="EXP" />
+					<f:selectItem itemLabel="Por número de archivo (mayor a menor)"
+						itemValue="DES" />
+					<f:selectItem itemLabel="Por número de archivo (menor a mayor)"
+						itemValue="ASC" />
+				</h:selectOneMenu>
+			</h:form>
+			<br />
 		</div>
 
 		<div class="scrolltabla">
@@ -74,23 +78,23 @@
 				styleClass="formatoTabla" headerClass="formatoHeader"
 				rowClasses="formatoFilaImpar,formatoFilaPar">
 				<h:column>
-					<f:facet name="header">expediente</f:facet>
-					<h:outputText id="expediente" value="#{matr.expediente}"></h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Turno</f:facet>
-					<h:outputText id="turno" value="#{matr.turno}"></h:outputText>
-				</h:column>
-				<h:column>
 					<f:facet name="header">Curso</f:facet>
 					<h:outputText id="curso" value="#{matr.curso}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">DNI</f:facet>
+					<h:outputText id="expediente" value="#{matr.expediente.alumno.dni}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Turno pref.</f:facet>
+					<h:outputText id="turno" value="#{matr.turno}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Tipo de Estudio</f:facet>
 					<h:outputText id="tipo_estudio" value="#{matr.tipo_estudio}"></h:outputText>
 				</h:column>
 				<h:column>
-				
+
 					<button type="button" class="btn btn-info" data-toggle="modal"
 						data-target="#{matriculasBean.containerID}">+</button>
 
@@ -101,8 +105,12 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">
-										Información de la matrícula
-										<h:outputText id="expediente_matr" value="#{matr.expediente}" />
+										Información de la matrícula del alumno
+										<h:outputText id="info_alumno"
+											value="#{matr.expediente.alumno.dni}" />
+										en el curso
+										<h:outputText id="info_curso" value="#{matr.curso}" />
+
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
@@ -110,24 +118,22 @@
 									</button>
 								</div>
 								<div class="modal-body datosAlumnos">
-									<label><strong>Curso </strong> <h:outputText
-											id="curso" value="#{matr.curso}" /> </label> <br /> <label><strong>Numero archivo
-											</strong> <h:outputText id="numeroArchivo"
-											value="#{matr.numero_archivo}" /> </label><br /> <label><strong>Activa </strong> <h:outputText id="activa"
-											value="#{matr.activa}" /> </label><br /> <label><strong>Turno
-											</strong> <h:outputText id="turno"
-											value="#{matr.turno}" /> </label> <br /> <label><strong>Tipo estudio
-											</strong> <h:outputText id="tipoEstudio"
-											value="#{matr.tipo_estudio}" /> </label><br /> <label><strong>Fecha
-											matricula </strong> <h:outputText id="fechaMatricula"
-											value="#{matr.fecha_matricula}" /> </label><br /> <label><strong>Nuevo ingreso
-									</strong> <h:outputText id="nuevoIngreso"
-											value="#{matr.nuevo_ingreso}" /> </label> <br /> <label><strong>Listado asignaturas
-									</strong> <h:outputText id="listaAsignaturas"
-											value="#{matr.listado_asignaturas}" /> </label><br /> <label><strong>Expediente
-									</strong> <h:outputText id="expediente"
-											value="#{matr.expediente}" /> </label>
-								</div>	
+									<label><strong>Numero archivo </strong> <h:outputText
+											id="numeroArchivo_" value="#{matr.numero_archivo}" /> </label> <br />
+									<label><strong>Número de expediente </strong> <h:outputText
+											id="numeroExpediente_" value="#{matr.expediente.numero}" />
+									</label> <br /> <label><strong>Alumno </strong> <h:outputText
+											id="nombreCompleto"
+											value="#{matr.expediente.alumno.nombre_completo}" /> </label> <br />
+									<label><strong>Activa </strong> <h:outputText
+											id="activa" value="#{matr.activa}" /> </label><br /> <label><strong>Fecha
+											matricula </strong> <h:outputText id="fechaMatricula_"
+											value="#{matr.fecha_matricula}" /> </label><br /> <label><strong>Nuevo
+											ingreso </strong> <h:outputText id="nuevoIngreso_"
+											value="#{matr.nuevo_ingreso}" /> </label> <br /> <label><strong>Listado
+											asignaturas </strong> <h:outputText id="listaAsignaturas_"
+											value="#{matr.listado_asignaturas}" /> </label><br />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -138,7 +144,7 @@
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
-	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
@@ -150,6 +156,6 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 		crossorigin="anonymous"></script>
-	
+
 </h:body>
 </html>

@@ -15,6 +15,8 @@
 		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
 		crossorigin="anonymous" />
 
+	<script src="resources/js/functions.js" />
+
 	<title>Asignacion</title>
 </h:head>
 
@@ -26,22 +28,25 @@
 			<div class="col-12">
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
-						value="Universidad
-						de Málaga" class="logo" action="index" />
+						value="Universidad de Malaga" action="index" class="logo"
+						id="logo_universidad" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="index" /></li>
-						<li class="scroll-to-section"><h:commandLink class="active"
-								value="Asignación de grupos" action="asignacion" /></li>
-						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
-								de datos</a>
+								id="Inicio" action="index" /></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Asignación de grupos" action="asignacion" class="active"
+								id="Asignacion_grupos" /></li>
+						<li class="submenu"><a>Gestión de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
-								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
-								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos"
+										id="Alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas"
+										id="Asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas"
+										id="Matriculas" /></li>
 							</ul></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Peticiones" action="peticiones" /></li>
+								value="Peticiones" action="peticiones" id="Peticiones" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -50,9 +55,128 @@
 	</div>
 	</header>
 
-	<div class="welcome-area" id="welcome"></div>
+	<div class="welcome-area" id="text">
+		<div class="uploadArea">
+			<h:form class="uploadFile">
+				<h:commandButton id="asignacion" value="Realizar asignacion"
+					class="btn btn-success"
+					action="#{asignacionBean.realizarAsignacion}"
+					onclick="return compruebaAsignacion()" />
+				<h:commandButton id="borrarTodo" value="Vaciar datos"
+					class="btn btn-danger" action="#{asignacionBean.vaciarDatos}" />
+				<div class="separarCreacion">
+					<h:commandButton id="crearPDF" value="Crear pdf"
+						class="btn btn-warning" action="#{asignacionBean.creaPDF}" />
+					<h:commandButton id="crearExcel" value="Crear excel"
+						class="btn btn-info" action="#{asignacionBean.creaExcel}" />
+				</div>
+				<h:outputText class="mensajeSubida" value="#{alumnosBean.mensaje}" />
+				<h:outputText class="mensajeSubida"
+					value="#{asignacionBean.mensaje}" />
+			</h:form>
+		</div>
+		<div class="titulo">
+			<h2>Asignacion provisional</h2>
+			<br />
+		</div>
+
+		<div class="scrolltabla">
+			<h:dataTable value="#{asignacionBean.asignacionProvisional}"
+				var="asig" styleClass="formatoTabla" headerClass="formatoHeader"
+				rowClasses="formatoFilaImpar,formatoFilaPar">
+				<h:column>
+					<f:facet name="header">Expediente</f:facet>
+					<h:outputText id="expediente"
+						value="#{asig.matricula.expediente.numero}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">DNI</f:facet>
+					<h:outputText id="dni"
+						value="#{asig.matricula.expediente.alumno.dni}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+					<h:outputText id="nombre"
+						value="#{asig.matricula.expediente.alumno.nombre_completo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Curso</f:facet>
+					<h:outputText id="curso" value="#{asig.asignatura.curso}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Asignatura</f:facet>
+					<h:outputText id="asignatura" value="#{asig.asignatura.codigo}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Grupo</f:facet>
+					<h:outputText id="grupo" value="#{asig.grupo.id}"></h:outputText>
+				</h:column>
+				<h:column>
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#{asignacionBean.containerID}">
+						<h:graphicImage value="#{resource['images:gear.png']}" />
+					</button>
+
+					<div class="modal fade" id="#{asignacionBean.prevID}" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">
+										Cambio de grupo para
+										<h:outputText value="#{asig.matricula.expediente.alumno.dni}" />
+										en
+										<h:outputText value="#{asig.asignatura.codigo}"></h:outputText>
+									</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<h:form id="user-form">
+									<div class="modal-body formulario">
+
+										<h:outputLabel for="cambio_grupo">Cambio de grupo: </h:outputLabel>
+										<h:selectOneRadio value="#{asignacionBean.grupos}"
+											id="cambio_grupo">
+											<f:selectItems id="elemento"
+												value="#{asignacionBean.listaGrupos(asig.asignatura)}"
+												var="c" itemLabel="#{c.curso} #{c.letra}"
+												itemValue="#{c.id}" />
+										</h:selectOneRadio>
+
+										<div class="modal-footer">
+											<h:messages class="mensajesError" />
+											<h:commandButton id="enviar" value="Editar grupo asignado"
+												class="btn btn-primary"
+												action="#{asignacionBean.edita(asig)}" />
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</h:column>
+
+			</h:dataTable>
+		</div>
+	</div>
 
 	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
 	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
+
 </h:body>
 </html>

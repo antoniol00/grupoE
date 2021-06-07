@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="resources/css/main.css" />
@@ -27,15 +27,15 @@
 			<div class="container">
 				<div class="row">
 					<div class="text-center">
-						<h1>
+						<h1 id="titulo">
 							Error <strong>500</strong>
 						</h1>
-						<h3>Error interno del servidor. La operación que acaba de
-							ejecutar no está soportada</h3>
+						<h3 id="mensaje_error">Error interno del servidor. La
+							operación que acaba de ejecutar no está soportada</h3>
 						<br>
 						<form onclick="history.go(-1);">
 							<input class="btn btn-outline-info btn-lg" type="submit"
-								value="Volver a la página anterior"></input>
+								value="Volver a la página anterior" id="boton_atras" />
 						</form>
 
 					</div>

@@ -27,23 +27,25 @@
 			<div class="col-12">
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
-						value="Universidad
-						de Málaga" class="logo" action="index" />
+						value="Universidad de Malaga" action="index" class="logo"
+						id="logo_universidad" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="index" /></li>
+								id="Inicio" action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Asignación de grupos" action="asignacion" /></li>
-						<li class="submenu"><a href="javascript:;" class="active">Gesti&oacute;n
-								de datos</a>
+								value="Asignación de grupos" action="asignacion"
+								id="Asignacion_grupos" /></li>
+						<li class="submenu"><a>Gestión de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos" class="active"
-										action="alumnos" /></li>
-								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
-								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos"
+										class="active" id="Alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas"
+										id="Asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas"
+										id="Matriculas" /></li>
 							</ul></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Peticiones" action="peticiones" /></li>
+								value="Peticiones" action="peticiones" id="Peticiones" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -52,21 +54,23 @@
 	</div>
 	</header>
 	<div class="welcome-area" id="text">
-		<div>
+		<div class="uploadArea">
 			<h:form class="uploadFile" enctype="multipart/form-data">
 				<h:inputFile id="file-id" value="#{alumnosBean.part}"
 					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
 				<h:commandButton value="Cargar datos" action="#{alumnosBean.upload}"
-					class="btn btn-primary" id="upload" />
+					class="btn btn-primary" id="upload"
+					onclick="return compruebaSubidaAlumnos()" />
 
 				<h:commandButton id="borrarTodo" value="Vaciar datos"
 					class="btn btn-danger" action="#{alumnosBean.vaciarDatos}"
 					onclick="return compruebaVaciadoAlumnos()" />
-				<h:outputText class="mensajeSubida" value="#{alumnosBean.mensaje}" />
+				<h:outputText id="mensaje_subida" class="mensajeSubida"
+					value="#{alumnosBean.mensaje}" />
 			</h:form>
 		</div>
 		<div class="titulo">
-			<h2>Listado de alumnos</h2>
+			<h2 id="titulo_listado">Listado de alumnos</h2>
 		</div>
 
 		<div class="scrolltabla">
@@ -91,7 +95,7 @@
 				</h:column>
 				<h:column>
 					<button type="button" class="btn btn-info" data-toggle="modal"
-						data-target="#{alumnosBean.containerID}">+</button>
+						data-target="#{alumnosBean.containerID}" id="mas_info">+</button>
 
 					<div class="modal fade" id="#{alumnosBean.prevID}" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalLabel"
@@ -139,8 +143,8 @@
 		</div>
 	</div>
 
-	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
-	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+	<footer id="footer"> Universidad de Málaga · Avda. Cervantes,
+	2. 29071 MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

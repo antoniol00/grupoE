@@ -26,22 +26,26 @@
 			<div class="col-12">
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
-						value="Universidad
-						de Málaga" class="logo" action="index" />
+						value="Universidad de Malaga" action="index" class="logo"
+						id="logo_universidad" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="index" /></li>
+								id="Inicio" action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Asignación de grupos" action="asignacion" /></li>
-						<li class="submenu"><a href="javascript:;">Gesti&oacute;n
-								de datos</a>
+								value="Asignación de grupos" action="asignacion"
+								id="Asignacion_grupos" /></li>
+						<li class="submenu"><a>Gestión de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
-								<li><h:commandLink value="Asignaturas" action="asignaturas" /></li>
-								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos"
+										id="Alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas"
+										id="Asignaturas" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas"
+										id="Matriculas" /></li>
 							</ul></li>
-						<li class="scroll-to-section"><h:commandLink class="active"
-								value="Peticiones" action="peticiones" /></li>
+						<li class="scroll-to-section"><h:commandLink
+								value="Peticiones" action="peticiones" id="Peticiones"
+								class="active" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -51,17 +55,20 @@
 	</header>
 
 	<div class="welcome-area" id="text">
-		<h2 class="titulo">Listado de peticiones</h2>
+		<h2 class="titulo" id="titulo_principal">Listado de peticiones</h2>
 		<div class="text">
+			<h:outputText class="mensajeSubida" id="mensaje_error"
+				value="#{peticionesBean.mensaje}" />
 			<button type="button" class="btn btn-success btn-lg"
-				data-toggle="modal" data-target="#creationModal">+</button>
+				id="creacion_peticion" data-toggle="modal"
+				data-target="#creationModal">+</button>
 
 			<div class="modal fade" id="creationModal" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Creaci&oacute;n
+							<h5 class="modal-title" id="titulo_creacion">Creaci&oacute;n
 								de petici&oacute;n</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -110,19 +117,19 @@
 					styleClass="formatoTabla" headerClass="formatoHeader"
 					rowClasses="formatoFilaImpar,formatoFilaPar">
 					<h:column>
-						<f:facet name="header">DNI</f:facet>
+						<f:facet name="header" id="h_alumno">DNI</f:facet>
 						<h:outputText id="alumno" value="#{p.alumno.dni}"></h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Fecha</f:facet>
+						<f:facet name="header" id="h_fecha">Fecha</f:facet>
 						<h:outputText id="fecha" value="#{p.date}"></h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Tipo</f:facet>
+						<f:facet name="header" id="h_tipo">Tipo</f:facet>
 						<h:outputText id="tipo" value="#{p.tipo}"></h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Descripci&oacute;n</f:facet>
+						<f:facet name="header" id="h_descripcion">Descripci&oacute;n</f:facet>
 						<h:outputText id="descripcion" value="#{p.descripcion}"></h:outputText>
 					</h:column>
 					<h:column>
@@ -134,8 +141,9 @@
 					</h:column>
 					<h:column>
 						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#{peticionesBean.containerID}">
-							<h:graphicImage value="#{resource['images:gear.png']}" />
+							data-target="#{peticionesBean.containerID}" id="boton_edicion">
+							<h:graphicImage value="#{resource['images:gear.png']}"
+								alt="Editar" />
 						</button>
 
 						<div class="modal fade" id="#{peticionesBean.prevID}"
@@ -144,8 +152,8 @@
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">
-											Edci&oacute;n de petici&oacute;n para
+										<h5 class="modal-title" id="titulo_edicion">
+											Edici&oacute;n de petici&oacute;n para
 											<h:outputText value="#{p.alumno.dni}" />
 										</h5>
 										<button type="button" class="close" data-dismiss="modal"
@@ -157,7 +165,7 @@
 										<div class="modal-body formulario">
 											<h:outputLabel for="tipo" value="Tipo "></h:outputLabel>
 											<h:selectOneMenu id="tipo" class="custom-select"
-												value="#{p.tipo}" immediate="true">
+												value="#{peticionesBean.peticion.tipo}">
 												<f:selectItem itemValue="Cambio de grupo"
 													itemLabel="Cambio de grupo" />
 												<f:selectItem itemValue="Cambio idioma"
@@ -169,14 +177,14 @@
 
 											<h:outputLabel for="desc">Descripci&oacute;n</h:outputLabel>
 											<h:inputTextarea id="desc" class="form-control"
-												value="#{p.descripcion}" immediate="true" cols="32" rows="3">
+												value="#{peticionesBean.peticion.descripcion}" cols="32"
+												rows="3">
 											</h:inputTextarea>
 											<div class="modal-footer">
 												<h:messages class="mensajesError" />
 												<h:commandButton id="enviar" value="Editar petición"
 													class="btn btn-primary"
-													action="#{peticionesBean.editarPeticion(p)}"
-													immediate="true" />
+													action="#{peticionesBean.editarPeticion(p)}" />
 											</div>
 										</div>
 									</h:form>

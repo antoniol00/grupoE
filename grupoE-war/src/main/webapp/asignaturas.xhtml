@@ -20,29 +20,32 @@
 
 
 <h:body>
+
 	<header class="header-area header-sticky">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h:form>
 					<nav class="main-nav"> <h:commandLink
-						value="Universidad
-						de Málaga" class="logo" action="index" />
+						value="Universidad de Malaga" action="index" class="logo"
+						id="logo_universidad" />
 					<ul class="nav">
 						<li class="scroll-to-section"><h:commandLink value="Inicio"
-								action="index" /></li>
+								id="Inicio" action="index" /></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Asignación de grupos" action="asignacion" /></li>
-						<li class="submenu"><a href="javascript:;" class="active">Gesti&oacute;n
-								de datos</a>
+								value="Asignación de grupos" action="asignacion"
+								id="Asignacion_grupos" /></li>
+						<li class="submenu"><a>Gestión de datos</a>
 							<ul>
-								<li><h:commandLink value="Alumnos" action="alumnos" /></li>
-								<li><h:commandLink value="Asignaturas" class="active"
-										action="asignaturas" /></li>
-								<li><h:commandLink value="Matriculas" action="matriculas" /></li>
+								<li><h:commandLink value="Alumnos" action="alumnos"
+										id="Alumnos" /></li>
+								<li><h:commandLink value="Asignaturas" action="asignaturas"
+										id="Asignaturas" class="active" /></li>
+								<li><h:commandLink value="Matriculas" action="matriculas"
+										id="Matriculas" /></li>
 							</ul></li>
 						<li class="scroll-to-section"><h:commandLink
-								value="Peticiones" action="peticiones" /></li>
+								value="Peticiones" action="peticiones" id="Peticiones" /></li>
 					</ul>
 					</nav>
 				</h:form>
@@ -52,7 +55,7 @@
 	</header>
 
 	<div class="welcome-area" id="text">
-		<div>
+		<div class="uploadArea">
 			<h:form class="uploadFile" enctype="multipart/form-data">
 				<h:inputFile id="file-id" value="#{asignaturasBean.part}"
 					requiredMessage="Es necesario subir un archivo" alt="upload file"></h:inputFile>
@@ -63,12 +66,29 @@
 				<h:commandButton id="borrarTodo" value="Vaciar datos"
 					class="btn btn-danger" action="#{asignaturasBean.vaciarDatos}"
 					onclick="return compruebaVaciadoAsignaturas()" />
-				<h:outputText class="mensajeSubida"
+				<h:outputText class="mensajeSubida" id="mensaje_subida"
 					value="#{asignaturasBean.mensaje}" />
 			</h:form>
 		</div>
 		<div class="titulo">
-			<h2>Listado de asignaturas</h2>
+			<h2 id="titulo_listado">Listado de asignaturas</h2>
+			<h:form>
+				<h:selectOneMenu id="tipo" class="custom-select"
+					value="#{asignaturasBean.filtro}"
+					valueChangeListener="#{asignaturasBean.refresh}"
+					onchange="submit()">
+					<f:selectItem itemLabel="Ingeniería Informática (1041)"
+						itemValue="GII" />
+					<f:selectItem itemLabel="Ingeniería del Software (1042)"
+						itemValue="GISw" />
+					<f:selectItem itemLabel="Ingeniería de Computadores (1043)"
+						itemValue="GIC" />
+					<f:selectItem itemLabel="Ingeniería de la Salud (1056)"
+						itemValue="GIS" />
+					<f:selectItem itemLabel="Doble Grado II+Matemáticas (1073)"
+						itemValue="DG" />
+				</h:selectOneMenu>
+			</h:form>
 		</div>
 
 		<div class="scrolltabla">
@@ -84,12 +104,31 @@
 					<h:outputText id="codigo" value="#{asig.codigo}"></h:outputText>
 				</h:column>
 				<h:column>
+					<f:facet name="header">Curso</f:facet>
+					<h:outputText id="curso" value="#{asig.curso}"></h:outputText>
+				</h:column>
+				<h:column>
 					<f:facet name="header">Nombre</f:facet>
 					<h:outputText id="nombre" value="#{asig.nombre}"></h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Cuatrimestre</f:facet>
 					<h:outputText id="Cuatrimestre" value="#{asig.cuatrimestre}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">C.T</f:facet>
+					<h:outputText id="creditos_teoricos"
+						value="#{asig.creditos_teoricos}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">C.P</f:facet>
+					<h:outputText id="creditos_practicos"
+						value="#{asig.creditos_practicos}"></h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Grupos asignados</f:facet>
+					<h:outputText id="grupos_asignados"
+						value="#{asignaturasBean.gruposAsignados(asig)}"></h:outputText>
 				</h:column>
 				<h:column>
 					<h:form>
@@ -100,6 +139,7 @@
 				</h:column>
 				<h:column>
 					<button type="button" class="btn btn-primary" data-toggle="modal"
+						id="editar_asignatura"
 						data-target="#{asignaturasBean.containerID}">
 						<h:graphicImage value="#{resource['images:gear.png']}" />
 					</button>
@@ -110,8 +150,8 @@
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">
-										Edci&oacute;n de asignatura
+									<h5 class="modal-title" id="titulo_edicion">
+										Edici&oacute;n de asignatura
 										<h:outputText value="#{asig.nombre}" />
 									</h5>
 									<button type="button" class="close" data-dismiss="modal"
@@ -140,6 +180,15 @@
 										<small id="idiomasHelp" class="form-text text-muted">Idiomas
 											y grupos en los que se imparte</small> <br /> <br />
 
+										<h:outputLabel for="grupos_imparticion">Grupos de impartición</h:outputLabel>
+										<h:selectManyCheckbox value="#{asignaturasBean.grupos}"
+											id="grupos_imparticion">
+											<f:selectItems id="elemento"
+												value="#{asignaturasBean.listaGrupos(asig.titulacion.codigo,asig.curso)}"
+												var="c" itemLabel="#{c.curso} #{c.letra}"
+												itemValue="#{c.id}" />
+										</h:selectManyCheckbox>
+
 										<div class="modal-footer">
 											<h:messages class="mensajesError" />
 											<h:commandButton id="enviar" value="Editar asignatura"
@@ -152,13 +201,12 @@
 						</div>
 					</div>
 				</h:column>
-
 			</h:dataTable>
 		</div>
 	</div>
 
-	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
-	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+	<footer id="footer"> Universidad de Málaga · Avda. Cervantes,
+	2. 29071 MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -1,7 +1,6 @@
 package es.uma.informatica.sii.backing;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -12,8 +11,8 @@ import javax.servlet.http.Part;
 
 import es.uma.informatica.sii.ejb.AlumnosImpl;
 import es.uma.informatica.sii.ejb.GestionAlumnos;
-import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
-import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.ejb.GestionMatriculas;
+import es.uma.informatica.sii.ejb.MatriculasImpl;
 import es.uma.informatica.sii.entities.Alumno;
 
 @Named
@@ -23,7 +22,8 @@ public class AlumnosBean {
 	@EJB
 	private GestionAlumnos al = new AlumnosImpl();
 
-	private Alumno alum;
+	@EJB
+	private GestionMatriculas gm = new MatriculasImpl();
 
 	private Part part;
 	private String fileName;
@@ -33,8 +33,44 @@ public class AlumnosBean {
 	private String mensaje;
 
 	public AlumnosBean() {
-		alum = new Alumno();
 		id = 0;
+	}
+
+	public String upload() {
+		String ruta = "";
+		try {
+			fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+			part.write(fileName);
+			ruta = System.getProperty("jboss.server.temp.dir") + "/grupoE-ear.ear.grupoE-war-0.0.1-SNAPSHOT.war/"
+					+ fileName;
+
+			al.importaAlumnos(ruta);
+			al.importaExpedientes(ruta);
+			gm.importaMatriculas(ruta);
+
+			File file = new File(ruta);
+			file.delete();
+
+			mensaje = "Importación correcta";
+
+			return null;
+
+		} catch (Exception e) {
+			mensaje = "Error de importación. Sin cambios";
+			if (!ruta.isEmpty()) {
+				File file = new File(ruta);
+				file.delete();
+			}
+			return null;
+		}
+	}
+
+	public String vaciarDatos() {
+		for (Alumno a : al.obtenerListaAlumnos()) {
+			al.borraAlumno(a);
+		}
+		mensaje = "Borrado correcto";
+		return null;
 	}
 
 	public List<Alumno> getAlumnos() {
@@ -57,10 +93,6 @@ public class AlumnosBean {
 		this.fileName = fileName;
 	}
 
-	public Alumno getAlumno() {
-		return alum;
-	}
-
 	public String getContainerID() {
 		id++;
 		return "#containerID" + id;
@@ -78,28 +110,4 @@ public class AlumnosBean {
 		this.mensaje = mensaje;
 	}
 
-	public String upload() throws IOException, SecretariaIOException, SecretariaException {
-
-		fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-		part.write(fileName);
-		String ruta = System.getProperty("jboss.server.temp.dir")
-				+ "/grupoE-ear-0.0.1-SNAPSHOT.ear.grupoE-war-0.0.1-SNAPSHOT.war/" + fileName;
-		al.importaAlumnos(ruta);
-		al.importaExpedientes(ruta);
-
-		File file = new File(ruta);
-		file.delete();
-
-		mensaje = "Imporación correcta";
-
-		return null;
-	}
-
-	public String vaciarDatos() {
-		for (Alumno a : al.obtenerListaAlumnos()) {
-			al.borraAlumno(a);
-		}
-		mensaje = "Borrado correcto";
-		return null;
-	}
 }
