@@ -38,5 +38,8 @@
         <dependent-module archiveName="curvesapi-1.04.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/github/virtuald/curvesapi/1.04/curvesapi-1.04.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="itextpdf-5.5.10.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/com/itextpdf/itextpdf/5.5.10/itextpdf-5.5.10.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
