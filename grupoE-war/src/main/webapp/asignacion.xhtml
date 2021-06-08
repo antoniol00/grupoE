@@ -70,14 +70,28 @@
 					<h:commandButton id="crearExcel" value="Crear excel"
 						class="btn btn-info" action="#{asignacionBean.creaExcel}" />
 				</div>
-				<h:outputText class="mensajeSubida" value="#{alumnosBean.mensaje}" />
-				<h:outputText class="mensajeSubida"
+
+				<h:outputText id="mensajeSubida" class="mensajeSubida"
 					value="#{asignacionBean.mensaje}" />
 			</h:form>
 		</div>
 		<div class="titulo">
-			<h2>Asignacion provisional</h2>
+			<h2 id="titulo_pagina">Asignacion provisional</h2>
 			<br />
+			<h4 id="subtitulo">Comprobador de colisiones</h4>
+			<h:form id="selector_colisiones">
+				<h:selectOneMenu id="tipo" class="custom-select"
+					value="#{asignacionBean.alumnoElegido}">
+					<f:selectItems id="elemento" value="#{asignacionBean.listaAlumnos}"
+						var="a"
+						itemLabel="#{a.expediente.alumno.dni}, #{a.expediente.alumno.nombre_completo}"
+						itemValue="#{a.numero_archivo}" />
+				</h:selectOneMenu>
+				<h:outputText id="textoAlumnoEscogido" class="mensajeSubida"
+					value="#{asignacionBean.existeColision()}" />
+				<h:commandButton id="boton11" class="btn btn-outline-secondary"
+					value="Comprobar" />
+			</h:form>
 		</div>
 
 		<div class="scrolltabla">
@@ -112,7 +126,8 @@
 					<h:outputText id="grupo" value="#{asig.grupo.id}"></h:outputText>
 				</h:column>
 				<h:column>
-					<button type="button" class="btn btn-primary" data-toggle="modal"
+					<button id="editar_asignacion" type="button"
+						class="btn btn-primary" data-toggle="modal"
 						data-target="#{asignacionBean.containerID}">
 						<h:graphicImage value="#{resource['images:gear.png']}" />
 					</button>
@@ -123,14 +138,14 @@
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">
+									<h5 class="modal-title" id="titulo_edicion">
 										Cambio de grupo para
 										<h:outputText value="#{asig.matricula.expediente.alumno.dni}" />
 										en
 										<h:outputText value="#{asig.asignatura.codigo}"></h:outputText>
 									</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
+									<button id="cerrar_popup" type="button" class="close"
+										data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
@@ -163,8 +178,8 @@
 		</div>
 	</div>
 
-	<footer> Universidad de Málaga · Avda. Cervantes, 2. 29071
-	MÁLAGA · Tel. 952131000 · info@uma.es </footer>
+	<footer id="footer"> Universidad de Málaga · Avda. Cervantes,
+	2. 29071 MÁLAGA · Tel. 952131000 · info@uma.es </footer>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

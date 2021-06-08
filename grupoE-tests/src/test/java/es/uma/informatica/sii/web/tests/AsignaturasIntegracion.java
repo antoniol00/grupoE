@@ -40,7 +40,7 @@ public class AsignaturasIntegracion {
 		vars = new HashMap<String, Object>();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.MINUTES);
-		driver.manage().window().setSize(new Dimension(1050, 626));
+		driver.manage().window().fullscreen();
 	}
 
 	@After

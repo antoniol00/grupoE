@@ -38,6 +38,7 @@ public class PeticionesIntegracion {
 		vars = new HashMap<String, Object>();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.MINUTES);
+		driver.manage().window().fullscreen();
 	}
 
 	@After

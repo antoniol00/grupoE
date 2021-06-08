@@ -15,7 +15,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,6 +30,8 @@ public class MatriculasIntegracion {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
+	private static String URL_ALUMNOS = "/home/alumno/git/grupoE/grupoE-ejb/DATOS/alumnos.csv";
+
 	@Before
 	public void setUp() {
 		driver = new ChromeDriver();
@@ -38,7 +39,7 @@ public class MatriculasIntegracion {
 		vars = new HashMap<String, Object>();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.MINUTES);
-		driver.manage().window().setSize(new Dimension(1050, 626));
+		driver.manage().window().fullscreen();
 	}
 
 	@After
@@ -71,7 +72,7 @@ public class MatriculasIntegracion {
 	@Test
 	public void test21InformacionCorrectaMatriculas() {
 		driver.get("http://localhost:8080/grupoE-war/faces/alumnos.xhtml");
-		driver.findElement(By.id("j_idt16:file-id")).sendKeys("/home/alumno/git/grupoE/grupoE-ejb/DATOS/alumnos.csv");
+		driver.findElement(By.id("j_idt16:file-id")).sendKeys(URL_ALUMNOS);
 		driver.findElement(By.id("j_idt16:upload")).click();
 		assertThat(driver.switchTo().alert().getText(), is(
 				"La subida de archivos debe hacerse desde alumnos.csv. Se cargaran los datos de ALUMNOS, EXPEDIENTES Y MATRICULAS. Confirmar?"));

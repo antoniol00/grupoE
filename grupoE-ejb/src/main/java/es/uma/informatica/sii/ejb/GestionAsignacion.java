@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Local;
 
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
-import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Asigna_grupos;
 import es.uma.informatica.sii.entities.Clase;
 import es.uma.informatica.sii.entities.Grupo;
@@ -66,15 +65,6 @@ public interface GestionAsignacion {
 	 * @throws SecretariaException si la clase no existe
 	 */
 	public void borraClase(String dia, String hora_inicio, String id_grupo) throws SecretariaException;
-
-	/**
-	 * Importa grupos del archivo excel pasado como parametro
-	 * 
-	 * @param file : archivo de importacion
-	 * @throws SecretariaException:   error en la importacion
-	 * @throws SecretariaIOException: error en el archivo indicado
-	 */
-	public void importaGrupos(String file) throws SecretariaException, SecretariaIOException;
 
 	// METODOS AUXILIARES
 	/**

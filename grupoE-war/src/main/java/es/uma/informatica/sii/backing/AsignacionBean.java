@@ -42,11 +42,11 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.MatriculasImpl;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
-import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Asigna_grupos;
 import es.uma.informatica.sii.entities.Asignatura;
 import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Grupos_asig;
+import es.uma.informatica.sii.entities.Matricula;
 
 @Named
 @RequestScoped
@@ -66,6 +66,7 @@ public class AsignacionBean {
 
 	private List<Grupo> listaGrupos;
 	private String grupos;
+	private String alumnoElegido;
 
 	public AsignacionBean() {
 		id = 0;
@@ -122,17 +123,22 @@ public class AsignacionBean {
 		return null;
 	}
 
-	public List<Alumno> getListaAlumnos() {
-		List<Alumno> la = new ArrayList<>();
+	public List<Matricula> getListaAlumnos() {
+		List<Matricula> la = new ArrayList<>();
 		for (Asigna_grupos ag : ga.listaAsignacionProvisional()) {
-			if (!la.contains(ag.getMatricula().getExpediente().getAlumno()))
-				la.add(ag.getMatricula().getExpediente().getAlumno());
+			if (!la.contains(ag.getMatricula()))
+				la.add(ag.getMatricula());
 		}
 		return la;
 	}
 
-	public String existeColision(Integer col) throws SecretariaException {
-		return ga.ColisionesHorario(col) ? "SI" : "NO";
+	public String existeColision() throws SecretariaException {
+		if (alumnoElegido != null) {
+			return ga.ColisionesHorario(Integer.parseInt(alumnoElegido)) ? "SI" : "NO";
+		} else {
+			return "";
+		}
+
 	}
 
 	public String getContainerID() {
@@ -285,5 +291,13 @@ public class AsignacionBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getAlumnoElegido() {
+		return alumnoElegido;
+	}
+
+	public void setAlumnoElegido(String alumnoElegido) {
+		this.alumnoElegido = alumnoElegido;
 	}
 }
