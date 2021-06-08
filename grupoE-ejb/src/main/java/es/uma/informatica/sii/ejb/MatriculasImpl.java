@@ -39,14 +39,14 @@ public class MatriculasImpl implements GestionMatriculas {
 			Reader in = new FileReader(file);
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
 			int x = 0;
-			for (CSVRecord record : records) {
+			for (CSVRecord r : records) {
 				// eliminamos las primeras 3 lineas de basura + header
 				if (x > 3) {
-					String numero_archivo = record.get("ARCHIVO");
-					String turno = record.get("TURNO");
-					String fecha_matricula = record.get("FECHA");
-					String grupos = record.get("GRUPOS");
-					String expediente = record.get("EXPEDIENTE");
+					String numero_archivo = r.get("ARCHIVO");
+					String turno = r.get("TURNO");
+					String fecha_matricula = r.get("FECHA");
+					String grupos = r.get("GRUPOS");
+					String expediente = r.get("EXPEDIENTE");
 
 					Matricula m = new Matricula();
 					m.setCurso("20/21");
@@ -62,13 +62,9 @@ public class MatriculasImpl implements GestionMatriculas {
 					} else {
 						m.setTipo_estudio("GRADO");
 					}
-					if (record.get("CREDITOS").equals("0")
+					m.setNuevo_ingreso(r.get("CREDITOS").equals("0")
 							&& (grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-")
-									|| grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-,111-"))) {
-						m.setNuevo_ingreso(true);
-					} else {
-						m.setNuevo_ingreso(false);
-					}
+									|| grupos.equals("101-,102-,103-,104-,105-,106-,107-,108-,109-,110-,111-")));
 
 					m.setFecha_matricula(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(fecha_matricula));
 
@@ -118,7 +114,7 @@ public class MatriculasImpl implements GestionMatriculas {
 
 	}
 
-	//METODOS AUXILIARES
+	// METODOS AUXILIARES
 	@Override
 	public Matricula obtenerMatricula(String curso, Integer expediente) throws SecretariaException {
 		MatriculaPK mpk = new MatriculaPK();

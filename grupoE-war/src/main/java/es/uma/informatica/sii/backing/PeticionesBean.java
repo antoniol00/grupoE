@@ -25,7 +25,10 @@ public class PeticionesBean {
 	private GestionAlumnos al = new AlumnosImpl();
 
 	private Peticion p;
-	private String DNI, containerID, prevID, mensaje;
+	private String DNI;
+	private String containerID;
+	private String prevID;
+	private String mensaje;
 	private int id;
 
 	public PeticionesBean() {

@@ -68,6 +68,8 @@ public class AsignacionBean {
 	private String grupos;
 	private String alumnoElegido;
 
+	private String path = "/opt/jboss/";
+
 	public AsignacionBean() {
 		id = 0;
 	}
@@ -111,14 +113,10 @@ public class AsignacionBean {
 		return res;
 	}
 
-	public String edita(Asigna_grupos x) {
+	public String edita(Asigna_grupos x) throws SecretariaException {
 
-		try {
-			ga.modificaGrupo(x.getAsignatura().getCodigo(), x.getAsignatura().getTitulacion().getCodigo(),
-					x.getMatricula().getCurso(), x.getMatricula().getExpediente().getNumero(), grupos);
-		} catch (SecretariaException e) {
-			return null;
-		}
+		ga.modificaGrupo(x.getAsignatura().getCodigo(), x.getAsignatura().getTitulacion().getCodigo(),
+				x.getMatricula().getCurso(), x.getMatricula().getExpediente().getNumero(), grupos);
 
 		return null;
 	}
@@ -206,7 +204,7 @@ public class AsignacionBean {
 			document.add(table);
 			document.close();
 
-			File file = new File("/opt/jboss/" + filename);
+			File file = new File(path + filename);
 			String fileName = file.getName();
 			int contentLength = (int) file.length();
 
@@ -231,46 +229,46 @@ public class AsignacionBean {
 	}
 
 	public void creaExcel() {
-		Workbook workbook = new HSSFWorkbook();
-		Sheet sheet = workbook.createSheet("Asignacion provisional");
+		try (Workbook workbook = new HSSFWorkbook()) {
+			Sheet sheet = workbook.createSheet("Asignacion provisional");
 
-		Map<String, Object[]> datos = new TreeMap<String, Object[]>();
-		datos.put("1", new Object[] { "Expediente", "DNI", "Nombre", "Curso", "Asignatura", "Grupo" });
-		int x = 2;
-		for (Asigna_grupos ag : ga.listaAsignacionProvisional()) {
-			datos.put(Integer.toString(x),
-					new Object[] { ag.getMatricula().getExpediente().getNumero().toString(),
-							ag.getMatricula().getExpediente().getAlumno().getDni(),
-							ag.getMatricula().getExpediente().getAlumno().getNombre_completo(),
-							ag.getAsignatura().getCurso().toString(), ag.getAsignatura().getCodigo().toString(),
-							ag.getGrupo().getLetra() });
-			x++;
-		}
+			Map<String, Object[]> datos = new TreeMap<>();
+			datos.put("1", new Object[] { "Expediente", "DNI", "Nombre", "Curso", "Asignatura", "Grupo" });
+			int x = 2;
+			for (Asigna_grupos ag : ga.listaAsignacionProvisional()) {
+				datos.put(Integer.toString(x),
+						new Object[] { ag.getMatricula().getExpediente().getNumero().toString(),
+								ag.getMatricula().getExpediente().getAlumno().getDni(),
+								ag.getMatricula().getExpediente().getAlumno().getNombre_completo(),
+								ag.getAsignatura().getCurso().toString(), ag.getAsignatura().getCodigo().toString(),
+								ag.getGrupo().getLetra() });
+				x++;
+			}
 
-		Set<String> keyset = datos.keySet();
-		int numeroRenglon = 0;
-		for (String key : keyset) {
-			Row row = sheet.createRow(numeroRenglon++);
-			Object[] arregloObjetos = datos.get(key);
-			int numeroCelda = 0;
-			for (Object obj : arregloObjetos) {
-				Cell cell = row.createCell(numeroCelda++);
-				if (obj instanceof String) {
-					cell.setCellValue((String) obj);
-				} else if (obj instanceof Integer) {
-					cell.setCellValue((Integer) obj);
+			Set<String> keyset = datos.keySet();
+			int numeroRenglon = 0;
+			for (String key : keyset) {
+				Row row = sheet.createRow(numeroRenglon++);
+				Object[] arregloObjetos = datos.get(key);
+				int numeroCelda = 0;
+				for (Object obj : arregloObjetos) {
+					Cell cell = row.createCell(numeroCelda++);
+					if (obj instanceof String) {
+						cell.setCellValue((String) obj);
+					} else if (obj instanceof Integer) {
+						cell.setCellValue((Integer) obj);
+					}
 				}
 			}
-		}
-		try {
+
 			String filename = new SimpleDateFormat("'asignacionProvisional'yyyy-dd-MM-HHmmss'.xlsx'")
 					.format(new Date());
-			FileOutputStream out = new FileOutputStream(new File("/opt/jboss/" + filename));
+			FileOutputStream out = new FileOutputStream(new File(path + filename));
 			workbook.write(out);
 			out.close();
 			workbook.close();
 
-			File file = new File("/opt/jboss/" + filename);
+			File file = new File(path + filename);
 			String fileName = file.getName();
 			int contentLength = (int) file.length();
 
@@ -289,7 +287,7 @@ public class AsignacionBean {
 
 			Files.delete(file.toPath());
 		} catch (Exception e) {
-			e.printStackTrace();
+			mensaje = "Error en la creacion del documento";
 		}
 	}
 

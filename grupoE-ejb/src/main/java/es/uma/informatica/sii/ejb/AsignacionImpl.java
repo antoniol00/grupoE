@@ -65,7 +65,7 @@ public class AsignacionImpl implements GestionAsignacion {
 				.filter(a -> a.getMatricula().getNumero_archivo() == matricula).collect(Collectors.toList());
 
 		if (!lista.isEmpty()) {
-			HashSet<String> hss = new HashSet<String>();
+			HashSet<String> hss = new HashSet<>();
 			for (Asigna_grupos ag : lista) {
 				hss.add(ag.getGrupo().getTurno());
 			}

@@ -1,10 +1,8 @@
 package es.uma.informatica.sii.entities;
 
-import es.uma.informatica.sii.entities.Asignatura;
 import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.String;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
 
 /**
  * Entity implementation class for Entity: Optativa
@@ -19,14 +17,16 @@ public class Optativa extends Asignatura implements Serializable {
 
 	public Optativa() {
 		super();
-	}   
+	}
+
 	public Integer getPlazas() {
 		return this.plazas;
 	}
 
 	public void setPlazas(Integer plazas) {
 		this.plazas = plazas;
-	}   
+	}
+
 	public String getMencion() {
 		return this.mencion;
 	}
@@ -34,6 +34,5 @@ public class Optativa extends Asignatura implements Serializable {
 	public void setMencion(String mencion) {
 		this.mencion = mencion;
 	}
-	
-   
+
 }

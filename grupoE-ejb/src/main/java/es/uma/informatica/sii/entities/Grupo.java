@@ -34,11 +34,11 @@ public class Grupo implements Serializable {
 	private Integer plazas;
 	private String asignar;
 
-	@OneToMany(mappedBy = "grupo")
+	@OneToMany(mappedBy = "grupoReflexivo")
 	private List<Grupo> grupos;
 
 	@ManyToOne
-	private Grupo grupo;
+	private Grupo grupoReflexivo;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -131,12 +131,12 @@ public class Grupo implements Serializable {
 		this.grupos = grupos;
 	}
 
-	public Grupo getGrupo() {
-		return grupo;
+	public Grupo getGrupoReflexivo() {
+		return grupoReflexivo;
 	}
 
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
+	public void setGrupoReflexivo(Grupo grupo) {
+		this.grupoReflexivo = grupo;
 	}
 
 	public Titulacion getTitulacion() {

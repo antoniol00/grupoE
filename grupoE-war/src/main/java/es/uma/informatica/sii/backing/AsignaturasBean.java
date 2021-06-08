@@ -26,9 +26,7 @@ import es.uma.informatica.sii.entities.Grupos_asig;
 @ViewScoped
 @SuppressWarnings("unused")
 public class AsignaturasBean implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -39,7 +37,7 @@ public class AsignaturasBean implements Serializable {
 
 	private Asignatura asig;
 
-	private Part part;
+	private transient Part part;
 	private String fileName;
 	private String mensaje;
 
@@ -72,8 +70,9 @@ public class AsignaturasBean implements Serializable {
 			return list.stream().filter(a -> a.getTitulacion().getCodigo() == 1056).collect(Collectors.toList());
 		case "DG":
 			return list.stream().filter(a -> a.getTitulacion().getCodigo() == 1073).collect(Collectors.toList());
+		default:
+			return list;
 		}
-		return null;
 	}
 
 	public String eliminarAsignatura(Asignatura asig) throws SecretariaException {
@@ -113,20 +112,20 @@ public class AsignaturasBean implements Serializable {
 			ga.importaAsignaturas(ruta);
 
 			File file = new File(ruta);
-			file.delete();
+			if (!file.delete())
+				mensaje = "Error de importación. Sin cambios";
 
 			mensaje = "Importación correcta";
-
-			return null;
 
 		} catch (Exception e) {
 			mensaje = "Error de importación. Sin cambios";
 			if (!ruta.isEmpty()) {
 				File file = new File(ruta);
-				file.delete();
+				if (!file.delete())
+					mensaje = "Error de importación. Sin cambios";
 			}
-			return null;
 		}
+		return null;
 	}
 
 	public String vaciarDatos() throws SecretariaException {

@@ -13,6 +13,7 @@ import es.uma.informatica.sii.ejb.AlumnosImpl;
 import es.uma.informatica.sii.ejb.GestionAlumnos;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.MatriculasImpl;
+import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
 import es.uma.informatica.sii.entities.Alumno;
 
 @Named
@@ -49,20 +50,21 @@ public class AlumnosBean {
 			gm.importaMatriculas(ruta);
 
 			File file = new File(ruta);
-			file.delete();
+			if (!file.delete()) {
+				throw new SecretariaIOException();
+			}
 
 			mensaje = "Importación correcta";
-
-			return null;
 
 		} catch (Exception e) {
 			mensaje = "Error de importación. Sin cambios";
 			if (!ruta.isEmpty()) {
 				File file = new File(ruta);
-				file.delete();
+				if (!file.delete())
+					mensaje = "Error de importación. Sin cambios";
 			}
-			return null;
 		}
+		return null;
 	}
 
 	public String vaciarDatos() {

@@ -80,10 +80,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						as.setCodigo(Integer.parseInt(codigo.substring(0, 3)));
 						as.setCreditos_teoricos(Double.parseDouble(teoria));
 						as.setCreditos_practicos(Double.parseDouble(practica));
-						if (ofertada.equalsIgnoreCase("N"))
-							as.setOfertada(false);
-						else
-							as.setOfertada(true);
+						as.setOfertada(ofertada.equalsIgnoreCase("S"));
 						as.setNombre(nombre);
 						as.setCurso(Integer.parseInt(curso.substring(0, 1)));
 						as.setCuatrimestre(Integer.parseInt(cuatrimestre.substring(0, 1)));
@@ -138,10 +135,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 					as.setCodigo(Integer.parseInt(codigo.substring(0, 3)));
 					as.setCreditos_teoricos(Double.parseDouble(teoria));
 					as.setCreditos_practicos(Double.parseDouble(practica));
-					if (ofertada.equalsIgnoreCase("N"))
-						as.setOfertada(false);
-					else
-						as.setOfertada(true);
+					as.setOfertada(ofertada.equalsIgnoreCase("S"));
 					as.setNombre(nombre);
 					as.setCurso(Integer.parseInt(curso.substring(0, 1)));
 					as.setCuatrimestre(Integer.parseInt(cuatrimestre.substring(0, 1)));

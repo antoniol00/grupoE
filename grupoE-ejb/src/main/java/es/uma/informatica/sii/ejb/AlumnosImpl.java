@@ -26,6 +26,18 @@ public class AlumnosImpl implements GestionAlumnos {
 	@PersistenceContext(name = "grupoE")
 	private EntityManager em;
 
+	private String DOCUMENTO = "DOCUMENTO", NOMBRE = "NOMBRE", APELLIDO1 = "APELLIDO1", APELLIDO2 = "APELLIDO2",
+			EXPEDIENTE = "EXPEDIENTE", ARCHIVO = "ARCHIVO", EMAILINST = "EMAIL_INST", EMAILPER = "EMAIL_PER",
+			FIJO = "FIJO", MOVIL = "MOVIL", DIR = "DIR", LOCAL = "LOCAL", PRO = "PRO", CP = "CP", FECHA = "FECHA",
+			TURNO = "TURNO", GRUPOS = "GRUPOS", NOTA = "NOTA", CREDITOS = "CREDITOS", CREDITOSFB = "CREDITOS_FB",
+			CREDITOSOB = "CREDITOS_OB", CREDITOSOP = "CREDITOS_OP", CREDITOSCF = "CREDITOSCF",
+			CREDITOSPE = "CREDITOS_PE", CREDITOSTF = "CREDITOS_TF";
+
+	// string de cabeceras para archivo alumnos.csv
+	private String[] HEADERS = { DOCUMENTO, NOMBRE, APELLIDO1, APELLIDO2, EXPEDIENTE, ARCHIVO, EMAILINST, EMAILPER,
+			FIJO, MOVIL, DIR, LOCAL, PRO, CP, FECHA, TURNO, GRUPOS, NOTA, CREDITOS, CREDITOSFB, CREDITOSOB, CREDITOSOP,
+			CREDITOSCF, CREDITOSPE, CREDITOSTF };
+
 	/**
 	 * El fichero alumnos se encuentra en ./DATOS/alumnos.csv Para completar la
 	 * tabla ALUMNOS esta sería la correspondencia entre columnas del csv y excel:
@@ -44,38 +56,32 @@ public class AlumnosImpl implements GestionAlumnos {
 	@Override
 	public void importaAlumnos(String file) throws SecretariaIOException, SecretariaException {
 		try {
-			// string de cabeceras para archivo alumnos.csv
-			String[] HEADERS = { "DOCUMENTO", "NOMBRE", "APELLIDO1", "APELLIDO2", "EXPEDIENTE", "ARCHIVO", "EMAIL_INST",
-					"EMAIL_PER", "FIJO", "MOVIL", "DIR", "LOCAL", "PRO", "CP", "FECHA", "TURNO", "GRUPOS", "NOTA",
-					"CREDITOS", "CREDITOS_FB", "CREDITOS_OB", "CREDITOS_OP", "CREDITOS_CF", "CREDITOS_PE",
-					"CREDITOS_TF" };
-
 			// RELLENAMOS TABLA ALUMNOS
 			Reader in = new FileReader(file);
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in);
 			int x = 0;
-			for (CSVRecord record : records) {
+			for (CSVRecord r : records) {
 				// eliminamos las primeras 3 lineas de basura + header
 				if (x > 3) {
-					String dni = record.get("DOCUMENTO");
-					String nombre_completo = record.get("NOMBRE") + " " + record.get("APELLIDO1") + " "
-							+ record.get("APELLIDO2");
-					String email_inst = record.get("EMAIL_INST");
-					String email_per = record.get("EMAIL_PER");
-					String fijo = record.get("FIJO");
-					String movil = record.get("MOVIL");
-					String dir_not = record.get("DIR");
-					String loc_not = record.get("LOCAL");
-					String pro_not = record.get("PRO");
-					String cp = record.get("CP");
+					String dni = r.get(DOCUMENTO);
+					String nombre_completo = r.get(NOMBRE) + " " + r.get(APELLIDO1) + " "
+							+ r.get(APELLIDO2);
+					String email_inst = r.get(EMAILINST);
+					String email_per = r.get(EMAILPER);
+					String fijo = r.get(FIJO);
+					String movil = r.get(MOVIL);
+					String dir_not = r.get(DIR);
+					String loc_not = r.get(LOCAL);
+					String pro_not = r.get(PRO);
+					String cp = r.get(CP);
 
 					Alumno al = new Alumno();
 					al.setDni(dni);
 					al.setNombre_completo(nombre_completo);
 					al.setEmail_institucional(email_inst);
 					al.setEmail_personal(email_per);
-					al.setTelefono_fijo(Integer.parseInt(fijo.replaceAll(" ", "")));
-					al.setTelefono_movil(Integer.parseInt(movil.replaceAll(" ", "")));
+					al.setTelefono_fijo(Integer.parseInt(fijo.replace(" ", "")));
+					al.setTelefono_movil(Integer.parseInt(movil.replace(" ", "")));
 					al.setDireccion_notificacion(dir_not);
 					al.setLocalidad_notificacion(loc_not);
 					al.setProvincia_notificacion(pro_not);
@@ -98,26 +104,20 @@ public class AlumnosImpl implements GestionAlumnos {
 	@Override
 	public void importaExpedientes(String file) throws SecretariaIOException, SecretariaException {
 		try {
-			// string de cabeceras para archivo alumnos.csv
-			String[] HEADERS = { "DOCUMENTO", "NOMBRE", "APELLIDO1", "APELLIDO2", "EXPEDIENTE", "ARCHIVO", "EMAIL_INST",
-					"EMAIL_PER", "FIJO", "MOVIL", "DIR", "LOCAL", "PRO", "CP", "FECHA", "TURNO", "GRUPOS", "NOTA",
-					"CREDITOS", "CREDITOS_FB", "CREDITOS_OB", "CREDITOS_OP", "CREDITOS_CF", "CREDITOS_PE",
-					"CREDITOS_TF" };
-
 			// RELLENAMOS TABLA EXPEDIENTE
 			Reader in2 = new FileReader(file);
 			Iterable<CSVRecord> records2 = CSVFormat.DEFAULT.withHeader(HEADERS).withDelimiter(';').parse(in2);
 			int y = 0;
-			for (CSVRecord record : records2) {
+			for (CSVRecord r : records2) {
 				// eliminamos las primeras 3 lineas de basura + header
 				if (y > 3) {
-					String numero = record.get("EXPEDIENTE");
-					String nota = record.get("NOTA");
-					String creditos_fb = record.get("CREDITOS_FB");
-					String creditos_ob = record.get("CREDITOS_OB");
-					String creditos_pe = record.get("CREDITOS_PE");
-					String creditos_tf = record.get("CREDITOS_TF");
-					String dni = record.get("DOCUMENTO");
+					String numero = r.get(EXPEDIENTE);
+					String nota = r.get(NOTA);
+					String creditos_fb = r.get(CREDITOSFB);
+					String creditos_ob = r.get(CREDITOSOB);
+					String creditos_pe = r.get(CREDITOSPE);
+					String creditos_tf = r.get(CREDITOSTF);
+					String dni = r.get(DOCUMENTO);
 
 					Expediente ex = new Expediente();
 					ex.setNumero(Integer.parseInt(numero));
