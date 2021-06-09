@@ -17,7 +17,9 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.entities.Alumno;
 import es.uma.informatica.sii.entities.Asigna_grupos;
+import es.uma.informatica.sii.entities.Expediente;
 
 public class PruebaAlumnos {
 
@@ -49,6 +51,22 @@ public class PruebaAlumnos {
 		assertEquals("Error al importar alumnos", 1508, gestionAlumnos.obtenerListaAlumnos().size());
 	}
 
+	// Buscar alumno existente no debe devolver error
+	@Requisitos({ "RF2.1" })
+	public void testObtenerAlumnoExistente() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv"); // importo alumnos
+		Alumno a = gestionAlumnos.obtenerListaAlumnos().get(0);
+		Alumno e = gestionAlumnos.obtenerAlumno(a.getDni());
+		assertEquals("DNI no coincidiente", a.getDni(), e.getDni());
+	}
+
+	// Buscar alumno no existente debe devolver excepcion
+	@Requisitos({ "RF2.1" })
+	@Test(expected = SecretariaException.class)
+	public void testObtenerAlumnoNoExistente() throws SecretariaException, SecretariaIOException {
+		Alumno a = gestionAlumnos.obtenerAlumno("X");
+	}
+
 	// Importar expedientes debe devolver una lista no vacia de 1508 entradas
 	@Requisitos({ "RF2.1" })
 	@Test
@@ -57,6 +75,32 @@ public class PruebaAlumnos {
 		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv");
 		assertNotEquals("Error al importar expedientes", 0, gestionAlumnos.obtenerListaExpedientes().size());
 		assertEquals("Error al importar expedientes", 1508, gestionAlumnos.obtenerListaExpedientes().size());
+	}
+
+	// Buscar expediente existente no debe devolver error
+	@Requisitos({ "RF2.1" })
+	public void testObtenerExpedienteExistente() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv");
+		Expediente ex = gestionAlumnos.obtenerListaExpedientes().get(0);
+		Expediente e = gestionAlumnos.obtenerExpediente(ex.getNumero());
+		assertEquals("Numero de exp no coincidiente", ex.getNumero(), e.getNumero());
+	}
+
+	// Buscar expediente no existente debe devolver excepcion
+	@Requisitos({ "RF2.1" })
+	@Test(expected = SecretariaException.class)
+	public void testObtenerExpedienteNoExistente() throws SecretariaException, SecretariaIOException {
+		Expediente ex = gestionAlumnos.obtenerExpediente(0);
+	}
+
+	// Borrar alumno existente
+	@Requisitos({ "RF2.1" })
+	public void testBorraAlumnoExistente() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
+		String dni = gestionAlumnos.obtenerListaAlumnos().get(0).getDni();
+		gestionAlumnos.borraAlumno(gestionAlumnos.obtenerListaAlumnos().get(0));
+		assertNotEquals(1508, gestionAlumnos.obtenerListaAlumnos().size());
 	}
 
 	// Al modificar un alumno se modifican los cambios especificados en la bbdd

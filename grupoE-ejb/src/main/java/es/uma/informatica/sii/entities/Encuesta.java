@@ -2,14 +2,12 @@ package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +32,6 @@ public class Encuesta implements Serializable {
 	@JoinColumn(name = "EXPEDIENTE")
 	private Expediente expediente;
 
-	@ManyToMany(mappedBy = "encuestas")
-	private List<Grupos_asig> asigYGrupo;
-
 	private static final long serialVersionUID = 1L;
 
 	public Encuesta() {
@@ -57,14 +52,6 @@ public class Encuesta implements Serializable {
 
 	public void setExpediente(Expediente expediente) {
 		this.expediente = expediente;
-	}
-
-	public List<Grupos_asig> getAsigYGrupo() {
-		return asigYGrupo;
-	}
-
-	public void setAsigYGrupo(List<Grupos_asig> asigYGrupo) {
-		this.asigYGrupo = asigYGrupo;
 	}
 
 	@Override

@@ -74,7 +74,21 @@ public class PruebaMatriculas {
 
 	@Requisitos({ "RF3.2" })
 	@Test(expected = SecretariaException.class)
-	public void tesListarMatriculasConFiltroNoValido() throws SecretariaException, SecretariaIOException {
+	public void testListarMatriculasConFiltroNoValido() throws SecretariaException, SecretariaIOException {
 		gestionMatriculas.listaMatriculas("x");
+	}
+
+	@Requisitos({ "RF3.2" })
+	public void testObtenerMatriculaExistente() throws SecretariaException, SecretariaIOException {
+		Matricula e = gestionMatriculas.listaMatriculas("DATE").get(0);
+		Matricula m = gestionMatriculas.obtenerMatricula(e.getCurso(), e.getExpediente().getNumero());
+		assertEquals("Curso no coincidiente", e.getCurso(), m.getCurso());
+		assertEquals("Expediente no coincidiente", e.getExpediente(), m.getExpediente());
+	}
+
+	@Requisitos({ "RF3.2" })
+	@Test(expected = SecretariaException.class)
+	public void testObtenerMatriculaNoExistente() throws SecretariaException, SecretariaIOException {
+		Matricula m = gestionMatriculas.obtenerMatricula("x", 0);
 	}
 }

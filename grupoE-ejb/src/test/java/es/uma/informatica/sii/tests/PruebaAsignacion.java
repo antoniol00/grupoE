@@ -1,7 +1,9 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -17,6 +19,9 @@ import es.uma.informatica.sii.ejb.GestionAsignaturas;
 import es.uma.informatica.sii.ejb.GestionMatriculas;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaException;
 import es.uma.informatica.sii.ejb.exceptions.SecretariaIOException;
+import es.uma.informatica.sii.entities.Asigna_grupos;
+import es.uma.informatica.sii.entities.Clase;
+import es.uma.informatica.sii.entities.Grupo;
 import es.uma.informatica.sii.entities.Matricula;
 
 public class PruebaAsignacion {
@@ -82,6 +87,75 @@ public class PruebaAsignacion {
 		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
 		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
 
-		assertNotEquals("Tabla no creada", 0,gestionAsignacion.listaAsignacionProvisional().size());
+		assertNotEquals("Tabla no creada", 0, gestionAsignacion.listaAsignacionProvisional().size());
+	}
+
+	// comprueba que la tabla asignacion se ha rellenado correctamente
+	@Requisitos({ "RF5.2", "RF5.3" })
+	@Test
+	public void testBorrarAsignacionGrupo() throws SecretariaException, SecretariaIOException {
+		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv"); // importo alumnos
+		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv"); // importo expedientes
+		gestionMatriculas.importaMatriculas("./DATOS/alumnos.csv"); // importo matriculas
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
+
+		for (Asigna_grupos a : gestionAsignacion.listaAsignacionProvisional()) {
+			gestionAsignacion.borraAsignacion(a);
+		}
+		assertTrue(gestionAsignacion.listaAsignacionProvisional().isEmpty());
+	}
+
+	@Requisitos({ "RF5.3" })
+	@Test(expected = SecretariaException.class)
+	public void testCrearGrupo() throws SecretariaException {
+		Grupo gs1 = gestionAsignacion.obtenerGrupo("g0");
+		gs1.setId("testGrupo");
+		gestionAsignacion.creaGrupo(gs1);
+		assertEquals(gs1, gestionAsignacion.obtenerGrupo("testGrupo"));
+		gestionAsignacion.creaGrupo(gs1);
+	}
+
+	@Requisitos({ "RF5.3" })
+	@Test(expected = SecretariaException.class)
+	public void testBorrarGrupo() throws SecretariaException {
+		Grupo gs1 = gestionAsignacion.obtenerGrupo("g0");
+		gs1.setId("testGrupo");
+		gestionAsignacion.creaGrupo(gs1);
+		gestionAsignacion.borraGrupo("testGrupo");
+		assertFalse(gestionAsignacion.listaGrupos().contains(gs1));
+		gestionAsignacion.borraGrupo("testGrupo");
+	}
+
+	@Requisitos({ "RF5.3" })
+	@Test(expected = SecretariaException.class)
+	public void testCrearClase() throws SecretariaException, SecretariaIOException {
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		Clase c = new Clase();
+		c.setDia("L");
+		c.setHora_inicio("9");
+		c.setHora_fin("10");
+		c.setAsignatura(gestionAsignaturas.listarAsignaturas().get(0));
+		c.setGrupo(gestionAsignacion.obtenerGrupo("g0"));
+		gestionAsignacion.creaClase(c);
+		assertFalse(gestionAsignacion.listaClases().isEmpty());
+		gestionAsignacion.creaClase(c);
+	}
+
+	@Requisitos({ "RF5.3" })
+	@Test(expected = SecretariaException.class)
+	public void testBorrarClase() throws SecretariaException, SecretariaIOException {
+		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
+		Clase c = new Clase();
+		c.setDia("L");
+		c.setHora_inicio("9");
+		c.setHora_fin("10");
+		c.setAsignatura(gestionAsignaturas.listarAsignaturas().get(0));
+		c.setGrupo(gestionAsignacion.obtenerGrupo("g0"));
+		gestionAsignacion.creaClase(c);
+		Clase t = gestionAsignacion.obtenerClase("L", "9", "g0");
+		gestionAsignacion.borraClase(t.getDia(), t.getHora_inicio(), t.getGrupo().getId());
+		assertTrue(gestionAsignacion.listaClases().isEmpty());
+		gestionAsignacion.borraClase("L", "9", "g0");
 	}
 }

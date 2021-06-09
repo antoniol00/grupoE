@@ -64,7 +64,7 @@ public class PeticionesImpl implements GestionPeticiones {
 		ppk.setDate(date);
 		Peticion pe = em.find(Peticion.class, ppk);
 		if (pe == null) {
-			throw new SecretariaException("Se ha intentado borrar una incidencia que no esta en la base de datos");
+			throw new SecretariaException("Se ha intentado obtener una incidencia que no esta en la base de datos");
 		}
 		return pe;
 	}

@@ -63,6 +63,11 @@ public class BaseDatos {
 				em.persist(t);
 			}
 		}
+		Titulacion t = new Titulacion();
+		t.setCodigo(100);
+		t.setNombre("OPT");
+		t.setCreditos(0);
+		em.persist(t);
 
 		int[] index = { 1041, 1042, 1043, 1056, 1073 };
 		int x = 0;

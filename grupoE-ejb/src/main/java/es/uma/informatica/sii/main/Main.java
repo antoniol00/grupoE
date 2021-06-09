@@ -10,9 +10,8 @@ public class Main {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("grupoE");
 		EntityManager em = emf.createEntityManager();
 
-		emf.close();
 		em.close();
-
+		emf.close();
 	}
 
 }

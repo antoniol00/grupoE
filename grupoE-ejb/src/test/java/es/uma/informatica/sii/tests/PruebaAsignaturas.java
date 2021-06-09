@@ -44,6 +44,14 @@ public class PruebaAsignaturas {
 		assertNotEquals("Error al importar asignaturas", 0, gestionAsignaturas.listarAsignaturas().size());
 	}
 
+	// Importar asignaturas debe devolver una lista no vacia
+	@Requisitos({ "RF1.1" })
+	@Test
+	public void testImportarOptativasListaNoVacia() throws SecretariaIOException, SecretariaException {
+		gestionAsignaturas.importaOptativas("./DATOS/asignaturas.xlsx");
+		assertNotEquals("Error al importar asignaturas", 0, gestionAsignaturas.listarAsignaturas().size());
+	}
+
 	// Importar asignaturas debe devolver una lista con 364 entradas
 	@Requisitos({ "RF1.1" })
 	@Test
@@ -150,6 +158,25 @@ public class PruebaAsignaturas {
 		ga.setGrupo(g);
 
 		assertTrue("Lista no contiene grupo creado", gestionAsignaturas.listarGrupoXAsignaturas().contains(ga));
+
+	}
+
+	@Requisitos({ "RF1.4" })
+	@Test
+	public void borrarDefinicionGrupoAsignatura() throws SecretariaException, SecretariaIOException {
+		Asignatura as = gestionAsignaturas.listarAsignaturas().get(0);
+		Grupo g = gestionAsignacion.listaGrupos().get(1);
+
+		gestionAsignaturas.definirGrupos(as.getCodigo(), as.getTitulacion().getCodigo(), g.getId(), "22/23");
+
+		Grupos_asig ga = new Grupos_asig();
+		ga.setAsignatura(as);
+		ga.setCurso("22/23");
+		ga.setGrupo(g);
+
+		gestionAsignaturas.borrarDefinirGrupos(ga);
+
+		assertTrue("Lista contiene grupo borrado", gestionAsignaturas.listarGrupoXAsignaturas().isEmpty());
 
 	}
 

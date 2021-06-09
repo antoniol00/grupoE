@@ -40,8 +40,7 @@ public class AsignaturasImpl implements GestionAsignaturas {
 			XSSFWorkbook workbook = new XSSFWorkbook(filex);
 			XSSFSheet sheet;
 			Iterator<Row> rowIterator;
-			// IMPORTAMOS DE GII, GISw, GICom y GII+GM (x)
-			int[] index = { 2, 3, 4, 6 };
+			int[] index = { 2, 3, 4, 5, 6 };
 			for (int x : index) {
 				sheet = workbook.getSheetAt(x);
 				rowIterator = sheet.iterator();
@@ -73,7 +72,6 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						String teoria = values.get(6);
 						String practica = values.get(7);
 						String cuatrimestre = values.get(9);
-						String ingles = values.get(11);
 
 						Asignatura as = new Asignatura();
 						as.setReferencia(Integer.parseInt(referencia.substring(0, 5)));
@@ -84,7 +82,10 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						as.setNombre(nombre);
 						as.setCurso(Integer.parseInt(curso.substring(0, 1)));
 						as.setCuatrimestre(Integer.parseInt(cuatrimestre.substring(0, 1)));
-						as.setIdiomas(ingles);
+						if (x != 5) {
+							String ingles = values.get(11);
+							as.setIdiomas(ingles);
+						}
 						Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion.substring(0, 4)));
 						if (t == null) {
 							throw new SecretariaException(
@@ -96,59 +97,6 @@ public class AsignaturasImpl implements GestionAsignaturas {
 					}
 				}
 			}
-
-			// IMPORTAMOS DE GIS
-
-			sheet = workbook.getSheetAt(5);
-			rowIterator = sheet.iterator();
-			rowIterator.next();
-			while (rowIterator.hasNext()) {
-				Row row = rowIterator.next();
-				Iterator<Cell> cellIterator = row.cellIterator();
-				ArrayList<String> values = new ArrayList<>();
-				while (cellIterator.hasNext()) {
-					Cell cell = cellIterator.next();
-					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_NUMERIC:
-						values.add(Double.toString(cell.getNumericCellValue()));
-						break;
-					case Cell.CELL_TYPE_STRING:
-						values.add(cell.getStringCellValue());
-						break;
-					default:
-						values.add("");
-					}
-				}
-				if (!values.get(0).equals("")) {
-					String titulacion = values.get(0);
-					String ofertada = values.get(1);
-					String codigo = values.get(2);
-					String referencia = values.get(3);
-					String nombre = values.get(4);
-					String curso = values.get(5);
-					String teoria = values.get(6);
-					String practica = values.get(7);
-					String cuatrimestre = values.get(9);
-
-					Asignatura as = new Asignatura();
-					as.setReferencia(Integer.parseInt(referencia.substring(0, 5)));
-					as.setCodigo(Integer.parseInt(codigo.substring(0, 3)));
-					as.setCreditos_teoricos(Double.parseDouble(teoria));
-					as.setCreditos_practicos(Double.parseDouble(practica));
-					as.setOfertada(ofertada.equalsIgnoreCase("S"));
-					as.setNombre(nombre);
-					as.setCurso(Integer.parseInt(curso.substring(0, 1)));
-					as.setCuatrimestre(Integer.parseInt(cuatrimestre.substring(0, 1)));
-					Titulacion t = em.find(Titulacion.class, Integer.parseInt(titulacion.substring(0, 4)));
-					if (t == null) {
-						throw new SecretariaException(
-								"Se ha intentado crear una asignatura para una titulacion que no existe");
-					}
-					as.setTitulacion(t);
-					em.persist(as);
-				}
-			}
-
 			workbook.close();
 			filex.close();
 		} catch (IOException e) {
@@ -217,8 +165,8 @@ public class AsignaturasImpl implements GestionAsignaturas {
 						o.setCreditos_teoricos(as.getCreditos_teoricos());
 						o.setOfertada(as.getOfertada());
 						o.setNombre(as.getNombre());
-						o.setTitulacion(as.getTitulacion());
-						em.merge(o);
+						o.setTitulacion(em.find(Titulacion.class, 100));
+						em.persist(o);
 					}
 				}
 			}

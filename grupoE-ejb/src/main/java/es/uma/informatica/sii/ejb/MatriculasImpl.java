@@ -57,7 +57,7 @@ public class MatriculasImpl implements GestionMatriculas {
 					} else {
 						m.setTurno("M");
 					}
-					if (expediente.substring(0, 3).equalsIgnoreCase("1073")) {
+					if (expediente.substring(0, 4).equalsIgnoreCase("1073")) {
 						m.setTipo_estudio("DOBLEGRADO");
 					} else {
 						m.setTipo_estudio("GRADO");

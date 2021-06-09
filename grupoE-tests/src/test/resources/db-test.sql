@@ -3,6 +3,7 @@ INSERT INTO Titulacion VALUES(1042,240,'Grado en Ingenieria del Software');
 INSERT INTO Titulacion VALUES(1043,240,'Grado en Ingenieria de Computadores');
 INSERT INTO Titulacion VALUES(1056,240,'Grado en Ingenieria de la Salud');
 INSERT INTO Titulacion VALUES(1073,372,'Doble Grado en Ingenieria Informatica y Matematicas');
+INSERT INTO Titulacion VALUES(100,0,'OPT');
 
 INSERT INTO Grupo VALUES('GIIM1A',NULL,1,false,'A',NULL,'M',true,NULL,1073);
 INSERT INTO Grupo VALUES('GIIM1D',NULL,1,true,'D',NULL,'M',true,NULL,1073);

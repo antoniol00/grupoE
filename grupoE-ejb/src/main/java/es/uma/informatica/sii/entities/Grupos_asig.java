@@ -1,15 +1,11 @@
 package es.uma.informatica.sii.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -32,15 +28,6 @@ public class Grupos_asig implements Serializable {
 	@Id
 	@ManyToOne
 	private Asignatura asignatura;
-
-	@ManyToMany
-	@JoinTable(name = "ENCUESTA_GRUPOS", joinColumns = { @JoinColumn(name = "CURSO", referencedColumnName = "curso"),
-			@JoinColumn(name = "GRUPO", referencedColumnName = "grupo_id"),
-			@JoinColumn(name = "ASIGNATURA", referencedColumnName = "asignatura_codigo"),
-			@JoinColumn(name = "TITULACION", referencedColumnName = "asignatura_titulacion_codigo") }, inverseJoinColumns = {
-					@JoinColumn(name = "FECHA_ENVIO", referencedColumnName = "fecha_envio"),
-					@JoinColumn(name = "EXPEDIENTE", referencedColumnName = "expediente") })
-	private List<Encuesta> encuestas;
 
 	private static final long serialVersionUID = 1L;
 
@@ -78,14 +65,6 @@ public class Grupos_asig implements Serializable {
 
 	public void setAsignatura(Asignatura asignatura) {
 		this.asignatura = asignatura;
-	}
-
-	public List<Encuesta> getEncuestas() {
-		return encuestas;
-	}
-
-	public void setEncuestas(List<Encuesta> encuestas) {
-		this.encuestas = encuestas;
 	}
 
 	@Override
@@ -126,7 +105,7 @@ public class Grupos_asig implements Serializable {
 	@Override
 	public String toString() {
 		return "Grupos_asig [curso=" + curso + ", oferta=" + oferta + ", grupo=" + grupo + ", asignatura=" + asignatura
-				+ ", encuestas=" + encuestas + "]";
+				+ "]";
 	}
 
 }

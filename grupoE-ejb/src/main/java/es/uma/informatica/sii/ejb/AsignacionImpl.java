@@ -149,7 +149,7 @@ public class AsignacionImpl implements GestionAsignacion {
 		if (cl == null) {
 			throw new SecretariaException("Se ha intentado borrar una clase que no existe");
 		}
-		em.remove(cpk);
+		em.remove(cl);
 	}
 
 	@Override

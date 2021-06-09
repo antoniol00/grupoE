@@ -48,7 +48,7 @@ public class PruebaPeticiones {
 		gestionPeticiones.creaIncidencia(p);
 
 		assertFalse("Peticion no insertada", gestionPeticiones.listaPeticiones().isEmpty());
-		assertEquals("Peticion no insertada",1, gestionPeticiones.listaPeticiones().size());
+		assertEquals("Peticion no insertada", 1, gestionPeticiones.listaPeticiones().size());
 
 		Peticion pbd = gestionPeticiones.obtenerPeticion(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni());
 
@@ -88,10 +88,8 @@ public class PruebaPeticiones {
 
 		gestionPeticiones.editaIncidencia(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni(), pbd);
 
-		assertEquals("Peticion no editada",
-				"NUEVO",
-				gestionPeticiones.obtenerPeticion(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni())
-						.getDescripcion());
+		assertEquals("Peticion no editada", "NUEVO", gestionPeticiones
+				.obtenerPeticion(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni()).getDescripcion());
 	}
 
 	@Requisitos({ "RF4.1" })
@@ -129,6 +127,13 @@ public class PruebaPeticiones {
 	@Test(expected = SecretariaException.class)
 	public void testBorrarIncidenciaNoExistente() throws SecretariaException {
 		gestionPeticiones.borraIncidencia(new Date(), "X");
+
+	}
+
+	@Requisitos({ "RF4.1" })
+	@Test(expected = SecretariaException.class)
+	public void testObtieneIncidenciaNoExistente() throws SecretariaException {
+		gestionPeticiones.obtenerPeticion(new Date(), "X");
 
 	}
 
