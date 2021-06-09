@@ -40,7 +40,7 @@ public class AsignaturasIntegracion {
 		vars = new HashMap<String, Object>();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.MINUTES);
-		driver.manage().window().setSize(new Dimension(1440,900));
+		driver.manage().window().setSize(new Dimension(1440, 900));
 	}
 
 	@After
@@ -240,6 +240,7 @@ public class AsignaturasIntegracion {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 			wait.until(ExpectedConditions.textToBe(By.id("j_idt25:2:grupos_asignados"), "(1 B) (1 D)"));
 		}
+		assertThat(driver.findElement(By.id("j_idt25:2:grupos_asignados")), is("(1 B) (1 D)"));
 		driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(3) #editar_asignatura")).click();
 		driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label"))
 				.click();
@@ -248,6 +249,7 @@ public class AsignaturasIntegracion {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
 			wait.until(ExpectedConditions.textToBe(By.id("j_idt25:2:grupos_asignados"), "(1 D)"));
 		}
+		assertThat(driver.findElement(By.id("j_idt25:2:grupos_asignados")), is("(1 D)"));
 	}
 
 	// Borrar una asignatura deja de mostrarla en la vista

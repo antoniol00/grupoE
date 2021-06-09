@@ -103,6 +103,7 @@ public class AsignaturasBean implements Serializable {
 	public String upload() throws IOException, SecretariaIOException, SecretariaException {
 
 		String ruta = "";
+		String error = "Error de importación. Sin cambios";
 		try {
 			fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 			part.write(fileName);
@@ -113,16 +114,16 @@ public class AsignaturasBean implements Serializable {
 
 			File file = new File(ruta);
 			if (!file.delete())
-				mensaje = "Error de importación. Sin cambios";
+				mensaje = error;
 
 			mensaje = "Importación correcta";
 
 		} catch (Exception e) {
-			mensaje = "Error de importación. Sin cambios";
+			mensaje = error;
 			if (!ruta.isEmpty()) {
 				File file = new File(ruta);
 				if (!file.delete())
-					mensaje = "Error de importación. Sin cambios";
+					mensaje = error;
 			}
 		}
 		return null;

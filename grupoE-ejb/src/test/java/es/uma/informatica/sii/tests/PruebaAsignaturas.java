@@ -2,6 +2,7 @@ package es.uma.informatica.sii.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -40,14 +41,14 @@ public class PruebaAsignaturas {
 	@Requisitos({ "RF1.1" })
 	@Test
 	public void testImportarAsignaturasListaNoVacia() throws SecretariaIOException, SecretariaException {
-		assertTrue("Error al importar asignaturas", gestionAsignaturas.listarAsignaturas().size() != 0);
+		assertNotEquals("Error al importar asignaturas", 0, gestionAsignaturas.listarAsignaturas().size());
 	}
 
 	// Importar asignaturas debe devolver una lista con 364 entradas
 	@Requisitos({ "RF1.1" })
 	@Test
 	public void testImportarAsignaturasTamanoCorrecto() throws SecretariaIOException, SecretariaException {
-		assertEquals("Error al importar asignaturas", gestionAsignaturas.listarAsignaturas().size(), 364);
+		assertEquals("Error al importar asignaturas", 364, gestionAsignaturas.listarAsignaturas().size());
 	}
 
 	// Al modificar una asignatura se modifican los cambios especificados en la bbdd
@@ -77,7 +78,7 @@ public class PruebaAsignaturas {
 	public void borrarTodasAsignaturas() throws SecretariaException, SecretariaIOException {
 		for (Asignatura as : gestionAsignaturas.listarAsignaturas())
 			gestionAsignaturas.borrarAsignatura(as.getCodigo(), as.getTitulacion().getCodigo());
-		assertTrue("Error al borrar la asignatura", gestionAsignaturas.listarAsignaturas().size() == 0);
+		assertEquals("Error al borrar la asignatura", 0, gestionAsignaturas.listarAsignaturas().size());
 	}
 
 	// Al borrar una asignatura que no existe, lanza excepcion

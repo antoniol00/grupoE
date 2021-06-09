@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -47,7 +48,7 @@ public class PruebaPeticiones {
 		gestionPeticiones.creaIncidencia(p);
 
 		assertFalse("Peticion no insertada", gestionPeticiones.listaPeticiones().isEmpty());
-		assertTrue("Peticion no insertada", gestionPeticiones.listaPeticiones().size() == 1);
+		assertEquals("Peticion no insertada",1, gestionPeticiones.listaPeticiones().size());
 
 		Peticion pbd = gestionPeticiones.obtenerPeticion(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni());
 
@@ -87,9 +88,10 @@ public class PruebaPeticiones {
 
 		gestionPeticiones.editaIncidencia(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni(), pbd);
 
-		assertTrue("Peticion no editada",
+		assertEquals("Peticion no editada",
+				"NUEVO",
 				gestionPeticiones.obtenerPeticion(d, gestionAlumnos.obtenerListaAlumnos().get(0).getDni())
-						.getDescripcion().equals("NUEVO"));
+						.getDescripcion());
 	}
 
 	@Requisitos({ "RF4.1" })

@@ -1,7 +1,7 @@
 package es.uma.informatica.sii.tests;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 
@@ -82,6 +82,6 @@ public class PruebaAsignacion {
 		gestionAsignaturas.importaAsignaturas("./DATOS/asignaturas.xlsx"); // importo asignaturas
 		gestionAsignacion.asignaGruposAlumnos(); // realizo asignacion
 
-		assertTrue("Tabla no creada", gestionAsignacion.listaAsignacionProvisional().size() != 0);
+		assertNotEquals("Tabla no creada", 0,gestionAsignacion.listaAsignacionProvisional().size());
 	}
 }

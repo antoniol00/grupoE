@@ -1,7 +1,8 @@
 package es.uma.informatica.sii.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,8 +42,8 @@ public class PruebaMatriculas {
 	@Test
 	public void testImportarMatriculas() throws SecretariaIOException, SecretariaException {
 		String filter = "ASC";
-		assertTrue("Error al importar matriculas", gestionMatriculas.listaMatriculas(filter).size() != 0);
-		assertTrue("Error al importar matriculas", gestionMatriculas.listaMatriculas(filter).size() == 1508);
+		assertNotEquals("Error al importar matriculas", 0, gestionMatriculas.listaMatriculas(filter).size());
+		assertEquals("Error al importar matriculas", 1508, gestionMatriculas.listaMatriculas(filter).size());
 	}
 
 	@Requisitos({ "RF3.2" })

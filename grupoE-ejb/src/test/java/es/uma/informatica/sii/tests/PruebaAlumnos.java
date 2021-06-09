@@ -1,6 +1,7 @@
 package es.uma.informatica.sii.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 
@@ -44,8 +45,8 @@ public class PruebaAlumnos {
 	@Test
 	public void testImportarAlumnosLista() throws SecretariaException, SecretariaIOException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
-		assertTrue("Error al importar alumnos", gestionAlumnos.obtenerListaAlumnos().size() != 0);
-		assertTrue("Error al importar alumnos", gestionAlumnos.obtenerListaAlumnos().size() == 1508);
+		assertNotEquals("Error al importar alumnos", 0, gestionAlumnos.obtenerListaAlumnos().size());
+		assertEquals("Error al importar alumnos", 1508, gestionAlumnos.obtenerListaAlumnos().size());
 	}
 
 	// Importar expedientes debe devolver una lista no vacia de 1508 entradas
@@ -54,8 +55,8 @@ public class PruebaAlumnos {
 	public void testImportarExpedientesLista() throws SecretariaException, SecretariaIOException {
 		gestionAlumnos.importaAlumnos("./DATOS/alumnos.csv");
 		gestionAlumnos.importaExpedientes("./DATOS/alumnos.csv");
-		assertTrue("Error al importar expedientes", gestionAlumnos.obtenerListaExpedientes().size() != 0);
-		assertTrue("Error al importar expedientes", gestionAlumnos.obtenerListaExpedientes().size() == 1508);
+		assertNotEquals("Error al importar expedientes", 0, gestionAlumnos.obtenerListaExpedientes().size());
+		assertEquals("Error al importar expedientes", 1508, gestionAlumnos.obtenerListaExpedientes().size());
 	}
 
 	// Al modificar un alumno se modifican los cambios especificados en la bbdd
@@ -77,16 +78,14 @@ public class PruebaAlumnos {
 		gestionAsignacion.modificaGrupo(ag.getAsignatura().getCodigo(), ag.getAsignatura().getTitulacion().getCodigo(),
 				ag.getMatricula().getCurso(), ag.getMatricula().getExpediente().getNumero(), ag.getGrupo().getId());
 
-		assertTrue(
-				"Grupo no modificado: expected: " + id_grupo_asignado + " actual: "
-						+ gestionAsignacion.obtieneAsignacion(ag.getAsignatura().getCodigo(),
-								ag.getAsignatura().getTitulacion().getCodigo(), ag.getMatricula().getCurso(),
-								ag.getMatricula().getExpediente().getNumero()).getGrupo().getId(),
-				gestionAsignacion
-						.obtieneAsignacion(ag.getAsignatura().getCodigo(),
-								ag.getAsignatura().getTitulacion().getCodigo(), ag.getMatricula().getCurso(),
-								ag.getMatricula().getExpediente().getNumero())
-						.getGrupo().getId().equals(id_grupo_asignado));
+		assertEquals("Grupo no modificado: expected: " + id_grupo_asignado + " actual: "
+				+ gestionAsignacion.obtieneAsignacion(
+						ag.getAsignatura().getCodigo(), ag.getAsignatura().getTitulacion().getCodigo(),
+						ag.getMatricula().getCurso(), ag.getMatricula().getExpediente().getNumero()).getGrupo().getId(),
+				id_grupo_asignado,
+				gestionAsignacion.obtieneAsignacion(ag.getAsignatura().getCodigo(),
+						ag.getAsignatura().getTitulacion().getCodigo(), ag.getMatricula().getCurso(),
+						ag.getMatricula().getExpediente().getNumero()).getGrupo().getId());
 
 	}
 
