@@ -230,26 +230,15 @@ public class AsignaturasIntegracion {
 	@Test
 	public void test17AsignarGruposAsignatura() {
 		driver.get("http://localhost:8080/grupoE-war/faces/asignaturas.xhtml");
-		driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(3) #editar_asignatura")).click();
-		driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label"))
-				.click();
-		driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(4) > label"))
-				.click();
-		driver.findElement(By.id("j_idt25:2:user-form:enviar")).click();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			wait.until(ExpectedConditions.textToBe(By.id("j_idt25:2:grupos_asignados"), "(1 B) (1 D)"));
-		}
-		assertThat(driver.findElement(By.id("j_idt25:2:grupos_asignados")), is("(1 B) (1 D)"));
-		driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(3) #editar_asignatura")).click();
-		driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label"))
-				.click();
-		driver.findElement(By.id("j_idt25:2:user-form:enviar")).click();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			wait.until(ExpectedConditions.textToBe(By.id("j_idt25:2:grupos_asignados"), "(1 D)"));
-		}
-		assertThat(driver.findElement(By.id("j_idt25:2:grupos_asignados")), is("(1 D)"));
+	    driver.manage().window().setSize(new Dimension(1050, 626));
+	    driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(3) #editar_asignatura")).click();
+	    driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(2) > label")).click();
+	    driver.findElement(By.cssSelector("#j_idt25\\3A 2\\3Auser-form\\3Agrupos_imparticion td:nth-child(4) > label")).click();
+	    driver.findElement(By.id("j_idt25:2:user-form:enviar")).click();
+	    {
+	      WebDriverWait wait = new WebDriverWait(driver, 30);
+	      wait.until(ExpectedConditions.textToBe(By.id("j_idt25:2:grupos_asignados"), "(1 B) (1 D)"));
+	    }
 	}
 
 	// Borrar una asignatura deja de mostrarla en la vista

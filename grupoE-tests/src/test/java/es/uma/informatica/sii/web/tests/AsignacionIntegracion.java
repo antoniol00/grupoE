@@ -172,35 +172,31 @@ public class AsignacionIntegracion {
 	@Test
 	public void test27AvisoColisiones() {
 		driver.get("http://localhost:8080/grupoE-war/faces/asignacion.xhtml");
-		{
-			WebElement dropdown = driver.findElement(By.id("selector_colisiones:tipo"));
-			dropdown.findElement(By.xpath("//option[. = '45496431S, Aimee Saenz Caban']")).click();
-		}
-		driver.findElement(By.id("selector_colisiones:boton11")).click();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			wait.until(ExpectedConditions.textToBe(By.id("selector_colisiones:textoAlumnoEscogido"), "NO"));
-		}
-		assertThat(driver.findElement(By.id("selector_colisiones:textoAlumnoEscogido")), is("NO"));
-		driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(15) #editar_asignacion")).click();
-		driver.findElement(By.cssSelector("#j_idt21\\3A 14\\3Auser-form\\3A cambio_grupo td:nth-child(2) > label"))
-				.click();
-		driver.findElement(By.id("j_idt21:14:user-form:enviar")).click();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			wait.until(ExpectedConditions.textToBe(By.id("j_idt21:14:grupo"), "II1C"));
-		}
-		{
-			WebElement dropdown = driver.findElement(By.id("selector_colisiones:tipo"));
-			dropdown.findElement(By.xpath("//option[. = '45496431S, Aimee Saenz Caban']")).click();
-		}
-		driver.findElement(By.id("selector_colisiones:boton11")).click();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, 30);
-			wait.until(ExpectedConditions.textToBe(By.id("selector_colisiones:textoAlumnoEscogido"), "SI"));
-		}
-
-		assertThat(driver.findElement(By.id("selector_colisiones:textoAlumnoEscogido")), is("SI"));
+	    {
+	      WebElement dropdown = driver.findElement(By.id("selector_colisiones:tipo"));
+	      dropdown.findElement(By.xpath("//option[. = '45496431S, Aimee Saenz Caban']")).click();
+	    }
+	    driver.findElement(By.id("selector_colisiones:boton11")).click();
+	    {
+	      WebDriverWait wait = new WebDriverWait(driver, 30);
+	      wait.until(ExpectedConditions.textToBe(By.id("selector_colisiones:textoAlumnoEscogido"), "NO"));
+	    }
+	    driver.findElement(By.cssSelector(".formatoFilaImpar:nth-child(15) #editar_asignacion")).click();
+	    driver.findElement(By.cssSelector("#j_idt21\\3A 14\\3Auser-form\\3A cambio_grupo td:nth-child(2) > label")).click();
+	    driver.findElement(By.id("j_idt21:14:user-form:enviar")).click();
+	    {
+	      WebDriverWait wait = new WebDriverWait(driver, 30);
+	      wait.until(ExpectedConditions.textToBe(By.id("j_idt21:14:grupo"), "II1C"));
+	    }
+	    {
+	      WebElement dropdown = driver.findElement(By.id("selector_colisiones:tipo"));
+	      dropdown.findElement(By.xpath("//option[. = '45496431S, Aimee Saenz Caban']")).click();
+	    }
+	    driver.findElement(By.id("selector_colisiones:boton11")).click();
+	    {
+	      WebDriverWait wait = new WebDriverWait(driver, 30);
+	      wait.until(ExpectedConditions.textToBe(By.id("selector_colisiones:textoAlumnoEscogido"), "SI"));
+	    }
 	}
 
 	// Vaciar la asignacion actual hace que no aparezca ningun elemento en la vista
